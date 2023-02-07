@@ -1,0 +1,39 @@
+.page-frame-container {
+  & > .ant-spin-wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    flex: 1 0 auto;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    &.ant-spin-nested-loading > div > .ant-spin {
+      display: flex;
+      flex-flow: column nowrap;
+      flex: 1 0 auto;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      max-height: none;
+    }
+
+    &.ant-spin-nested-loading > div > .ant-spin > .ant-spin-dot {
+      margin-top: -90px;
+    }
+
+    &.ant-spin-nested-loading > div > .ant-spin > .ant-spin-text {
+      margin-top: -55px;
+    }
+
+    &.ant-spin-nested-loading > .ant-spin-container {
+      display: flex;
+      flex-flow: column nowrap;
+      flex: 1 0 auto;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

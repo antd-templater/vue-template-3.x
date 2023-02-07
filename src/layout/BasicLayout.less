@@ -1,0 +1,36 @@
+@import 'ant-design-vue/es/style/variable.less';
+@import '@ant-design-vue/pro-layout/dist/style.less';
+
+// layout - basic
+.ant-pro-basicLayout {
+  width: 100%;
+  height: auto;
+  flex-direction: row;
+
+  .ant-pro-sider-logo,
+  .ant-pro-global-header,
+  .ant-pro-top-nav-header-main,
+  .ant-pro-basicLayout-content {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .ant-pro-top-nav-header {
+    box-shadow: 0 1px 2px 0 rgb(0 21 41 / 12%);
+  }
+
+  .ant-menu-horizontal > .ant-menu-item::after,
+  .ant-menu-horizontal > .ant-menu-submenu::after {
+    left: 10px;
+    right: 10px;
+  }
+}
+
+// layout - mobile drawer
+.ant-layout-sider-children {
+  .ant-pro-sider-logo,
+  .ant-pro-sider-extra {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}

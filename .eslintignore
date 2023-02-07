@@ -1,0 +1,12 @@
+# ignore eslint files
+.gitignore
+*.svg
+*.ico
+*.json
+*.md
+*.log
+*.lock
+
+/dist/*
+/node_modules/*
+/*.d.ts

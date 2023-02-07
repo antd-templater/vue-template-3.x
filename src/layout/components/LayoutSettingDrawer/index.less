@@ -1,0 +1,171 @@
+.layout-setting-drawer .layout-setting-drawer-content {
+  .setting-title {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .setting-checbox {
+    width: 100%;
+    display: flex;
+    margin-bottom: 20px;
+
+    .setting-checbox-item {
+      width: 44px;
+      height: 40px;
+      margin-right: 25px;
+      border-radius: 5px;
+      border: solid 0.5px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+
+      .setting-icon {
+        width: 100%;
+        height: 100%;
+
+        &.bg-dark {
+          background-color: #404144;
+        }
+
+        &.bg-light {
+          background-color: #efefef;
+        }
+
+        &.topmenu-dark::before {
+          content: '';
+          width: 100%;
+          height: 12px;
+          position: absolute;
+          background-color: #404144;
+          top: 0;
+          left: 0;
+        }
+
+        &.topmenu-light::before {
+          content: '';
+          width: 100%;
+          height: 12px;
+          position: absolute;
+          background-color: #fcfcfc;
+          top: 0;
+          left: 0;
+        }
+
+        &.sidemenu-dark::after {
+          content: '';
+          width: 15px;
+          height: 100%;
+          position: absolute;
+          background-color: #404144;
+          top: 0;
+          left: 0;
+        }
+
+        &.sidemenu-light::after {
+          content: '';
+          width: 15px;
+          height: 100%;
+          position: absolute;
+          background-color: #fcfcfc;
+          top: 0;
+          left: 0;
+        }
+      }
+
+      .setting-check {
+        color: #1890ff;
+        font-size: 14px;
+        font-weight: 700;
+        position: absolute;
+        bottom: 7px;
+        right: 14px;
+      }
+
+      .setting-icon.topmenu-dark + .setting-check,
+      .setting-icon.topmenu-light + .setting-check {
+        bottom: 3px;
+      }
+
+      .setting-icon.sidemenu-dark + .setting-check,
+      .setting-icon.sidemenu-light + .setting-check {
+        right: 6px;
+      }
+    }
+  }
+
+  .setting-tags {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 20px;
+
+    & > .setting-tag {
+      width: 22px;
+      height: 22px;
+      margin: 0 5px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    & > .setting-tag:first-child {
+      margin-left: 3px;
+    }
+
+    & > .setting-tag:last-child {
+      margin-right: 3px;
+    }
+
+    & > .setting-tag .setting-check {
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+      position: absolute;
+      left: 3px;
+      top: 1px;
+    }
+  }
+
+  .setting-components {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 20px;
+
+    & > .setting-component {
+      margin: 0 8px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 500;
+      border-radius: 4px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    & > .setting-component:first-child {
+      margin-left: 3px;
+    }
+
+    & > .setting-component:last-child {
+      margin-right: 3px;
+    }
+  }
+
+  .ant-divider-horizontal {
+    margin: 20px 0;
+  }
+}
+
+.layout-setting-drawer .layout-setting-drawer-button {
+  display: flex;
+  width: 48px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 22px;
+  background: var(--ant-primary-color);
+  border-radius: 4px 0 0 4px;
+  position: absolute;
+  top: 240px;
+  left: -48px;
+  z-index: 1001;
+  cursor: pointer;
+}
