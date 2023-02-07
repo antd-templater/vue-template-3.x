@@ -313,8 +313,9 @@ export default defineComponent({
     }
 
     const ANoticeInfo = (props: any) => {
+      const info = console.info
       const lookSetting = () => {
-        console.info(`{\n  themeColor: {\n    primaryColor: '${appStore.primaryColor}',\n    warningColor: '${appStore.warningColor}',\n    successColor: '${appStore.successColor}',\n    errorColor: '${appStore.errorColor}',\n    infoColor: '${appStore.infoColor}'\n  },\n  themeWeak: ${appStore.themeWeak},\n  themeMode: '${appStore.themeMode}',\n  layoutMode: '${appStore.layoutMode}',\n  contentWidth: '${appStore.contentWidth}',\n  componentSize: '${appStore.componentSize}',\n  domTitle: '${defaultSettings.domTitle}',\n  language: '${appStore.language}',\n  multiTab: ${appStore.multiTab},\n  keepAlive: ${appStore.keepAlive},\n  fixedHeader: ${appStore.fixedHeader},\n  fixedSidebar: ${appStore.fixedSidebar},\n  autoHideHeader: ${appStore.autoHideHeader}\n}`)
+        info(`{\n  themeColor: {\n    primaryColor: '${appStore.primaryColor}',\n    warningColor: '${appStore.warningColor}',\n    successColor: '${appStore.successColor}',\n    errorColor: '${appStore.errorColor}',\n    infoColor: '${appStore.infoColor}'\n  },\n  themeWeak: ${appStore.themeWeak},\n  themeMode: '${appStore.themeMode}',\n  layoutMode: '${appStore.layoutMode}',\n  contentWidth: '${appStore.contentWidth}',\n  componentSize: '${appStore.componentSize}',\n  domTitle: '${defaultSettings.domTitle}',\n  language: '${appStore.language}',\n  multiTab: ${appStore.multiTab},\n  keepAlive: ${appStore.keepAlive},\n  fixedHeader: ${appStore.fixedHeader},\n  fixedSidebar: ${appStore.fixedSidebar},\n  autoHideHeader: ${appStore.autoHideHeader}\n}`)
       }
 
       return (
