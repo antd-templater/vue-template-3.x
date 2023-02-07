@@ -75,6 +75,7 @@ export default defineComponent({
       return (
         <LayoutAvatar
           isTopMenu={appStore.isTopMenu}
+          isSideMenu={appStore.isSideMenu}
           themeMode={appStore.themeMode}
         />
       )

@@ -22,6 +22,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    isSideMenu: {
+      type: Boolean,
+      default: false
+    },
     themeMode: {
       type: String,
       default: 'light'
@@ -247,7 +251,7 @@ export default defineComponent({
               style={{
                 flex: '1 1 auto',
                 maxWidth: '120px',
-                color: props.themeMode === 'light' ? '#303133' : '#f9f9f9',
+                color: props.themeMode === 'light' || (props.themeMode === 'dark' && props.isSideMenu) ? '#303133' : '#f9f9f9',
                 textOverflow: 'ellipsis',
                 whiteSpace: 'nowrap',
                 overflow: 'hidden'
