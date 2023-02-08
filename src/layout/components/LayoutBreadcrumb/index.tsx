@@ -48,7 +48,6 @@ export default defineComponent({
               padding: '9px 0 0 12px',
               backgroundColor: '#ffffff',
               boxShadow: '0 1px 1px 0 rgba(0, 0, 0, 0.15)',
-              maxWidth: props.isTopMenu && props.isFixed ? '1200px' : 'unset',
               position: 'relative',
               zIndex: 9
             }}

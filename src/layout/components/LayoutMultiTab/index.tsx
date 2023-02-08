@@ -136,9 +136,7 @@ export default defineComponent({
               style={{
                 width: '100%',
                 height: '38px',
-                margin: '0 auto',
                 boxSizing: 'border-box',
-                maxWidth: props.isTopMenu && props.isFixed ? '1200px' : 'unset',
                 boxShadow: '0 1px 1px 0 rgba(0, 0, 0, 0.15)',
                 position: 'relative',
                 zIndex: 9
