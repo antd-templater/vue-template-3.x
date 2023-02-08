@@ -146,9 +146,7 @@ export default defineStore('tag', () => {
   }
 
   const delCacheTags = (tag: Route) => {
-    if (cacheTags.value.includes(tag.meta.componentName)) {
-      cacheTags.value.splice(cacheTags.value.indexOf(tag.meta.componentName), 1)
-    }
+    cacheTags.value = cacheTags.value.filter(name => name !== tag.meta.componentName)
 
     return {
       stackTags: readonly(stackTags),
@@ -184,8 +182,7 @@ export default defineStore('tag', () => {
   }
 
   const delOtherCacheTags = (tag: Route) => {
-    cacheTags.value.splice(0, cacheTags.value.length)
-    cacheTags.value.push(tag.meta.componentName)
+    cacheTags.value = cacheTags.value.filter(name => name === tag.meta.componentName)
 
     return {
       stackTags: readonly(stackTags),
@@ -221,7 +218,7 @@ export default defineStore('tag', () => {
   }
 
   const delAllCacheTags = () => {
-    cacheTags.value.splice(0, cacheTags.value.length)
+    cacheTags.value = []
 
     return {
       stackTags: readonly(stackTags),
