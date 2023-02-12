@@ -2,8 +2,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist",
-    "target": "esnext",
-    "module": "esnext",
+    "target": "ESNext",
+    "module": "ESNext",
     "moduleResolution": "node",
     "jsx": "preserve",
     "strict": true,
@@ -26,6 +26,7 @@
       "dom"
     ],
     "types": [
+      "@antd-templater/antd-template-lib3.x/global",
       "unplugin-vue-define-options/macros-global",
       "pinia-plugin-persist",
       "vitest/globals",

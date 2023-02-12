@@ -40,8 +40,8 @@ util.worker.use(
           component: 'OrganizeManage',
           redirect: '',
           meta: {
-            title: '组织管理',
             icon: '',
+            title: '组织管理',
             hideChildInMenu: 'N',
             hideInMenu: 'N',
             allowCache: 'Y'
@@ -55,8 +55,8 @@ util.worker.use(
           component: 'ResourceManage',
           redirect: '',
           meta: {
-            title: '资源管理',
             icon: '',
+            title: '资源管理',
             hideChildInMenu: 'N',
             hideInMenu: 'N',
             allowCache: 'Y'
@@ -70,8 +70,8 @@ util.worker.use(
           component: 'RoleManage',
           redirect: '',
           meta: {
-            title: '角色管理',
             icon: '',
+            title: '角色管理',
             hideChildInMenu: 'N',
             hideInMenu: 'N',
             allowCache: 'Y'
@@ -85,8 +85,8 @@ util.worker.use(
           component: 'UserManage',
           redirect: '',
           meta: {
-            title: '用户管理',
             icon: '',
+            title: '用户管理',
             hideChildInMenu: 'N',
             hideInMenu: 'N',
             allowCache: 'Y'

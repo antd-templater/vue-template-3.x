@@ -110,6 +110,7 @@ export default defineConfig(({ mode }) => {
           manualChunks(id) {
             if (/\/node_modules\/@ant-design\/icons-(\w+)\/?/.test(id)) return 'antd-design-icons'
             if (/\/node_modules\/(@ant-design(-\w+)?|ant-design-vue|nprogress)\//.test(id)) return 'antd-design-all'
+            if (/\/node_modules\/(@antd-templater\/antd-template-lib3.x)\//.test(id)) return 'antd-template-lib'
             if (/\/node_modules\/(cookie|vue-ls|pinia(-plugin-\w+)?)\//.test(id)) return 'storage-all'
             if (/\/node_modules\/(@?vue|vuex|vue-router)\//.test(id)) return 'vue-all'
             if (/\/node_modules\/(@mswjs|msw|graphql)\//.test(id)) return 'msw-all'

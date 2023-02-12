@@ -32,7 +32,7 @@ export default defineComponent({
     const activeKey = ref(route.fullPath)
 
     const active = (route: any) => {
-      route = { ...route, meta: { ...route.meta } }
+      route = { ...route, meta: { ...route.meta, icon: undefined } }
       activeKey.value = route.fullPath
       tagStore.updateVisitedTags(route)
       tagStore.addCacheTags(route)

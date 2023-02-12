@@ -29,7 +29,7 @@ export interface Route {
   matched?: Array<Matched>;
   component?: any;
   meta?: {
-    icon?: string;
+    icon?: any;
     match?: string;
     title?: string;
     target?: string;
