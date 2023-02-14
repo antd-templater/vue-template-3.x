@@ -35,6 +35,7 @@ export interface Route {
     target?: string;
     groupId?: string;
     external?: string;
+    iconName?: string;
     permission?: string[];
     componentName?: string;
     hideChildInMenu?: boolean | 'Y' | 'N';

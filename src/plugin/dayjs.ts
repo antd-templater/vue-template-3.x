@@ -5,6 +5,9 @@ import isYesterday from 'dayjs/plugin/isYesterday'
 import objectSupport from 'dayjs/plugin/objectSupport'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 
+import 'dayjs/locale/en'
+import 'dayjs/locale/zh-cn'
+
 /**
  * 配置 dayjs 插件
  */

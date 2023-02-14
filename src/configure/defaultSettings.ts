@@ -17,7 +17,7 @@ import zhCN from 'ant-design-vue/es/locale/zh_CN'
  */
 export default {
   themeColor: {
-    primaryColor: '#1890ff',
+    primaryColor: '#f5222d',
     warningColor: '#faad14',
     successColor: '#52c41a',
     errorColor: '#ff4d4f',

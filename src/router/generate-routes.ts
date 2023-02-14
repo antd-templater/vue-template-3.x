@@ -67,11 +67,12 @@ const treeToRoute: TreeToRoute = (trees, parent = {}, components = {}) => {
         target: target,
         groupId: (parent.meta || {}).groupId || item.id,
         external: isFrameView && item.path || '',
-        permission: item.name && [item.name] || [],
+        iconName: typeof icon === 'string' ? icon : '',
         componentName: item.component || item.name || '',
         hideChildInMenu: hideInMenu === true || hideInMenu === 'Y' || hideChildInMenu === true || hideChildInMenu === 'Y',
         allowCache: (parentAllowCache !== false && parentAllowCache !== 'N') || (allowCache !== false && allowCache !== 'N'),
-        hideInMenu: hideInMenu === true || hideInMenu === 'Y'
+        hideInMenu: hideInMenu === true || hideInMenu === 'Y',
+        permission: item.name && [item.name] || []
       }
     }
 
