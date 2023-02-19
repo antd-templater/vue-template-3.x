@@ -2,30 +2,16 @@ import 'ant-design-vue/es/breadcrumb/style/index.less'
 
 import ABreadcrumb, { BreadcrumbItem as ABreadcrumbItem } from 'ant-design-vue/es/breadcrumb'
 import { HomeOutlined } from '@ant-design/icons-vue'
+import * as VueTypes from 'vue-types'
 
 export default defineComponent({
   name: 'LayoutBreadcrumb',
   props: {
-    isFixed: {
-      type: Boolean,
-      default: false
-    },
-    isMobile: {
-      type: Boolean,
-      default: false
-    },
-    isTopMenu: {
-      type: Boolean,
-      default: false
-    },
-    isMixMenu: {
-      type: Boolean,
-      default: false
-    },
-    multiTab: {
-      type: Boolean,
-      default: false
-    }
+    isFixed: VueTypes.bool().def(false),
+    isMobile: VueTypes.bool().def(false),
+    isTopMenu: VueTypes.bool().def(false),
+    isMixMenu: VueTypes.bool().def(false),
+    multiTab: VueTypes.bool().def(false)
   },
   setup(props) {
     const route = useRoute()

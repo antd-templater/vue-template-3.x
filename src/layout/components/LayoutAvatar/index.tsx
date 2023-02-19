@@ -4,6 +4,7 @@ import 'ant-design-vue/es/input/style/index.less'
 import 'ant-design-vue/es/form/style/index.less'
 import 'ant-design-vue/es/menu/style/index.less'
 
+import * as VueTypes from 'vue-types'
 import { SettingOutlined, LogoutOutlined } from '@ant-design/icons-vue'
 import { InputPassword as AInputPassword } from 'ant-design-vue/es/input'
 import AMenu, { MenuItem as AMenuItem } from 'ant-design-vue/es/menu'
@@ -18,18 +19,9 @@ import * as authApi from '@/api/auth'
 export default defineComponent({
   name: 'LayoutAvatar',
   props: {
-    isTopMenu: {
-      type: Boolean,
-      default: false
-    },
-    isSideMenu: {
-      type: Boolean,
-      default: false
-    },
-    themeMode: {
-      type: String,
-      default: 'light'
-    }
+    isTopMenu: VueTypes.bool().def(false),
+    isSideMenu: VueTypes.bool().def(false),
+    themeMode: VueTypes.string().def('light')
   },
   setup(props) {
     const userStore = useUserStore()

@@ -33,13 +33,14 @@
     "qs": "^6.11.0",
     "vue": "^3.2.47",
     "vue-ls": "^4.2.0",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "vue-types": "^5.0.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.4.3",
-    "@commitlint/config-conventional": "^17.4.3",
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
     "@types/md5": "^2.3.2",
-    "@types/node": "^18.13.0",
+    "@types/node": "^18.14.0",
     "@types/nprogress": "^0.2.0",
     "@types/qs": "^6.9.7",
     "@types/vue-ls": "^3.2.3",
@@ -50,7 +51,7 @@
     "@vitejs/plugin-vue-jsx": "^3.0.0",
     "@vitest/coverage-c8": "^0.28.5",
     "@vitest/ui": "^0.28.5",
-    "@volar-plugins/prettyhtml": "^1.0.3",
+    "@volar-plugins/prettyhtml": "^1.1.0",
     "@vue/test-utils": "^2.2.10",
     "cz-message-helper": "^1.2.2",
     "darkreader": "^4.9.58",
@@ -61,16 +62,16 @@
     "less": "^4.1.3",
     "lint-staged": "^13.1.2",
     "prettier": "^2.8.4",
-    "rollup": "^3.15.0",
-    "terser": "^5.16.3",
+    "rollup": "^3.17.1",
+    "terser": "^5.16.4",
     "typescript": "^4.9.5",
-    "unplugin-auto-import": "^0.14.2",
-    "unplugin-vue-components": "^0.23.0",
-    "unplugin-vue-macros": "^1.7.3",
-    "vite": "^4.1.1",
+    "unplugin-auto-import": "^0.14.3",
+    "unplugin-vue-components": "^0.24.0",
+    "unplugin-vue-macros": "^1.8.1",
+    "vite": "^4.1.2",
     "vite-plugin-compression": "^0.5.1",
     "vitest": "^0.28.5",
-    "vue-tsc": "^1.0.24"
+    "vue-tsc": "^1.1.3"
   },
   "config": {
     "commitizen": {

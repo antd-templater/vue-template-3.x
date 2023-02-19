@@ -8,22 +8,14 @@ import AMenu, { MenuItem as AMenuItem } from 'ant-design-vue/es/menu'
 import ADropdown from 'ant-design-vue/es/dropdown'
 import AMessage from 'ant-design-vue/es/message'
 import useTagStore from '@/store/tag'
+import * as VueTypes from 'vue-types'
 
 export default defineComponent({
   name: 'LayoutMultiTab',
   props: {
-    isTopMenu: {
-      type: Boolean,
-      default: false
-    },
-    isFixed: {
-      type: Boolean,
-      default: false
-    },
-    multiTab: {
-      type: Boolean,
-      default: false
-    }
+    isTopMenu: VueTypes.bool().def(false),
+    isFixed: VueTypes.bool().def(false),
+    multiTab: VueTypes.bool().def(false)
   },
   setup(props) {
     const route = useRoute()

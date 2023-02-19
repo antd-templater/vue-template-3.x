@@ -1,31 +1,17 @@
-import logoDark from '@/assets/logo/logo_dark.png?url'
-import logoLight from '@/assets/logo/logo_light.png?url'
-import logoShrinkDart from '@/assets/logo/logo_shrink_dark.png?url'
 import logoShrinkLight from '@/assets/logo/logo_shrink_light.png?url'
+import logoShrinkDart from '@/assets/logo/logo_shrink_dark.png?url'
+import logoLight from '@/assets/logo/logo_light.png?url'
+import logoDark from '@/assets/logo/logo_dark.png?url'
+import * as VueTypes from 'vue-types'
 
 export default defineComponent({
   name: 'LayoutLogo',
   props: {
-    full: {
-      type: Boolean,
-      default: false
-    },
-    title: {
-      type: String,
-      default: ''
-    },
-    isSideMenu: {
-      type: Boolean,
-      default: false
-    },
-    collapsed: {
-      type: Boolean,
-      default: false
-    },
-    themeMode: {
-      type: String,
-      default: 'light'
-    }
+    full: VueTypes.bool().def(false),
+    title: VueTypes.string().def(''),
+    isSideMenu: VueTypes.bool().def(false),
+    collapsed: VueTypes.bool().def(false),
+    themeMode: VueTypes.string().def('light')
   },
   setup(props) {
     const { full, title, collapsed, isSideMenu } = toRefs(props)
