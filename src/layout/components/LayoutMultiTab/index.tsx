@@ -129,7 +129,7 @@ export default defineComponent({
                 width: '100%',
                 height: '38px',
                 boxSizing: 'border-box',
-                boxShadow: '0 1px 1px 0 rgba(0, 0, 0, 0.15)',
+                boxShadow: '0 .5px 1px 0 rgba(0, 0, 0, 0.15)',
                 position: 'relative',
                 zIndex: 9
               }}
