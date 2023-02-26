@@ -56,11 +56,11 @@ export default defineComponent({
       if (props.isMobile || appStore.isSideMenu) {
         return (
           <GlobalHeader {...props}>
-            <div
-              style='display: flex; flex: 1 1 auto; alignItems: center; height: 50px; lineHeight: 50px; cursor: pointer'
-              onClick={ () => { appStore.toggleCollapsed(!appStore.collapsed) }}
-            >
-              <h1 style='fontSize: 24px; margin: 0 0; padding: 0 15px; color: var(--ant-primary-color)'>
+            <div style='display: flex; flex: 1 1 auto; alignItems: center; height: 50px; lineHeight: 50px;'>
+              <h1
+                style='fontSize: 24px; margin: 0 0; padding: 0 15px; color: var(--ant-primary-color); cursor: pointer;'
+                onClick={ () => { appStore.toggleCollapsed(!appStore.collapsed) }}
+              >
                 { props.collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/> }
               </h1>
             </div>

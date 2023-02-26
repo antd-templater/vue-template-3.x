@@ -5,6 +5,7 @@ import isYesterday from 'dayjs/plugin/isYesterday'
 import objectSupport from 'dayjs/plugin/objectSupport'
 import advancedFormat from 'dayjs/plugin/advancedFormat'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
+import quarterOfYear from 'dayjs/plugin/quarterOfYear'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
 
 import 'dayjs/locale/en'
@@ -19,6 +20,7 @@ dayjs.extend(isYesterday)
 dayjs.extend(objectSupport)
 dayjs.extend(advancedFormat)
 dayjs.extend(customParseFormat)
+dayjs.extend(quarterOfYear)
 dayjs.extend(weekOfYear)
 
 /**
