@@ -1,5 +1,6 @@
 import { KeepAlive } from 'vue'
 import { RouterView } from 'vue-router'
+import { SIcon, isIconType } from '@antd-templater/antd-template-lib3.x'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
 import AProLayout, { clearMenuItem, GlobalHeader } from '@ant-design-vue/pro-layout'
 import defaultSettings from '@/configure/defaultSettings'
@@ -29,7 +30,24 @@ export default defineComponent({
     const menuData = computed(() => {
       const dynamicRoutes = router.getRoutes()
       const menuDataRoutes = dynamicRoutes.find(route => route.path === '/')?.children || []
-      return clearMenuItem(menuDataRoutes)
+
+      const lazyMenuIcon = (routes: any[]): any[] => {
+        if (Array.isArray(routes)) {
+          return routes.map(route => ({
+            id: route.id,
+            path: route.path,
+            name: route.name,
+            meta: {
+              icon: isIconType(route.meta?.icon) ? <SIcon type={route.meta.icon}/> : route.meta?.icon || '',
+              title: route.meta?.title || ''
+            },
+            children: lazyMenuIcon(route.children)
+          }))
+        }
+        return []
+      }
+
+      return lazyMenuIcon(clearMenuItem(menuDataRoutes))
     })
 
     const isAllowOpenKey = ref(!appStore.collapsed && !appStore.isTopMenu || appStore.isMobile)
@@ -145,7 +163,7 @@ export default defineComponent({
         fixSiderbar={appStore.fixedSidebar}
         contentWidth={appStore.contentWidth}
         primaryColor={appStore.primaryColor}
-
+        hasSider={appStore.isSideMenu || appStore.isMixMenu}
         menuData={menuData.value}
         collapsed={appStore.collapsed}
         siderWidth={siderWidth.value}
@@ -162,17 +180,17 @@ export default defineComponent({
       >
         <div class='page-router-view-navigate'>
           <LayoutMultiTab
-            isFixed={appStore.isFixed}
             multiTab={appStore.multiTab}
-            isTopMenu={appStore.isTopMenu}
+            isMobile={appStore.isMobile}
+            isMixMenu={appStore.isMixMenu}
+            hideMixHeaderTab={appStore.hideMixHeaderTab}
           />
 
           <LayoutBreadcrumb
-            isFixed={appStore.isFixed}
-            isMobile={appStore.isMobile}
             multiTab={appStore.multiTab}
-            isTopMenu={appStore.isTopMenu}
+            isMobile={appStore.isMobile}
             isMixMenu={appStore.isMixMenu}
+            hideMixHeaderTab={appStore.hideMixHeaderTab}
           />
         </div>
 
@@ -180,11 +198,11 @@ export default defineComponent({
           class='page-router-view-container'
           style={{
             width: appStore.isTopMenu && appStore.isFixed ? '1200px' : '100%',
-            height: 'calc(100% - 38px)',
+            height: (appStore.isMixMenu || appStore.fixedHeader) && appStore.fixedHeaderTab ? 'calc(100% - 38px)' : 'auto',
+            position: (appStore.isMixMenu || appStore.fixedHeader) && appStore.fixedHeaderTab ? 'absolute' : 'relative',
+            overflow: (appStore.isMixMenu || appStore.fixedHeader) && appStore.fixedHeaderTab ? 'auto' : 'visible',
             margin: '0px auto',
             padding: '0px 0px',
-            overflow: appStore.isMixMenu || appStore.fixedHeader ? 'auto' : 'visible',
-            position: appStore.isMixMenu || appStore.fixedHeader ? 'absolute' : 'relative',
             zIndex: 1,
             right: 0,
             left: 0

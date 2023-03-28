@@ -7,18 +7,21 @@ import * as VueTypes from 'vue-types'
 export default defineComponent({
   name: 'LayoutBreadcrumb',
   props: {
-    isFixed: VueTypes.bool().def(false),
+    multiTab: VueTypes.bool().def(false),
     isMobile: VueTypes.bool().def(false),
-    isTopMenu: VueTypes.bool().def(false),
     isMixMenu: VueTypes.bool().def(false),
-    multiTab: VueTypes.bool().def(false)
+    hideMixHeaderTab: VueTypes.bool().def(true)
   },
   setup(props) {
     const route = useRoute()
     const breadcrumbs = computed(() => route.matched)
 
     return () => {
-      if (props.isMixMenu && !props.isMobile || props.multiTab) {
+      if (props.multiTab) {
+        return
+      }
+
+      if (!props.isMobile && props.isMixMenu && props.hideMixHeaderTab) {
         return
       }
 

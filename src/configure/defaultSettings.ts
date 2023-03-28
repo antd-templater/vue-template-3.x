@@ -2,7 +2,7 @@ import zhCN from 'ant-design-vue/es/locale/zh_CN'
 
 /**
  * @themeColor 主题颜色
- * @themeWeak 色盲模式
+ * @themeWeak 弱色模式
  * @themeMode 主题风格
  * @contentWidth 内容区布局
  * @componentSize 组件尺寸
@@ -11,9 +11,10 @@ import zhCN from 'ant-design-vue/es/locale/zh_CN'
  * @language 国际化
  * @multiTab 多标签页
  * @keepAlive 多标签缓存
- * @fixedHeader 固定 Header
+ * @fixedHeader 固定顶部栏导航
  * @fixedSidebar 固定左侧菜单栏
- * @autoHideHeader 隐藏 Header
+ * @fixedHeaderTab 固定导航栏页签
+ * @hideMixHeaderTab 隐藏混合导航页签
  */
 export default {
   themeColor: {
@@ -34,7 +35,8 @@ export default {
   keepAlive: true,
   fixedHeader: true,
   fixedSidebar: true,
-  autoHideHeader: false
+  fixedHeaderTab: false,
+  hideMixHeaderTab: true
 }
 
 export type ThemeMode = 'light' | 'dark' | 'realDark'

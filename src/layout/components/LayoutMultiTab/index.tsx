@@ -13,9 +13,10 @@ import * as VueTypes from 'vue-types'
 export default defineComponent({
   name: 'LayoutMultiTab',
   props: {
-    isTopMenu: VueTypes.bool().def(false),
-    isFixed: VueTypes.bool().def(false),
-    multiTab: VueTypes.bool().def(false)
+    multiTab: VueTypes.bool().def(false),
+    isMobile: VueTypes.bool().def(false),
+    isMixMenu: VueTypes.bool().def(false),
+    hideMixHeaderTab: VueTypes.bool().def(true)
   },
   setup(props) {
     const route = useRoute()
@@ -121,33 +122,39 @@ export default defineComponent({
         )
       }
 
-      if (props.multiTab) {
-        return (
-          <div class='layout-multi-tabs'>
-            <div
-              style={{
-                width: '100%',
-                height: '38px',
-                boxSizing: 'border-box',
-                boxShadow: '0 .5px 1px 0 rgba(0, 0, 0, 0.15)',
-                position: 'relative',
-                zIndex: 9
-              }}
-            >
-              <ATabs
-                hideAdd
-                size='small'
-                type='editable-card'
-                v-model={[activeKey.value, 'activeKey']}
-                onEdit={(key, action) => action === 'remove' ? closeThis(key) : null }
-                tabBarStyle={{ margin: '0 0', padding: '6.5px 0 5px', background: '#ffffff' }}
-              >
-                { ATabPanes() }
-              </ATabs>
-            </div>
-          </div>
-        )
+      if (!props.multiTab) {
+        return
       }
+
+      if (!props.isMobile && props.isMixMenu && props.hideMixHeaderTab) {
+        return
+      }
+
+      return (
+        <div class='layout-multi-tabs'>
+          <div
+            style={{
+              width: '100%',
+              height: '38px',
+              boxSizing: 'border-box',
+              boxShadow: '0 .5px 1px 0 rgba(0, 0, 0, 0.15)',
+              position: 'relative',
+              zIndex: 9
+            }}
+          >
+            <ATabs
+              hideAdd
+              size='small'
+              type='editable-card'
+              v-model={[activeKey.value, 'activeKey']}
+              onEdit={(key, action) => action === 'remove' ? closeThis(key) : null }
+              tabBarStyle={{ margin: '0 0', padding: '6.5px 0 5px', background: '#ffffff' }}
+            >
+              { ATabPanes() }
+            </ATabs>
+          </div>
+        </div>
+      )
     }
   }
 })

@@ -1,5 +1,5 @@
 <template>
-  <div style="padding: 30px">
+  <div style="padding: 30px;">
     OrganizeManage
   </div>
 </template>

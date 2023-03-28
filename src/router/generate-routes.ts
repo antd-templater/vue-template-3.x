@@ -1,5 +1,4 @@
 import { requestBuilder } from '@/utils/common'
-import { SIcon, isIconType } from '@antd-templater/antd-template-lib3.x'
 import defaultRouter from '@/configure/defaultRouter'
 import * as userApi from '@/api/user'
 
@@ -61,13 +60,12 @@ const treeToRoute: TreeToRoute = (trees, parent = {}, components = {}) => {
       redirect: item.redirect && item.redirect.trim(),
 
       meta: {
-        icon: icon && isIconType(icon) ? h(SIcon, { type: icon }) : icon,
+        icon: icon,
         title: title,
         match: match,
         target: target,
         groupId: (parent.meta || {}).groupId || item.id,
         external: isFrameView && item.path || '',
-        iconName: typeof icon === 'string' ? icon : '',
         componentName: item.component || item.name || '',
         hideChildInMenu: hideInMenu === true || hideInMenu === 'Y' || hideChildInMenu === true || hideChildInMenu === 'Y',
         allowCache: (parentAllowCache !== false && parentAllowCache !== 'N') || (allowCache !== false && allowCache !== 'N'),

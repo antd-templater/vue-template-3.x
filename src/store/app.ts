@@ -25,9 +25,10 @@ export default defineStore('app', () => {
   const layoutMode = ref(defaultSettings.layoutMode)
   const fixedHeader = ref(defaultSettings.fixedHeader)
   const fixedSidebar = ref(defaultSettings.fixedSidebar)
-  const contentWidth = ref(defaultSettings.contentWidth)
+  const fixedHeaderTab = ref(defaultSettings.fixedHeaderTab)
+  const hideMixHeaderTab = ref(defaultSettings.hideMixHeaderTab)
   const componentSize = ref(defaultSettings.componentSize)
-  const autoHideHeader = ref(defaultSettings.autoHideHeader)
+  const contentWidth = ref(defaultSettings.contentWidth)
 
   const isFixed = computed(() => contentWidth.value === 'Fixed')
   const isFluid = computed(() => contentWidth.value === 'Fluid')
@@ -47,11 +48,12 @@ export default defineStore('app', () => {
   const toggleKeepAlive = (value: boolean) => { keepAlive.value = value }
   const toggleCollapsed = (value: boolean) => { collapsed.value = value }
   const toggleLayoutMode = (value: LayoutMode) => { layoutMode.value = value }
-  const toggleHideHeader = (value: boolean) => { autoHideHeader.value = value }
   const toggleFixedHeader = (value: boolean) => { fixedHeader.value = value }
   const toggleFixedSidebar = (value: boolean) => { fixedSidebar.value = value }
-  const toggleContentWidth = (value: ContentWidth) => { contentWidth.value = value }
+  const toggleFixedHeaderTab = (value: boolean) => { fixedHeaderTab.value = value }
+  const toggleHideMixHeaderTab = (value: boolean) => { hideMixHeaderTab.value = value }
   const toggleComponentSize = (value: ComponentSize) => { componentSize.value = value }
+  const toggleContentWidth = (value: ContentWidth) => { contentWidth.value = value }
   const togglePrimaryColor = (value: string) => { themeColor.primaryColor = value }
   const toggleWarningColor = (value: string) => { themeColor.warningColor = value }
   const toggleSuccessColor = (value: string) => { themeColor.successColor = value }
@@ -86,9 +88,10 @@ export default defineStore('app', () => {
     layoutMode,
     fixedHeader,
     fixedSidebar,
-    contentWidth,
+    fixedHeaderTab,
+    hideMixHeaderTab,
     componentSize,
-    autoHideHeader,
+    contentWidth,
     primaryColor,
     warningColor,
     successColor,
@@ -104,11 +107,12 @@ export default defineStore('app', () => {
     toggleCollapsed,
     toggleThemeMode,
     toggleLayoutMode,
-    toggleHideHeader,
     toggleFixedHeader,
     toggleFixedSidebar,
-    toggleContentWidth,
+    toggleFixedHeaderTab,
+    toggleHideMixHeaderTab,
     toggleComponentSize,
+    toggleContentWidth,
     togglePrimaryColor,
     toggleWarningColor,
     toggleSuccessColor,

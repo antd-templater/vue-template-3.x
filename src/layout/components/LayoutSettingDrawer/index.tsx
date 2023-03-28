@@ -212,6 +212,26 @@ export default defineComponent({
         ]
       }
 
+      const AFixedHeaderTab = () => {
+        return [
+          <ASwitch
+            size='small'
+            checked={appStore.fixedHeaderTab}
+            onChange={(value: any) => appStore.toggleFixedHeaderTab(value!)}
+          />
+        ]
+      }
+
+      const AHideMixHeaderTab = () => {
+        return [
+          <ASwitch
+            size='small'
+            checked={appStore.hideMixHeaderTab}
+            onChange={(value: any) => appStore.toggleHideMixHeaderTab(value!)}
+          />
+        ]
+      }
+
       return (
         <div { ...props }>
           <h3 class='setting-title'>导航设置</h3>
@@ -239,6 +259,20 @@ export default defineComponent({
                 actions={ AFixedSidebar() }
               >
                 <AListItemMeta title='固定侧边栏菜单'/>
+              </AListItem>
+
+              <AListItem
+                style='padding: 4px 3px; margin: 13px 0 10px;'
+                actions={ AFixedHeaderTab() }
+              >
+                <AListItemMeta title='固定导航栏页签'/>
+              </AListItem>
+
+              <AListItem
+                style='padding: 4px 3px; margin: 13px 0 10px;'
+                actions={ AHideMixHeaderTab() }
+              >
+                <AListItemMeta title='隐藏混合导航栏页签'/>
               </AListItem>
             </AList>
           </div>
@@ -314,9 +348,7 @@ export default defineComponent({
 
     const ANoticeInfo = (props: any) => {
       const info = console.info
-      const lookSetting = () => {
-        info(`{\n  themeColor: {\n    primaryColor: '${appStore.primaryColor}',\n    warningColor: '${appStore.warningColor}',\n    successColor: '${appStore.successColor}',\n    errorColor: '${appStore.errorColor}',\n    infoColor: '${appStore.infoColor}'\n  },\n  themeWeak: ${appStore.themeWeak},\n  themeMode: '${appStore.themeMode}',\n  layoutMode: '${appStore.layoutMode}',\n  contentWidth: '${appStore.contentWidth}',\n  componentSize: '${appStore.componentSize}',\n  domTitle: '${defaultSettings.domTitle}',\n  language: '${appStore.language}',\n  multiTab: ${appStore.multiTab},\n  keepAlive: ${appStore.keepAlive},\n  fixedHeader: ${appStore.fixedHeader},\n  fixedSidebar: ${appStore.fixedSidebar},\n  autoHideHeader: ${appStore.autoHideHeader}\n}`)
-      }
+      const lookSetting = () => info(`{\n  themeColor: {\n    primaryColor: '${appStore.primaryColor}',\n    warningColor: '${appStore.warningColor}',\n    successColor: '${appStore.successColor}',\n    errorColor: '${appStore.errorColor}',\n    infoColor: '${appStore.infoColor}'\n  },\n  themeWeak: ${appStore.themeWeak},\n  themeMode: '${appStore.themeMode}',\n  layoutMode: '${appStore.layoutMode}',\n  contentWidth: '${appStore.contentWidth}',\n  componentSize: '${appStore.componentSize}',\n  domTitle: '${defaultSettings.domTitle}',\n  language: '${appStore.language}',\n  multiTab: ${appStore.multiTab},\n  keepAlive: ${appStore.keepAlive},\n  fixedHeader: ${appStore.fixedHeader},\n  fixedSidebar: ${appStore.fixedSidebar},\n  fixedHeaderTab: ${appStore.fixedHeaderTab},\n  hideMixHeaderTab: ${appStore.hideMixHeaderTab}\n}`)
 
       return (
         <div { ...props }>
