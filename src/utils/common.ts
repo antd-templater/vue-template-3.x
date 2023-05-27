@@ -5,14 +5,14 @@ import dayjs from 'dayjs'
  */
 export type TakeFixed = (num: string | number, digit?: number) => string;
 export type TakePadEnd = (num: string | number, keep?: number) => string;
-export type TakeTimeToDayjsFormat = (date?: dayjs.ConfigType, format?: string) => string;
-export type TakeTimeToDayjs = (date?: dayjs.ConfigType, format?: dayjs.OptionType) => dayjs.Dayjs | null;
+export type TakeTimeToDesc = (date?: dayjs.ConfigType, format?: string) => string;
+export type TakeTimeToDate = (date?: dayjs.ConfigType, format?: dayjs.OptionType) => dayjs.Dayjs | undefined;
 export type TakeTreeByKey = (tree: Array<LiteralTree>, key: LiteralTree['label']) => LiteralTree;
 export type TakeLabelByKey = (tree: Array<LiteralTree>, key: LiteralTree['label'], out?: Array<'label'|'value'>) => LiteralTree['label'|'value'];
 export type RequestBuilder = (action?: string, param?: Record<string, any>, pageNo?: number | null, pageSize?: number | null, sortField?: string, sortOrder?: string) => AxiosRequestResult
 
 /**
- * 处理数值精度
+ * 数值精度 Fix
  */
 export const takeFixed: TakeFixed = (num, digit = 0) => {
   if (!isFinite(+num)) {
@@ -39,7 +39,7 @@ export const takeFixed: TakeFixed = (num, digit = 0) => {
 }
 
 /**
- * 补齐数值精度
+ * 数值精度 Pad
  */
 export const takePadEnd: TakePadEnd = (num, keep = 0) => {
   const string = String(+num || 0)
@@ -51,10 +51,10 @@ export const takePadEnd: TakePadEnd = (num, keep = 0) => {
 }
 
 /**
- * 转换 Dayjs Format
+ * 转换 Dayjs Desc
  */
-export const takeTimeToDayjsFormat: TakeTimeToDayjsFormat = (date, format) => {
-  if (date) {
+export const takeTimeToDesc: TakeTimeToDesc = (date, format) => {
+  if (date !== null && date !== undefined) {
     try {
       return dayjs(date).format(format || 'YYYY-MM-DD HH:mm:ss')
     } catch {}
@@ -63,15 +63,15 @@ export const takeTimeToDayjsFormat: TakeTimeToDayjsFormat = (date, format) => {
 }
 
 /**
- * 转换 Dayjs
+ * 转换 Dayjs Date
  */
-export const takeTimeToDayjs: TakeTimeToDayjs = (date, format) => {
-  if (date) {
+export const takeTimeToDate: TakeTimeToDate = (date, format) => {
+  if (date !== null && date !== undefined) {
     try {
       return dayjs(date, format)
     } catch {}
   }
-  return null
+  return undefined
 }
 
 /**
