@@ -102,6 +102,7 @@
       width: 22px;
       height: 22px;
       margin: 0 5px;
+      display: inline-block;
       position: relative;
       cursor: pointer;
     }
@@ -129,7 +130,7 @@
     height: 30px;
     margin-bottom: 20px;
 
-    & > .setting-component {
+    & > .setting-component > .setting-components-tag {
       margin: 0 8px;
       padding: 2px 8px;
       font-size: 11px;
@@ -139,11 +140,11 @@
       cursor: pointer;
     }
 
-    & > .setting-component:first-child {
+    & .setting-component:first-child > .setting-components-tag {
       margin-left: 3px;
     }
 
-    & > .setting-component:last-child {
+    & .setting-component:last-child > .setting-components-tag {
       margin-right: 3px;
     }
   }

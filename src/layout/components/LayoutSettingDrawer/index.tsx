@@ -80,29 +80,41 @@ export default defineComponent({
         <div { ...props }>
           <h3 class='setting-title'>组件风格</h3>
           <div class='setting-components'>
-            <ATag
+            <span
               class='setting-component'
-              color={appStore.componentSize === 'small' ? '#1890ff' : '#e3e3e3'}
               onClick={() => appStore.toggleComponentSize('small') }
             >
-              <span class='setting-components-tag'>小</span>
-            </ATag>
+              <ATag
+                class='setting-components-tag'
+                color={appStore.componentSize === 'small' ? '#1890ff' : '#e3e3e3'}
+              >
+                <span class='setting-components-text'>小</span>
+              </ATag>
+            </span>
 
-            <ATag
+            <span
               class='setting-component'
-              color={appStore.componentSize === 'middle' ? '#1890ff' : '#e3e3e3'}
               onClick={() => appStore.toggleComponentSize('middle') }
             >
-              <span class='setting-components-tag'>中</span>
-            </ATag>
+              <ATag
+                class='setting-components-tag'
+                color={appStore.componentSize === 'middle' ? '#1890ff' : '#e3e3e3'}
+              >
+                <span class='setting-components-text'>中</span>
+              </ATag>
+            </span>
 
-            <ATag
+            <span
               class='setting-component'
-              color={appStore.componentSize === 'large' ? '#1890ff' : '#e3e3e3'}
-              onClick={() => appStore.toggleComponentSize('large') }
+              onClick={() => appStore.toggleComponentSize('middle') }
             >
-              <span class='setting-components-tag'>大</span>
-            </ATag>
+              <ATag
+                class='setting-components-tag'
+                color={appStore.componentSize === 'large' ? '#1890ff' : '#e3e3e3'}
+              >
+                <span class='setting-components-text'>大</span>
+              </ATag>
+            </span>
           </div>
         </div>
       )
@@ -161,15 +173,19 @@ export default defineComponent({
             {
               presetThemeColors.map(({ name, color }) => (
                 <ATooltip title={name}>
-                  <ATag
-                    color={color}
+                  <div
                     class='setting-tag'
                     onClick={() => appStore.togglePrimaryColor(color) }
                   >
-                    <div class='setting-check'>
-                      { appStore.primaryColor === color ? <CheckOutlined/> : null }
-                    </div>
-                  </ATag>
+                    <ATag
+                      style='width: 100%; height: 100%;'
+                      color={color}
+                    >
+                      <div class='setting-check'>
+                        { appStore.primaryColor === color ? <CheckOutlined/> : null }
+                      </div>
+                    </ATag>
+                  </div>
                 </ATooltip>
               ))
             }
@@ -351,11 +367,10 @@ export default defineComponent({
       const lookSetting = () => info(`{\n  themeColor: {\n    primaryColor: '${appStore.primaryColor}',\n    warningColor: '${appStore.warningColor}',\n    successColor: '${appStore.successColor}',\n    errorColor: '${appStore.errorColor}',\n    infoColor: '${appStore.infoColor}'\n  },\n  themeWeak: ${appStore.themeWeak},\n  themeMode: '${appStore.themeMode}',\n  layoutMode: '${appStore.layoutMode}',\n  contentWidth: '${appStore.contentWidth}',\n  componentSize: '${appStore.componentSize}',\n  domTitle: '${defaultSettings.domTitle}',\n  language: '${appStore.language}',\n  multiTab: ${appStore.multiTab},\n  keepAlive: ${appStore.keepAlive},\n  fixedHeader: ${appStore.fixedHeader},\n  fixedSidebar: ${appStore.fixedSidebar},\n  fixedHeaderTab: ${appStore.fixedHeaderTab},\n  hideMixHeaderTab: ${appStore.hideMixHeaderTab}\n}`)
 
       return (
-        <div { ...props }>
+        <div { ...props } onClick={() => lookSetting() }>
           <AAlert
             type='warning'
             style={{ marginBottom: '5px', fontSize: '14px', cursor: 'pointer' }}
-            onClick={() => lookSetting() }
             message={
               <>
                 <span>配置栏应用于开发环境中预览、调试</span>
