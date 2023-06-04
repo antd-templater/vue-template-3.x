@@ -174,7 +174,7 @@ const doLogin = async() => {
       top: 0;
       left: 45px;
       right: 45px;
-      bottom: 150px;
+      bottom: 90px;
 
       &>.main-header {
         width: calc(100% - 72px);

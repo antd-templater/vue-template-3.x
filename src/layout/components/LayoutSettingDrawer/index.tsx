@@ -86,7 +86,7 @@ export default defineComponent({
             >
               <ATag
                 class='setting-components-tag'
-                color={appStore.componentSize === 'small' ? '#1890ff' : '#e3e3e3'}
+                color={appStore.componentSize === 'small' ? 'var(--ant-primary-color)' : '#e3e3e3'}
               >
                 <span class='setting-components-text'>小</span>
               </ATag>
@@ -98,7 +98,7 @@ export default defineComponent({
             >
               <ATag
                 class='setting-components-tag'
-                color={appStore.componentSize === 'middle' ? '#1890ff' : '#e3e3e3'}
+                color={appStore.componentSize === 'middle' ? 'var(--ant-primary-color)' : '#e3e3e3'}
               >
                 <span class='setting-components-text'>中</span>
               </ATag>
@@ -106,11 +106,11 @@ export default defineComponent({
 
             <span
               class='setting-component'
-              onClick={() => appStore.toggleComponentSize('middle') }
+              onClick={() => appStore.toggleComponentSize('large') }
             >
               <ATag
                 class='setting-components-tag'
-                color={appStore.componentSize === 'large' ? '#1890ff' : '#e3e3e3'}
+                color={appStore.componentSize === 'large' ? 'var(--ant-primary-color)' : '#e3e3e3'}
               >
                 <span class='setting-components-text'>大</span>
               </ATag>
@@ -178,7 +178,7 @@ export default defineComponent({
                     onClick={() => appStore.togglePrimaryColor(color) }
                   >
                     <ATag
-                      style='width: 100%; height: 100%;'
+                      style='width: 100%; height: 100%; padding: 0;'
                       color={color}
                     >
                       <div class='setting-check'>
