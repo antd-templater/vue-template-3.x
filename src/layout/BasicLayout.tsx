@@ -24,8 +24,8 @@ export default defineComponent({
     const headerHeight = ref(48)
     const collapsedWidth = ref(48)
 
-    const splitMenus = ref(true)
-    const collapsedButtonRender = ref(false)
+    const splitMenus: Ref<boolean> = ref(true)
+    const collapsedButtonRender: Ref<false> = ref(false)
 
     const menuData = computed(() => {
       const dynamicRoutes = router.getRoutes()
@@ -158,12 +158,11 @@ export default defineComponent({
         theme={appStore.themeMode}
         layout={appStore.layoutMode}
         navTheme={appStore.themeMode}
-        headerTheme={appStore.themeMode}
         fixedHeader={appStore.fixedHeader}
         fixSiderbar={appStore.fixedSidebar}
         contentWidth={appStore.contentWidth}
         primaryColor={appStore.primaryColor}
-        hasSider={appStore.isSideMenu || appStore.isMixMenu}
+        headerTheme={appStore.themeMode !== 'realDark' ? appStore.themeMode : 'dark'}
         menuData={menuData.value}
         collapsed={appStore.collapsed}
         siderWidth={siderWidth.value}

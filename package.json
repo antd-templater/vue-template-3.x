@@ -21,7 +21,7 @@
   "dependencies": {
     "@ant-design-vue/pro-layout": "^3.2.4",
     "@ant-design/icons-vue": "^6.1.0",
-    "@antd-templater/antd-template-lib3.x": "^0.0.29",
+    "@antd-templater/antd-template-lib3.x": "^0.0.30",
     "ant-design-vue": "^3.2.20",
     "axios": "^1.4.0",
     "dayjs": "^1.11.8",
@@ -62,7 +62,7 @@
     "less": "^4.1.3",
     "lint-staged": "^13.2.2",
     "prettier": "^2.8.8",
-    "rollup": "^3.23.0",
+    "rollup": "^3.23.1",
     "terser": "^5.17.7",
     "typescript": "^5.1.3",
     "unplugin-auto-import": "^0.16.4",
