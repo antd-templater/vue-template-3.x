@@ -1,4 +1,4 @@
-import dayjs from 'dayjs'
+import dayjs from '@/plugin/dayjs'
 
 /**
  * 声明类型
@@ -7,8 +7,8 @@ export type TakeFixed = (num: string | number, digit?: number) => string;
 export type TakePadEnd = (num: string | number, keep?: number) => string;
 export type TakeTimeToDesc = (date?: dayjs.ConfigType, format?: string) => string;
 export type TakeTimeToDate = (date?: dayjs.ConfigType, format?: dayjs.OptionType) => dayjs.Dayjs | undefined;
-export type TakeTreeByKey = (tree: Array<LiteralTree>, key: LiteralTree['label']) => LiteralTree;
-export type TakeLabelByKey = (tree: Array<LiteralTree>, key: LiteralTree['label'], out?: Array<'label'|'value'>) => LiteralTree['label'|'value'];
+export type TakeTreeByKey = (tree: Array<LabelValueChildrenTree>, key: LabelValueChildrenTree['label']) => LabelValueChildrenTree;
+export type TakeLabelByKey = (tree: Array<LabelValueChildrenTree>, key: LabelValueChildrenTree['label'], out?: Array<'label'|'value'>) => LabelValueChildrenTree['label'|'value'];
 export type RequestBuilder = (action?: string, param?: Record<string, any>, pageNo?: number | null, pageSize?: number | null, sortField?: string, sortOrder?: string) => AxiosRequestResult
 
 /**

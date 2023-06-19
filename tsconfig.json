@@ -27,7 +27,6 @@
     ],
     "types": [
       "@antd-templater/antd-template-lib3.x/library-declare",
-      "unplugin-vue-define-options/macros-global",
       "pinia-plugin-persist",
       "vitest/globals",
       "vite/client"

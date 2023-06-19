@@ -5,7 +5,6 @@ import ViteCompression from 'vite-plugin-compression'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import ViteLegacy from '@vitejs/plugin-legacy'
-import VueMacros from 'unplugin-vue-macros'
 import VueJsx from '@vitejs/plugin-vue-jsx'
 import Vue from '@vitejs/plugin-vue'
 
@@ -88,9 +87,13 @@ export default defineConfig(({ mode }) => {
       ViteLegacy({
         targets: ['defaults', 'not IE 11']
       }),
-      VueMacros.vite(),
       VueJsx(),
-      Vue()
+      Vue({
+        script: {
+          defineModel: true,
+          propsDestructure: true
+        }
+      })
     ],
 
     build: {

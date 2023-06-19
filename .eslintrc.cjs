@@ -20,6 +20,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:vue/vue3-recommended',
     'plugin:@typescript-eslint/eslint-recommended',
+    './node_modules/@antd-templater/antd-template-lib3.x/library-eslintrc.json',
     '.eslintrc-auto-import.json'
   ],
   rules: {
