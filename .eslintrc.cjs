@@ -222,7 +222,8 @@ module.exports = {
           ignores: []
         }],
         'vue/attribute-hyphenation': ['error', 'never', { ignore: ['vcoder-*'] }],
-        'vue/v-on-event-hyphenation': ['error', 'never']
+        'vue/v-on-event-hyphenation': ['error', 'never'],
+        'vue/no-setup-props-destructure': ['off']
       }
     },
     {
