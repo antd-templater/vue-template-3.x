@@ -1,5 +1,5 @@
 import qs from 'qs'
-import Axios, { RawAxiosRequestConfig } from 'axios'
+import Axios, { RawAxiosRequestConfig, AxiosResponse } from 'axios'
 import { AppApiBase } from '@/configure/presetEnvironment'
 import Notification from 'ant-design-vue/es/notification'
 import useUserStore from '@/store/user'
@@ -9,9 +9,7 @@ import useUserStore from '@/store/user'
  */
 const base = AppApiBase || '/'
 const axios = Axios.create({ baseURL: base, timeout: 30000 })
-const request = <T = any, D = any>(config: RawAxiosRequestConfig<D>) => {
-  return axios(config) as Promise<T>
-}
+const request = <T = any, D = any>(config: RawAxiosRequestConfig<D>) => axios<T, AxiosResponse<T>, D>(config) as Promise<T>
 
 /**
  * 统一异常处理
