@@ -1,4 +1,4 @@
-const prettyhtml = require('@volar-plugins/prettyhtml')
+const prettyhtml = require('volar-service-prettyhtml')
 
 module.exports = {
   plugins: [
