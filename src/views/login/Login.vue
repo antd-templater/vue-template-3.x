@@ -25,6 +25,7 @@
                   placeholder="账号: admin"
                   size="large"
                   type="text"
+                  @pressEnter="doLogin"
                 >
                   <template #prefix>
                     <UserOutlined :style="formStates.username ? { color: '#c0c0c0' } : {}" />
@@ -40,6 +41,7 @@
                   placeholder="密码: 12345678"
                   size="large"
                   type="text"
+                  @pressEnter="doLogin"
                 >
                   <template #prefix>
                     <LockOutlined :style="formStates.password ? { color: '#c0c0c0' } : {}" />

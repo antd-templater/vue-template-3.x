@@ -34,9 +34,15 @@ type Matched = {
  * 标签页管理
  */
 export default defineStore('tag', () => {
+  const cacheTags: Ref<string[]> = ref([
+    'BasicLayout',
+    'RouteView',
+    'PageFrame',
+    'PageView'
+  ])
+
   const stackTags: Ref<Route[]> = ref([])
   const visitTags: Ref<Route[]> = ref([])
-  const cacheTags: Ref<string[]> = ref([])
   const currentTag: Ref<Route | null> = ref(null)
 
   const clone = (tag: Route) => {
@@ -147,6 +153,7 @@ export default defineStore('tag', () => {
 
   const delCacheTags = (tag: Route) => {
     cacheTags.value = cacheTags.value.filter(name => name !== tag.meta.componentName)
+    cacheTags.value = Array.from(new Set([...cacheTags.value, 'BasicLayout', 'RouteView', 'PageFrame', 'PageView']))
 
     return {
       stackTags: readonly(stackTags),
@@ -183,6 +190,7 @@ export default defineStore('tag', () => {
 
   const delOtherCacheTags = (tag: Route) => {
     cacheTags.value = cacheTags.value.filter(name => name === tag.meta.componentName)
+    cacheTags.value = Array.from(new Set([...cacheTags.value, 'BasicLayout', 'RouteView', 'PageFrame', 'PageView']))
 
     return {
       stackTags: readonly(stackTags),
@@ -218,7 +226,7 @@ export default defineStore('tag', () => {
   }
 
   const delAllCacheTags = () => {
-    cacheTags.value = []
+    cacheTags.value = ['BasicLayout', 'RouteView', 'PageFrame', 'PageView']
 
     return {
       stackTags: readonly(stackTags),

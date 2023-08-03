@@ -1,5 +1,6 @@
-import ASpin from 'ant-design-vue/es/spin'
 import { extractLink } from '@/utils/router'
+import ASpin from 'ant-design-vue/es/spin'
+import useAppStore from '@/store/app'
 
 import 'ant-design-vue/es/spin/style/index.less'
 import '@/layout/PageFrame.less'
@@ -8,9 +9,10 @@ export default defineComponent({
   name: 'PageFrame',
   setup() {
     const route = useRoute()
-    const iframe = ref<any>(null)
-    const loading = ref<boolean>(true)
+    const appStore = useAppStore()
     const iframeSource = extractLink(route as any)
+    const loading = ref<boolean>(true)
+    const iframe = ref<any>(null)
 
     onMounted(() => {
       if (iframe.value) {
@@ -24,10 +26,10 @@ export default defineComponent({
         class='page-frame-container'
         style={{
           width: '100%',
-          height: '100%',
+          height: (appStore.isMixMenu && !appStore.hideMixHeaderTab || appStore.fixedHeader) && appStore.fixedHeaderTab ? 'calc(100vh - 88px)' : (appStore.isMixMenu || appStore.fixedHeader) ? 'calc(100vh - 50px)' : '100vh',
           margin: '0',
           padding: '0.5px',
-          position: 'relative',
+          position: 'absolute',
           boxSizing: 'border-box'
         }}
       >

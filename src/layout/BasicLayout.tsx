@@ -1,10 +1,12 @@
 import { KeepAlive } from 'vue'
 import { RouterView } from 'vue-router'
+import { extractLink } from '@/utils/router'
 import { SIcon, isIconType } from '@antd-templater/antd-template-lib3.x'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
 import AProLayout, { clearMenuItem, GlobalHeader } from '@ant-design-vue/pro-layout'
 import defaultSettings from '@/configure/defaultSettings'
 import useAppStore from '@/store/app'
+import useTagStore from '@/store/tag'
 
 import LayoutSettingDrawer from './components/LayoutSettingDrawer'
 import LayoutBreadcrumb from './components/LayoutBreadcrumb'
@@ -19,6 +21,7 @@ export default defineComponent({
     const route = useRoute()
     const router = useRouter()
     const appStore = useAppStore()
+    const tagStore = useTagStore()
 
     const siderWidth = ref(192)
     const headerHeight = ref(48)
@@ -26,6 +29,13 @@ export default defineComponent({
 
     const splitMenus: Ref<boolean> = ref(true)
     const collapsedButtonRender: Ref<false> = ref(false)
+
+    const key = computed(() => {
+      const route = useRoute()
+      const meta = route.meta || {}
+      const match = meta.match || 'path'
+      return match !== 'external' ? route.fullPath : extractLink(route as any)
+    })
 
     const menuData = computed(() => {
       const dynamicRoutes = router.getRoutes()
@@ -197,9 +207,9 @@ export default defineComponent({
           class='page-router-view-container'
           style={{
             width: appStore.isTopMenu && appStore.isFixed ? '1200px' : '100%',
-            height: (appStore.isMixMenu || appStore.fixedHeader) && appStore.fixedHeaderTab ? 'calc(100% - 38px)' : 'auto',
-            position: (appStore.isMixMenu || appStore.fixedHeader) && appStore.fixedHeaderTab ? 'absolute' : 'relative',
-            overflow: (appStore.isMixMenu || appStore.fixedHeader) && appStore.fixedHeaderTab ? 'auto' : 'visible',
+            height: (appStore.isMixMenu && !appStore.hideMixHeaderTab || appStore.fixedHeader) && appStore.fixedHeaderTab ? 'calc(100vh - 88px)' : (appStore.isMixMenu || appStore.fixedHeader) ? 'calc(100vh - 50px)' : 'auto',
+            position: appStore.isMixMenu || appStore.fixedHeader ? 'absolute' : 'relative',
+            overflow: appStore.isMixMenu || appStore.fixedHeader ? 'auto' : 'visible',
             margin: '0px auto',
             padding: '0px 0px',
             zIndex: 1,
@@ -207,7 +217,15 @@ export default defineComponent({
             left: 0
           }}
         >
-          <RouterView v-slots={{ default: (scope: any) => <KeepAlive>{ scope.Component ? <scope.Component/> : null }</KeepAlive> }}/>
+          <RouterView
+            v-slots={{
+              default: (scope: any) => (
+                <KeepAlive include={appStore.multiTab && appStore.keepAlive ? tagStore.cacheTags : []}>
+                  { scope.Component ? <scope.Component key={key.value}/> : null }
+                </KeepAlive>
+              )
+            }}
+          />
         </div>
 
         <div class='page-router-view-settings'>
