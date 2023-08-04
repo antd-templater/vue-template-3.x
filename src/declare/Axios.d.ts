@@ -1,15 +1,25 @@
 /**
+ * 请求扩展
+ */
+declare type AxiosSorter = {
+  field: string;
+  order: string;
+}
+
+declare type AxiosRequestOptions = {
+  sorter?: AxiosSorter[] | AxiosSorter;
+  [key: string]: any;
+}
+
+/**
  * 请求参数
  */
 declare type AxiosRequestResult<T = any> = {
-  param: T;
-  action: string;
-  sortField: string | undefined;
-  sortOrder: string | undefined;
-  sortTopField: string | undefined;
-  sortTopOrder: string | undefined;
-  pageSize: number | undefined;
-  pageNo:number | undefined;
+  param?: T;
+  action?: string;
+  sorter?: AxiosSorter[] | AxiosSorter;
+  pageSize?: number;
+  pageNo?: number;
 }
 
 /**

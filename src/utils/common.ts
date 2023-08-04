@@ -9,7 +9,7 @@ export type TakeTimeToDesc = (date?: dayjs.ConfigType, format?: string) => strin
 export type TakeTimeToDate = (date?: dayjs.ConfigType, format?: dayjs.OptionType) => dayjs.Dayjs | undefined;
 export type TakeTreeByKey = (tree: Array<LabelValueChildrenTree>, key: LabelValueChildrenTree['label']) => LabelValueChildrenTree;
 export type TakeLabelByKey = (tree: Array<LabelValueChildrenTree>, key: LabelValueChildrenTree['label'], out?: Array<'label'|'value'>) => LabelValueChildrenTree['label'|'value'];
-export type RequestBuilder = (action?: string, param?: Record<string, any>, pageNo?: number | null, pageSize?: number | null, sortField?: string, sortOrder?: string) => AxiosRequestResult
+export type RequestBuilder = (action?: string, param?: Record<string, any>, pageNo?: number | null, pageSize?: number | null, options?: AxiosRequestOptions) => AxiosRequestResult
 
 /**
  * 数值精度 Fix
@@ -127,32 +127,41 @@ export const takeLabelByKey: TakeLabelByKey = (tree, key, out) => {
 /**
  * 封装传参格式
  */
-export const requestBuilder: RequestBuilder = (action = '', param = {}, pageNo = 0, pageSize = 10, sortField = '', sortOrder = '') => {
-  const toSortField = (field?: string | null, order?: string | null) => {
-    const sortField = field && field.replace(/(^|\B)([A-Z])/g, '_$2').toLowerCase()
-    const sortOrder = order && order.replace(/end$/i, '')
-    return (sortOrder && sortField) || undefined
+export const requestBuilder: RequestBuilder = (action = '', param = {}, pageNo = 0, pageSize = 10, options = {}) => {
+  if (Array.isArray(options?.sorter)) {
+    return {
+      param: param,
+      action: action,
+
+      sorter: options.sorter.filter(opt => opt.field && opt.order).map(opt => ({
+        field: opt.field.replace(/(^|\B)([A-Z])/g, '_$2').toLowerCase(),
+        order: opt.order.replace(/(^|\B)([A-Z])/g, '_$2').toLowerCase()
+      })),
+
+      pageSize: pageSize !== null ? pageSize : undefined,
+      pageNo: pageNo !== null ? pageNo : undefined
+    }
   }
 
-  const toSortOrder = (field?: string | null, order?: string | null) => {
-    const sortField = field && field.replace(/(^|\B)([A-Z])/g, '_$2').toLowerCase()
-    const sortOrder = order && order.replace(/end$/i, '')
-    return (sortField && sortOrder) || undefined
+  if (options?.sorter?.field && options?.sorter?.order) {
+    return {
+      param: param,
+      action: action,
+
+      sorter: {
+        field: options?.sorter?.field.replace(/(^|\B)([A-Z])/g, '_$2').toLowerCase(),
+        order: options?.sorter?.order.replace(/(^|\B)([A-Z])/g, '_$2').toLowerCase()
+      },
+
+      pageSize: pageSize !== null ? pageSize : undefined,
+      pageNo: pageNo !== null ? pageNo : undefined
+    }
   }
-
-  const sortTopField = param.sortTopField
-  const sortTopOrder = param.sortTopOrder
-
-  delete param.sortTopField
-  delete param.sortTopOrder
 
   return {
     param: param,
     action: action,
-    sortField: toSortField(sortField, sortOrder),
-    sortOrder: toSortOrder(sortField, sortOrder),
-    sortTopField: toSortField(sortTopField, sortTopOrder),
-    sortTopOrder: toSortOrder(sortTopField, sortTopOrder),
+    sorter: undefined,
     pageSize: pageSize !== null ? pageSize : undefined,
     pageNo: pageNo !== null ? pageNo : undefined
   }
