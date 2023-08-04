@@ -18,6 +18,7 @@ util.worker.use(
       message: null,
       result: [
         {
+          sort: 1000000,
           id: '27245863256459422',
           name: 'system',
           path: '',
@@ -33,6 +34,7 @@ util.worker.use(
           }
         },
         {
+          sort: 1000100,
           id: '1127282136000102507',
           name: 'OrganizeManage',
           path: '/system/OrganizeManage',
@@ -48,6 +50,7 @@ util.worker.use(
           }
         },
         {
+          sort: 1000200,
           id: '27245863256459445',
           name: 'ResourceManage',
           path: '/system/ResourceManage',
@@ -63,6 +66,7 @@ util.worker.use(
           }
         },
         {
+          sort: 1000300,
           id: '27245863256459495',
           name: 'RoleManage',
           path: '/system/RoleManage',
@@ -78,6 +82,7 @@ util.worker.use(
           }
         },
         {
+          sort: 1000400,
           id: '1127282136000102579',
           name: 'UserManage',
           path: '/system/UserManage',

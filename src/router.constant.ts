@@ -2,8 +2,10 @@ import UserLayout from '@/layout/UserLayout'
 import defaultRouter from '@/configure/defaultRouter'
 import type { Route } from '@/router/generate-typing'
 
-export const menuRoutes: Route[] = defaultRouter.rootRoute.children // 菜单路由
-export const baseRoutes: Route[] = defaultRouter.constantRoutes // 基础路由
+interface defineRoute extends Route { sort?: number; }
+
+export const baseRoutes: defineRoute[] = defaultRouter.constantRoutes // 基础路由
+export const menuRoutes: defineRoute[] = defaultRouter.rootRoute.children // 菜单路由
 
 baseRoutes.push(
   {

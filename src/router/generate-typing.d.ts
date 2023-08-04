@@ -1,4 +1,5 @@
 export interface Menu {
+  sort?: number;
   id?: string;
   key?: string;
   name: string;

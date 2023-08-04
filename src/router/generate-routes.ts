@@ -32,6 +32,12 @@ const listToTree: ListToTree = (list, chidren, parent) => {
       chidren.push(menu)
     }
   })
+
+  chidren.sort((next, prev) => {
+    const nextSort = next.sort === Infinity || Number.isFinite(+next.sort!) ? next.sort! : -1
+    const prevSort = prev.sort === Infinity || Number.isFinite(+prev.sort!) ? prev.sort! : -1
+    return nextSort - prevSort < 0 ? -1 : nextSort - prevSort > 0 ? 1 : 0
+  })
 }
 
 /**
