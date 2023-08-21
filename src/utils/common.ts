@@ -14,18 +14,16 @@ export type RequestBuilder = (action?: string, param?: Record<string, any>, page
 /**
  * 数值精度 Fix
  */
-export const takeFixed: TakeFixed = (num, digit = 0) => {
-  if (!isFinite(+num)) {
-    return '0.' + ''.padEnd(digit, '0')
+export const takeFixed: TakeFixed = (num, digit = NaN) => {
+  if (!Number.isFinite(+num)) {
+    return Number.isFinite(digit) && digit > 0 ? '0.' + ''.padEnd(digit, '0') : '0'
   }
 
   let string = ''
   let number = 0
 
   num = +num || 0
-  digit = isFinite(digit) ? +digit : 2
-
-  number = Math.round(Math.pow(10, digit) * num) / Math.pow(10, digit)
+  number = Number.isFinite(digit) ? Math.round(Math.pow(10, digit) * num) / Math.pow(10, digit) : num
   string = String(number)
 
   if (~string.indexOf('.')) {
