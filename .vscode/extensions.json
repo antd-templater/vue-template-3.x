@@ -3,6 +3,7 @@
     "vue.volar",
     "eamodio.gitlens",
     "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint"
+    "dbaeumer.vscode-eslint",
+    "Vue.vscode-typescript-vue-plugin"
   ]
 }
