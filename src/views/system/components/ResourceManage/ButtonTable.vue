@@ -9,7 +9,7 @@
     >
       <template #extra>
         <AButton
-          v-if="parentNode.value"
+          v-if="parentNode.resourceId"
           type="primary"
           @click="doDrawerAdd"
         >
@@ -100,7 +100,6 @@ import ButtonDrawer from './ButtonDrawer.vue'
 
 export interface Props {
   parentNode: Record<string, any>;
-  parentInfo: Record<string, any>;
 }
 
 defineOptions({
@@ -344,8 +343,8 @@ const doDrawerDel = (record: object) => {
 
 const doDrawerAdd = () => {
   buttonDrawer.value?.doAdd({
-    parentId: props.parentNode.value,
-    component: props.parentInfo.component
+    parentId: props.parentNode.resourceId,
+    component: props.parentNode.component
   })
 }
 

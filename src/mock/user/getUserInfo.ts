@@ -28,7 +28,6 @@ worker.use(
         role: {
           permissions: [
             {
-              roleId: '27442970747734159',
               permissionId: 'ResourceManage',
               actionEntitySet: [
                 { action: 'add', defaultCheck: false, describe: '新增' },
@@ -36,7 +35,6 @@ worker.use(
               ]
             },
             {
-              roleId: '27442970747734159',
               permissionId: 'RoleManage',
               actionEntitySet: [
                 { action: 'add', defaultCheck: false, describe: '新增' },
@@ -46,7 +44,6 @@ worker.use(
               ]
             },
             {
-              roleId: '27442970747734159',
               permissionId: 'OrganizeManage',
               actionEntitySet: [
                 { action: 'add', defaultCheck: false, describe: '新增' },
@@ -56,7 +53,6 @@ worker.use(
               ]
             },
             {
-              roleId: '27442970747734159',
               permissionId: 'UserManage',
               actionEntitySet: [
                 { action: 'add', defaultCheck: false, describe: '新增' },

@@ -17,7 +17,6 @@
         :is="menuNode.children?.length > 0 ? MenuTable : ButtonTable"
         ref="refTable"
         :parentNode="menuNode"
-        :parentInfo="menuInfo"
       />
 
       <AButton
@@ -45,23 +44,19 @@ defineOptions({
 })
 
 const menuNode = ref({} as Record<string, any>)
-const menuInfo = ref({} as Record<string, any>)
 const refTable = ref(null as InstanceType<typeof ButtonTable> | InstanceType<typeof MenuTable> | null)
 const collapse = ref(false as boolean)
 
-const queryTable = (options: { node: object, info: object }) => {
-  const node: any = options.node
-
-  menuNode.value = options.node
-  menuInfo.value = options.info
+const queryTable = (node: Record<string, any>) => {
+  menuNode.value = node
 
   nextTick(() => {
-    if (!node.value) {
+    if (!node.resourceId) {
       refTable.value?.doTableClear()
     }
 
-    if (node.value) {
-      refTable.value!.queryParams.parentId = node.value
+    if (node.resourceId) {
+      refTable.value!.queryParams.parentId = node.resourceId
       refTable.value!.doTableRefresh()
     }
   })

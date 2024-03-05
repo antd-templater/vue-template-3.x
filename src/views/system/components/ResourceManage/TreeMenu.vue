@@ -140,7 +140,7 @@
 import { CSSProperties, createVNode, render } from 'vue'
 import { treeEmitSelectDefiner } from '@antd-templater/antd-template-lib3.x'
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue'
-import { requestBuilder, rawValue } from '@/utils/common'
+import { requestBuilder } from '@/utils/common'
 import * as resourceApi from '@/api/resource'
 
 import Message from 'ant-design-vue/es/message'
@@ -148,7 +148,7 @@ import ConfirmDialog from 'ant-design-vue/es/modal/ConfirmDialog'
 import MenuDrawer from './MenuDrawer.vue'
 
 export interface Emits {
-  (e: 'linkage', opt: { node: object, info: object; }): void;
+  (e: 'linkage', opt: object): void;
 }
 
 defineOptions({
@@ -168,15 +168,14 @@ const cardBodyStyle: CSSProperties = {
 }
 
 const replaceFields: Ref<STreeFieldNames> = ref({
-  key: 'value',
-  title: 'label',
+  key: 'resourceId',
+  title: 'title',
   children: 'children'
 })
 
 const emits = defineEmits<Emits>()
 const tree = ref(null as InstanceType<STree>| null)
 const menuDrawer = ref(null as InstanceType<typeof MenuDrawer>| null)
-const menuInfos = ref([] as Record<string, any>[])
 const menuTree = ref([] as Record<string, any>[])
 const loading = ref(false)
 
@@ -190,8 +189,8 @@ const doQuery = () => {
         Message.error('菜单资源加载失败')
         return Promise.reject()
       }
-      menuTree.value = res.result.treeNodes
-      menuInfos.value = res.result.nodes
+
+      menuTree.value = res.result
 
       nextTick(() => doTreeAllExpand())
     })
@@ -213,18 +212,15 @@ const doTreeAllExpand = () => {
 }
 
 const doLinkage = treeEmitSelectDefiner(options => {
-  emits('linkage', {
-    node: options.selectedNode!,
-    info: rawValue(menuInfos.value.find(menu => menu.resourceId === options.selectedNode!.value)!)
-  })
+  emits('linkage', options.selectedNode!)
 })
 
 const doDrawerAdd = (record: Record<string, any>) => {
-  menuDrawer.value?.doAdd({ parentId: record.value })
+  menuDrawer.value?.doAdd({ parentId: record.resourceId })
 }
 
 const doDrawerEdit = (record: Record<string, any>) => {
-  menuDrawer.value?.doEdit(menuInfos.value.find(menu => menu.resourceId === record.value))
+  menuDrawer.value?.doEdit(record)
 }
 
 const doDrawerDel = (record: Record<string, any>) => {
@@ -264,4 +260,3 @@ doQuery()
   overflow: auto;
 }
 </style>
-./MenuDrawer.vue

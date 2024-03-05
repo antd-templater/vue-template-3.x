@@ -9,7 +9,7 @@
     >
       <template #extra>
         <AButton
-          v-if="parentNode.value"
+          v-if="parentNode.resourceId"
           type="primary"
           @click="doDrawerAdd"
         >
@@ -112,7 +112,6 @@ import MenuDrawer from './MenuDrawer.vue'
 
 export interface Props {
   parentNode: Record<string, any>;
-  parentInfo: Record<string, any>;
 }
 
 defineOptions({
@@ -350,7 +349,7 @@ const doDrawerDel = (record: object) => {
 
 const doDrawerAdd = () => {
   menuDrawer.value?.doAdd({
-    parentId: props.parentNode.value
+    parentId: props.parentNode.resourceId
   })
 }
 
