@@ -1,21 +1,19 @@
-import { rest } from 'msw'
-import util from '@/mock/util'
-import api from '@/api/auth'
+import { promiser, resolver, worker, rester } from '@/mock/setup'
+import { http, HttpResponse } from 'msw'
 
 const tag = '系统登录'
-const fetch = rest.post
-const request = util.resolve(api.login)
+const url = resolver('/auth/:login')
 
-util.worker.use(
-  fetch(request, async(req, res, ctx) => {
-    const body = await util.body(req)
-    const query = await util.query(req)
-    const params = await util.params(req)
-    const printer = await util.printer(tag)
+worker.use(
+  http.post(url, async req => {
+    const body = await rester.body(req)
+    const query = await rester.query(req)
+    const params = await rester.params(req)
+    const printer = await rester.printer(tag)
 
     let result: any = null
 
-    if (body.param.username !== 'admin' || body.param.password !== '25d55ad283aa400af464c76d713c07ad') {
+    if (body.params.username !== 'admin' || body.params.password !== '25d55ad283aa400af464c76d713c07ad') {
       result = {
         code: '9999',
         message: '用户名密码错误',
@@ -23,7 +21,7 @@ util.worker.use(
       }
     }
 
-    if (body.param.username === 'admin' && body.param.password === '25d55ad283aa400af464c76d713c07ad') {
+    if (body.params.username === 'admin' && body.params.password === '25d55ad283aa400af464c76d713c07ad') {
       result = {
         code: '0000',
         message: null,
@@ -50,6 +48,9 @@ util.worker.use(
       log('[result] - ', result)
     })
 
-    return res(ctx.json(result))
+    return promiser(
+      HttpResponse.json(result),
+      100
+    )
   })
 )

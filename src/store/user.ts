@@ -6,33 +6,6 @@ import useTagStore from '@/store/tag'
 import * as authApi from '@/api/auth'
 import * as userApi from '@/api/user'
 
-// 用户角色
-interface UserRole {
-  permissionList: Array<string>;
-  permissions: Array<{
-    roleId: string;
-    permissionId: string;
-    actionEntitySet: Array<{ action: string, describe: string }>;
-    actionList: Array<string>;
-  }>;
-}
-
-// 用户信息
-interface UserInfo {
-  userNo?: string | null;
-  userName?: string | null;
-  mobilePhone?: string | null;
-  avatar?: string | null;
-  postName?: string | null;
-  role?: UserRole | null;
-  orgId?: string | null;
-  orgName?: string | null;
-  deptName?: string | null;
-  deptId?: string | null;
-  dataFlag?: string | null;
-  activity?: string | null;
-}
-
 /**
  * 用户管理
  */
@@ -52,7 +25,7 @@ export default defineStore('user', () => {
   const nickname = computed(() => userName.value)
   const tagStore = useTagStore()
 
-  const login = async(params: Record<string, any>) => {
+  const login = async(params: Record<string, any> = {}) => {
     if (tagStore) {
       tagStore.delAllTags()
     }
@@ -62,7 +35,7 @@ export default defineStore('user', () => {
       data: UserInfo;
     }
 
-    return authApi.login<AxiosResponseResult<CustomResult>>(requestBuilder('login', params)).then(res => {
+    return authApi.login<CustomResult>(requestBuilder('login', params)).then(res => {
       if (res.code !== '0000') {
         return Promise.reject(res)
       }
@@ -100,15 +73,15 @@ export default defineStore('user', () => {
     userInfo.value = {} as UserInfo
     userRole.value = {} as UserRole
 
-    return authApi.logout<AxiosResponseResult>(params).then(res => {
+    return authApi.logout(params).then(res => {
       if (res.code !== '0000') {
         return Promise.reject(res)
       }
     })
   }
 
-  const getUserInfo = async(params: Record<string, any>) => {
-    return userApi.getUserInfo<AxiosResponseResult<UserInfo>>(requestBuilder('getInfo', params)).then(res => {
+  const getUserInfo = async(params: Record<string, any> = {}) => {
+    return userApi.getUserInfo<UserInfo>(requestBuilder('getInfo', params)).then(res => {
       if (res.code !== '0000') {
         return Promise.reject(new Error(res.message || '获取用户失败!'))
       }

@@ -1,10 +1,10 @@
 import { loadEnv } from 'vite'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitest/config'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import ViteCompression from 'vite-plugin-compression'
-import Components from 'unplugin-vue-components/vite'
+import AutoComponents from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
-import ViteLegacy from '@vitejs/plugin-legacy'
 import VueJsx from '@vitejs/plugin-vue-jsx'
 import Vue from '@vitejs/plugin-vue'
 
@@ -15,10 +15,12 @@ export default defineConfig(({ mode }) => {
   const offGzip = env.VITE_APP_ENABLE_GZIP !== 'true'
 
   return {
-    base,
+    root: cwd,
+    base: base,
 
     test: {
-      globals: true
+      globals: true,
+      environment: 'jsdom'
     },
 
     css: {
@@ -34,7 +36,7 @@ export default defineConfig(({ mode }) => {
 
     resolve: {
       alias: {
-        '@/': new URL('./src/', import.meta.url).pathname
+        '@/': fileURLToPath(new URL('./src', import.meta.url)) + '/'
       }
     },
 
@@ -56,12 +58,20 @@ export default defineConfig(({ mode }) => {
         algorithm: 'gzip',
         ext: '.gz'
       }),
+      AutoComponents({
+        dirs: ['src/components'],
+        resolvers: [
+          AntDesignVueResolver({
+            resolveIcons: true,
+            importStyle: 'less'
+          })
+        ]
+      }),
       AutoImport({
         include: [
           /\.[tj]sx?$/,
           /\.vue\?vue/,
-          /\.vue$/,
-          /\.md$/
+          /\.vue$/
         ],
         imports: [
           'vue',
@@ -74,18 +84,6 @@ export default defineConfig(({ mode }) => {
           globalsPropValue: true
         },
         dts: true
-      }),
-      Components({
-        dirs: ['src/components'],
-        resolvers: [
-          AntDesignVueResolver({
-            resolveIcons: true,
-            importStyle: 'less'
-          })
-        ]
-      }),
-      ViteLegacy({
-        targets: ['defaults', 'not IE 11']
       }),
       VueJsx(),
       Vue({
@@ -106,6 +104,7 @@ export default defineConfig(({ mode }) => {
         }
       },
       rollupOptions: {
+        logLevel: 'silent',
         output: {
           chunkFileNames: 'static/js/[name]-[hash].js',
           entryFileNames: 'static/js/[name]-[hash].js',

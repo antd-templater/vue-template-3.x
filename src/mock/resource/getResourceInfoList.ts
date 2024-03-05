@@ -1,21 +1,98 @@
-import { rest } from 'msw'
-import util from '@/mock/util'
-import api from '@/api/resource'
+import { promiser, resolver, worker, rester } from '@/mock/setup'
+import { http, HttpResponse } from 'msw'
 
 const tag = '查询资源信息'
-const fetch = rest.post
-const request = util.resolve(api.getResourceInfoList)
+const url = resolver('/resource/getResourceInfoList')
 
-util.worker.use(
-  fetch(request, async(req, res, ctx) => {
-    const body = await util.body(req)
-    const query = await util.query(req)
-    const params = await util.params(req)
-    const printer = await util.printer(tag)
+worker.use(
+  http.post(url, async req => {
+    const body = await rester.body(req)
+    const query = await rester.query(req)
+    const params = await rester.params(req)
+    const printer = await rester.printer(tag)
 
     let result:any = null
 
-    switch (body.param.parentId) {
+    switch (body.params.parentId) {
+      case '27245863256459422': {
+        result = {
+          code: '0000',
+          message: null,
+          result: {
+            data: [
+              {
+                sort: 1000100,
+                path: '/system/OrganizeManage',
+                icon: 'CodepenOutlined',
+                title: '组织管理',
+                redirect: '',
+                parentId: '27245863256459422',
+                component: 'OrganizeManage',
+                resourceId: '1127282136000102507',
+                resourceName: 'OrganizeManage',
+                resourceType: 'm',
+                hideChildInMenu: 'N',
+                hideInMenu: 'N',
+                allowCache: 'Y',
+                activity: 'Y'
+              },
+              {
+                sort: 1000200,
+                path: '/system/ResourceManage',
+                icon: 'CodepenOutlined',
+                title: '资源管理',
+                redirect: '',
+                parentId: '27245863256459422',
+                component: 'ResourceManage',
+                resourceId: '27245863256459445',
+                resourceName: 'ResourceManage',
+                resourceType: 'm',
+                hideChildInMenu: 'N',
+                hideInMenu: 'N',
+                allowCache: 'Y',
+                activity: 'Y'
+              },
+              {
+                sort: 1000300,
+                path: '/system/RoleManage',
+                icon: '',
+                title: '角色管理',
+                redirect: '',
+                parentId: '27245863256459422',
+                component: 'RoleManage',
+                resourceId: '27245863256459495',
+                resourceName: 'RoleManage',
+                resourceType: 'm',
+                hideChildInMenu: 'N',
+                hideInMenu: 'N',
+                allowCache: 'Y',
+                activity: 'Y'
+              },
+              {
+                sort: 1000400,
+                path: '/system/UserManage',
+                icon: '',
+                title: '用户管理',
+                redirect: '',
+                parentId: '27245863256459422',
+                component: 'UserManage',
+                resourceId: '1127282136000102579',
+                resourceName: 'UserManage',
+                resourceType: 'm',
+                hideChildInMenu: 'N',
+                hideInMenu: 'N',
+                allowCache: 'Y',
+                activity: 'Y'
+              }
+            ],
+            pageNo: 1,
+            pageSize: 20,
+            totalSize: 4,
+            totalPage: 1
+          }
+        }
+        break
+      }
       case '1127282136000102507': {
         result = {
           code: '0000',
@@ -65,7 +142,7 @@ util.worker.use(
             ],
             pageNo: 1,
             pageSize: 20,
-            totalCount: 4,
+            totalSize: 4,
             totalPage: 1
           }
         }
@@ -100,7 +177,7 @@ util.worker.use(
             ],
             pageNo: 1,
             pageSize: 20,
-            totalCount: 2,
+            totalSize: 2,
             totalPage: 1
           }
         }
@@ -155,7 +232,7 @@ util.worker.use(
             ],
             pageNo: 1,
             pageSize: 20,
-            totalCount: 4,
+            totalSize: 4,
             totalPage: 1
           }
         }
@@ -210,32 +287,7 @@ util.worker.use(
             ],
             pageNo: 1,
             pageSize: 20,
-            totalCount: 4,
-            totalPage: 1
-          }
-        }
-        break
-      }
-      case '1127282136000102508': {
-        result = {
-          code: '0000',
-          message: null,
-          result: {
-            data: [
-              {
-                sort: 0,
-                title: '组织新增',
-                parentId: '1127282136000102508',
-                component: 'OrganizeManage',
-                resourceId: '26722904834083932',
-                resourceName: '/api/resource/add',
-                resourceType: 's',
-                activity: 'Y'
-              }
-            ],
-            pageNo: 1,
-            pageSize: 20,
-            totalCount: 1,
+            totalSize: 4,
             totalPage: 1
           }
         }
@@ -249,7 +301,7 @@ util.worker.use(
             data: [],
             pageNo: 1,
             pageSize: 20,
-            totalCount: 0,
+            totalSize: 0,
             totalPage: 0
           }
         }
@@ -263,6 +315,9 @@ util.worker.use(
       log('[result] - ', result)
     })
 
-    return res(ctx.json(result))
+    return promiser(
+      HttpResponse.json(result),
+      300
+    )
   })
 )

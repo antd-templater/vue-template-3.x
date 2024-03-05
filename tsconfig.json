@@ -35,10 +35,10 @@
   "include": [
     "**/*.ts",
     "**/*.js",
-    "**/*.tsx",
-    "**/*.jsx",
     "**/*.mjs",
-    "**/*.vue"
+    "src/**/*.tsx",
+    "src/**/*.jsx",
+    "src/**/*.vue"
   ],
   "references": [
     {

@@ -1,68 +1,67 @@
 import { request } from '@/utils/request'
 
 /**
- * addUserInfo 新增用户信息
- * getUserInfo 获取用户信息
- * getUserMenu 获取用户菜单
- * getUserInfoList 获取用户列表
- * modifyUserInfo 修改用户信息
- * deleteUserInfo 删除用户信息
+ * 新增用户信息
  */
-const api = {
-  addUserInfo: '/user/addUserInfo',
-  getUserInfo: '/user/getUserInfo',
-  getUserMenu: '/user/getUserMenu',
-  getUserInfoList: '/user/getUserInfoList',
-  modifyUserInfo: '/user/modifyUserInfo',
-  deleteUserInfo: '/user/deleteUserInfo'
-}
-
 export function addUserInfo<T = any, D = any>(data: D) {
   return request<T, D>({
-    url: api.addUserInfo,
+    url: '/user/addUserInfo',
     method: 'post',
     data: data
   })
 }
 
+/**
+ * 获取用户信息
+ */
 export function getUserInfo<T = any, D = any>(data: D) {
   return request<T, D>({
-    url: api.getUserInfo,
+    url: '/user/getUserInfo',
     method: 'post',
     data: data
   })
 }
 
+/**
+ * 获取用户菜单
+ */
 export function getUserMenu<T = any, D = any>(data: D) {
   return request<T, D>({
-    url: api.getUserMenu,
+    url: '/user/getUserMenu',
     method: 'post',
     data: data
   })
 }
 
+/**
+ * 获取用户列表
+ */
 export function getUserInfoList<T = any, D = any>(data: D) {
   return request<T, D>({
-    url: api.getUserInfoList,
+    url: '/user/getUserInfoList',
     method: 'post',
     data: data
   })
 }
 
+/**
+ * 修改用户信息
+ */
 export function modifyUserInfo<T = any, D = any>(data: D) {
   return request<T, D>({
-    url: api.modifyUserInfo,
+    url: '/user/modifyUserInfo',
     method: 'post',
     data: data
   })
 }
 
+/**
+ * 删除用户信息
+ */
 export function deleteUserInfo<T = any, D = any>(data: D) {
   return request<T, D>({
-    url: api.deleteUserInfo,
+    url: '/user/deleteUserInfo',
     method: 'post',
     data: data
   })
 }
-
-export default api

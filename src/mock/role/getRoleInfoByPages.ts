@@ -1,17 +1,15 @@
-import { rest } from 'msw'
-import util from '@/mock/util'
-import api from '@/api/role'
+import { promiser, resolver, worker, rester } from '@/mock/setup'
+import { http, HttpResponse } from 'msw'
 
 const tag = '分页获取角色列表'
-const fetch = rest.post
-const request = util.resolve(api.getRoleInfoByPages)
+const url = resolver('/role/getRoleInfoByPages')
 
-util.worker.use(
-  fetch(request, async(req, res, ctx) => {
-    const body = await util.body(req)
-    const query = await util.query(req)
-    const params = await util.params(req)
-    const printer = await util.printer(tag)
+worker.use(
+  http.post(url, async req => {
+    const body = await rester.body(req)
+    const query = await rester.query(req)
+    const params = await rester.params(req)
+    const printer = await rester.printer(tag)
 
     const result = {
       code: '0000',
@@ -28,7 +26,7 @@ util.worker.use(
         ],
         pageNo: 1,
         pageSize: 20,
-        totalCount: 1,
+        totalSize: 1,
         totalPage: 1
       }
     }
@@ -40,6 +38,9 @@ util.worker.use(
       log('[result] - ', result)
     })
 
-    return res(ctx.json(result))
+    return promiser(
+      HttpResponse.json(result),
+      300
+    )
   })
 )

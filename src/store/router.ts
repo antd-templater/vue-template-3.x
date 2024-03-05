@@ -9,8 +9,8 @@ export default defineStore('router', () => {
   const dynamicRoutes: Ref<Route[]> = ref([])
   const constantRoutes: Ref<Route[]> = ref(defaultRouter.constantRoutes)
 
-  const generateRouter = async(params: any, components: any) => {
-    dynamicRoutes.value = await generateDynamicRouter(params, components)
+  const generateRouter = async(params: Record<string, any>, components: Record<string, any>, isServer = true) => {
+    dynamicRoutes.value = await generateDynamicRouter(params, components, isServer)
   }
 
   return {

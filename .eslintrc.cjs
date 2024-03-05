@@ -227,7 +227,7 @@ module.exports = {
       }
     },
     {
-      files: ['**/*.ts'],
+      files: ['**/*.vue', '**/*.ts'],
       rules: {
         'no-undef': 'off',
         'no-unused-vars': 'off',

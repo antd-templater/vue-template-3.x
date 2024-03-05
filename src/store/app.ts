@@ -71,6 +71,51 @@ export default defineStore('app', () => {
     themeMode.value = value
   }
 
+  const contentAreaStyle = computed(() => {
+    let width = '100%'
+    let height = '100vh'
+    let maxWidth = 'none'
+    let maxHeight = 'none'
+
+    if (isTopMenu.value && contentWidth.value === 'Fixed') {
+      width = '100%'
+      maxWidth = '1200px'
+    }
+
+    if (isMixMenu.value && (hideMixHeaderTab.value || !fixedHeaderTab.value)) {
+      height = 'calc(100vh - 52px)'
+    }
+
+    if (isMixMenu.value && !hideMixHeaderTab.value && fixedHeaderTab.value) {
+      height = 'calc(100vh - 90px)'
+    }
+
+    if (!isMixMenu.value && fixedHeader.value && fixedHeaderTab.value) {
+      height = 'calc(100vh - 90px)'
+    }
+
+    if (!isMixMenu.value && fixedHeader.value && !fixedHeaderTab.value) {
+      height = 'calc(100vh - 52px)'
+    }
+
+    if (!isMixMenu.value && !fixedHeader.value) {
+      height = '100vh'
+    }
+
+    if (isMobile.value) {
+      width = '100%'
+      maxWidth = 'none'
+      maxHeight = 'none'
+    }
+
+    return {
+      width: width,
+      height: height,
+      maxWidth: maxWidth,
+      maxHeight: maxHeight
+    }
+  })
+
   return {
     isFixed,
     isFluid,
@@ -90,6 +135,7 @@ export default defineStore('app', () => {
     fixedSidebar,
     fixedHeaderTab,
     hideMixHeaderTab,
+    contentAreaStyle,
     componentSize,
     contentWidth,
     primaryColor,

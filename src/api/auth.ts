@@ -1,38 +1,34 @@
 import { request } from '@/utils/request'
 
 /**
- * login 系统登录
- * logout 系统退出
- * modifyPassword 修改密码
+ * 系统登录
  */
-const api = {
-  login: '/auth/login',
-  logout: '/auth/logout',
-  modifyPassword: '/auth/modifyPassword'
-}
-
 export function login<T = any, D = any>(data: D) {
   return request<T, D>({
-    url: api.login,
+    url: '/auth/login',
     method: 'post',
     data: data
   })
 }
 
+/**
+ * 系统退出
+ */
 export function logout<T = any, D = any>(data: D) {
   return request<T, D>({
-    url: api.logout,
+    url: '/auth/logout',
     method: 'post',
     data: data
   })
 }
 
+/**
+ * 修改密码
+ */
 export function modifyPassword<T = any, D = any>(data: D) {
   return request<T, D>({
-    url: api.modifyPassword,
+    url: '/auth/modifyPassword',
     method: 'post',
     data: data
   })
 }
-
-export default api

@@ -1,17 +1,15 @@
-import { rest } from 'msw'
-import util from '@/mock/util'
-import api from '@/api/resource'
+import { promiser, resolver, worker, rester } from '@/mock/setup'
+import { http, HttpResponse } from 'msw'
 
 const tag = '查询所有菜单资源'
-const fetch = rest.post
-const request = util.resolve(api.getResourceMenuAll)
+const url = resolver('/resource/getResourceMenuAll')
 
-util.worker.use(
-  fetch(request, async(req, res, ctx) => {
-    const body = await util.body(req)
-    const query = await util.query(req)
-    const params = await util.params(req)
-    const printer = await util.printer(tag)
+worker.use(
+  http.post(url, async req => {
+    const body = await rester.body(req)
+    const query = await rester.query(req)
+    const params = await rester.params(req)
+    const printer = await rester.printer(tag)
 
     const result = {
       code: '0000',
@@ -37,7 +35,7 @@ util.worker.use(
           {
             sort: 1000100,
             path: '/system/OrganizeManage',
-            icon: '',
+            icon: 'CodepenOutlined',
             title: '组织管理',
             redirect: '',
             parentId: '27245863256459422',
@@ -53,7 +51,7 @@ util.worker.use(
           {
             sort: 1000200,
             path: '/system/ResourceManage',
-            icon: '',
+            icon: 'CodepenOutlined',
             title: '资源管理',
             redirect: '',
             parentId: '27245863256459422',
@@ -69,7 +67,7 @@ util.worker.use(
           {
             sort: 1000300,
             path: '/system/RoleManage',
-            icon: '',
+            icon: 'CodepenOutlined',
             title: '角色管理',
             redirect: '',
             parentId: '27245863256459422',
@@ -85,7 +83,7 @@ util.worker.use(
           {
             sort: 1000400,
             path: '/system/UserManage',
-            icon: '',
+            icon: 'CodepenOutlined',
             title: '用户管理',
             redirect: '',
             parentId: '27245863256459422',
@@ -127,6 +125,9 @@ util.worker.use(
       log('[result] - ', result)
     })
 
-    return res(ctx.json(result))
+    return promiser(
+      HttpResponse.json(result),
+      300
+    )
   })
 )

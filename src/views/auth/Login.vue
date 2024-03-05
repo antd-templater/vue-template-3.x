@@ -88,6 +88,8 @@ import Form from 'ant-design-vue/es/form'
 import useUserStore from '@/store/user'
 import md5 from 'md5'
 
+defineOptions({ name: 'Login' })
+
 const loading = ref(false)
 const userStore = useUserStore()
 const router = useRouter()
@@ -148,6 +150,7 @@ const doLogin = async() => {
             onClose: () => { loading.value = false }
           })
         }
+        setTimeout(() => { loading.value = false }, 500)
       })
   } catch {}
 }

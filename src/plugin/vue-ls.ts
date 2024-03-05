@@ -6,6 +6,6 @@ import Storage from 'vue-ls'
 export const StorageOptions = {
   name: 'ls',
   storage: 'local',
-  namespace: '__antd_tempate_'
+  namespace: '__antd_templater_'
 }
 export default Storage.useStorage(StorageOptions).ls

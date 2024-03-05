@@ -18,6 +18,7 @@
 </template>
 
 <script setup lang="ts">
+defineOptions({ name: 'PageError404' })
 </script>
 
 <style lang="less" scoped>

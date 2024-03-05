@@ -1,29 +1,42 @@
+import { MaybeRef, ComputedRef } from 'vue'
+import { isNonEmptyString } from 'js-simpler'
+import { isNonEmptyObject } from 'js-simpler'
+import { isNonEmptyArray } from 'js-simpler'
+import { isFiniteNumber } from 'js-simpler'
 import dayjs from '@/plugin/dayjs'
 
 /**
  * 声明类型
  */
+export type RawValue = <T = any>(value: MaybeRef<T> | ComputedRef<T>) => T;
 export type TakeFixed = (num: string | number, digit?: number) => string;
 export type TakePadEnd = (num: string | number, keep?: number) => string;
 export type TakeTimeToDesc = (date?: dayjs.ConfigType, format?: string) => string;
 export type TakeTimeToDate = (date?: dayjs.ConfigType, format?: dayjs.OptionType) => dayjs.Dayjs | undefined;
-export type TakeTreeByKey = (tree: Array<LabelValueChildrenTree>, key: LabelValueChildrenTree['label']) => LabelValueChildrenTree;
-export type TakeLabelByKey = (tree: Array<LabelValueChildrenTree>, key: LabelValueChildrenTree['label'], out?: Array<'label'|'value'>) => LabelValueChildrenTree['label'|'value'];
-export type RequestBuilder = (action?: string, param?: Record<string, any>, pageNo?: number | null, pageSize?: number | null, options?: AxiosRequestOptions) => AxiosRequestResult
+export type RequestBuilder = (action?: string, params?: Record<string, any>, paginate?: { pageNo?: number, pageSize?: number } | null, sorter?: AxiosSorter[] | AxiosSorter | null) => AxiosRequestResult;
+export type TakeTextByKey = <T = string | number>(tree: Array<Record<string, any>>, key: string | number, field?: Array<string> | string) => T;
+export type TakeNodeByKey = <T = Record<string, any>>(tree: Array<Record<string, any>>, key: string | number) => T | null;
 
 /**
- * 数值精度 Fix
+ * 获取原数据 Raw (Ref / Reactive)
+ */
+export const rawValue: RawValue = value => {
+  return toRaw(unref(value))
+}
+
+/**
+ * 数值精度 Fix (四舍五入)
  */
 export const takeFixed: TakeFixed = (num, digit = NaN) => {
-  if (!Number.isFinite(+num)) {
-    return Number.isFinite(digit) && digit > 0 ? '0.' + ''.padEnd(digit, '0') : '0'
+  if (!isFiniteNumber(+num)) {
+    return isFiniteNumber(digit) && digit > 0 ? '0.' + ''.padEnd(digit, '0') : '0'
   }
 
   let string = ''
   let number = 0
 
   num = +num || 0
-  number = Number.isFinite(digit) ? Math.round(Math.pow(10, digit) * num) / Math.pow(10, digit) : num
+  number = isFiniteNumber(digit) ? Math.round(Math.pow(10, digit) * num) / Math.pow(10, digit) : num
   string = String(number)
 
   if (~string.indexOf('.')) {
@@ -37,7 +50,7 @@ export const takeFixed: TakeFixed = (num, digit = NaN) => {
 }
 
 /**
- * 数值精度 Pad
+ * 数值精度 Pad (精度补齐)
  */
 export const takePadEnd: TakePadEnd = (num, keep = 0) => {
   const string = String(+num || 0)
@@ -75,92 +88,98 @@ export const takeTimeToDate: TakeTimeToDate = (date, format) => {
 /**
  * 取出节点数据
  */
-export const takeTreeByKey: TakeTreeByKey = (tree, key) => {
-  function isString(obj: any): obj is string {
-    return Object.prototype.toString.call(obj) === '[object String]'
-  }
-
-  function isNumber(obj: any): obj is number {
-    return Object.prototype.toString.call(obj) === '[object Number]'
-  }
-
-  if (isString(key) || isNumber(key)) {
+export const takeNodeByKey: TakeNodeByKey = (tree, key) => {
+  if (isNonEmptyString(key) || isFiniteNumber(key)) {
     for (const node of tree) {
       if (key === node.value) {
-        return node
+        return node || null
       }
 
-      if (Array.isArray(node.children) && node.children.length > 0) {
-        return takeTreeByKey(node.children, key)
+      if (isNonEmptyArray(node.children)) {
+        const result = takeNodeByKey(node.children, key)
+
+        if (result) {
+          return result
+        }
       }
     }
   }
 
-  return {} as ReturnType<TakeTreeByKey>
+  return null as any
 }
 
 /**
  * 取出节点文本
  */
-export const takeLabelByKey: TakeLabelByKey = (tree, key, out) => {
-  if (Array.isArray(out)) {
-    for (const name of out) {
-      const result = takeTreeByKey(tree, key)[name]
-      const isString = typeof result === 'string'
-      const isNumber = typeof result === 'number'
+export const takeTextByKey: TakeTextByKey = (tree, key, field = 'label') => {
+  const node = takeNodeByKey(tree, key)
 
-      if (isString || isNumber) {
+  if (isNonEmptyArray(field)) {
+    for (const name of field) {
+      const result = node?.[name]
+
+      if (isNonEmptyString(result) || isFiniteNumber(result)) {
         return result
       }
     }
+
     return key
   }
 
-  const result = takeTreeByKey(tree, key).label
-  const isString = typeof result === 'string'
-  const isNumber = typeof result === 'number'
-  return isString || isNumber ? result : key
+  if (isNonEmptyString(field)) {
+    const result = node?.[field]
+    const isString = isNonEmptyString(result)
+    const isNumber = isFiniteNumber(result)
+
+    return isString || isNumber
+      ? result
+      : key
+  }
+
+  return key as any
 }
 
 /**
  * 封装传参格式
  */
-export const requestBuilder: RequestBuilder = (action = '', param = {}, pageNo = 0, pageSize = 10, options = {}) => {
-  if (Array.isArray(options?.sorter)) {
+export const requestBuilder: RequestBuilder = (action = '', params = {}, paginate, sorter) => {
+  if (isNonEmptyArray(sorter)) {
     return {
-      param: param,
       action: action,
+      params: params,
 
-      sorter: options.sorter.filter(opt => opt.field && opt.order).map(opt => ({
+      sorter: sorter.filter(opt => opt.field && opt.value).map(opt => ({
         field: opt.field.replace(/(^|\B)([A-Z])/g, '_$2').toLowerCase(),
-        order: opt.order.replace(/(^|\B)([A-Z])/g, '_$2').toLowerCase()
+        value: opt.value.replace(/(^|\B)([A-Z])/g, '_$2').toLowerCase()
       })),
 
-      pageSize: pageSize !== null ? pageSize : undefined,
-      pageNo: pageNo !== null ? pageNo : undefined
+      pageSize: paginate?.pageSize ?? undefined,
+      pageNo: paginate?.pageNo ?? undefined
     }
   }
 
-  if (options?.sorter?.field && options?.sorter?.order) {
-    return {
-      param: param,
-      action: action,
+  if (isNonEmptyObject(sorter)) {
+    if (isNonEmptyString(sorter.field) && isNonEmptyString(sorter.value)) {
+      return {
+        action: action,
+        params: params,
 
-      sorter: {
-        field: options?.sorter?.field.replace(/(^|\B)([A-Z])/g, '_$2').toLowerCase(),
-        order: options?.sorter?.order.replace(/(^|\B)([A-Z])/g, '_$2').toLowerCase()
-      },
+        sorter: {
+          field: sorter.field.replace(/(^|\B)([A-Z])/g, '_$2').toLowerCase(),
+          value: sorter.value.replace(/(^|\B)([A-Z])/g, '_$2').toLowerCase()
+        },
 
-      pageSize: pageSize !== null ? pageSize : undefined,
-      pageNo: pageNo !== null ? pageNo : undefined
+        pageSize: paginate?.pageSize ?? undefined,
+        pageNo: paginate?.pageNo ?? undefined
+      }
     }
   }
 
   return {
-    param: param,
     action: action,
+    params: params,
     sorter: undefined,
-    pageSize: pageSize !== null ? pageSize : undefined,
-    pageNo: pageNo !== null ? pageNo : undefined
+    pageSize: paginate?.pageSize ?? undefined,
+    pageNo: paginate?.pageNo ?? undefined
   }
 }

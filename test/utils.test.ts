@@ -1,14 +1,11 @@
 import { request } from '@/utils/request'
+import { takeFixed } from '@/utils/common'
+import { TakeFixed } from '@/utils/common'
+import { takePadEnd } from '@/utils/common'
+import { TakePadEnd } from '@/utils/common'
+import { http, HttpResponse } from 'msw'
 import { setupServer } from 'msw/node'
 import { AxiosError } from 'axios'
-import { rest } from 'msw'
-
-import {
-  takeFixed,
-  TakeFixed,
-  takePadEnd,
-  TakePadEnd
-} from '@/utils/common'
 
 
 vi.mock('@/store/user', () => {
@@ -28,18 +25,20 @@ describe('@utils/common.ts', () => {
 
 describe('@utils/request.ts', () => {
   const server = setupServer(
-    rest.post('http://api.test.com/updateUserInfo', (req, res, ctx) => {
-      return res(
-        ctx.status(200),
-        ctx.json({ code: '0000', message: null, result: 'success' })
-      )
+    http.post('http://api.test.com/updateUserInfo', () => {
+      return HttpResponse.json({
+        code: '0000',
+        message: null,
+        result: 'success'
+      })
     }),
 
-    rest.get('http://api.test.com/getUserInfo', (req, res, ctx) => {
-      return res(
-        ctx.status(200),
-        ctx.json({ code: '0000', message: null, result: { name: 'admin', email: 'admin@gmail.com' } })
-      )
+    http.get('http://api.test.com/getUserInfo', () => {
+      return HttpResponse.json({
+        code: '0000',
+        message: null,
+        result: { name: 'admin', email: 'admin@gmail.com' }
+      })
     })
   )
 

@@ -67,7 +67,7 @@ export interface GenerateDynamicComponent {
 }
 
 export interface GenerateDynamicRouter {
-  (params: Record<string, any>, components: Record<string, any>): Promise<Router[]>;
+  (params: Record<string, any>, components: Record<string, any>, isServer?: boolean): Promise<Router[]>;
 }
 
 export interface GenerateLayoutRouter {

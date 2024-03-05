@@ -1,14 +1,9 @@
 /**
- * 请求扩展
+ * 请求参数 - 排序
  */
 declare type AxiosSorter = {
   field: string;
-  order: string;
-}
-
-declare type AxiosRequestOptions = {
-  sorter?: AxiosSorter[] | AxiosSorter;
-  [key: string]: any;
+  value: string;
 }
 
 /**
@@ -27,6 +22,6 @@ declare type AxiosRequestResult<T = any> = {
  */
 declare type AxiosResponseResult<T = any> = {
   result: T;
-  code: string | null | undefined;
+  code: string | number | null | undefined;
   message: string | null | undefined;
 }

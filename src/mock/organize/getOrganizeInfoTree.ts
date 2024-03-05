@@ -1,21 +1,19 @@
-import { rest } from 'msw'
-import util from '@/mock/util'
-import api from '@/api/organize'
+import { promiser, resolver, worker, rester } from '@/mock/setup'
+import { http, HttpResponse } from 'msw'
 
 const tag = '获取组织 Tree 列表'
-const fetch = rest.post
-const request = util.resolve(api.getOrganizeInfoTree)
+const url = resolver('/organize/getOrganizeInfoTree')
 
-util.worker.use(
-  fetch(request, async(req, res, ctx) => {
-    const body = await util.body(req)
-    const query = await util.query(req)
-    const params = await util.params(req)
-    const printer = await util.printer(tag)
+worker.use(
+  http.post(url, async req => {
+    const body = await rester.body(req)
+    const query = await rester.query(req)
+    const params = await rester.params(req)
+    const printer = await rester.printer(tag)
 
     let result: any = null
 
-    switch (body && body.param && body.param.orgId) {
+    switch (body && body.params && body.params.orgId) {
       case '0': {
         result = {
           code: '0000',
@@ -87,6 +85,9 @@ util.worker.use(
       log('[result] - ', result)
     })
 
-    return res(ctx.json(result))
+    return promiser(
+      HttpResponse.json(result),
+      300
+    )
   })
 )

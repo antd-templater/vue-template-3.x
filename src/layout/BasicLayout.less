@@ -17,12 +17,17 @@
 
   .ant-pro-top-nav-header {
     box-shadow: 0 1px 2px 0 rgb(0 21 41 / 12%);
+
+    .ant-menu-horizontal > .ant-menu-item::after,
+    .ant-menu-horizontal > .ant-menu-submenu::after {
+      left: 10px;
+      right: 10px;
+    }
   }
 
-  .ant-menu-horizontal > .ant-menu-item::after,
-  .ant-menu-horizontal > .ant-menu-submenu::after {
-    left: 10px;
-    right: 10px;
+  .ant-layout.ant-layout-has-sider > .ant-layout,
+  .ant-layout.ant-layout-has-sider > .ant-layout-content {
+    width: auto;
   }
 }
 

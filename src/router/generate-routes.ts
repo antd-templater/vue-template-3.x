@@ -172,35 +172,37 @@ export const generateDynamicComponent: GenerateDynamicComponent = (parent = {}, 
 /**
  * 动态生成菜单
  */
-export const generateDynamicRouter: GenerateDynamicRouter = (params, components) => {
-  return userApi.getUserMenu<AxiosResponseResult<Menu[]>>(requestBuilder('generateRoutes', params, 0, 0)).then(
-    res => {
-      if (res.code !== '0000') {
-        return Promise.reject(res)
-      }
+export const generateDynamicRouter: GenerateDynamicRouter = (params, components, isServer = true) => {
+  const requester = () => userApi.getUserMenu<Menu[]>(requestBuilder('generateRoutes', params))
+  const resolver = () => Promise.resolve({ code: '0000', message: null, result: [] })
+  const promise = isServer ? requester() : resolver()
 
-      // 创建节点组
-      const result = res.result
-      const rootRoute = defaultRouter.rootRoute
-      const externalRoute = defaultRouter.externalRoute
-      const notFoundRoutes = defaultRouter.notFoundRoutes
-      const children = JSON.parse(JSON.stringify(rootRoute.children)) as Menu[]
-
-      // 生成树型数组
-      listToTree(result, children, { id: '0' })
-
-      // 生成路由表
-      const trees: Menu[] = [{ ...rootRoute, children }]
-      const routers = treeToRoute(trees, {}, components)
-
-      // 添加静态路由
-      routers[0].children?.unshift(externalRoute)
-      routers.push(...notFoundRoutes)
-
-      // 菜单路由
-      return routers
+  return promise.then(res => {
+    if (res.code !== '0000') {
+      return Promise.reject(res)
     }
-  )
+
+    // 创建节点组
+    const result = res.result
+    const rootRoute = defaultRouter.rootRoute
+    const externalRoute = defaultRouter.externalRoute
+    const notFoundRoutes = defaultRouter.notFoundRoutes
+    const children = JSON.parse(JSON.stringify(rootRoute.children)) as Menu[]
+
+    // 生成树型数组
+    listToTree(result, children, { id: '0' })
+
+    // 生成路由表
+    const trees: Menu[] = [{ ...rootRoute, children }]
+    const routers = treeToRoute(trees, {}, components)
+
+    // 添加静态路由
+    routers[0].children?.unshift(externalRoute)
+    routers.push(...notFoundRoutes)
+
+    // 菜单路由
+    return routers
+  })
 }
 
 /**

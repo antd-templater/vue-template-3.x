@@ -25,12 +25,11 @@ export default defineComponent({
       <div
         class='page-frame-container'
         style={{
-          width: '100%',
-          height: (appStore.isMixMenu && !appStore.hideMixHeaderTab || appStore.fixedHeader) && appStore.fixedHeaderTab ? 'calc(100vh - 88px)' : (appStore.isMixMenu || appStore.fixedHeader) ? 'calc(100vh - 50px)' : '100vh',
           margin: '0',
           padding: '0.5px',
           position: 'absolute',
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
+          ...appStore.contentAreaStyle
         }}
       >
         <ASpin

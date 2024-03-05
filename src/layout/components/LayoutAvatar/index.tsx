@@ -4,6 +4,10 @@ import 'ant-design-vue/es/input/style/index.less'
 import 'ant-design-vue/es/form/style/index.less'
 import 'ant-design-vue/es/menu/style/index.less'
 
+import { createVNode, render } from 'vue'
+import { ExclamationCircleOutlined } from '@ant-design/icons-vue'
+import ConfirmDialog from 'ant-design-vue/es/modal/ConfirmDialog'
+
 import * as VueTypes from 'vue-types'
 import { SettingOutlined, LogoutOutlined } from '@ant-design/icons-vue'
 import { InputPassword as AInputPassword } from 'ant-design-vue/es/input'
@@ -31,11 +35,33 @@ export default defineComponent({
 
     const ADropdownOverlay = () => {
       const doLogout = () => {
-        AModal.confirm({
-          title: '提示',
-          content: '真的要注销登录吗 ?',
+        // fix Modal.confirm not closed bug in vue3.4
+
+        // AModal.confirm({
+        //   title: '提示',
+        //   content: '真的要注销登录吗 ?',
+        //   onOk: () => { userStore.logout().then(() => window.location.reload()) }
+        // })
+
+        const element = document.createDocumentFragment() as any
+        const dialog = createVNode(ConfirmDialog, {
+          type: 'confirm',
+          visible: true,
+          prefixCls: 'ant-modal',
+          rootPrefixCls: 'ant',
+          contentPrefixCls: 'ant-modal-confirm',
+          icon: createVNode(ExclamationCircleOutlined),
+          title: '提示?',
+          content: '真的要注销登录吗?',
+          cancelText: '取消',
+          okText: '注销',
+          okType: 'danger',
+          onCancel: () => { dialog.component!.props.visible = false },
           onOk: () => { userStore.logout().then(() => window.location.reload()) }
         })
+
+        // Render Modal.confirm
+        render(dialog, element)
       }
 
       return (

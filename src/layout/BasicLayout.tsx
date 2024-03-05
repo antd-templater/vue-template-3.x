@@ -26,15 +26,28 @@ export default defineComponent({
     const siderWidth = ref(192)
     const headerHeight = ref(48)
     const collapsedWidth = ref(48)
+    const refLayoutHeader = ref(null as HTMLElement | null)
 
     const splitMenus: Ref<boolean> = ref(true)
     const collapsedButtonRender: Ref<false> = ref(false)
+
+    const intersectionObserver = new window.IntersectionObserver(entries => {
+      if (entries[0].intersectionRatio <= 0.5) {
+        onHeaderHide({})
+      }
+    })
 
     const key = computed(() => {
       const route = useRoute()
       const meta = route.meta || {}
       const match = meta.match || 'path'
       return match !== 'external' ? route.fullPath : extractLink(route as any)
+    })
+
+    const contentStyle = computed(() => {
+      return {
+        overflow: (appStore.isMixMenu && (appStore.hideMixHeaderTab || !appStore.fixedHeaderTab)) || (!appStore.isMixMenu && appStore.fixedHeader && !appStore.fixedHeaderTab) ? 'auto' : 'visible'
+      }
     })
 
     const menuData = computed(() => {
@@ -84,7 +97,10 @@ export default defineComponent({
       if (props.isMobile || appStore.isSideMenu) {
         return (
           <GlobalHeader {...props}>
-            <div style='display: flex; flex: 1 1 auto; alignItems: center; height: 50px; lineHeight: 50px;'>
+            <div
+              ref={refLayoutHeader}
+              style='display: flex; flex: 1 1 auto; alignItems: center; height: 50px; lineHeight: 50px;'
+            >
               <h1
                 style='fontSize: 24px; margin: 0 0; padding: 0 15px; color: var(--ant-primary-color); cursor: pointer;'
                 onClick={ () => { appStore.toggleCollapsed(!appStore.collapsed) }}
@@ -137,6 +153,10 @@ export default defineComponent({
       }
     }
 
+    const onHeaderHide = (props: any) => {
+      appStore.toggleCollapsed(true)
+    }
+
     const onCollapse = (props: any) => {
       if (appStore.isMobile) {
         appStore.toggleCollapsed(true)
@@ -163,6 +183,16 @@ export default defineComponent({
       openKeys.value = route.matched.map(route => route.path).filter(path => path !== '/' && isAllowOpenKey.value)
     })
 
+    onUnmounted(() => {
+      intersectionObserver.disconnect()
+    })
+
+    onMounted(() => {
+      if (refLayoutHeader.value) {
+        intersectionObserver.observe(refLayoutHeader.value)
+      }
+    })
+
     return () => (
       <AProLayout
         theme={appStore.themeMode}
@@ -178,6 +208,7 @@ export default defineComponent({
         siderWidth={siderWidth.value}
         splitMenus={splitMenus.value}
         headerHeight={headerHeight.value}
+        contentStyle={contentStyle.value}
         collapsedWidth={collapsedWidth.value}
         collapsedButtonRender={collapsedButtonRender.value}
 
@@ -187,7 +218,10 @@ export default defineComponent({
         onCollapse={onCollapse}
         onSelect={onSelect}
       >
-        <div class='page-router-view-navigate'>
+        <div
+          class='page-router-view-navigate'
+          style={{ position: 'sticky', left: 0 }}
+        >
           <LayoutMultiTab
             multiTab={appStore.multiTab}
             isMobile={appStore.isMobile}
@@ -206,10 +240,11 @@ export default defineComponent({
         <div
           class='page-router-view-container'
           style={{
-            width: appStore.isTopMenu && appStore.isFixed ? '1200px' : '100%',
-            height: (appStore.isMixMenu && !appStore.hideMixHeaderTab || appStore.fixedHeader) && appStore.fixedHeaderTab ? 'calc(100vh - 88px)' : (appStore.isMixMenu || appStore.fixedHeader) ? 'calc(100vh - 50px)' : 'auto',
+            width: '100%',
+            maxWidth: appStore.isTopMenu && appStore.isFixed ? '1200px' : 'none',
+            height: (appStore.isMixMenu && !appStore.hideMixHeaderTab && appStore.fixedHeaderTab) || (!appStore.isMixMenu && appStore.fixedHeader && appStore.fixedHeaderTab) ? 'calc(100vh - 88px)' : 'auto',
+            overflow: (appStore.isMixMenu && !appStore.hideMixHeaderTab && appStore.fixedHeaderTab) || (!appStore.isMixMenu && appStore.fixedHeader && appStore.fixedHeaderTab) ? 'auto' : 'visible',
             position: appStore.isMixMenu || appStore.fixedHeader ? 'absolute' : 'relative',
-            overflow: appStore.isMixMenu || appStore.fixedHeader ? 'auto' : 'visible',
             margin: '0px auto',
             padding: '0px 0px',
             zIndex: 1,

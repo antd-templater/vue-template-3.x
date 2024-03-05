@@ -1,10 +1,11 @@
-import router from '@/router'
-import useAppStore from '@/store/app'
-import useUserStore from '@/store/user'
-import useRouterStore from '@/store/router'
-import routerComponents from '@/router.dynamic'
+import { isNonEmptyString } from 'js-simpler'
 import Notification from 'ant-design-vue/es/notification'
+import routerComponents from '@/router.dynamic'
+import useRouterStore from '@/store/router'
+import useUserStore from '@/store/user'
+import useAppStore from '@/store/app'
 import NProgress from 'nprogress'
+import router from '@/router'
 
 /**
  * 进度配置
@@ -15,8 +16,8 @@ NProgress.configure({ showSpinner: false })
  * 路由配置
  */
 const indexRoutePath = '/index'
-const loginRoutePath = '/login/Login'
-const whiteRouteList = ['/login/Login']
+const loginRoutePath = '/auth/Login'
+const whiteRouteList = ['/auth/Login']
 
 /**
  * 路由处理
@@ -32,7 +33,7 @@ router.beforeEach(async(to, from, next) => {
 
   if (token) {
     if (to.path === loginRoutePath) {
-      next({ path: indexRoutePath })
+      next({ path: isNonEmptyString(to.query.redirect) && to.query.redirect || indexRoutePath })
       return
     }
 
@@ -60,7 +61,7 @@ router.beforeEach(async(to, from, next) => {
             duration: 0.8,
             message: '系统通知',
             description: '获取用户信息失败，请重新登录!',
-            onClose: () => userStore.logout().then(resolve)
+            onClose: () => userStore.logout().then(resolve).catch(resolve)
           })
         })
 
@@ -88,7 +89,7 @@ router.beforeEach(async(to, from, next) => {
       duration: 0.8,
       message: '系统通知',
       description: 'token 已过期, 请重新登录!',
-      onClose: () => userStore.logout().then(resolve)
+      onClose: () => userStore.logout().then(resolve).catch(resolve)
     })
   })
 

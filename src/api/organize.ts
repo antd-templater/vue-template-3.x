@@ -1,58 +1,56 @@
 import { request } from '@/utils/request'
 
 /**
- * addOrganizeInfo 新增组织信息
- * getOrganizeInfoList 获取组织信息列表
- * getOrganizeInfoTree 获取组织Tree列表
- * modifyOrganizeInfo 修改组织信息
- * deleteOrganizeInfo 删除组织信息
+ * 新增组织信息
  */
-const api = {
-  addOrganizeInfo: '/organize/addOrganizeInfo',
-  getOrganizeInfoList: '/organize/getOrganizeInfoList',
-  getOrganizeInfoTree: '/organize/getOrganizeInfoTree',
-  modifyOrganizeInfo: '/organize/modifyOrganizeInfo',
-  deleteOrganizeInfo: '/organize/deleteOrganizeInfo'
-}
-
 export function addOrganizeInfo<T = any, D = any>(data: D) {
   return request<T, D>({
-    url: api.addOrganizeInfo,
+    url: '/organize/addOrganizeInfo',
     method: 'post',
     data: data
   })
 }
 
+/**
+ * 获取组织信息列表
+ */
 export function getOrganizeInfoList<T = any, D = any>(data: D) {
   return request<T, D>({
-    url: api.getOrganizeInfoList,
+    url: '/organize/getOrganizeInfoList',
     method: 'post',
     data: data
   })
 }
 
+/**
+ * 获取组织Tree列表
+ */
 export function getOrganizeInfoTree<T = any, D = any>(data: D) {
   return request<T, D>({
-    url: api.getOrganizeInfoTree,
+    url: '/organize/getOrganizeInfoTree',
     method: 'post',
     data: data
   })
 }
 
+/**
+ * 修改组织信息
+ */
 export function modifyOrganizeInfo<T = any, D = any>(data: D) {
   return request<T, D>({
-    url: api.modifyOrganizeInfo,
+    url: '/organize/modifyOrganizeInfo',
     method: 'post',
     data: data
   })
 }
 
+/**
+ * 删除组织信息
+ */
 export function deleteOrganizeInfo<T = any, D = any>(data: D) {
   return request<T, D>({
-    url: api.deleteOrganizeInfo,
+    url: '/organize/deleteOrganizeInfo',
     method: 'post',
     data: data
   })
 }
-
-export default api

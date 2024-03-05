@@ -14,14 +14,14 @@ baseRoutes.push(
     redirect: '/system/OrganizeManage'
   },
   {
-    path: '/login',
-    redirect: '/login/Login',
+    path: '/auth',
+    redirect: '/auth/Login',
     component: UserLayout,
     children: [
       {
         path: 'Login',
         name: 'Login',
-        component: () => import(`@/views/login/Login.vue`),
+        component: () => import(`@/views/auth/Login.vue`),
         meta: { title: '系统登录' }
       }
     ]
