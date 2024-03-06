@@ -55,7 +55,7 @@ worker.use(
               {
                 sort: 1000300,
                 path: '/system/RoleManage',
-                icon: '',
+                icon: 'CodepenOutlined',
                 title: '角色管理',
                 redirect: '',
                 parentId: '27245863256459422',
@@ -71,7 +71,7 @@ worker.use(
               {
                 sort: 1000400,
                 path: '/system/UserManage',
-                icon: '',
+                icon: 'CodepenOutlined',
                 title: '用户管理',
                 redirect: '',
                 parentId: '27245863256459422',

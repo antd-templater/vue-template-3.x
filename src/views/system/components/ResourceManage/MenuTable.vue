@@ -7,18 +7,6 @@
       :bodyStyle="cardBodyStyle"
       :bordered="false"
     >
-      <template #extra>
-        <AButton
-          v-if="parentNode.resourceId"
-          type="primary"
-          @click="doDrawerAdd"
-        >
-          <template #icon>
-            <PlusOutlined />
-          </template>
-        </AButton>
-      </template>
-
       <STable
         ref="table"
         v-model:loading="loading"
@@ -40,8 +28,19 @@
             <span>{{ groupIndex + 1 }}</span>
           </template>
 
-          <template v-if="['title', 'resourceName', 'component', 'redirect', 'path', 'sort'].includes(column.key)">
+          <template v-if="['title', 'resourceName', 'component', 'sort'].includes(column.key)">
             <SEditCellInput
+              v-model:status="cellState"
+              :cellStyle="cellStyle"
+              :text="String(value)"
+              empty="无"
+              @change="doTableChange(record, column.key, $event.value)"
+              @confirm="doTableModify(record)"
+            />
+          </template>
+
+          <template v-if="['redirect', 'path'].includes(column.key)">
+            <SEditCellTextarea
               v-model:status="cellState"
               :cellStyle="cellStyle"
               :text="String(value)"
@@ -67,20 +66,11 @@
               v-model:status="cellState"
               :cellStyle="cellStyle"
               :text="String(value)"
+              allowClear
               empty="无"
               @change="doTableChange(record, column.key, $event.value)"
               @confirm="doTableModify(record)"
             />
-          </template>
-
-          <template v-if="column.key === 'action'">
-            <a
-              href="javascript: void(0)"
-              style="display: inline-block; font-weight: 500; margin: 0 7px; color: #f44848;"
-              @click.stop="doDrawerDel(record)"
-            >
-              删除
-            </a>
           </template>
         </template>
       </STable>
@@ -101,25 +91,18 @@ import { tableColumnsDefiner } from '@antd-templater/antd-template-lib3.x'
 import { tableStickyDefiner } from '@antd-templater/antd-template-lib3.x'
 import { tableScrollDefiner } from '@antd-templater/antd-template-lib3.x'
 
-import { CSSProperties, createVNode, render } from 'vue'
+import { CSSProperties } from 'vue'
 import { requestBuilder } from '@/utils/common'
 import * as resourceApi from '@/api/resource'
 
-import { ExclamationCircleOutlined } from '@ant-design/icons-vue'
-import ConfirmDialog from 'ant-design-vue/es/modal/ConfirmDialog'
 import Notification from 'ant-design-vue/es/notification'
 import MenuDrawer from './MenuDrawer.vue'
-
-export interface Props {
-  parentNode: Record<string, any>;
-}
 
 defineOptions({
   name: 'ButtonTable',
   inheritAttrs: false
 })
 
-const props = defineProps<Props>()
 const table = ref(null as InstanceType<STable> | null)
 const menuDrawer = ref(null as InstanceType<typeof MenuDrawer> | null)
 
@@ -238,12 +221,6 @@ const columns = tableColumnsDefiner([
     title: '是否启用',
     dataIndex: 'activity',
     width: 120
-  },
-  {
-    title: '操作',
-    dataIndex: 'action',
-    align: 'center',
-    width: 80
   }
 ])
 
@@ -316,41 +293,6 @@ const doTableClear = () => {
   cellState.value = false
   loading.value = false
   table.value?.clear()
-}
-
-const doDrawerDel = (record: object) => {
-  // fix Modal.confirm not closed bug in vue3.4
-  const element = document.createDocumentFragment() as any
-  const dialog = createVNode(ConfirmDialog, {
-    type: 'confirm',
-    visible: true,
-    prefixCls: 'ant-modal',
-    rootPrefixCls: 'ant',
-    contentPrefixCls: 'ant-modal-confirm',
-    icon: createVNode(ExclamationCircleOutlined),
-    title: '是否确认删除该菜单?',
-    content: '删除菜单会导致相关页面丢失，请慎重考虑!',
-    cancelText: '取消',
-    okText: '删除',
-    okType: 'danger',
-    onCancel: () => {
-      dialog.component!.props.visible = false
-    },
-    onOk: () => {
-      menuDrawer.value?.doDel([record]).finally(() => {
-        dialog.component!.props.visible = false
-      })
-    }
-  })
-
-  // Render Modal.confirm
-  render(dialog, element)
-}
-
-const doDrawerAdd = () => {
-  menuDrawer.value?.doAdd({
-    parentId: props.parentNode.resourceId
-  })
 }
 
 defineExpose({
