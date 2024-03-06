@@ -14,9 +14,9 @@ export function addResourceInfo<T = any, D = any>(data: D) {
 /**
  * 查询资源信息
  */
-export function getResourceInfoList<T = any, D = any>(data: D) {
+export function getResourceListInfo<T = any, D = any>(data: D) {
   return request<T, D>({
-    url: '/resource/getResourceInfoList',
+    url: '/resource/getResourceListInfo',
     method: 'post',
     data: data
   })
@@ -25,9 +25,9 @@ export function getResourceInfoList<T = any, D = any>(data: D) {
 /**
  * 查询所有菜单资源
  */
-export function getResourceMenuAll<T = any, D = any>(data: D) {
+export function getResourceTreeInfo<T = any, D = any>(data: D) {
   return request<T, D>({
-    url: '/resource/getResourceMenuAll',
+    url: '/resource/getResourceTreeInfo',
     method: 'post',
     data: data
   })
@@ -58,9 +58,9 @@ export function getResourceButtonByRole<T = any, D = any>(data: D) {
 /**
  * 修改角色资源配置
  */
-export function modifyResoureInfoByRoleId<T = any, D = any>(data: D) {
+export function modifyResoureInfoByRole<T = any, D = any>(data: D) {
   return request<T, D>({
-    url: '/resource/modifyResoureInfoByRoleId',
+    url: '/resource/modifyResoureInfoByRole',
     method: 'post',
     data: data
   })

@@ -137,7 +137,6 @@
 
 <script setup lang="ts">
 import { treeEmitSelectDefiner } from '@antd-templater/antd-template-lib3.x'
-import { requestBuilder } from '@/utils/common'
 import { CSSProperties } from 'vue'
 
 import * as resourceApi from '@/api/resource'
@@ -181,8 +180,7 @@ const doQuery = () => {
   if (!loading.value) {
     loading.value = true
 
-    const params = requestBuilder('', { resourceType: 'm' })
-    const promise = resourceApi.getResourceMenuAll(params).then(res => {
+    const promise = resourceApi.getResourceTreeInfo({ resourceType: 'm' }).then(res => {
       if (res.code !== '0000') {
         Message.error('菜单资源加载失败')
         return Promise.reject()

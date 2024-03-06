@@ -1,6 +1,5 @@
 import { KeepAlive } from 'vue'
 import { RouterView } from 'vue-router'
-import { extractLink } from '@/utils/router'
 import { SIcon, isIconType } from '@antd-templater/antd-template-lib3.x'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
 import AProLayout, { clearMenuItem, GlobalHeader } from '@ant-design-vue/pro-layout'
@@ -35,13 +34,6 @@ export default defineComponent({
       if (entries[0].intersectionRatio <= 0.5) {
         onHeaderHide({})
       }
-    })
-
-    const key = computed(() => {
-      const route = useRoute()
-      const meta = route.meta || {}
-      const match = meta.match || 'path'
-      return match !== 'external' ? route.fullPath : extractLink(route as any)
     })
 
     const contentStyle = computed(() => {
@@ -256,7 +248,7 @@ export default defineComponent({
             v-slots={{
               default: (scope: any) => (
                 <KeepAlive include={appStore.multiTab && appStore.keepAlive ? tagStore.cacheTags : []}>
-                  { scope.Component ? <scope.Component key={key.value}/> : null }
+                  { scope.Component ? <scope.Component /> : null }
                 </KeepAlive>
               )
             }}

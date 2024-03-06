@@ -11,7 +11,7 @@
       :border="false"
       :scroll="scroll"
       :sticky="sticky"
-      rowKey="key"
+      rowKey="roleId"
     >
       <template #bodyerCell="{ column, record, value, groupIndex }">
         <template v-if="column.key === 'serial'">

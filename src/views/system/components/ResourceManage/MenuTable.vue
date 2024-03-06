@@ -238,7 +238,7 @@ const paginate = tablePaginateDefiner({
 const loadData = tableLoadDataDefiner(async options => {
   const param = requestBuilder('', queryParams.value, options.paginate, options.sorter)
 
-  return resourceApi.getResourceInfoList(param).then(res => {
+  return resourceApi.getResourceListInfo(param).then(res => {
     if (res.code !== '0000') {
       Notification.error({
         message: '系统消息',

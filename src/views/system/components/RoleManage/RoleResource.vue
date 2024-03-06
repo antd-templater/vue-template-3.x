@@ -204,7 +204,7 @@ const queryMenus = async() => {
     loadings.value.button = true
   }
 
-  return resourceApi.getResourceMenuByRole(requestBuilder('', { roleId: record.value.roleId })).then(res => {
+  return resourceApi.getResourceMenuByRole({ roleId: record.value.roleId }).then(res => {
     if (res.code !== '0000') {
       if (res.message) {
         Message.error(res.message)
@@ -396,7 +396,7 @@ const doSubmit = () => {
     loadings.value.submitting = true
   }
 
-  const promise = resourceApi.modifyResoureInfoByRoleId(requestBuilder('insert', { roleId, resourceIds }))
+  const promise = resourceApi.modifyResoureInfoByRole({ roleId, resourceIds })
     .then(res => {
       if (res.code !== '0000') {
         Notification.error({

@@ -2,7 +2,7 @@ import { promiser, resolver, worker, rester } from '@/mock/setup'
 import { http, HttpResponse } from 'msw'
 
 const tag = '查询所有菜单资源'
-const url = resolver('/resource/getResourceMenuAll')
+const url = resolver('/resource/getResourceTreeInfo')
 
 worker.use(
   http.post(url, async req => {

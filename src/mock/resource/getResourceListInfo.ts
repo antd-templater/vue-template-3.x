@@ -2,7 +2,7 @@ import { promiser, resolver, worker, rester } from '@/mock/setup'
 import { http, HttpResponse } from 'msw'
 
 const tag = '查询资源信息'
-const url = resolver('/resource/getResourceInfoList')
+const url = resolver('/resource/getResourceListInfo')
 
 worker.use(
   http.post(url, async req => {

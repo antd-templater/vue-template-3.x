@@ -5,9 +5,9 @@
       :zIndex="1010"
       :title="title"
       :visible="visible"
-      :forceRender="true"
+      :forceRender="false"
       :maskClosable="true"
-      :destroyOnClose="false"
+      :destroyOnClose="true"
       placement="right"
       @close="doClose()"
     >
@@ -96,6 +96,7 @@ const doEdit = (data: any) => {
   title.value = '修改按钮资源'
   action.value = 'update'
   readonly.value = false
+  visible.value = true
   isAdd.value = false
 
   record.value = Object.assign(
@@ -106,16 +107,16 @@ const doEdit = (data: any) => {
     data
   )
 
-  if (form.value) {
-    form.value.doCreate('update', record.value)
-    visible.value = true
-  }
+  nextTick(() => {
+    form.value?.doCreate('update', record.value)
+  })
 }
 
 const doAdd = (data: any) => {
   title.value = '添加按钮资源'
   action.value = 'insert'
   readonly.value = false
+  visible.value = true
   isAdd.value = true
 
   record.value = Object.assign(
@@ -126,10 +127,9 @@ const doAdd = (data: any) => {
     data
   )
 
-  if (form.value) {
-    form.value.doCreate('insert', record.value)
-    visible.value = true
-  }
+  nextTick(() => {
+    form.value?.doCreate('insert', record.value)
+  })
 }
 
 const doDel = async(records: object[]) => {

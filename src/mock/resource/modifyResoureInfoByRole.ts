@@ -2,7 +2,7 @@ import { promiser, resolver, worker, rester } from '@/mock/setup'
 import { http, HttpResponse } from 'msw'
 
 const tag = '修改角色资源配置'
-const url = resolver('/resource/modifyResoureInfoByRoleId')
+const url = resolver('/resource/modifyResoureInfoByRole')
 
 worker.use(
   http.post(url, async req => {

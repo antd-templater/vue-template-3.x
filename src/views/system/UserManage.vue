@@ -33,7 +33,6 @@
 
 <script setup lang="ts">
 import { CSSProperties } from 'vue'
-import { requestBuilder } from '@/utils/common'
 import UserQuery from './components/UserManage/UserQuery.vue'
 import UserTable from './components/UserManage/UserTable.vue'
 import UserDrawer from './components/UserManage/UserDrawer.vue'
@@ -113,7 +112,7 @@ const doOptionQuery = () => {
   })
 
   // 角色
-  roleApi.getRoleInfoList(requestBuilder('', { activity: 'Y' })).then(res => {
+  roleApi.getRoleInfoList({ activity: 'Y' }).then(res => {
     if (res.code !== '0000') {
       return Promise.reject()
     }
