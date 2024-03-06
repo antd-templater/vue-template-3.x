@@ -16,12 +16,14 @@ export default (_: App) => {
 
       const dialog = createVNode(ConfirmDialog, {
         ...options,
-        visible: true,
         type: 'confirm',
+        icon: isVNode(options.icon) ? options.icon : createVNode(ExclamationCircleOutlined),
+        visible: true,
         prefixCls: 'ant-modal',
         rootPrefixCls: 'ant',
         contentPrefixCls: 'ant-modal-confirm',
-        icon: isVNode(options.icon) ? options.icon : createVNode(ExclamationCircleOutlined),
+        cancelText: '取消',
+        okText: '确认',
         onCancel: async(...rest: any[]) => {
           return Promise.resolve(options.onCancel?.(...rest)).finally(() => {
             dialog.component!.props.visible = false

@@ -12,28 +12,6 @@ export function addUserInfo<T = any, D = any>(data: D) {
 }
 
 /**
- * 获取用户信息
- */
-export function getUserInfo<T = any, D = any>(data: D) {
-  return request<T, D>({
-    url: '/user/getUserInfo',
-    method: 'post',
-    data: data
-  })
-}
-
-/**
- * 获取用户菜单
- */
-export function getUserMenu<T = any, D = any>(data: D) {
-  return request<T, D>({
-    url: '/user/getUserMenu',
-    method: 'post',
-    data: data
-  })
-}
-
-/**
  * 获取用户列表
  */
 export function getUserInfoList<T = any, D = any>(data: D) {

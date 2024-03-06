@@ -1,10 +1,8 @@
 import { defineStore } from 'pinia'
 import { Ref, ref, computed } from 'vue'
-import { requestBuilder } from '@/utils/common'
 import defaultAvatar from '@/assets/avatar/default_avatar.png?url'
 import useTagStore from '@/store/tag'
 import * as authApi from '@/api/auth'
-import * as userApi from '@/api/user'
 
 /**
  * 用户管理
@@ -35,7 +33,7 @@ export default defineStore('user', () => {
       data: UserInfo;
     }
 
-    return authApi.login<CustomResult>(requestBuilder('login', params)).then(res => {
+    return authApi.login<CustomResult>(params).then(res => {
       if (res.code !== '0000') {
         return Promise.reject(res)
       }
@@ -80,8 +78,8 @@ export default defineStore('user', () => {
     })
   }
 
-  const getUserInfo = async(params: Record<string, any> = {}) => {
-    return userApi.getUserInfo<UserInfo>(requestBuilder('getInfo', params)).then(res => {
+  const loginUserInfo = async(params: Record<string, any> = {}) => {
+    return authApi.loginUserInfo<UserInfo>(params).then(res => {
       if (res.code !== '0000') {
         return Promise.reject(new Error(res.message || '获取用户失败!'))
       }
@@ -129,7 +127,7 @@ export default defineStore('user', () => {
 
     login,
     logout,
-    getUserInfo
+    loginUserInfo
   }
 }, {
   persist: {

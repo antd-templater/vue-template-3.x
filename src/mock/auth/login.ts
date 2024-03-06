@@ -2,7 +2,7 @@ import { promiser, resolver, worker, rester } from '@/mock/setup'
 import { http, HttpResponse } from 'msw'
 
 const tag = '系统登录'
-const url = resolver('/auth/:login')
+const url = resolver('/auth/login')
 
 worker.use(
   http.post(url, async req => {
@@ -13,7 +13,7 @@ worker.use(
 
     let result: any = null
 
-    if (body.params.username !== 'admin' || body.params.password !== '25d55ad283aa400af464c76d713c07ad') {
+    if (body.username !== 'admin' || body.password !== '25d55ad283aa400af464c76d713c07ad') {
       result = {
         code: '9999',
         message: '用户名密码错误',
@@ -21,7 +21,7 @@ worker.use(
       }
     }
 
-    if (body.params.username === 'admin' && body.params.password === '25d55ad283aa400af464c76d713c07ad') {
+    if (body.username === 'admin' && body.password === '25d55ad283aa400af464c76d713c07ad') {
       result = {
         code: '0000',
         message: null,

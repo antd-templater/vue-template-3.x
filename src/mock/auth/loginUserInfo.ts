@@ -2,7 +2,7 @@ import { promiser, resolver, worker, rester } from '@/mock/setup'
 import { http, HttpResponse } from 'msw'
 
 const tag = '获取用户信息'
-const url = resolver('/user/getUserInfo')
+const url = resolver('/auth/loginUserInfo')
 
 worker.use(
   http.post(url, async req => {

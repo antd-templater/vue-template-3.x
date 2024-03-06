@@ -1,6 +1,5 @@
-import { requestBuilder } from '@/utils/common'
 import defaultRouter from '@/configure/defaultRouter'
-import * as userApi from '@/api/user'
+import * as authApi from '@/api/auth'
 
 import type {
   Menu,
@@ -173,7 +172,7 @@ export const generateDynamicComponent: GenerateDynamicComponent = (parent = {}, 
  * 动态生成菜单
  */
 export const generateDynamicRouter: GenerateDynamicRouter = (params, components, isServer = true) => {
-  const requester = () => userApi.getUserMenu<Menu[]>(requestBuilder('generateRoutes', params))
+  const requester = () => authApi.loginUserMenu<Menu[]>(params)
   const resolver = () => Promise.resolve({ code: '0000', message: null, result: [] })
   const promise = isServer ? requester() : resolver()
 

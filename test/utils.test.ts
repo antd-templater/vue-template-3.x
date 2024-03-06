@@ -33,7 +33,7 @@ describe('@utils/request.ts', () => {
       })
     }),
 
-    http.get('http://api.test.com/getUserInfo', () => {
+    http.get('http://api.test.com/loginUserInfo', () => {
       return HttpResponse.json({
         code: '0000',
         message: null,
@@ -52,8 +52,8 @@ describe('@utils/request.ts', () => {
     await expect(request(options)).resolves.toMatchObject(response)
   })
 
-  it('Check request.get - eg. getUserInfo', async() => {
-    const options = { url: 'http://api.test.com/getUserInfo', method: 'get' }
+  it('Check request.get - eg. loginUserInfo', async() => {
+    const options = { url: 'http://api.test.com/loginUserInfo', method: 'get' }
     const response = { code: '0000', message: null, result: { name: 'admin', email: 'admin@gmail.com' } }
     await expect(request(options)).resolves.toMatchObject(response)
   })

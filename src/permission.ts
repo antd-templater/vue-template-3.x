@@ -39,7 +39,7 @@ router.beforeEach(async(to, from, next) => {
 
     if (!userRole.permissions || userRole.permissions.length === 0) {
       try {
-        await userStore.getUserInfo({})
+        await userStore.loginUserInfo({})
         await routerStore.generateRouter({}, routerComponents)
 
         const dynamicRoutes = toRaw(routerStore.dynamicRoutes)

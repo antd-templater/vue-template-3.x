@@ -2,6 +2,8 @@
 import './auth/login'
 import './auth/logout'
 import './auth/modifyPassword'
+import './auth/loginUserInfo'
+import './auth/loginUserMenu'
 
 // Mock Base
 import './base/getOptionById'
@@ -35,7 +37,5 @@ import './role/modifyRoleInfo'
 // Mock User
 import './user/addUserInfo'
 import './user/deleteUserInfo'
-import './user/getUserInfo'
 import './user/getUserInfoList'
-import './user/getUserMenu'
 import './user/modifyUserInfo'

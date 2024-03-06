@@ -32,3 +32,25 @@ export function modifyPassword<T = any, D = any>(data: D) {
     data: data
   })
 }
+
+/**
+ * 获取登录用户
+ */
+export function loginUserInfo<T = any, D = any>(data: D) {
+  return request<T, D>({
+    url: '/auth/loginUserInfo',
+    method: 'post',
+    data: data
+  })
+}
+
+/**
+ * 获取用户菜单
+ */
+export function loginUserMenu<T = any, D = any>(data: D) {
+  return request<T, D>({
+    url: '/auth/loginUserMenu',
+    method: 'post',
+    data: data
+  })
+}
