@@ -15,11 +15,11 @@
         style="width: 100%; height: 100%; overflow: auto;"
         :columnPresetResizable="true"
         :loadData="loadData"
+        :bodyMinRows="true"
         :immediate="false"
         :border="false"
         :scroll="scroll"
         :sticky="sticky"
-        :bodyMinRows="15"
         tableLayout="auto"
         rowKey="resourceId"
       >
@@ -57,7 +57,7 @@
               unCheckedValue="N"
               checkedChildren="是"
               unCheckedChildren="否"
-              @change="doActivitier(record, 'activity', $event)"
+              @change="doActivitier(record, column.key, $event)"
             />
           </template>
 
@@ -229,6 +229,7 @@ const paginate = tablePaginateDefiner({
   pageSize: 20,
   totalPage: 0,
   totalSize: 0,
+  showSizeChanger: true,
   showTotal: true,
   visible: true,
   fixed: true

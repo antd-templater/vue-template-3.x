@@ -136,15 +136,13 @@
 </template>
 
 <script setup lang="ts">
-
-import { CSSProperties, createVNode, render } from 'vue'
 import { treeEmitSelectDefiner } from '@antd-templater/antd-template-lib3.x'
-import { ExclamationCircleOutlined } from '@ant-design/icons-vue'
 import { requestBuilder } from '@/utils/common'
-import * as resourceApi from '@/api/resource'
+import { CSSProperties } from 'vue'
 
+import * as resourceApi from '@/api/resource'
 import Message from 'ant-design-vue/es/message'
-import ConfirmDialog from 'ant-design-vue/es/modal/ConfirmDialog'
+import AModal from 'ant-design-vue/es/modal'
 import MenuDrawer from './MenuDrawer.vue'
 
 export interface Emits {
@@ -224,30 +222,14 @@ const doDrawerEdit = (record: Record<string, any>) => {
 }
 
 const doDrawerDel = (record: Record<string, any>) => {
-  // fix Modal.confirm not closed bug in vue3.4
-  const element = document.createDocumentFragment() as any
-  const dialog = createVNode(ConfirmDialog, {
-    type: 'confirm',
-    visible: true,
-    prefixCls: 'ant-modal',
-    rootPrefixCls: 'ant',
-    contentPrefixCls: 'ant-modal-confirm',
-    icon: createVNode(ExclamationCircleOutlined),
+  AModal.confirm({
     title: '是否确认删除该菜单?',
     content: '删除菜单会导致相关页面丢失，请慎重考虑!',
     cancelText: '取消',
     okText: '删除',
     okType: 'danger',
-    onCancel: () => { dialog.component!.props.visible = false },
-    onOk: () => {
-      menuDrawer.value?.doDel([record]).finally(() => {
-         dialog.component!.props.visible = false
-      })
-    }
+    onOk: () => { menuDrawer.value?.doDel([record]) }
   })
-
-  // Render Modal.confirm
-  render(dialog, element)
 }
 
 doQuery()

@@ -27,11 +27,11 @@
         style="height: 100%; overflow: auto"
         :columnPresetResizable="true"
         :loadData="loadData"
+        :bodyMinRows="true"
         :immediate="false"
         :border="false"
         :scroll="scroll"
         :sticky="sticky"
-        :bodyMinRows="15"
         rowKey="resourceId"
       >
         <template #bodyerCell="{ column, record, value, groupIndex }">
@@ -89,14 +89,13 @@ import { tableColumnsDefiner } from '@antd-templater/antd-template-lib3.x'
 import { tableStickyDefiner } from '@antd-templater/antd-template-lib3.x'
 import { tableScrollDefiner } from '@antd-templater/antd-template-lib3.x'
 
-import { CSSProperties, createVNode, render } from 'vue'
+import { CSSProperties } from 'vue'
 import { requestBuilder } from '@/utils/common'
 import * as resourceApi from '@/api/resource'
 
-import { ExclamationCircleOutlined } from '@ant-design/icons-vue'
-import ConfirmDialog from 'ant-design-vue/es/modal/ConfirmDialog'
 import Notification from 'ant-design-vue/es/notification'
 import ButtonDrawer from './ButtonDrawer.vue'
+import AModal from 'ant-design-vue/es/modal'
 
 export interface Props {
   parentNode: Record<string, any>;
@@ -246,6 +245,7 @@ const paginate = tablePaginateDefiner({
   pageSize: 20,
   totalPage: 0,
   totalSize: 0,
+  showSizeChanger: true,
   showTotal: true,
   visible: true,
   fixed: true
@@ -313,32 +313,14 @@ const doTableClear = () => {
 }
 
 const doDrawerDel = (record: object) => {
-  // fix Modal.confirm not closed bug in vue3.4
-  const element = document.createDocumentFragment() as any
-  const dialog = createVNode(ConfirmDialog, {
-    type: 'confirm',
-    visible: true,
-    prefixCls: 'ant-modal',
-    rootPrefixCls: 'ant',
-    contentPrefixCls: 'ant-modal-confirm',
-    icon: createVNode(ExclamationCircleOutlined),
+  AModal.confirm({
     title: '是否确认删除该按钮资源?',
     content: '删除按钮资源会导致相关页面丢失，请慎重考虑!',
     cancelText: '取消',
     okText: '删除',
     okType: 'danger',
-    onCancel: () => {
-      dialog.component!.props.visible = false
-    },
-    onOk: () => {
-      buttonDrawer.value?.doDel([record]).finally(() => {
-        dialog.component!.props.visible = false
-      })
-    }
+    onOk: () => { buttonDrawer.value?.doDel([record]) }
   })
-
-  // Render Modal.confirm
-  render(dialog, element)
 }
 
 const doDrawerAdd = () => {

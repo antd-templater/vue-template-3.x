@@ -6,7 +6,7 @@
       v-model:paginate="paginate"
       :columnPresetResizable="true"
       :loadData="loadData"
-      :bodyMinRows="15"
+      :bodyMinRows="true"
       :immediate="true"
       :border="false"
       :scroll="scroll"
@@ -160,6 +160,7 @@ const paginate = tablePaginateDefiner({
   pageSize: 20,
   totalPage: 0,
   totalSize: 0,
+  showSizeChanger: true,
   showTotal: true,
   visible: true,
   fixed: true
