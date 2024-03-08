@@ -20,7 +20,6 @@
         :border="false"
         :scroll="scroll"
         :sticky="sticky"
-        tableLayout="auto"
         rowKey="resourceId"
       >
         <template #bodyerCell="{ column, record, value, groupIndex }">
@@ -236,9 +235,9 @@ const paginate = tablePaginateDefiner({
 })
 
 const loadData = tableLoadDataDefiner(async options => {
-  const param = requestBuilder('', queryParams.value, options.paginate, options.sorter)
+  const params = requestBuilder('', queryParams.value, options.paginate, options.sorter)
 
-  return resourceApi.getResourceListInfo(param).then(res => {
+  return resourceApi.getResourceListInfo(params).then(res => {
     if (res.code !== '0000') {
       Notification.error({
         message: '系统消息',

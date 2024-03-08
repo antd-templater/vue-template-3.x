@@ -29,7 +29,7 @@ router.beforeEach(async(to, from, next) => {
   const routerStore = useRouterStore()
 
   const token = userStore.token
-  const userRole = userStore.userRole
+  const logined = userStore.logined
 
   if (token) {
     if (to.path === loginRoutePath) {
@@ -37,7 +37,7 @@ router.beforeEach(async(to, from, next) => {
       return
     }
 
-    if (!userRole.permissions || userRole.permissions.length === 0) {
+    if (!logined) {
       try {
         await userStore.loginUserInfo({})
         await routerStore.generateRouter({}, routerComponents)

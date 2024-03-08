@@ -22,10 +22,15 @@ export default defineStore('user', () => {
   const userRole = ref({}) as Ref<UserRole>
   const nickname = computed(() => userName.value)
   const tagStore = useTagStore()
+  const logined = ref(false)
 
   const login = async(params: Record<string, any> = {}) => {
     if (tagStore) {
       tagStore.delAllTags()
+    }
+
+    if (logined.value) {
+      logined.value = false
     }
 
     interface CustomResult {
@@ -70,6 +75,7 @@ export default defineStore('user', () => {
     avatar.value = defaultAvatar
     userInfo.value = {} as UserInfo
     userRole.value = {} as UserRole
+    logined.value = false
 
     return authApi.logout(params).then(res => {
       if (res.code !== '0000') {
@@ -106,6 +112,8 @@ export default defineStore('user', () => {
         userRole.value.permissionList = userRole.value.permissions.map(permission => permission.permissionId)
       }
 
+      logined.value = true
+
       return res
     })
   }
@@ -124,6 +132,7 @@ export default defineStore('user', () => {
     userInfo,
     userRole,
     nickname,
+    logined,
 
     login,
     logout,
@@ -135,17 +144,17 @@ export default defineStore('user', () => {
     strategies: [
       {
         storage: localStorage,
-        key: 'user-token',
+        key: 'STORE-TOKEN',
         paths: ['token']
       },
       {
         storage: localStorage,
-        key: 'user-orgId',
+        key: 'STORE-ORG-ID',
         paths: ['orgId']
       },
       {
         storage: localStorage,
-        key: 'user-userNo',
+        key: 'STORE-USER-NO',
         paths: ['userNo']
       }
     ]

@@ -160,14 +160,14 @@ const doChange = treeEmitChangeDefiner(options => {
 })
 
 const doQuery = treeLoadDataDefiner(options => {
-  const param = requestBuilder(
+  const params = requestBuilder(
     '',
     { orgId: options.key },
     null,
     null
   )
 
-  return organizeApi.getOrganizeInfoTree(param).then(res => {
+  return organizeApi.getOrganizeInfoTree(params).then(res => {
     if (res.code !== '0000') {
       return Promise.reject()
     }

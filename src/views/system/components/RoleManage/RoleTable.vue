@@ -197,14 +197,14 @@ const paginate = tablePaginateDefiner({
 })
 
 const loadData = tableLoadDataDefiner(options => {
-  const param = requestBuilder(
+  const params = requestBuilder(
     '',
     queryParams.value,
     options.paginate,
     options.sorter
   )
 
-  return roleApi.getRoleInfoByPages(param).then(res => {
+  return roleApi.getRoleInfoByPages(params).then(res => {
     if (res.code !== '0000') {
       Notification.error({
         message: '系统消息',

@@ -290,12 +290,12 @@ export default defineStore('tag', () => {
     strategies: [
       {
         storage: sessionStorage,
-        key: 'tag-stackTags',
+        key: 'STORE-STACK-TAGS',
         paths: ['stackTags']
       },
       {
         storage: sessionStorage,
-        key: 'tag-visitTags',
+        key: 'STORE-VISIT-TAGS',
         paths: ['visitTags']
       }
     ]

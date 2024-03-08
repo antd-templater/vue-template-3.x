@@ -169,6 +169,9 @@ export default defineStore('app', () => {
 }, {
   persist: {
     enabled: true,
-    strategies: [{ storage: localStorage }]
+    strategies: [{
+      key: 'STORE-APP',
+      storage: localStorage
+    }]
   }
 })
