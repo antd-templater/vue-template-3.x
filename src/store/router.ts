@@ -3,7 +3,7 @@ import { Route, generateDynamicRouter } from '@/router/generate-routes'
 import defaultRouter from '@/configure/defaultRouter'
 
 /**
- * 路由管理
+ * Router 路由管理
  */
 export default defineStore('router', () => {
   const dynamicRoutes: Ref<Route[]> = ref([])

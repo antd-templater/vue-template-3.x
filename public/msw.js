@@ -95,11 +95,10 @@ self.addEventListener('fetch', async function (event) {
   const clientId = event.clientId
 
   if (!clientId) {
-    delete headers['x-msw']
     return
   }
 
-  if (!headers.get('x-msw')) {
+  if (!headers.get('x-msw-url')) {
     return
   }
 
@@ -111,21 +110,22 @@ self.addEventListener('fetch', async function (event) {
     return
   }
 
-  if (!activeClientIds.has(clientId) && headers.get('x-msw') === 'force') {
-    if (!activeClientRuns.has(clientId)) {
-      let promiser = null
-      let resolver = null
-      
-      promiser = new Promise((resolve) => {
-        resolver = resolve
-      })
-      
-      activeClientRuns.set(clientId, {
-        promise: promiser,
-        resolve: resolver
-      })
-    }
+  if (!activeClientIds.has(clientId) && !activeClientRuns.has(clientId)) {
+    let promiser = null
+    let resolver = null
+    
+    promiser = new Promise((resolve, reject) => { 
+      setTimeout(reject, 1200) 
+      resolver = resolve 
+    })
+    
+    activeClientRuns.set(clientId, {
+      promise: promiser,
+      resolve: resolver
+    })
+  }
 
+  if (!activeClientIds.has(clientId) && headers.get('x-msw-wait')) {
     const uuid = crypto.randomUUID()
     const promise = activeClientRuns.get(clientId).promise
     return event.respondWith(promise.then(() => handleRequest(event, uuid)))
@@ -201,11 +201,14 @@ async function getResponse(event, client, requestId) {
 
   function passthrough() {
     const headers = Object.fromEntries(requestClone.headers.entries())
+    const promise = fetch(requestClone, { headers })
 
     delete headers['x-msw-intention']
-    delete headers['x-msw']
+    delete headers['x-msw-wait']
+    delete headers['x-msw-mode']
+    delete headers['x-msw-url']
 
-    return fetch(requestClone, { headers })
+    return promise
   }
 
   if (!client) {

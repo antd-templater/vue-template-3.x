@@ -2,6 +2,7 @@ import Axios, { RawAxiosRequestConfig, CreateAxiosDefaults, AxiosInstance } from
 import { AppApiBase } from '@/configure/presetEnvironment'
 import Notification from 'ant-design-vue/es/notification'
 import useUserStore from '@/store/user'
+import useMockStore from '@/store/mock'
 
 /**
  * 定义 Axios 类型
@@ -25,19 +26,20 @@ const createAxiosInstance = (config: AxiosDefaultConfig) => {
 const createAxiosInterceptor = (axios: AxiosInstance) => {
   axios.interceptors.request.use(
     config => {
-      const token = useUserStore().token
+      const user = useUserStore()
+      const mocker = useMockStore()
       const headers = config.headers
 
-      if (token && !headers.token && headers.token !== null) {
-        headers.token = `Bearer ${token}`
+      if (user.token && !headers.token && headers.token !== null) {
+        headers.token = `Bearer ${user.token}`
       }
 
       if (headers.token === null) {
         delete headers.token
       }
 
-      if (!headers['x-msw']) {
-        headers['x-msw'] = 'force'
+      if (mocker.headers) {
+        Object.assign(headers, mocker.headers)
       }
 
       return config

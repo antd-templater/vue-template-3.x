@@ -1,6 +1,8 @@
 import { toPromise } from 'js-simpler'
 import { setupWorker } from 'msw/browser'
 import { AppApiBase } from '@/configure/presetEnvironment'
+import PiniaterPlugin from '@/plugin/pinia'
+import useMockStore from '@/store/mock'
 
 export const promiser = (value: any, delay: number = 300) => {
   return toPromise(delay)
@@ -65,7 +67,14 @@ export const request = () => {
 }
 
 export const runner = () => {
+  const mocker = useMockStore(PiniaterPlugin)
   const worker = setupWorker()
+
+  mocker.update({
+    'x-msw-error': 'bypass',
+    'x-msw-wait': 'connect',
+    'x-msw-url': '/msw.js'
+  })
 
   worker.start({
     serviceWorker: { url: `/msw.js` },

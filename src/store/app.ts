@@ -3,7 +3,7 @@ import { ref, reactive, computed } from 'vue'
 import * as DarkReader from 'darkreader'
 
 /**
- * 应用管理
+ * App 应用管理
  */
 export default defineStore('app', () => {
   const themeColor = reactive({

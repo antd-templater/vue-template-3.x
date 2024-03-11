@@ -5,7 +5,7 @@ import useTagStore from '@/store/tag'
 import * as authApi from '@/api/auth'
 
 /**
- * 用户管理
+ * User 用户管理
  */
 export default defineStore('user', () => {
   const token = ref('')

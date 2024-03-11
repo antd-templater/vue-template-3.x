@@ -31,7 +31,7 @@ type Matched = {
 }
 
 /**
- * 标签页管理
+ * Tag 标签页管理
  */
 export default defineStore('tag', () => {
   const cacheTags: Ref<string[]> = ref([
