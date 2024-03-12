@@ -40,7 +40,7 @@
                   v-model:value="formModel.password"
                   placeholder="密码: 12345678"
                   size="large"
-                  type="text"
+                  type="password"
                   @pressEnter="doLogin"
                 >
                   <template #prefix>

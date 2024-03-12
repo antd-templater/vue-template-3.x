@@ -315,7 +315,7 @@ const doTableClear = () => {
 const doDrawerDel = (record: object) => {
   AModal.confirm({
     title: '是否确认删除该按钮资源?',
-    content: '删除按钮资源会导致相关按钮权限丢失，请慎重考虑!',
+    content: '删除按钮资源会导致相关权限丢失，请慎重考虑!',
     cancelText: '取消',
     okText: '删除',
     okType: 'danger',
