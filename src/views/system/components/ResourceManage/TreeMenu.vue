@@ -1,5 +1,5 @@
 <template>
-  <section class="tree-menu-container">
+  <section class="resource-tree-menu-container">
     <ACard
       title="菜单资源"
       style="display: flex; flex-flow: column nowrap; height: 100%;"
@@ -149,7 +149,7 @@ export interface Emits {
 }
 
 defineOptions({
-  name: 'TreeMenu',
+  name: 'ResourceTreeMenu',
   inheritAttrs: false
 })
 
@@ -234,7 +234,7 @@ doQuery()
 </script>
 
 <style lang="less" scoped>
-.tree-menu-container {
+.resource-tree-menu-container {
   width: 100%;
   height: 100%;
   overflow: auto;

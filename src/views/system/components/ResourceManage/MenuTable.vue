@@ -1,5 +1,5 @@
 <template>
-  <section class="button-table-container">
+  <section class="resource-menu-table-container">
     <ACard
       title="子菜单资源"
       style="display: flex; flex-flow: column nowrap; height: 100%;"
@@ -31,7 +31,7 @@
             <SEditCellInput
               v-model:status="cellState"
               :cellStyle="cellStyle"
-              :text="String(value)"
+              :text="String(value ?? '')"
               empty="无"
               @change="doTableChange(record, column.key, $event.value)"
               @confirm="doTableModify(record)"
@@ -42,7 +42,7 @@
             <SEditCellTextarea
               v-model:status="cellState"
               :cellStyle="cellStyle"
-              :text="String(value)"
+              :text="String(value ?? '')"
               empty="无"
               @change="doTableChange(record, column.key, $event.value)"
               @confirm="doTableModify(record)"
@@ -64,7 +64,7 @@
             <SEditCellSelectIcon
               v-model:status="cellState"
               :cellStyle="cellStyle"
-              :text="String(value)"
+              :text="String(value ?? '')"
               allowClear
               empty="无"
               @change="doTableChange(record, column.key, $event.value)"
@@ -98,7 +98,7 @@ import Notification from 'ant-design-vue/es/notification'
 import MenuDrawer from './MenuDrawer.vue'
 
 defineOptions({
-  name: 'ButtonTable',
+  name: 'ResourceMenuTable',
   inheritAttrs: false
 })
 
@@ -304,7 +304,7 @@ defineExpose({
 </script>
 
 <style lang="less" scoped>
-.button-table-container {
+.resource-menu-table-container {
   width: 100%;
   height: 100%;
 }

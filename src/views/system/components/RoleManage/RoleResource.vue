@@ -85,11 +85,11 @@
             :headStyle="{ flex: '0 0 auto', overflow: 'hidden' }"
           >
             <ASpin :spinning="loadings.button">
-              <div class="button-resource-container">
+              <div class="resource-button-container">
                 <div
                   v-for="button of buttonSortList"
                   :key="button.id"
-                  class="button-resource-group"
+                  class="resource-button-group"
                 >
                   <div class="group-header">
                     <ACheckbox
@@ -435,12 +435,12 @@ defineExpose({
   height: 100%;
 }
 
-.button-resource-container {
+.resource-button-container {
   width: 100%;
   height: 100%;
   overflow: auto;
 
-  .button-resource-group {
+  .resource-button-group {
     width: 100%;
     height: auto;
 

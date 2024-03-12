@@ -1,5 +1,5 @@
 <template>
-  <section class="organize-drawer-form-container">
+  <section class="resource-button-form-container">
     <SForm
       ref="form"
       v-model="model"
@@ -28,7 +28,7 @@ export interface Props {
 }
 
 defineOptions({
-  name: 'ButtonForm',
+  name: 'ResourceButtonForm',
   inheritAttrs: false
 })
 

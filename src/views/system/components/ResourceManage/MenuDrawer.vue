@@ -1,5 +1,5 @@
 <template>
-  <section class="organize-drawer-container">
+  <section class="resource-menu-drawer-container">
     <ADrawer
       width="400"
       :zIndex="1010"
@@ -65,7 +65,7 @@ export interface Emits{
 }
 
 defineOptions({
-  name: 'MenuDrawer',
+  name: 'ResourceMenuDrawer',
   inheritAttrs: false
 })
 

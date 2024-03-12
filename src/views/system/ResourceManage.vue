@@ -14,7 +14,7 @@
 
     <div class="section-right-container">
       <Component
-        :is="menuNode.children?.length > 0 ? MenuTable : ButtonTable"
+        :is="['PageView', 'RouteView'].includes(menuNode.component) ? MenuTable : ButtonTable"
         ref="refTable"
         :parentNode="menuNode"
       />

@@ -1,5 +1,5 @@
 <template>
-  <section class="organize-drawer-container">
+  <section class="role-drawer-container">
     <ADrawer
       width="400"
       :zIndex="1010"

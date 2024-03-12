@@ -1,5 +1,5 @@
 <template>
-  <section class="organize-table-container">
+  <section class="user-table-container">
     <STable
       ref="table"
       v-model:columns="columns"
@@ -231,7 +231,7 @@ defineExpose({
 </script>
 
 <style lang="less" scoped>
-.organize-table-container {
+.user-table-container {
   width: 100%;
   height: 100%;
   overflow: auto;

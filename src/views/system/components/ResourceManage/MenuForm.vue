@@ -1,5 +1,5 @@
 <template>
-  <section class="organize-drawer-form-container">
+  <section class="resource-menu-form-container">
     <SForm
       ref="form"
       v-model="model"
@@ -32,7 +32,7 @@ export interface Props {
 }
 
 defineOptions({
-  name: 'MenuForm',
+  name: 'ResourceMenuForm',
   inheritAttrs: false
 })
 
@@ -76,7 +76,24 @@ const groups = formGroupsDefiner([
     props: {
       showSearch: true,
       placeholder: '请输入组件名称',
-      replaceFields: { label: 'label', value: 'label' }
+      replaceFields: { label: 'label', value: 'label' },
+      filterOption: (value: string, option: { label: string }) => {
+        return !value.trim() || option.label.startsWith(value.trim())
+      },
+      options: [
+        {
+          label: 'PageView',
+          value: 'PageView'
+        },
+        {
+          label: 'RouteView',
+          value: 'RouteView'
+        },
+        {
+          label: 'PageFrame',
+          value: 'PageFrame'
+        }
+      ]
     }
   },
   {

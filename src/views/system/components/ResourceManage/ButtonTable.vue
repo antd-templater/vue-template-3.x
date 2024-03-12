@@ -1,5 +1,5 @@
 <template>
-  <section class="button-table-container">
+  <section class="resource-button-table-container">
     <ACard
       title="按钮资源"
       style="display: flex; flex-flow: column nowrap; height: 100%"
@@ -102,7 +102,7 @@ export interface Props {
 }
 
 defineOptions({
-  name: 'ButtonTable',
+  name: 'ResourceButtonTable',
   inheritAttrs: false
 })
 
@@ -339,7 +339,7 @@ defineExpose({
 </script>
 
 <style lang="less" scoped>
-.button-table-container {
+.resource-button-table-container {
   width: 100%;
   height: 100%;
 }

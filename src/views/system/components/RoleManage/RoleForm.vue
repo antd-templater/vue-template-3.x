@@ -1,5 +1,5 @@
 <template>
-  <section class="organize-drawer-form-container">
+  <section class="role-form-container">
     <SForm
       ref="form"
       v-model="model"

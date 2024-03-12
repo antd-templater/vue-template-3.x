@@ -1,5 +1,5 @@
 <template>
-  <section class="organize-query-container">
+  <section class="role-query-container">
     <AForm layout="inline">
       <div class="flex-row-auto">
         <div class="flex-row-none">
@@ -134,7 +134,7 @@ const doReset = (query: boolean) => {
 </script>
 
 <style lang="less" scoped>
-.organize-query-container {
+.role-query-container {
   width: 100%;
   height: auto;
   padding: 0 5px;
