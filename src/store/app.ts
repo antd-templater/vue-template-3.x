@@ -23,6 +23,8 @@ export default defineStore('app', () => {
   const themeMode = ref(defaultSettings.themeMode)
   const themeWeak = ref(defaultSettings.themeWeak)
   const layoutMode = ref(defaultSettings.layoutMode)
+  const iconPrefix = ref(defaultSettings.iconPrefix)
+  const iconfontUrl = ref(defaultSettings.iconfontUrl)
   const fixedHeader = ref(defaultSettings.fixedHeader)
   const fixedSidebar = ref(defaultSettings.fixedSidebar)
   const fixedHeaderTab = ref(defaultSettings.fixedHeaderTab)
@@ -48,6 +50,8 @@ export default defineStore('app', () => {
   const toggleKeepAlive = (value: boolean) => { keepAlive.value = value }
   const toggleCollapsed = (value: boolean) => { collapsed.value = value }
   const toggleLayoutMode = (value: LayoutMode) => { layoutMode.value = value }
+  const toggleIconPrefix = (value: string) => { iconPrefix.value = value }
+  const toggleIconfontUrl = (value: string) => { iconfontUrl.value = value }
   const toggleFixedHeader = (value: boolean) => { fixedHeader.value = value }
   const toggleFixedSidebar = (value: boolean) => { fixedSidebar.value = value }
   const toggleFixedHeaderTab = (value: boolean) => { fixedHeaderTab.value = value }
@@ -71,39 +75,55 @@ export default defineStore('app', () => {
     themeMode.value = value
   }
 
-  const contentAreaStyle = computed(() => {
+  const layoutViewStyle = computed(() => {
     let width = '100%'
     let height = '100vh'
+    let minWidth = '100%'
     let maxWidth = 'none'
+    let minHeight = '100vh'
     let maxHeight = 'none'
 
     if (isTopMenu.value && contentWidth.value === 'Fixed') {
       width = '100%'
+      minWidth = '100%'
       maxWidth = '1200px'
     }
 
     if (isMixMenu.value && (hideMixHeaderTab.value || !fixedHeaderTab.value)) {
-      height = 'calc(100vh - 52px)'
+      height = 'calc(100vh - 50px)'
     }
 
     if (isMixMenu.value && !hideMixHeaderTab.value && fixedHeaderTab.value) {
-      height = 'calc(100vh - 90px)'
+      height = 'calc(100vh - 88px)'
+    }
+
+    if (isMixMenu.value && !hideMixHeaderTab.value) {
+      minHeight = 'calc(100vh - 88px)'
+    }
+
+    if (isMixMenu.value && hideMixHeaderTab.value) {
+      minHeight = 'calc(100vh - 50px)'
     }
 
     if (!isMixMenu.value && fixedHeader.value && fixedHeaderTab.value) {
-      height = 'calc(100vh - 90px)'
+      height = 'calc(100vh - 88px)'
     }
 
     if (!isMixMenu.value && fixedHeader.value && !fixedHeaderTab.value) {
-      height = 'calc(100vh - 52px)'
+      height = 'calc(100vh - 50px)'
     }
 
     if (!isMixMenu.value && !fixedHeader.value) {
       height = '100vh'
     }
 
+    if (!isMixMenu.value) {
+      minHeight = 'calc(100vh - 88px)'
+    }
+
     if (isMobile.value) {
       width = '100%'
+      minWidth = '100%'
       maxWidth = 'none'
       maxHeight = 'none'
     }
@@ -111,7 +131,9 @@ export default defineStore('app', () => {
     return {
       width: width,
       height: height,
+      minWidth: minWidth,
       maxWidth: maxWidth,
+      minHeight: minHeight,
       maxHeight: maxHeight
     }
   })
@@ -131,11 +153,13 @@ export default defineStore('app', () => {
     isTopMenu,
     isSideMenu,
     layoutMode,
+    iconPrefix,
+    iconfontUrl,
     fixedHeader,
     fixedSidebar,
     fixedHeaderTab,
     hideMixHeaderTab,
-    contentAreaStyle,
+    layoutViewStyle,
     componentSize,
     contentWidth,
     primaryColor,
@@ -153,6 +177,8 @@ export default defineStore('app', () => {
     toggleCollapsed,
     toggleThemeMode,
     toggleLayoutMode,
+    toggleIconPrefix,
+    toggleIconfontUrl,
     toggleFixedHeader,
     toggleFixedSidebar,
     toggleFixedHeaderTab,

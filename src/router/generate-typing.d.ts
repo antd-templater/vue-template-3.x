@@ -58,12 +58,12 @@ export interface TreeToRoute {
   (trees: Menu[], parent: Partial<Route>, components: Record<string, any>): Route[];
 }
 
-export interface GenerateDynamicPath {
-  (parent: Partial<Route>, item: Partial<Menu>): string;
-}
-
 export interface GenerateDynamicComponent {
   (parent: Partial<Route>, item: Partial<Menu>, components: Record<string, any>): any;
+}
+
+export interface GenerateDynamicFullpath {
+  (parent: Partial<Route>, item: Partial<Menu>): string;
 }
 
 export interface GenerateDynamicRouter {

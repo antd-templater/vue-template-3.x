@@ -1,18 +1,16 @@
-import defaultRouter from '@/configure/defaultRouter'
 import * as authApi from '@/api/auth'
+import defaultRouter from '@/configure/defaultRouter'
 
-import type {
-  Menu,
-  Route,
-  ListToTree,
-  TreeToRoute,
-  ReqiredRoute,
-  GenerateDynamicPath,
-  GenerateDynamicComponent,
-  GenerateDynamicRouter,
-  GenerateLayoutRouter,
-  GenerateViewsRouter
-} from './generate-typing'
+import type { GenerateDynamicComponent } from './generate-typing'
+import type { GenerateDynamicFullpath } from './generate-typing'
+import type { GenerateDynamicRouter } from './generate-typing'
+import type { GenerateLayoutRouter } from './generate-typing'
+import type { GenerateViewsRouter } from './generate-typing'
+import type { ReqiredRoute } from './generate-typing'
+import type { TreeToRoute } from './generate-typing'
+import type { ListToTree } from './generate-typing'
+import type { Route } from './generate-typing'
+import type { Menu } from './generate-typing'
 
 /**
  * 转换树形结构
@@ -60,7 +58,7 @@ const treeToRoute: TreeToRoute = (trees, parent = {}, components = {}) => {
     const currentRouter: ReqiredRoute = {
       id: item.id,
       name: item.name || '',
-      path: generateDynamicPath(parent, item),
+      path: generateDynamicFullpath(parent, item),
       component: generateDynamicComponent(parent, item, components),
       redirect: item.redirect && item.redirect.trim(),
 
@@ -121,17 +119,18 @@ const treeToRoute: TreeToRoute = (trees, parent = {}, components = {}) => {
 /**
  * 动态生成路径
  */
-export const generateDynamicPath: GenerateDynamicPath = (parent = {}, item = {}) => {
-  const end = /.+\/+$/g
-  const start = /^\/*([^/].*)/
-  const namePath = item.name?.replace(end, '')
-  const itemPath = item.path?.replace(end, '')
-  const parentPath = parent.path?.replace(end, '')
-  const isUseMergePath = item.component === 'PageFrame' || !itemPath || false
+export const generateDynamicFullpath: GenerateDynamicFullpath = (parent = {}, item = {}) => {
+  const one = /\/+$/
+  const two = /^\/*/
+  const keep = /(.+?)\/*$/
+  const namePath = item.name?.replace(one, '') ?? ''
+  const itemPath = item.path?.replace(keep, '$1') ?? ''
+  const parentPath = parent.path?.replace(one, '') ?? ''
+  const isUseMergePath = item.component === 'PageFrame' || !(/^\//).test(itemPath)
 
-  return isUseMergePath && parentPath && namePath
-    ? (parentPath + '/' + namePath).replace(start, '/$1')
-    : itemPath || ''
+  return isUseMergePath && !!namePath
+    ? (parentPath + '/' + namePath).replace(two, '/')
+    : (itemPath || '')
 }
 
 /**
@@ -139,9 +138,10 @@ export const generateDynamicPath: GenerateDynamicPath = (parent = {}, item = {})
  */
 export const generateDynamicComponent: GenerateDynamicComponent = (parent = {}, item = {}, components = {}) => {
   // 组件路径
-  const regex = /^.+\/+$/g
-  const itemPath = item.path?.replace(regex, '') || ''
-  const parentPath = parent.path?.replace(regex, '') || ''
+  const end = /\/+$/
+  const keep = /(.+?)\/*$/
+  const itemPath = item.path?.replace(keep, '$1') || ''
+  const parentPath = parent.path?.replace(end, '') || ''
   const tempViewPath = itemPath?.startsWith('/') ? itemPath : parentPath + '/' + itemPath
   const currentPath = tempViewPath.replace(/^\/*([^/].*)/, '/$1')
   const importrMaps = import.meta.glob('@/views/**/*.vue')
@@ -251,8 +251,8 @@ export type {
   ListToTree,
   TreeToRoute,
   ReqiredRoute,
-  GenerateDynamicPath,
   GenerateDynamicComponent,
+  GenerateDynamicFullpath,
   GenerateDynamicRouter,
   GenerateLayoutRouter,
   GenerateViewsRouter

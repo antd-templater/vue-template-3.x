@@ -37,6 +37,7 @@
 import ButtonTable from './components/ResourceManage/ButtonTable.vue'
 import MenuTable from './components/ResourceManage/MenuTable.vue'
 import TreeMenu from './components/ResourceManage/TreeMenu.vue'
+import useAppStore from '@/store/app'
 
 defineOptions({
   name: 'ResourceManage',
@@ -46,6 +47,7 @@ defineOptions({
 const menuNode = ref({} as Record<string, any>)
 const refTable = ref(null as InstanceType<typeof ButtonTable> | InstanceType<typeof MenuTable> | null)
 const collapse = ref(false as boolean)
+const appStore = useAppStore()
 
 const queryTable = (node: Record<string, any>) => {
   menuNode.value = node
@@ -68,7 +70,7 @@ const queryTable = (node: Record<string, any>) => {
   display: flex;
   flex-flow: row nowrap;
   width: 100%;
-  height: calc(100vh - 90px);
+  height: v-bind('appStore.layoutViewStyle.minHeight');
   padding: 20px;
   position: relative;
 

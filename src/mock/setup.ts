@@ -1,10 +1,9 @@
 import { toPromise } from 'js-simpler'
 import { setupWorker } from 'msw/browser'
+import { AppPageBase } from '@/configure/presetEnvironment'
 import { AppApiBase } from '@/configure/presetEnvironment'
-import PiniaterPlugin from '@/plugin/pinia'
-import useMockStore from '@/store/mock'
 
-export const promiser = (value: any, delay: number = 300) => {
+export const promiser = async(value: any, delay: number = 300) => {
   return toPromise(delay)
     .then(() => Promise.resolve(value))
     .catch(() => Promise.reject(value))
@@ -22,6 +21,23 @@ export const resolver = (url: string, regex?: boolean) => {
     const format = /[-/\\^$*+?.()|[\]{}]/g
     const source = (url.split('?')[0]).replace(format, '\\$&')
     return new RegExp(source + '(\\?.*)?$')
+  }
+
+  return url
+}
+
+export const replacer = (url: string) => {
+  const http = /^https?:\/\//i
+  const prefix = /^\/*/
+  const suffix = /\/+$/
+
+  if (!http.test(url)) {
+    url = url.replace(prefix, '/')
+    url = url.replace(suffix, '')
+  }
+
+  if (http.test(url)) {
+    url = url.replace(suffix, '')
   }
 
   return url
@@ -67,17 +83,10 @@ export const request = () => {
 }
 
 export const runner = () => {
-  const mocker = useMockStore(PiniaterPlugin)
   const worker = setupWorker()
 
-  mocker.update({
-    'x-msw-error': 'bypass',
-    'x-msw-wait': 'connect',
-    'x-msw-url': '/msw.js'
-  })
-
   worker.start({
-    serviceWorker: { url: `/msw.js` },
+    serviceWorker: { url: `${replacer(AppPageBase)}/msw.js` },
     onUnhandledRequest: 'bypass',
     quiet: true
   })

@@ -24,6 +24,21 @@ export default defineStore('user', () => {
   const tagStore = useTagStore()
   const logined = ref(false)
 
+  const clear = async(_: Record<string, any> = {}) => {
+    token.value = ''
+    userNo.value = ''
+    userName.value = ''
+    orgId.value = ''
+    orgName.value = ''
+    deptId.value = ''
+    deptName.value = ''
+    dataFlag.value = ''
+    avatar.value = defaultAvatar
+    userInfo.value = {} as UserInfo
+    userRole.value = {} as UserRole
+    logined.value = false
+  }
+
   const login = async(params: Record<string, any> = {}) => {
     if (tagStore) {
       tagStore.delAllTags()
@@ -64,24 +79,13 @@ export default defineStore('user', () => {
       tagStore.delAllTags()
     }
 
-    token.value = ''
-    userNo.value = ''
-    userName.value = ''
-    orgId.value = ''
-    orgName.value = ''
-    deptId.value = ''
-    deptName.value = ''
-    dataFlag.value = ''
-    avatar.value = defaultAvatar
-    userInfo.value = {} as UserInfo
-    userRole.value = {} as UserRole
-    logined.value = false
+    if (!token.value) {
+      return clear()
+    }
 
-    return authApi.logout(params).then(res => {
-      if (res.code !== '0000') {
-        return Promise.reject(res)
-      }
-    })
+    return authApi.logout(params)
+      .then(() => clear())
+      .catch(() => clear())
   }
 
   const loginUserInfo = async(params: Record<string, any> = {}) => {

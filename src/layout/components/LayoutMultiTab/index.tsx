@@ -14,7 +14,6 @@ export default defineComponent({
   name: 'LayoutMultiTab',
   props: {
     multiTab: VueTypes.bool().def(false),
-    isMobile: VueTypes.bool().def(false),
     isMixMenu: VueTypes.bool().def(false),
     hideMixHeaderTab: VueTypes.bool().def(true)
   },
@@ -126,7 +125,7 @@ export default defineComponent({
         return
       }
 
-      if (!props.isMobile && props.isMixMenu && props.hideMixHeaderTab) {
+      if (props.isMixMenu && props.hideMixHeaderTab) {
         return
       }
 

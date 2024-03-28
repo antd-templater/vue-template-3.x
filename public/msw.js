@@ -1,23 +1,24 @@
 /* eslint-disable */
 /* tslint:disable */
 
-/** Mock Service Worker (2.2.2).
+/**
+ * Mock Service Worker.
  * @see https://github.com/mswjs/msw
  * - Please do NOT modify this file.
  * - Please do NOT serve this file on production.
  */
 
-const INTEGRITY_CHECKSUM = '223d191a56023cd36aa88c802961b911'
+const PACKAGE_VERSION = '2.2.13'
+const INTEGRITY_CHECKSUM = '26357c79639bfa20d64c0efca2a87423'
 const IS_MOCKED_RESPONSE = Symbol('isMockedResponse')
-const activeClientRuns = new Map()
 const activeClientIds = new Set()
 
 
-self.addEventListener('install', async function (event) {
+self.addEventListener('install', function () {
   self.skipWaiting()
 })
 
-self.addEventListener('activate', async function (event) {
+self.addEventListener('activate', function (event) {
   event.waitUntil(self.clients.claim())
 })
 
@@ -39,14 +40,6 @@ self.addEventListener('message', async function (event) {
   })
 
   switch (event.data) {
-    case 'INTEGRITY_CHECK_REQUEST': {
-      sendToClient(client, {
-        type: 'INTEGRITY_CHECK_RESPONSE',
-        payload: INTEGRITY_CHECKSUM,
-      })
-      break
-    }
-
     case 'KEEPALIVE_REQUEST': {
       sendToClient(client, {
         type: 'KEEPALIVE_RESPONSE',
@@ -54,27 +47,34 @@ self.addEventListener('message', async function (event) {
       break
     }
 
-    case 'MOCK_DEACTIVATE': {
-      activeClientIds.delete(clientId)
-      activeClientRuns.delete(clientId)
+    case 'INTEGRITY_CHECK_REQUEST': {
+      sendToClient(client, {
+        type: 'INTEGRITY_CHECK_RESPONSE',
+        payload: {
+          packageVersion: PACKAGE_VERSION,
+          checksum: INTEGRITY_CHECKSUM,
+        },
+      })
       break
     }
 
     case 'MOCK_ACTIVATE': {
       activeClientIds.add(clientId)
-      activeClientRuns.get(clientId)?.resolve()
 
       sendToClient(client, {
         type: 'MOCKING_ENABLED',
         payload: true,
       })
-      
+      break
+    }
+
+    case 'MOCK_DEACTIVATE': {
+      activeClientIds.delete(clientId)
       break
     }
 
     case 'CLIENT_CLOSED': {
       activeClientIds.delete(clientId)
-      activeClientRuns.delete(clientId)
 
       const remainingClients = allClients.filter((client) => {
         return client.id !== clientId
@@ -91,14 +91,11 @@ self.addEventListener('message', async function (event) {
 
 self.addEventListener('fetch', async function (event) {
   const request = event.request
-  const headers = request.headers
   const clientId = event.clientId
+  const requestId = crypto.randomUUID()
+  const requester = request.headers.get('x-msw-requester')
 
-  if (!clientId) {
-    return
-  }
-
-  if (!headers.get('x-msw-url')) {
+  if (!requester) {
     return
   }
 
@@ -110,59 +107,47 @@ self.addEventListener('fetch', async function (event) {
     return
   }
 
-  if (!activeClientIds.has(clientId) && !activeClientRuns.has(clientId)) {
-    let promiser = null
-    let resolver = null
-    
-    promiser = new Promise((resolve, reject) => { 
-      setTimeout(reject, 1200) 
-      resolver = resolve 
-    })
-    
-    activeClientRuns.set(clientId, {
-      promise: promiser,
-      resolve: resolver
-    })
+  const passthrough = async () => {
+    const requestClone = request.clone()
+    const headers = Object.fromEntries(requestClone.headers.entries())
+    const request = fetch(requestClone, { headers })
+
+    delete headers['x-msw-requester']
+    delete headers['x-msw-intention']
+
+    return request
   }
 
-  if (!activeClientIds.has(clientId) && headers.get('x-msw-wait')) {
-    const uuid = crypto.randomUUID()
-    const promise = activeClientRuns.get(clientId).promise
-    return event.respondWith(promise.then(() => handleRequest(event, uuid)))
+  const responser = async () => {
+    if (!activeClientIds.has(clientId)) {
+      await new Promise((resolve) => setTimeout(resolve, 300))
+    }
+
+    if (activeClientIds.has(clientId)) {
+      return handleRequest(event, requestId)
+    }
+
+    return passthrough()
   }
 
-  if (activeClientIds.has(clientId)) {
-    event.respondWith(handleRequest(event, crypto.randomUUID()))
-  }
+  event.respondWith(responser())
 })
 
 
 async function resolveMainClient(event) {
   const client = await self.clients.get(event.clientId)
-  const clients = await self.clients.matchAll({ type: 'window' })
 
   if (client?.frameType === 'top-level') {
     return client
   }
 
-  return clients
-    .filter((client) => client.visibilityState === 'visible')
-    .find((client) => activeClientIds.has(client.id))
-}
-
-async function respondWithMock(response) {
-  if (response.status === 0) {
-    return Response.error()
-  }
-
-  const mockedResponse = new Response(response.body, response)
-
-  Reflect.defineProperty(mockedResponse, IS_MOCKED_RESPONSE, {
-    value: true,
-    enumerable: true,
+  const allClients = await self.clients.matchAll({
+    type: 'window',
   })
 
-  return mockedResponse
+  return allClients
+    .filter((client) => client.visibilityState === 'visible')
+    .find((client) => activeClientIds.has(client.id))
 }
 
 async function handleRequest(event, requestId) {
@@ -201,14 +186,12 @@ async function getResponse(event, client, requestId) {
 
   function passthrough() {
     const headers = Object.fromEntries(requestClone.headers.entries())
-    const promise = fetch(requestClone, { headers })
+    const request = fetch(requestClone, { headers })
 
+    delete headers['x-msw-requester']
     delete headers['x-msw-intention']
-    delete headers['x-msw-wait']
-    delete headers['x-msw-mode']
-    delete headers['x-msw-url']
 
-    return promise
+    return request
   }
 
   if (!client) {
@@ -216,12 +199,6 @@ async function getResponse(event, client, requestId) {
   }
 
   if (!activeClientIds.has(client.id)) {
-    return passthrough()
-  }
-
-  const mswIntention = request.headers.get('x-msw-intention')
-
-  if (['bypass', 'passthrough'].includes(mswIntention)) {
     return passthrough()
   }
 
@@ -255,7 +232,7 @@ async function getResponse(event, client, requestId) {
       return respondWithMock(clientMessage.data)
     }
 
-    case 'MOCK_NOT_FOUND': {
+    case 'PASSTHROUGH': {
       return passthrough()
     }
   }
@@ -263,9 +240,10 @@ async function getResponse(event, client, requestId) {
   return passthrough()
 }
 
-async function sendToClient(client, message, transfers = []) {
+async function sendToClient(client, message, transferrables = []) {
   return new Promise((resolve, reject) => {
     const channel = new MessageChannel()
+    const transfers = [channel.port2].concat(transferrables.filter(Boolean))
 
     channel.port1.onmessage = (event) => {
       if (event.data && event.data.error) {
@@ -275,9 +253,21 @@ async function sendToClient(client, message, transfers = []) {
       resolve(event.data)
     }
 
-    client.postMessage(
-      message,
-      [channel.port2].concat(transfers.filter(Boolean)),
-    )
+    client.postMessage(message, transfers)
   })
+}
+
+async function respondWithMock(response) {
+  if (response.status === 0) {
+    return Response.error()
+  }
+
+  const mockedResponse = new Response(response.body, response)
+
+  Reflect.defineProperty(mockedResponse, IS_MOCKED_RESPONSE, {
+    value: true,
+    enumerable: true,
+  })
+
+  return mockedResponse
 }

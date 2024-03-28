@@ -36,6 +36,7 @@ import { CSSProperties } from 'vue'
 import UserQuery from './components/UserManage/UserQuery.vue'
 import UserTable from './components/UserManage/UserTable.vue'
 import UserDrawer from './components/UserManage/UserDrawer.vue'
+import useAppStore from '@/store/app'
 import * as roleApi from '@/api/role'
 import * as baseApi from '@/api/base'
 
@@ -76,6 +77,7 @@ const cardBodyStyle: CSSProperties = {
 const table = ref(null as InstanceType<typeof UserTable> | null)
 const query = ref(null as InstanceType<typeof UserQuery> | null)
 const drawer = ref(null as InstanceType<typeof UserDrawer> | null)
+const appStore = useAppStore()
 
 const doTableRefresh = (params = {}) => {
   if (table.value) {
@@ -129,7 +131,7 @@ doOptionQuery()
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
-  height: calc(100vh - 90px);
+  height: v-bind('appStore.layoutViewStyle.minHeight');
   padding: 20px 20px;
   box-sizing: border-box;
   position: relative;
