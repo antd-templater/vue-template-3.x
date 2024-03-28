@@ -110,7 +110,9 @@ export default defineConfig(({ mode }) => {
           entryFileNames: 'static/js/[name]-[hash].js',
           assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
           manualChunks(id) {
-            if (/\/node_modules\/@ant-design\/icons-(\w+)\/?/.test(id)) return 'antd-design-icons'
+            if (/\/node_modules\/@ant-design\/icons-svg\/?/.test(id)) return 'antd-design-icons-svg'
+            if (/\/node_modules\/@ant-design\/icons-vue\/?/.test(id)) return 'antd-design-icons-vue'
+            if (/\/node_modules\/@ant-design\/icons-(\w+)\/?/.test(id)) return 'antd-design-icons-helper'
             if (/\/node_modules\/(@ant-design(-\w+)?|ant-design-vue|nprogress)\//.test(id)) return 'antd-design-all'
             if (/\/node_modules\/(@antd-templater\/antd-template-lib3.x)\//.test(id)) return 'antd-template-lib'
             if (/\/node_modules\/(cookie|vue-ls|pinia(-plugin-\w+)?)\//.test(id)) return 'storage-all'
@@ -122,7 +124,8 @@ export default defineConfig(({ mode }) => {
 
             if (/\/src\/components\/.+/.test(id)) return 'components-all'
             if (/\/src\/layout\/.+/.test(id)) return 'layout-all'
-            if (/\/src\/mock\/.+/.test(id)) return 'mocks-all'
+            if (/\/src\/views\/.+/.test(id)) return 'views-all'
+            if (/\/src\/mock\/.+/.test(id)) return 'mock-all'
             if (/\/src\/.+\/.+/.test(id)) return 'bootstrap'
             if (/\/src\//.test(id)) return 'main'
           }

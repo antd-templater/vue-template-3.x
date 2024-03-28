@@ -3,14 +3,13 @@ import { AppRouterBase, AppRouterUseHash } from '@/configure/presetEnvironment'
 import { baseRoutes } from '@/router.constant'
 import useAppStore from '@/store/app'
 
-const computeRoutes: any = baseRoutes
-const computeHistory = AppRouterUseHash
-  ? createWebHashHistory(AppRouterBase)
-  : createWebHistory(AppRouterBase)
-
 export default createRouter({
-  routes: computeRoutes,
-  history: computeHistory,
+  routes: baseRoutes as any,
+
+  history: AppRouterUseHash
+    ? createWebHashHistory(AppRouterBase)
+    : createWebHistory(AppRouterBase),
+
   scrollBehavior: (to, _, position) => {
     const app = useAppStore()
     const multiTab = app.multiTab

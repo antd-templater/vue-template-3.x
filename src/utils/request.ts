@@ -1,8 +1,8 @@
-import Axios, { RawAxiosRequestConfig, CreateAxiosDefaults, AxiosInstance } from 'axios'
+import { RawAxiosRequestConfig, CreateAxiosDefaults, AxiosInstance } from 'axios'
 import { AppApiBase } from '@/configure/presetEnvironment'
 import Notification from 'ant-design-vue/es/notification'
 import useUserStore from '@/store/user'
-import useMockStore from '@/store/mock'
+import Axios from 'axios'
 
 /**
  * 定义 Axios 类型
@@ -27,19 +27,18 @@ const createAxiosInterceptor = (axios: AxiosInstance) => {
   axios.interceptors.request.use(
     config => {
       const user = useUserStore()
-      const mocker = useMockStore()
       const headers = config.headers
 
       if (user.token && !headers.token && headers.token !== null) {
         headers.token = `Bearer ${user.token}`
       }
 
-      if (headers.token === null) {
-        delete headers.token
+      if (headers['x-msw-requester'] === undefined) {
+        headers['x-msw-requester'] = 'Axios'
       }
 
-      if (mocker.headers) {
-        Object.assign(headers, mocker.headers)
+      if (headers.token === null) {
+        delete headers.token
       }
 
       return config
@@ -70,38 +69,39 @@ const createAxiosInterceptor = (axios: AxiosInstance) => {
     error => {
       let status = 500 as any
       let message = '' as any
-      let notifier = true as boolean
+      let messager = true as boolean
       const token = useUserStore().token
       const logout = useUserStore().logout
+      const promise = Promise.reject(error)
 
       try {
         status = error.status || status
         status = error.data?.code || status
         message = error.data?.message || null
-        notifier = error.config?.notifier !== false
+        messager = error.config?.messager !== false
       } catch (e) {}
 
       if (error.toString().indexOf('timeout') > -1) {
-        notifier && Notification.error({
+        messager && Notification.error({
           duration: 1.5,
           message: '系统消息',
           description: '请求超时'
         })
-        return Promise.reject(error)
+        return promise
       }
 
       if (status === 403 || status === '403') {
-        notifier && Notification.error({
+        messager && Notification.error({
           duration: 1.5,
           message: '系统消息',
           description: message || '暂无权限'
         })
 
-        return Promise.reject(error)
+        return promise
       }
 
       if (status === 401 || status === '401') {
-        notifier && Notification.error({
+        messager && Notification.error({
           duration: 1.5,
           message: '系统消息',
           description: message || (token ? 'token已过期' : '暂无权限')
@@ -111,18 +111,18 @@ const createAxiosInterceptor = (axios: AxiosInstance) => {
           logout().then(() => { setTimeout(() => window.location.reload(), 800) })
         }
 
-        return Promise.reject(error)
+        return promise
       }
 
-      if (typeof message === 'string') {
-        notifier && Notification.error({
+      if (messager === true) {
+        Notification.error({
           duration: 1.5,
           message: '系统消息',
-          description: message
+          description: message ?? '系统异常'
         })
       }
 
-      return Promise.reject(error)
+      return promise
     }
   )
   return axios
@@ -133,5 +133,6 @@ const createAxiosInterceptor = (axios: AxiosInstance) => {
  */
 export const request = createAxiosInstance({
   baseURL: AppApiBase || '/',
-  timeout: 30000
+  timeout: 30000,
+  messager: true
 })

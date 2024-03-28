@@ -91,7 +91,7 @@ export default defineComponent({
           <GlobalHeader {...props}>
             <div
               ref={refLayoutHeader}
-              style='display: flex; flex: 1 1 auto; alignItems: center; height: 50px; lineHeight: 50px;'
+              style='display: flex; flex: 1 1 auto; alignItems: center; height: 48px; lineHeight: 48px;'
             >
               <h1
                 style='fontSize: 24px; margin: 0 0; padding: 0 15px; color: var(--ant-primary-color); cursor: pointer;'
@@ -122,9 +122,11 @@ export default defineComponent({
         <LayoutLogo
           full={false}
           title={defaultSettings.domTitle}
+          layoutMode={appStore.layoutMode}
           collapsed={appStore.collapsed}
           themeMode={appStore.themeMode}
           isSideMenu={appStore.isSideMenu}
+          isMobile={appStore.isMobile}
         />
       )
     }
@@ -133,9 +135,13 @@ export default defineComponent({
       if (props.layout === 'mix' && props.isMobile) {
         return (
           <LayoutLogo
+            full={false}
+            title={defaultSettings.domTitle}
+            layoutMode={appStore.layoutMode}
             collapsed={appStore.collapsed}
             themeMode={appStore.themeMode}
             isSideMenu={appStore.isSideMenu}
+            isMobile={appStore.isMobile}
           />
         )
       }
@@ -216,14 +222,12 @@ export default defineComponent({
         >
           <LayoutMultiTab
             multiTab={appStore.multiTab}
-            isMobile={appStore.isMobile}
             isMixMenu={appStore.isMixMenu}
             hideMixHeaderTab={appStore.hideMixHeaderTab}
           />
 
           <LayoutBreadcrumb
             multiTab={appStore.multiTab}
-            isMobile={appStore.isMobile}
             isMixMenu={appStore.isMixMenu}
             hideMixHeaderTab={appStore.hideMixHeaderTab}
           />

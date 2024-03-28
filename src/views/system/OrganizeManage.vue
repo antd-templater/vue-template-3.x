@@ -66,6 +66,7 @@ import OrganizeTree from './components/OrganizeManage/OrganizeTree.vue'
 import OrganizeQuery from './components/OrganizeManage/OrganizeQuery.vue'
 import OrganizeTable from './components/OrganizeManage/OrganizeTable.vue'
 import OrganizeDrawer from './components/OrganizeManage/OrganizeDrawer.vue'
+import useAppStore from '@/store/app'
 import * as baseApi from '@/api/base'
 
 defineOptions({
@@ -102,6 +103,7 @@ const query = ref(null as InstanceType<typeof OrganizeQuery> | null)
 const drawer = ref(null as InstanceType<typeof OrganizeDrawer> | null)
 const selecter = ref(null as Record<string, any> | null)
 const collapse = ref(false as boolean)
+const appStore = useAppStore()
 
 const dictionary = ref({
   orgTree: [] as any[],
@@ -160,7 +162,7 @@ onMounted(() => {
   display: flex;
   flex-flow: row nowrap;
   width: 100%;
-  height: calc(100vh - 90px);
+  height: v-bind('appStore.layoutViewStyle.minHeight');
   padding: 20px 20px;
   box-sizing: border-box;
   position: relative;

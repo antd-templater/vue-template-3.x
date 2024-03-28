@@ -4,9 +4,11 @@ import zhCN from 'ant-design-vue/es/locale/zh_CN'
  * @themeColor 主题颜色
  * @themeWeak 弱色模式
  * @themeMode 主题风格
+ * @layoutMode 整体布局方式
+ * @iconPrefix 图标字体库 - 前缀
+ * @iconfontUrl 图标字体库 - 资源
  * @contentWidth 内容区布局
  * @componentSize 组件尺寸
- * @layoutMode 整体布局方式
  * @domTitle 标题
  * @language 国际化
  * @multiTab 多标签页
@@ -27,6 +29,8 @@ export default {
   themeWeak: false,
   themeMode: 'light' as	ThemeMode,
   layoutMode: 'side' as LayoutMode,
+  iconPrefix: 'icon-',
+  iconfontUrl: '',
   contentWidth: 'Fluid' as ContentWidth,
   componentSize: 'middle' as ComponentSize,
   domTitle: 'Antd Template',

@@ -29,7 +29,7 @@ export default defineComponent({
           padding: '0.5px',
           position: 'absolute',
           boxSizing: 'border-box',
-          ...appStore.contentAreaStyle
+          ...appStore.layoutViewStyle
         }}
       >
         <ASpin

@@ -9,16 +9,18 @@ export default defineComponent({
   props: {
     full: VueTypes.bool().def(false),
     title: VueTypes.string().def(''),
+    isMobile: VueTypes.bool().def(false),
     isSideMenu: VueTypes.bool().def(false),
     collapsed: VueTypes.bool().def(false),
+    layoutMode: VueTypes.string().def('side'),
     themeMode: VueTypes.string().def('light')
   },
   setup(props) {
     const { full, title, collapsed, isSideMenu } = toRefs(props)
     const logoWidth = computed(() => isSideMenu.value && collapsed.value ? 48 : 192)
     const logoShowUrl = computed(() => isSideMenu.value && collapsed.value ? logoShrinkUrl.value : logoNormalUrl.value)
-    const logoShrinkUrl = computed(() => props.themeMode !== 'light' ? logoShrinkDart : logoShrinkLight)
-    const logoNormalUrl = computed(() => props.themeMode !== 'light' ? logoDark : logoLight)
+    const logoShrinkUrl = computed(() => (!props.isMobile || props.layoutMode !== 'mix') && props.themeMode !== 'light' ? logoShrinkDart : logoShrinkLight)
+    const logoNormalUrl = computed(() => (!props.isMobile || props.layoutMode !== 'mix') && props.themeMode !== 'light' ? logoDark : logoLight)
 
     const LogoContent = () => {
       return (
@@ -50,8 +52,23 @@ export default defineComponent({
         return null
       }
 
+      const titleStyle = {
+        flex: '1 1 auto',
+        margin: '0 0',
+        height: '48px',
+        fontSize: '18px',
+        lineHeight: '48px',
+        color: props.themeMode !== 'light' ? '#ffffff' : 'var(--ant-primary-color)'
+      }
+
+      if (props.isMobile && props.layoutMode === 'mix') {
+        Object.assign(titleStyle, {
+          color: 'var(--ant-primary-color)'
+        })
+      }
+
       return (
-        <h1 style='flex: 1 1 auto; margin: 0 0; height: 48px; font-size: 18px; line-height: 48px; color: var(--ant-primary-color);'>
+        <h1 style={titleStyle}>
           {title.value}
         </h1>
       )

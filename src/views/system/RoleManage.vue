@@ -34,6 +34,7 @@ import { CSSProperties } from 'vue'
 import RoleQuery from './components/RoleManage/RoleQuery.vue'
 import RoleTable from './components/RoleManage/RoleTable.vue'
 import RoleDrawer from './components/RoleManage/RoleDrawer.vue'
+import useAppStore from '@/store/app'
 
 defineOptions({
   name: 'RoleManage',
@@ -66,6 +67,7 @@ const cardBodyStyle: CSSProperties = {
 const table = ref(null as InstanceType<typeof RoleTable> | null)
 const query = ref(null as InstanceType<typeof RoleQuery> | null)
 const drawer = ref(null as InstanceType<typeof RoleDrawer> | null)
+const appStore = useAppStore()
 
 const doTableRefresh = (params = {}) => {
   if (table.value) {
@@ -88,7 +90,7 @@ const doDrawerAdd = () => {
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
-  height: calc(100vh - 90px);
+  height: v-bind('appStore.layoutViewStyle.minHeight');
   padding: 20px 20px;
   box-sizing: border-box;
   position: relative;
