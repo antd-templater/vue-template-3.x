@@ -1,7 +1,7 @@
 import App from './App.vue'
 import Message from 'ant-design-vue/es/message'
 import Notification from 'ant-design-vue/es/notification'
-import AntdComponents from '@antd-templater/antd-template-lib3.x'
+import AntdComponentPlugin from '@antd-templater/library-3.x'
 import MagicModifyPlugin from '@/configure/presetMagicModify'
 import DirectivePlugin from '@/configure/presetDirective'
 import PiniaterPlugin from '@/plugin/pinia'
@@ -15,7 +15,7 @@ Notification.config({ duration: 1 })
 Message.config({ duration: 1 })
 
 createApp(App)
-  .use(AntdComponents)
+  .use(AntdComponentPlugin)
   .use(MagicModifyPlugin)
   .use(DirectivePlugin)
   .use(PiniaterPlugin)

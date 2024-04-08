@@ -26,7 +26,7 @@
       "dom"
     ],
     "types": [
-      "@antd-templater/antd-template-lib3.x/library-declare",
+      "@antd-templater/library-3.x/library-declare",
       "pinia-plugin-persist",
       "vitest/globals",
       "vite/client"

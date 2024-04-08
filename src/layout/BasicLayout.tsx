@@ -1,6 +1,6 @@
 import { KeepAlive } from 'vue'
 import { RouterView } from 'vue-router'
-import { SIcon, isIconType } from '@antd-templater/antd-template-lib3.x'
+import { SIcon, isIconType } from '@antd-templater/library-3.x'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
 import AProLayout, { clearMenuItem, GlobalHeader } from '@ant-design-vue/pro-layout'
 import defaultSettings from '@/configure/defaultSettings'
