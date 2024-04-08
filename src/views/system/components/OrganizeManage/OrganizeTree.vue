@@ -57,9 +57,9 @@
 </template>
 
 <script setup lang="ts">
-import { treeEmitChangeDefiner } from '@antd-templater/antd-template-lib3.x'
-import { treeEmitSelectDefiner } from '@antd-templater/antd-template-lib3.x'
-import { treeLoadDataDefiner } from '@antd-templater/antd-template-lib3.x'
+import { treeEmitChangeDefiner } from '@antd-templater/library-3.x'
+import { treeEmitSelectDefiner } from '@antd-templater/library-3.x'
+import { treeLoadDataDefiner } from '@antd-templater/library-3.x'
 
 import { CSSProperties } from 'vue'
 import { requestBuilder } from '@/utils/common'

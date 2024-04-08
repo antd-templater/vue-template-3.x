@@ -52,11 +52,11 @@
 </template>
 
 <script setup lang="ts">
-import { tableLoadDataDefiner } from '@antd-templater/antd-template-lib3.x'
-import { tablePaginateDefiner } from '@antd-templater/antd-template-lib3.x'
-import { tableColumnsDefiner } from '@antd-templater/antd-template-lib3.x'
-import { tableStickyDefiner } from '@antd-templater/antd-template-lib3.x'
-import { tableScrollDefiner } from '@antd-templater/antd-template-lib3.x'
+import { tableLoadDataDefiner } from '@antd-templater/library-3.x'
+import { tablePaginateDefiner } from '@antd-templater/library-3.x'
+import { tableColumnsDefiner } from '@antd-templater/library-3.x'
+import { tableStickyDefiner } from '@antd-templater/library-3.x'
+import { tableScrollDefiner } from '@antd-templater/library-3.x'
 
 import Notification from 'ant-design-vue/es/notification'
 import { requestBuilder, takeTextByKey } from '@/utils/common'
