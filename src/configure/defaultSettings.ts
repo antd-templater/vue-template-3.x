@@ -39,7 +39,7 @@ export default {
   keepAlive: true,
   fixedHeader: true,
   fixedSidebar: true,
-  fixedHeaderTab: false,
+  fixedHeaderTab: true,
   hideMixHeaderTab: true
 }
 

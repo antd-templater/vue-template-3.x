@@ -2,9 +2,9 @@
   <section class="organize-drawer-container">
     <ADrawer
       width="400"
-      :zIndex="1010"
+      :open="open"
       :title="title"
-      :visible="visible"
+      :zIndex="1010"
       :forceRender="false"
       :maskClosable="true"
       :destroyOnClose="true"
@@ -31,8 +31,8 @@
         :loading="loading"
       />
 
-      <div class="drawer-footer">
-        <div class="footer-fixed">
+      <div class="drawer-body-footer">
+        <div class="drawer-body-footer-fixed">
           <AButton @click="doClose()">
             取消
           </AButton>
@@ -81,18 +81,19 @@ const form = ref(null as InstanceType<typeof OrganizeForm> | null)
 const title = ref('')
 const action = ref('')
 const record = ref({ key: '' } as Record<string, any>)
-const visible = ref(false)
 const readonly = ref(false)
 const disabled = ref(false)
 const loading = ref(false)
 const isAdd = ref(false)
+const open = ref(false)
 
 const doEdit = (data: any) => {
   title.value = '修改'
   action.value = 'update'
+  disabled.value = false
   readonly.value = false
-  visible.value = true
   isAdd.value = false
+  open.value = true
 
   record.value = Object.assign(
     {
@@ -111,9 +112,10 @@ const doEdit = (data: any) => {
 const doAdd = (data: any) => {
   title.value = '新增'
   action.value = 'insert'
+  disabled.value = false
   readonly.value = false
-  visible.value = true
   isAdd.value = true
+  open.value = true
 
   record.value = Object.assign(
     {
@@ -166,15 +168,15 @@ const doSubmit = () => {
 }
 
 const doClose = () => {
-  if (visible.value) {
+  if (open.value) {
     title.value = ''
     action.value = ''
     record.value = { key: '' }
     disabled.value = false
     readonly.value = false
     loading.value = false
-    visible.value = false
     isAdd.value = false
+    open.value = false
 
     form.value?.doClose()
     emits('closed')

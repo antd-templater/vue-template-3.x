@@ -37,6 +37,7 @@ export default defineStore('app', () => {
   const isMixMenu = computed(() => layoutMode.value === 'mix')
   const isTopMenu = computed(() => layoutMode.value === 'top')
   const isSideMenu = computed(() => layoutMode.value === 'side')
+  const isRealDark = computed(() => themeMode.value === 'realDark')
   const primaryColor = computed(() => themeColor.primaryColor)
   const warningColor = computed(() => themeColor.warningColor)
   const successColor = computed(() => themeColor.successColor)
@@ -44,7 +45,6 @@ export default defineStore('app', () => {
   const infoColor = computed(() => themeColor.infoColor)
 
   const toggleMobile = (value: boolean) => { isMobile.value = value }
-  const toggleDomTitle = (value: string) => { domTitle.value = value.trim() || defaultSettings.domTitle }
   const toggleLanguage = (value: string) => { language.value = value }
   const toggleMultiTab = (value: boolean) => { multiTab.value = value }
   const toggleKeepAlive = (value: boolean) => { keepAlive.value = value }
@@ -65,14 +65,32 @@ export default defineStore('app', () => {
   const toggleInfoColor = (value: string) => { themeColor.infoColor = value }
   const toggleThemeWeak = (value: boolean) => { themeWeak.value = value }
 
-  const toggleThemeMode = (value: ThemeMode) => {
+  const toggleThemeMode = (value?: ThemeMode) => {
     const isRealDark = value === 'realDark'
     const isEnabled = DarkReader.isEnabled()
 
     if (isRealDark && !isEnabled) DarkReader.enable({ brightness: 100, contrast: 90, sepia: 10 })
     if (!isRealDark && isEnabled) DarkReader.disable()
 
-    themeMode.value = value
+    themeMode.value = value ?? themeMode.value
+  }
+
+  const toggleDomTitle = (value?: string) => {
+    if (value) {
+      value = value ?? domTitle
+    }
+
+    if (value?.trim()) {
+      domTitle.value = value?.trim()
+    }
+
+    if (!value?.trim()) {
+      domTitle.value = defaultSettings.domTitle
+    }
+
+    if (typeof document !== 'undefined') {
+      document.title = domTitle.value
+    }
   }
 
   const layoutViewStyle = computed(() => {
@@ -94,11 +112,11 @@ export default defineStore('app', () => {
     }
 
     if (isMixMenu.value && !hideMixHeaderTab.value && fixedHeaderTab.value) {
-      height = 'calc(100vh - 88px)'
+      height = 'calc(100vh - 90px)'
     }
 
     if (isMixMenu.value && !hideMixHeaderTab.value) {
-      minHeight = 'calc(100vh - 88px)'
+      minHeight = 'calc(100vh - 90px)'
     }
 
     if (isMixMenu.value && hideMixHeaderTab.value) {
@@ -106,7 +124,7 @@ export default defineStore('app', () => {
     }
 
     if (!isMixMenu.value && fixedHeader.value && fixedHeaderTab.value) {
-      height = 'calc(100vh - 88px)'
+      height = 'calc(100vh - 90px)'
     }
 
     if (!isMixMenu.value && fixedHeader.value && !fixedHeaderTab.value) {
@@ -118,7 +136,7 @@ export default defineStore('app', () => {
     }
 
     if (!isMixMenu.value) {
-      minHeight = 'calc(100vh - 88px)'
+      minHeight = 'calc(100vh - 90px)'
     }
 
     if (isMobile.value) {
@@ -138,6 +156,14 @@ export default defineStore('app', () => {
     }
   })
 
+  const isWindowOS = computed(() => {
+    return (/windows/i).test(window.navigator.userAgent)
+  })
+
+  const isMacOS = computed(() => {
+    return (/Macintosh/i).test(window.navigator.userAgent)
+  })
+
   return {
     isFixed,
     isFluid,
@@ -152,6 +178,7 @@ export default defineStore('app', () => {
     isMixMenu,
     isTopMenu,
     isSideMenu,
+    isRealDark,
     layoutMode,
     iconPrefix,
     iconfontUrl,
@@ -159,7 +186,6 @@ export default defineStore('app', () => {
     fixedSidebar,
     fixedHeaderTab,
     hideMixHeaderTab,
-    layoutViewStyle,
     componentSize,
     contentWidth,
     primaryColor,
@@ -190,7 +216,11 @@ export default defineStore('app', () => {
     toggleSuccessColor,
     toggleErrorColor,
     toggleInfoColor,
-    toggleThemeWeak
+    toggleThemeWeak,
+
+    layoutViewStyle,
+    isWindowOS,
+    isMacOS
   }
 }, {
   persist: {

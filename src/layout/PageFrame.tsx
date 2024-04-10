@@ -2,7 +2,6 @@ import { extractLink } from '@/utils/router'
 import ASpin from 'ant-design-vue/es/spin'
 import useAppStore from '@/store/app'
 
-import 'ant-design-vue/es/spin/style/index.less'
 import '@/layout/PageFrame.less'
 
 export default defineComponent({
@@ -39,7 +38,7 @@ export default defineComponent({
           spinning={loading.value}
         >
           <iframe
-            ref={iframe}
+            ref={iframe as any}
             width='100%'
             height='100%'
             scrolling='yes'

@@ -1,9 +1,3 @@
-import 'ant-design-vue/es/dropdown/style/index.less'
-import 'ant-design-vue/es/button/style/index.less'
-import 'ant-design-vue/es/input/style/index.less'
-import 'ant-design-vue/es/form/style/index.less'
-import 'ant-design-vue/es/menu/style/index.less'
-
 import * as VueTypes from 'vue-types'
 import { SettingOutlined, LogoutOutlined } from '@ant-design/icons-vue'
 import { InputPassword as AInputPassword } from 'ant-design-vue/es/input'
@@ -14,6 +8,7 @@ import AMessage from 'ant-design-vue/es/message'
 import AButton from 'ant-design-vue/es/button'
 import AModal from 'ant-design-vue/es/modal'
 import useUserStore from '@/store/user'
+import useAppStore from '@/store/app'
 import * as authApi from '@/api/auth'
 
 export default defineComponent({
@@ -24,10 +19,18 @@ export default defineComponent({
     themeMode: VueTypes.string().def('light')
   },
   setup(props) {
+    const appStore = useAppStore()
     const userStore = useUserStore()
     const nickname = toRef(userStore, 'nickname')
     const avatar = toRef(userStore, 'avatar')
-    const visible = ref(false)
+    const open = ref(false)
+
+    const whiteTheme = computed(() => {
+      return (
+        (appStore.themeMode !== 'light' && appStore.layoutMode === 'top' && !appStore.isMobile) ||
+        (appStore.themeMode !== 'light' && appStore.layoutMode === 'mix')
+      )
+    })
 
     const ADropdownOverlay = () => {
       const doLogout = () => {
@@ -47,7 +50,7 @@ export default defineComponent({
             <AMenuItem key='1'>
               <a
                 href='javascript:void(0);'
-                onClick={() => { visible.value = true } }
+                onClick={() => { open.value = true } }
               >
                 <SettingOutlined style='margin-right: 10px'/>
                 <span>修改密码</span>
@@ -116,7 +119,7 @@ export default defineComponent({
           <>
             <AButton
               key='back'
-              onClick={ () => { visible.value = false } }
+              onClick={ () => { open.value = false } }
             >
               <span>取消</span>
             </AButton>
@@ -163,7 +166,7 @@ export default defineComponent({
           title='修改密码'
           bodyStyle={{ padding: '15px 30px 10px 30px' }}
           v-slots={{ footer: APasswordModalFooter }}
-          v-model={[visible.value, 'visible']}
+          v-model={[open.value, 'open']}
         >
           <AForm
             ref={formRef}
@@ -213,7 +216,7 @@ export default defineComponent({
         style={{
           height: '100%',
           padding: '0 16px 0 10px',
-          color: props.isTopMenu && props.themeMode !== 'light' ? '#ffffff' : 'inherit',
+          color: whiteTheme.value ? 'inherit' : '#ffffff',
           cursor: 'pointer'
         }}
       >
@@ -243,7 +246,7 @@ export default defineComponent({
               style={{
                 flex: '1 1 auto',
                 maxWidth: '120px',
-                color: props.themeMode === 'light' || (props.themeMode === 'dark' && props.isSideMenu) ? '#303133' : '#f9f9f9',
+                color: whiteTheme.value ? '#f9f9f9' : '#303133',
                 textOverflow: 'ellipsis',
                 whiteSpace: 'nowrap',
                 overflow: 'hidden'

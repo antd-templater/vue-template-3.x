@@ -61,7 +61,7 @@ worker.use(
 
     return promiser(
       HttpResponse.json(result),
-      300
+      0
     )
   })
 )

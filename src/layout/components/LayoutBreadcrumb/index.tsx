@@ -1,5 +1,3 @@
-import 'ant-design-vue/es/breadcrumb/style/index.less'
-
 import ABreadcrumb, { BreadcrumbItem as ABreadcrumbItem } from 'ant-design-vue/es/breadcrumb'
 import { HomeOutlined } from '@ant-design/icons-vue'
 import * as VueTypes from 'vue-types'

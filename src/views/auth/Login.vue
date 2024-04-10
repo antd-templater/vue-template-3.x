@@ -12,7 +12,7 @@
             <span>系统平台</span>
           </div>
           <div class="description">
-            <span>基于 Ant Design Vue v3.x 框架搭建</span>
+            <span>基于 Ant Design Vue v4.x 框架搭建</span>
           </div>
         </div>
 
@@ -34,7 +34,7 @@
               </AFormItem>
             </div>
 
-            <div style="padding: 1px;">
+            <div style="padding: 1px">
               <AFormItem v-bind="formUse.validateInfos.password">
                 <AInput
                   v-model:value="formModel.password"
@@ -75,7 +75,7 @@
 
     <div class="footer">
       <div class="copyright">
-        Copyright &copy; 2023 Antd-Templater
+        Copyright &copy; 2024 Antd-Templater
       </div>
     </div>
   </div>
@@ -97,19 +97,22 @@ const router = useRouter()
 const formModel = reactive({
   username: '',
   password: '',
-  passwordMd5: '',
   rememberMe: true
 })
 
 const formRules = reactive({
-  username: [{
-    required: true,
-    message: '请输入用户名'
-  }],
-  password: [{
-    required: true,
-    message: '请输入密码'
-  }]
+  username: [
+    {
+      required: true,
+      message: '请输入用户名'
+    }
+  ],
+  password: [
+    {
+      required: true,
+      message: '请输入密码'
+    }
+  ]
 })
 
 const formStates = reactive({
@@ -126,32 +129,39 @@ const doLogin = async() => {
   try {
     await formUse.validate()
 
-    loading.value = true
-    formModel.passwordMd5 = md5(formModel.password)
+    const success = (_: any) => {
+      Notification.success({
+        message: `系统提示`,
+        duration: 0.8,
+        description: `欢迎回来`,
+        onClose: () => {
+          loading.value = false
+          router.push({ path: '/' })
+        }
+      })
+    }
 
-    return userStore.login({ ...formModel, password: formModel.passwordMd5 })
-      .then(() => {
-        Notification.success({
+    const failure = (err: any) => {
+      if (err.message) {
+        Notification.error({
           message: `系统提示`,
           duration: 0.8,
-          description: `欢迎回来`,
+          description: err.message,
           onClose: () => {
             loading.value = false
-            router.push({ path: '/' })
           }
         })
-      })
-      .catch(err => {
-        if (err.message) {
-          Notification.error({
-            message: `系统提示`,
-            duration: 0.8,
-            description: err.message,
-            onClose: () => { loading.value = false }
-          })
-        }
-        setTimeout(() => { loading.value = false }, 500)
-      })
+      }
+      setTimeout(() => {
+        loading.value = false
+      }, 500)
+    }
+
+    loading.value = true
+
+    return userStore.login({ ...formModel, password: md5(formModel.password) })
+      .then(success)
+      .catch(failure)
   } catch {}
 }
 </script>
@@ -165,13 +175,13 @@ const doLogin = async() => {
   justify-content: center;
   background: #f0f2f5 url(@/assets/login/background.svg);
 
-  &>.main {
+  & > .main {
     width: 400px;
     height: 100%;
     flex: 0 0 auto;
     position: relative;
 
-    &>.main-container {
+    & > .main-container {
       height: 450px;
       margin: auto 0;
       overflow: hidden;
@@ -181,19 +191,19 @@ const doLogin = async() => {
       right: 45px;
       bottom: 90px;
 
-      &>.main-header {
-        width: calc(100% - 72px);
+      & > .main-header {
+        width: calc(100% - 64px);
         height: auto;
         margin: 0 auto 48px;
 
-        &>.title {
+        & > .title {
           font-size: 33px;
           color: rgba(0, 0, 0, 0.85);
           text-align: center;
           font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
           font-weight: 600;
 
-          &>.logo {
+          & > .logo {
             height: 44px;
             vertical-align: top;
             margin-right: 16px;
@@ -201,7 +211,7 @@ const doLogin = async() => {
           }
         }
 
-        &>.description {
+        & > .description {
           font-size: 15px;
           color: rgba(0, 0, 0, 0.45);
           text-align: center;
@@ -209,7 +219,7 @@ const doLogin = async() => {
         }
       }
 
-      &>.main-content {
+      & > .main-content {
         button.login-button {
           padding: 0 15px;
           width: calc(100% - 6px);
@@ -219,7 +229,7 @@ const doLogin = async() => {
     }
   }
 
-  &>.footer {
+  & > .footer {
     width: 100%;
     padding: 0 16px;
     margin: 48px 0 24px;

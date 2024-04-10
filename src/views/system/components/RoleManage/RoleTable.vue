@@ -53,18 +53,10 @@
         <template v-if="column.key === 'action'">
           <a
             href="javascript: void(0)"
-            style="display: inline-block; margin: 0 7px; font-weight: 500;"
+            style="display: inline-block; margin: 0 7px; font-weight: 500; color: var(--ant-primary-color);"
             @click.stop="doResourceOpen(record)"
           >
             资源配置
-          </a>
-
-          <a
-            href="javascript: void(0)"
-            style="display: inline-block; margin: 0 7px; font-weight: 500;"
-            @click="doTableEdit(record)"
-          >
-            修改
           </a>
         </template>
       </template>
@@ -121,7 +113,6 @@ const presetOptions = ref({
 
 })
 
-const emits = defineEmits<Emits>()
 const table = ref(null as InstanceType<STable> | null)
 const roleResource = ref(null as InstanceType<typeof RoleResource> | null)
 const cellState = ref(false)
@@ -248,10 +239,6 @@ const doTableModify = (record: object) => {
 
     doTableRefresh()
   })
-}
-
-const doTableEdit = (record: object) => {
-  emits('editRecord', record)
 }
 
 const doTableRefresh = () => {

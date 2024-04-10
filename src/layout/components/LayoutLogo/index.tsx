@@ -18,9 +18,10 @@ export default defineComponent({
   setup(props) {
     const { full, title, collapsed, isSideMenu } = toRefs(props)
     const logoWidth = computed(() => isSideMenu.value && collapsed.value ? 48 : 192)
+    const darkTheme = computed(() => props.isMobile ? (props.layoutMode === 'mix' ? props.themeMode === 'realDark' : props.themeMode !== 'light') : props.themeMode !== 'light')
     const logoShowUrl = computed(() => isSideMenu.value && collapsed.value ? logoShrinkUrl.value : logoNormalUrl.value)
-    const logoShrinkUrl = computed(() => (!props.isMobile || props.layoutMode !== 'mix') && props.themeMode !== 'light' ? logoShrinkDart : logoShrinkLight)
-    const logoNormalUrl = computed(() => (!props.isMobile || props.layoutMode !== 'mix') && props.themeMode !== 'light' ? logoDark : logoLight)
+    const logoShrinkUrl = computed(() => darkTheme.value ? logoShrinkDart : logoShrinkLight)
+    const logoNormalUrl = computed(() => darkTheme.value ? logoDark : logoLight)
 
     const LogoContent = () => {
       return (
@@ -58,13 +59,7 @@ export default defineComponent({
         height: '48px',
         fontSize: '18px',
         lineHeight: '48px',
-        color: props.themeMode !== 'light' ? '#ffffff' : 'var(--ant-primary-color)'
-      }
-
-      if (props.isMobile && props.layoutMode === 'mix') {
-        Object.assign(titleStyle, {
-          color: 'var(--ant-primary-color)'
-        })
+        color: darkTheme.value ? '#ffffff' : 'var(--ant-primary-color)'
       }
 
       return (

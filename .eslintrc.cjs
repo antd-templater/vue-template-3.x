@@ -147,8 +147,9 @@ module.exports = {
     'no-unreachable': 'error',
     'no-unsafe-finally': 'error',
     'no-unused-vars': ['error', {
-      vars: 'all',
-      args: 'none'
+      ignoreRestSiblings: true,
+      args: 'none',
+      vars: 'all'
     }],
     'no-useless-call': 'error',
     'no-useless-computed-key': 'error',

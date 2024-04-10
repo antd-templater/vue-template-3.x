@@ -1,7 +1,4 @@
 import './index.less'
-import 'ant-design-vue/es/tabs/style/index.less'
-import 'ant-design-vue/es/menu/style/index.less'
-import 'ant-design-vue/es/dropdown/style/index.less'
 
 import ATabs, { TabPane as ATabPane } from 'ant-design-vue/es/tabs'
 import AMenu, { MenuItem as AMenuItem } from 'ant-design-vue/es/menu'
@@ -130,7 +127,7 @@ export default defineComponent({
       }
 
       return (
-        <div class='layout-multi-tabs'>
+        <div class='layout-tabs-container'>
           <div
             style={{
               width: '100%',
@@ -145,6 +142,7 @@ export default defineComponent({
               hideAdd
               size='small'
               type='editable-card'
+              prefixCls='layout-tabs'
               v-model={[activeKey.value, 'activeKey']}
               onEdit={(key, action) => action === 'remove' ? closeThis(key) : null }
               tabBarStyle={{ margin: '0 0', padding: '6.5px 0 5px', background: '#ffffff' }}

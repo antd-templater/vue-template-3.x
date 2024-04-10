@@ -1,8 +1,7 @@
 import { KeepAlive } from 'vue'
 import { RouterView } from 'vue-router'
-import { SIcon, isIconType } from '@antd-templater/library-3.x'
+import { SProLayout, SProGlobalHeader, proClearMenuItem } from '@antd-templater/library-3.x'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
-import AProLayout, { clearMenuItem, GlobalHeader } from '@ant-design-vue/pro-layout'
 import defaultSettings from '@/configure/defaultSettings'
 import useAppStore from '@/store/app'
 import useTagStore from '@/store/tag'
@@ -22,13 +21,11 @@ export default defineComponent({
     const appStore = useAppStore()
     const tagStore = useTagStore()
 
+    const splitMenus = ref(true)
     const siderWidth = ref(192)
     const headerHeight = ref(48)
     const collapsedWidth = ref(48)
     const refLayoutHeader = ref(null as HTMLElement | null)
-
-    const splitMenus: Ref<boolean> = ref(true)
-    const collapsedButtonRender: Ref<false> = ref(false)
 
     const intersectionObserver = new window.IntersectionObserver(entries => {
       if (entries[0].intersectionRatio <= 0.5) {
@@ -45,24 +42,7 @@ export default defineComponent({
     const menuData = computed(() => {
       const dynamicRoutes = router.getRoutes()
       const menuDataRoutes = dynamicRoutes.find(route => route.path === '/')?.children || []
-
-      const lazyMenuIcon = (routes: any[]): any[] => {
-        if (Array.isArray(routes)) {
-          return routes.map(route => ({
-            id: route.id,
-            path: route.path,
-            name: route.name,
-            meta: {
-              icon: isIconType(route.meta?.icon) ? <SIcon type={route.meta.icon}/> : route.meta?.icon || '',
-              title: route.meta?.title || ''
-            },
-            children: lazyMenuIcon(route.children)
-          }))
-        }
-        return []
-      }
-
-      return lazyMenuIcon(clearMenuItem(menuDataRoutes))
+      return proClearMenuItem(menuDataRoutes)
     })
 
     const isAllowOpenKey = ref(!appStore.collapsed && !appStore.isTopMenu || appStore.isMobile)
@@ -86,21 +66,41 @@ export default defineComponent({
     const headerRender = (props: any, dom: any) => {
       appStore.toggleMobile(props.isMobile)
 
-      if (props.isMobile || appStore.isSideMenu) {
+      if (props.isMobile || appStore.isSideMenu || appStore.isMixMenu) {
+        const darkTheme = computed(() => {
+          return (
+            (!appStore.isMobile && appStore.themeMode !== 'light' && appStore.layoutMode !== 'side') ||
+            (appStore.isMobile && (appStore.themeMode === 'dark' && appStore.layoutMode === 'mix')) ||
+            (appStore.themeMode === 'realDark')
+          )
+        })
+
+        const h1Style: any = {
+          margin: '0 0',
+          padding: '0 15px',
+          fontSize: '24px',
+          color: darkTheme.value ? '#ffffff' : 'var(--ant-primary-color)',
+          cursor: 'pointer'
+        }
+
         return (
-          <GlobalHeader {...props}>
+          <SProGlobalHeader
+            {...props}
+            iconPrefix={appStore.iconPrefix}
+            iconfontUrl={appStore.iconfontUrl}
+          >
             <div
-              ref={refLayoutHeader}
-              style='display: flex; flex: 1 1 auto; alignItems: center; height: 48px; lineHeight: 48px;'
+              ref={refLayoutHeader as any}
+              style='display: flex; flex: 1 1 auto; align-items: center; height: 48px; lineHeight: 48px;'
             >
               <h1
-                style='fontSize: 24px; margin: 0 0; padding: 0 15px; color: var(--ant-primary-color); cursor: pointer;'
-                onClick={ () => { appStore.toggleCollapsed(!appStore.collapsed) }}
+                style={h1Style}
+                onClick={() => appStore.toggleCollapsed(!appStore.collapsed)}
               >
                 { props.collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/> }
               </h1>
             </div>
-          </GlobalHeader>
+          </SProGlobalHeader>
         )
       }
 
@@ -132,20 +132,6 @@ export default defineComponent({
     }
 
     const menuExtraRender = (props: any) => {
-      if (props.layout === 'mix' && props.isMobile) {
-        return (
-          <LayoutLogo
-            full={false}
-            title={defaultSettings.domTitle}
-            layoutMode={appStore.layoutMode}
-            collapsed={appStore.collapsed}
-            themeMode={appStore.themeMode}
-            isSideMenu={appStore.isSideMenu}
-            isMobile={appStore.isMobile}
-          />
-        )
-      }
-
       if (props.layout === 'mix' && !props.isMobile) {
         return <div style='width: 100%; height: 5px'/>
       }
@@ -192,10 +178,11 @@ export default defineComponent({
     })
 
     return () => (
-      <AProLayout
+      <SProLayout
         theme={appStore.themeMode}
         layout={appStore.layoutMode}
-        navTheme={appStore.themeMode}
+        iconPrefix={appStore.iconPrefix}
+        iconfontUrl={appStore.iconfontUrl}
         fixedHeader={appStore.fixedHeader}
         fixSiderbar={appStore.fixedSidebar}
         contentWidth={appStore.contentWidth}
@@ -208,7 +195,6 @@ export default defineComponent({
         headerHeight={headerHeight.value}
         contentStyle={contentStyle.value}
         collapsedWidth={collapsedWidth.value}
-        collapsedButtonRender={collapsedButtonRender.value}
 
         v-models={[[selectedKeys.value, 'selectedKeys'], [openKeys.value, 'openKeys']]}
         v-slots={{ headerRender, menuHeaderRender, menuExtraRender, rightContentRender }}
@@ -238,7 +224,7 @@ export default defineComponent({
           style={{
             width: '100%',
             maxWidth: appStore.isTopMenu && appStore.isFixed ? '1200px' : 'none',
-            height: (appStore.isMixMenu && !appStore.hideMixHeaderTab && appStore.fixedHeaderTab) || (!appStore.isMixMenu && appStore.fixedHeader && appStore.fixedHeaderTab) ? 'calc(100vh - 88px)' : 'auto',
+            height: (appStore.isMixMenu && !appStore.hideMixHeaderTab && appStore.fixedHeaderTab) || (!appStore.isMixMenu && appStore.fixedHeader && appStore.fixedHeaderTab) ? 'calc(100vh - 89px)' : 'auto',
             overflow: (appStore.isMixMenu && !appStore.hideMixHeaderTab && appStore.fixedHeaderTab) || (!appStore.isMixMenu && appStore.fixedHeader && appStore.fixedHeaderTab) ? 'auto' : 'visible',
             position: appStore.isMixMenu || appStore.fixedHeader ? 'absolute' : 'relative',
             margin: '0px auto',
@@ -262,7 +248,7 @@ export default defineComponent({
         <div class='page-router-view-settings'>
           <LayoutSettingDrawer/>
         </div>
-      </AProLayout>
+      </SProLayout>
     )
   }
 })

@@ -114,6 +114,12 @@ router.afterEach(to => {
       : null
   }
 
-  useAppStore().toggleDomTitle(domTitle)
+  const appStore = useAppStore()
+  const themeMode = appStore.themeMode
+  const toggleDomTitle = appStore.toggleDomTitle
+  const toggleThemeMode = appStore.toggleThemeMode
+
+  toggleThemeMode(themeMode)
+  toggleDomTitle(domTitle)
   NProgress.done()
 })

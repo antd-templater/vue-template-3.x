@@ -5,7 +5,7 @@
         <div class="flex-row-none">
           <AFormItem
             label="组织/部门"
-            :style="{ width: config.componentSize === 'large' ? '380px' : config.componentSize === 'middle' ? '330px' : '270px' }"
+            :style="{ width: componentSize === 'large' ? '385px' : componentSize === 'middle' ? '345px' : '312px' }"
           >
             <AInputSearch
               v-model:value="params.title"
@@ -49,7 +49,7 @@
       </div>
 
       <div
-        v-if="visible"
+        v-if="open"
         class="form-inline-more"
       >
         <div
@@ -102,7 +102,7 @@
 </template>
 
 <script setup lang="ts">
-import { defaultConfigProvider } from 'ant-design-vue/es/config-provider'
+import { useConfigContextInject } from 'ant-design-vue/es/config-provider/context'
 
 export interface Emits {
   (e: 'addRecord'): void;
@@ -114,14 +114,17 @@ defineOptions({
   inheritAttrs: false
 })
 
+const open = ref(false)
 const emits = defineEmits<Emits>()
+const config = useConfigContextInject()
 const params = ref({ title: '', activity: '' })
-const config = inject('configProvider', defaultConfigProvider)
-const visible = ref(false)
+const componentSize = computed(() => config.componentSize?.value ?? 'middle')
+const offsetBefore = computed(() => componentSize.value === 'large' ? '412px' : componentSize.value === 'middle' ? '368px' : '330px')
+const offsetAfter = computed(() => componentSize.value === 'large' ? '414px' : componentSize.value === 'middle' ? '370px' : '332px')
 
 const doAdd = () => { emits('addRecord') }
 const doQuery = () => { emits('queryTable', params.value) }
-const doFilter = () => { visible.value = !visible.value }
+const doFilter = () => { open.value = !open.value }
 
 const doReset = (query: boolean) => {
   params.value.title = ''
@@ -155,7 +158,7 @@ const doReset = (query: boolean) => {
       height: 0;
       position: absolute;
       top: -8px;
-      left: 352px;
+      left: v-bind('offsetBefore');
       border: solid 8px #e3e5f1;
       border-top: none;
       border-left-color: transparent;
@@ -168,7 +171,7 @@ const doReset = (query: boolean) => {
       height: 0;
       position: absolute;
       top: -6px;
-      left: 354px;
+      left: v-bind('offsetAfter');
       border: solid 6px #fafafd;
       border-top: none;
       border-left-color: transparent;

@@ -1,13 +1,14 @@
 <template>
   <section class="role-resource-drawer-container">
     <ADrawer
+      :open="open"
       :title="title"
+      :width="'100%'"
       :zIndex="1010"
-      :visible="visible"
       :maskClosable="true"
       :bodyStyle="{ height: 'calc(100% - 55px)', padding: '15px' }"
-      :contentWrapperStyle="{ width: '100% !important', 'max-width': '1180px' }"
-      @afterVisibleChange="() => visible && queryMenus()"
+      :contentWrapperStyle="{ 'max-width': '1180px' }"
+      @afterOpenChange="() => open && queryMenus()"
       @close="doClose()"
     >
       <div
@@ -132,8 +133,8 @@
       </div>
 
       <!-- 按钮组 -->
-      <div class="drawer-footer">
-        <div class="footer-fixed">
+      <div class="drawer-body-footer">
+        <div class="drawer-body-footer-fixed">
           <AButton @click="doClose()">
             取消
           </AButton>
@@ -171,10 +172,10 @@ defineOptions({
 const emits = defineEmits<Emits>()
 
 // 弹窗
+const open = ref(false)
 const title = ref('')
 const action = ref('')
 const record = ref({} as Record<string, any>)
-const visible = ref(false)
 const loadings = ref({
   tree: false,
   button: false,
@@ -349,10 +350,10 @@ const doButtonSort = () => {
 }
 
 const doOpen = (source: Record<string, any>) => {
+  open.value = true
   title.value = '资源配置'
   action.value = 'update'
   record.value = source
-  visible.value = true
   loadings.value = {
     tree: false,
     button: false,
@@ -361,11 +362,11 @@ const doOpen = (source: Record<string, any>) => {
 }
 
 const doClose = () => {
-  if (visible.value) {
+  if (open.value) {
     // 弹窗
+    open.value = false
     title.value = ''
     action.value = ''
-    visible.value = false
     record.value = {}
     loadings.value = {
       tree: false,

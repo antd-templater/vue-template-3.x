@@ -26,7 +26,7 @@ worker.use(
 
     return promiser(
       HttpResponse.json(result),
-      100
+      0
     )
   })
 )

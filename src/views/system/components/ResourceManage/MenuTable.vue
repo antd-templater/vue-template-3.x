@@ -14,6 +14,7 @@
         v-model:paginate="paginate"
         style="width: 100%; height: 100%; overflow: auto;"
         :columnPresetResizable="true"
+        :tableLayout="'auto'"
         :loadData="loadData"
         :bodyMinRows="true"
         :immediate="false"

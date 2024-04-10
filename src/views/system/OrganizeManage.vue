@@ -205,7 +205,7 @@ onMounted(() => {
     }
 
     .section-tree-collapse {
-      font-size: 18px;
+      font-size: 14px; // because default is scale(1.143)
       margin: -30px 0 0 12px;
       border: none;
       transform: translate(-50%, -50%);

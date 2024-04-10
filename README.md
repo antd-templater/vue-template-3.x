@@ -1,8 +1,8 @@
 ## Todo List
 
-- Provide Documents And Demo - (Documents: 0%, Demo:100%)
-- Provide Custom Components library - 100% (note: antd-template-lib3.x)
-- Provide Development Standard - pending (note: antd-standard-vue3.x)
+- Provide Documents And Demo - (note: Documents: 0%, Demo: 100%)
+- Provide Custom Components library - 100% (note: library-3.x)
+- Provide Development Standard - 100% (note: standard-3.x)
 - Preset Buiness View - 100%
 - Preset Permission - 100%
 - Preset Configure - 100%

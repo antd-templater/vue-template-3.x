@@ -1,12 +1,4 @@
 import './index.less'
-import 'ant-design-vue/es/tooltip/style/index.less'
-import 'ant-design-vue/es/divider/style/index.less'
-import 'ant-design-vue/es/select/style/index.less'
-import 'ant-design-vue/es/drawer/style/index.less'
-import 'ant-design-vue/es/switch/style/index.less'
-import 'ant-design-vue/es/alert/style/index.less'
-import 'ant-design-vue/es/list/style/index.less'
-import 'ant-design-vue/es/tag/style/index.less'
 
 import { Teleport } from 'vue'
 import { SettingOutlined, CloseOutlined, CheckOutlined } from '@ant-design/icons-vue'
@@ -26,7 +18,7 @@ import useAppStore from '@/store/app'
 export default defineComponent({
   name: 'LayoutSettingDrawer',
   setup() {
-    const visible = ref(false)
+    const open = ref(false)
     const appStore = useAppStore()
     const isRender = !presetEnvironment.AppHiddenSettings
 
@@ -364,7 +356,7 @@ export default defineComponent({
 
     const ANoticeInfo = (props: any) => {
       const info = console.info
-      const lookSetting = () => info(`{\n  themeColor: {\n    primaryColor: '${appStore.primaryColor}',\n    warningColor: '${appStore.warningColor}',\n    successColor: '${appStore.successColor}',\n    errorColor: '${appStore.errorColor}',\n    infoColor: '${appStore.infoColor}'\n  },\n  themeWeak: ${appStore.themeWeak},\n  themeMode: '${appStore.themeMode}',\n  layoutMode: '${appStore.layoutMode}',\n  contentWidth: '${appStore.contentWidth}',\n  componentSize: '${appStore.componentSize}',\n  domTitle: '${defaultSettings.domTitle}',\n  language: '${appStore.language}',\n  multiTab: ${appStore.multiTab},\n  keepAlive: ${appStore.keepAlive},\n  fixedHeader: ${appStore.fixedHeader},\n  fixedSidebar: ${appStore.fixedSidebar},\n  fixedHeaderTab: ${appStore.fixedHeaderTab},\n  hideMixHeaderTab: ${appStore.hideMixHeaderTab}\n}`)
+      const lookSetting = () => info(`{\n  themeColor: {\n    primaryColor: '${appStore.primaryColor}',\n    warningColor: '${appStore.warningColor}',\n    successColor: '${appStore.successColor}',\n    errorColor: '${appStore.errorColor}',\n    infoColor: '${appStore.infoColor}'\n  },\n  themeWeak: ${appStore.themeWeak},\n  themeMode: '${appStore.themeMode}',\n  layoutMode: '${appStore.layoutMode}',\n  iconPrefix: '${appStore.iconPrefix}',\n  iconfontUrl: '${appStore.iconfontUrl}',\n  contentWidth: '${appStore.contentWidth}',\n  componentSize: '${appStore.componentSize}',\n  domTitle: '${defaultSettings.domTitle}',\n  language: '${appStore.language}',\n  multiTab: ${appStore.multiTab},\n  keepAlive: ${appStore.keepAlive},\n  fixedHeader: ${appStore.fixedHeader},\n  fixedSidebar: ${appStore.fixedSidebar},\n  fixedHeaderTab: ${appStore.fixedHeaderTab},\n  hideMixHeaderTab: ${appStore.hideMixHeaderTab}\n}`)
 
       return (
         <div { ...props } onClick={() => lookSetting() }>
@@ -375,7 +367,7 @@ export default defineComponent({
               <>
                 <span>配置栏应用于开发环境中预览、调试</span>
                 <br/>
-                <span>点击查看配置 - 游览器console界面</span>
+                <span>点击此处 - 可在游览器Console界面中查看目前配置选项</span>
               </>
             }
           />
@@ -384,7 +376,7 @@ export default defineComponent({
     }
 
     const ADrawerButton = () => {
-      return !visible.value
+      return !open.value
         ? <SettingOutlined style='color: #ffffff;'/>
         : <CloseOutlined style='color: #ffffff;'/>
     }
@@ -393,17 +385,19 @@ export default defineComponent({
       return () => (
         <>
           <ADrawer
-            class='layout-setting-drawer'
             width='300'
-            placement='right'
+            open={open.value}
             closable={true}
             forceRender={true}
-            visible={visible.value}
-            bodyStyle={{ padding: '0 20px 10px' }}
-            headerStyle={{ padding: '16px 0', direction: 'rtl' }}
-            onClose={() => { visible.value = false }}
+            placement={'right'}
+            prefixCls='layout-setting-drawer'
+            contentWrapperStyle={{ display: 'block', transform: open.value ? 'translateX(0)' : 'translateX(100%)' }}
+            headerStyle={{ padding: '16px 0', direction: 'rtl', border: 'none' }}
+            rootStyle={{ width: open.value ? '100%' : 0 }}
+            bodyStyle={{ padding: '0 0 10px' }}
+            onClose={() => { open.value = false }}
           >
-            <div class='layout-setting-drawer-content'>
+            <div class='layout-setting-drawer-body-content'>
               <ALayoutMode style='margin-bottom: 22px;'/>
               <ADivider/>
               <AThemeComponnets/>
@@ -418,10 +412,10 @@ export default defineComponent({
             </div>
           </ADrawer>
 
-          <Teleport to='.layout-setting-drawer .ant-drawer-content-wrapper'>
+          <Teleport to='.layout-setting-drawer-content-wrapper'>
             <div
-              class='layout-setting-drawer-button'
-              onClick={() => { visible.value = !visible.value }}
+              class='layout-setting-drawer-body-button'
+              onClick={() => { open.value = !open.value }}
             >
               <ADrawerButton/>
             </div>

@@ -139,7 +139,7 @@ defineExpose({
 <style lang="less" scoped>
 :deep(.s-form-container) {
   .ant-form.ant-form-horizontal {
-    .ant-form-item > .ant-form-item-label {
+    .ant-form-item .ant-form-item-label {
       width: 80px;
       margin-right: 5px;
     }

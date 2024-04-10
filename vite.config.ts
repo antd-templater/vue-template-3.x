@@ -28,7 +28,7 @@ export default defineConfig(({ mode }) => {
       devSourcemap: true,
       preprocessorOptions: {
         less: {
-          modifyVars: { 'root-entry-name': 'variable' },
+          modifyVars: {},
           javascriptEnabled: true
         }
       }
@@ -110,16 +110,21 @@ export default defineConfig(({ mode }) => {
           entryFileNames: 'static/js/[name]-[hash].js',
           assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
           manualChunks(id) {
-            if (/\/node_modules\/@ant-design\/icons-svg\/?/.test(id)) return 'antd-design-icons-svg'
-            if (/\/node_modules\/@ant-design\/icons-vue\/?/.test(id)) return 'antd-design-icons-vue'
-            if (/\/node_modules\/@ant-design\/icons-(\w+)\/?/.test(id)) return 'antd-design-icons-helper'
-            if (/\/node_modules\/(@antd-templater\/library-3.x)\//.test(id)) return 'antd-template-library'
-            if (/\/node_modules\/(@ant-design(-\w+)?|ant-design-vue|nprogress)\//.test(id)) return 'antd-design-all'
-            if (/\/node_modules\/(cookie|vue-ls|pinia(-plugin-\w+)?)\//.test(id)) return 'storage-all'
-            if (/\/node_modules\/(@?vue|vuex|vue-router)\//.test(id)) return 'vue-all'
-            if (/\/node_modules\/(@mswjs|msw|graphql)\//.test(id)) return 'msw-all'
-            if (/\/node_modules\/(moment|dayjs)\/.+/.test(id)) return 'date-all'
-            if (/\/node_modules\/(axios|qs)\/.+/.test(id)) return 'fetch-all'
+            if (/\/node_modules\/(@ant-design\/colors)(\/|$)/.test(id)) return 'ant-design-colors'
+            if (/\/node_modules\/(@ant-design\/icons-svg)(\/|$)/.test(id)) return 'ant-design-icons-svg'
+            if (/\/node_modules\/(@ant-design\/icons-vue)(\/|$)/.test(id)) return 'ant-design-icons-vue'
+            if (/\/node_modules\/(@ant-design\/icons-(\w+))(\/|$)/.test(id)) return 'ant-design-icons-helper'
+            if (/\/node_modules\/(@antd-templater\/library-3.x)(\/|$)/.test(id)) return 'antd-template-library'
+            if (/\/node_modules\/(@?ant-design-vue(\/.+)?\/(locale\/\w+_))/.test(id)) return 'ant-design-localer'
+            if (/\/node_modules\/(@?cookie|@?vue-ls|@?pinia(-plugin-\w+)?)(\/|$)/.test(id)) return 'storage-all'
+            if (/\/node_modules\/(@?vue|@?vuex|@?vue-router)(\/|$)/.test(id)) return 'vue-all'
+            if (/\/node_modules\/(@?mswjs|@?msw|@?graphql)(\/|$)/.test(id)) return 'msw-all'
+            if (/\/node_modules\/(@?ant-design-vue)(\/|$)/.test(id)) return 'antdv-all'
+            if (/\/node_modules\/(axios|qs)(-\w+)?(\/|$)/.test(id)) return 'fetch-all'
+            if (/\/node_modules\/(lodash(-\w+)?)(\/|$)/.test(id)) return 'lodash-all'
+            if (/\/node_modules\/(jquery(-\w+)?)(\/|$)/.test(id)) return 'jquery-all'
+            if (/\/node_modules\/(moment|dayjs)(\/|$)/.test(id)) return 'date-all'
+            if (/\/node_modules\/(darkreader)(\/|$)/.test(id)) return 'darker-all'
             if (/\/node_modules\//.test(id)) return 'vendors-all'
 
             if (/\/src\/components\/.+/.test(id)) return 'components-all'
