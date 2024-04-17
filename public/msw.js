@@ -92,6 +92,7 @@ self.addEventListener('message', async function (event) {
 self.addEventListener('fetch', async function (event) {
   const request = event.request
   const clientId = event.clientId
+  const _request = request.clone()
   const requestId = crypto.randomUUID()
   const requester = request.headers.get('x-msw-requester')
 
@@ -108,14 +109,13 @@ self.addEventListener('fetch', async function (event) {
   }
 
   const passthrough = async () => {
-    const requestClone = request.clone()
-    const headers = Object.fromEntries(requestClone.headers.entries())
-    const request = fetch(requestClone, { headers })
+    const entries = _request.headers.entries()
+    const headers = Object.fromEntries(entries)
 
     delete headers['x-msw-requester']
     delete headers['x-msw-intention']
 
-    return request
+    return fetch(_request, { headers })
   }
 
   const responser = async () => {

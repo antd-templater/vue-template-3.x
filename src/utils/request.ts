@@ -14,10 +14,10 @@ type AxiosAssertResult<R, T> = R extends AxiosResponseResult ? Promise<AxiosResp
 /**
  * 创建 Axios 实例
  */
-const createAxiosInstance = (config: AxiosDefaultConfig) => {
+const createAxiosInstance = <Result = AxiosResponseResult>(config: AxiosDefaultConfig) => {
   const axios = Axios.create(config)
   const proxy = createAxiosInterceptor(axios)
-  return <T = any, D = any, R = AxiosResponseResult>(config: AxiosRequestConfig<D>) => proxy(config) as AxiosAssertResult<R, T>
+  return <T = any, D = any, R = Result>(config: AxiosRequestConfig<D>) => proxy(config) as AxiosAssertResult<R, T>
 }
 
 /**
@@ -46,8 +46,9 @@ const createAxiosInterceptor = (axios: AxiosInstance) => {
   )
   axios.interceptors.response.use(
     response => {
-      const status = response.status
-      const config = response.config
+      const config = response.config as any
+      const status = response.status as number
+      const messager = config.messager as boolean
 
       if (status < 200 || status > 300) {
         return Promise.reject(response)
@@ -57,7 +58,11 @@ const createAxiosInterceptor = (axios: AxiosInstance) => {
         return response
       }
 
-      if (['403', '401', 403, 401].includes(response.data?.code)) {
+      if (!messager && ['403', '401', 403, 401].includes(response.data?.code)) {
+        return Promise.reject(response)
+      }
+
+      if (messager && response.data?.code !== '0000') {
         return Promise.reject(response)
       }
 
@@ -82,7 +87,7 @@ const createAxiosInterceptor = (axios: AxiosInstance) => {
       } catch (e) {}
 
       if (error.toString().indexOf('timeout') > -1) {
-        messager && Notification.error({
+        Notification.error({
           duration: 1.5,
           message: '系统消息',
           description: '请求超时'
@@ -91,7 +96,7 @@ const createAxiosInterceptor = (axios: AxiosInstance) => {
       }
 
       if (status === 403 || status === '403') {
-        messager && Notification.error({
+        Notification.error({
           duration: 1.5,
           message: '系统消息',
           description: message || '暂无权限'
@@ -101,7 +106,7 @@ const createAxiosInterceptor = (axios: AxiosInstance) => {
       }
 
       if (status === 401 || status === '401') {
-        messager && Notification.error({
+        Notification.error({
           duration: 1.5,
           message: '系统消息',
           description: message || (token ? 'token已过期' : '暂无权限')

@@ -11,7 +11,7 @@ worker.use(
     const params = await rester.params(req)
     const printer = await rester.printer(tag)
 
-    const result = {
+    const resource = {
       code: '0000',
       message: null,
       result: [] as any
@@ -19,14 +19,14 @@ worker.use(
 
     for (const item of body.params) {
       if (item.roleId === '27442970747734159' && item.menuId === '27245863256459422') {
-        result.result.push({
+        resource.result.push({
           id: '27245863256459422',
           actionsOptions: [],
           selected: []
         })
       }
       if (item.roleId === '27442970747734159' && item.menuId === '1127282136000102507') {
-        result.result.push({
+        resource.result.push({
           id: '1127282136000102507',
           actionsOptions: [
             { label: '新增', value: '1127282136000102508' },
@@ -43,7 +43,7 @@ worker.use(
         })
       }
       if (item.roleId === '27442970747734159' && item.menuId === '27245863256459445') {
-        result.result.push({
+        resource.result.push({
           id: '27245863256459445',
           actionsOptions: [
             { label: '新增', value: '27245863256459447' },
@@ -53,7 +53,7 @@ worker.use(
         })
       }
       if (item.roleId === '27442970747734159' && item.menuId === '27245863256459495') {
-        result.result.push({
+        resource.result.push({
           id: '27245863256459495',
           actionsOptions: [
             { label: '新增', value: '27245863256459496' },
@@ -70,7 +70,7 @@ worker.use(
         })
       }
       if (item.roleId === '27442970747734159' && item.menuId === '1127282136000102579') {
-        result.result.push({
+        resource.result.push({
           id: '1127282136000102579',
           actionsOptions: [
             { label: '新增', value: '1127282136000102580' },
@@ -92,11 +92,11 @@ worker.use(
       log('[body] - ', body)
       log('[query] - ', query)
       log('[params] - ', params)
-      log('[result] - ', result)
+      log('[resource] - ', resource)
     })
 
     return promiser(
-      HttpResponse.json(result),
+      HttpResponse.json(resource),
       0
     )
   })

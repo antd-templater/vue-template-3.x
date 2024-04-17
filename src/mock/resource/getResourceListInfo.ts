@@ -11,11 +11,11 @@ worker.use(
     const params = await rester.params(req)
     const printer = await rester.printer(tag)
 
-    let result:any = null
+    let resource:any = null
 
     switch (body.params.parentId) {
       case '27245863256459422': {
-        result = {
+        resource = {
           code: '0000',
           message: null,
           result: {
@@ -94,7 +94,7 @@ worker.use(
         break
       }
       case '1127282136000102507': {
-        result = {
+        resource = {
           code: '0000',
           message: null,
           result: {
@@ -149,7 +149,7 @@ worker.use(
         break
       }
       case '27245863256459445': {
-        result = {
+        resource = {
           code: '0000',
           message: null,
           result: {
@@ -184,7 +184,7 @@ worker.use(
         break
       }
       case '27245863256459495': {
-        result = {
+        resource = {
           code: '0000',
           message: null,
           result: {
@@ -239,7 +239,7 @@ worker.use(
         break
       }
       case '1127282136000102579': {
-        result = {
+        resource = {
           code: '0000',
           message: null,
           result: {
@@ -294,7 +294,7 @@ worker.use(
         break
       }
       default: {
-        result = {
+        resource = {
           code: '0000',
           message: null,
           result: {
@@ -312,11 +312,11 @@ worker.use(
       log('[body] - ', body)
       log('[query] - ', query)
       log('[params] - ', params)
-      log('[result] - ', result)
+      log('[resource] - ', resource)
     })
 
     return promiser(
-      HttpResponse.json(result),
+      HttpResponse.json(resource),
       0
     )
   })

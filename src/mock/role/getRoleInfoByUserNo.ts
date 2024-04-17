@@ -11,7 +11,7 @@ worker.use(
     const params = await rester.params(req)
     const printer = await rester.printer(tag)
 
-    const result = {
+    const resource = {
       code: '0000',
       message: null,
       result: [
@@ -29,11 +29,11 @@ worker.use(
       log('[body] - ', body)
       log('[query] - ', query)
       log('[params] - ', params)
-      log('[result] - ', result)
+      log('[resource] - ', resource)
     })
 
     return promiser(
-      HttpResponse.json(result),
+      HttpResponse.json(resource),
       0
     )
   })

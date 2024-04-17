@@ -11,10 +11,10 @@ worker.use(
     const params = await rester.params(req)
     const printer = await rester.printer(tag)
 
-    let result: any = null
+    let resource: any = null
 
     if (body.username !== 'admin' || body.password !== '25d55ad283aa400af464c76d713c07ad') {
-      result = {
+      resource = {
         code: '9999',
         message: '用户名密码错误',
         result: null
@@ -22,7 +22,7 @@ worker.use(
     }
 
     if (body.username === 'admin' && body.password === '25d55ad283aa400af464c76d713c07ad') {
-      result = {
+      resource = {
         code: '0000',
         message: null,
         result: {
@@ -45,11 +45,11 @@ worker.use(
       log('[body] - ', body)
       log('[query] - ', query)
       log('[params] - ', params)
-      log('[result] - ', result)
+      log('[resource] - ', resource)
     })
 
     return promiser(
-      HttpResponse.json(result),
+      HttpResponse.json(resource),
       0
     )
   })
