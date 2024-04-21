@@ -1,4 +1,8 @@
 import * as authApi from '@/api/auth'
+
+import PageView from '@/layout/PageView'
+import PageFrame from '@/layout/PageFrame'
+import RouteView from '@/layout/RouteView'
 import defaultRouter from '@/configure/defaultRouter'
 
 import type { GenerateDynamicComponent } from './generate-typing'
@@ -50,6 +54,18 @@ const treeToRoute: TreeToRoute = (trees, parent = {}, components = {}) => {
       hideInMenu,
       hideChildInMenu
     } = item.meta || {}
+
+    if (item.component === PageView) {
+      item.component = 'PageView'
+    }
+
+    if (item.component === PageFrame) {
+      item.component = 'PageFrame'
+    }
+
+    if (item.component === RouteView) {
+      item.component = 'RouteView'
+    }
 
     const parentAllowCache = parent.meta?.allowCache
     const isFrameView = item.component === 'PageFrame'
@@ -146,22 +162,22 @@ export const generateDynamicComponent: GenerateDynamicComponent = (parent = {}, 
   const currentPath = tempViewPath.replace(/^\/*([^/].*)/, '/$1')
   const importrMaps = import.meta.glob('@/views/**/*.vue')
 
-  // Component
+  // Component Finder
   if (String(item.component) !== item.component) {
     return item.component
   }
 
-  // Layout
+  // Layout Finder
   if (components[item.component]) {
     return components[item.component]
   }
 
-  // Views
+  // Views Finder
   if (components[currentPath]) {
     return components[currentPath]
   }
 
-  // Matching
+  // Auto Finder
   const viewSuffix = '.vue'
   const viewPrefix = `/src/views`
   const viewPartPath = currentPath.replace(/^\/+|\.vue$/gi, '')
@@ -186,7 +202,7 @@ export const generateDynamicRouter: GenerateDynamicRouter = (params, components,
     const rootRoute = defaultRouter.rootRoute
     const externalRoute = defaultRouter.externalRoute
     const notFoundRoutes = defaultRouter.notFoundRoutes
-    const children = JSON.parse(JSON.stringify(rootRoute.children)) as Menu[]
+    const children = Array.from(rootRoute.children) as Menu[]
 
     // 生成树型数组
     listToTree(result, children, { id: '0' })

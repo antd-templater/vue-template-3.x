@@ -1,18 +1,20 @@
 import { Route } from '@/router/generate-typing'
 
 export const extractLink = (route: Route): string => {
-  let link
+  let link = ''
 
   const path = route.path
-  const meta = route.meta || {}
-  const query = route.query || {}
-  const params = route.params || {}
+  const meta = { ...route.meta }
+  const query = { ...route.query }
+  const params = { ...route.params }
   const tabRegex = /^\/external\/link(\/.*)?/
-  const tablink = '/external/link'
+  const tabLink = '/external/link'
 
-  !tabRegex.test(path)
-    ? (link = meta.external)
-    : (link = query.from)
+  link = !tabRegex.test(path) ? meta.external : query.from
+
+  if (link === query.from) {
+    delete query.from
+  }
 
   if (link) {
     if (/^file:\/\/\/|^https?:\/\//.test(link)) {
@@ -43,7 +45,7 @@ export const extractLink = (route: Route): string => {
     const urlParams = new URLSearchParams(urlSearch)
     let urlPathname = urlLink.pathname.replace(/\/+$/, '')
 
-    if (path !== tablink) {
+    if (path !== tabLink) {
       for (const key in query) {
         if (query[key] !== undefined && query[key] !== null) {
           urlParams.set(key, query[key])
