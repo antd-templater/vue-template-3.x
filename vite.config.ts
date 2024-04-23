@@ -127,10 +127,9 @@ export default defineConfig(({ mode }) => {
             if (/\/node_modules\/(darkreader)(\/|$)/.test(id)) return 'darker-all'
             if (/\/node_modules\//.test(id)) return 'vendors-all'
 
-            if (/\/src\/components\/.+/.test(id)) return 'components-all'
-            if (/\/src\/layout\/.+/.test(id)) return 'layout-all'
-            if (/\/src\/views\/.+/.test(id)) return 'views-all'
-            if (/\/src\/mock\/.+/.test(id)) return 'mock-all'
+            if (/\/src\/assets\/.+/.test(id)) return 'assets-all'
+            if (/\/src\/test\/.+/.test(id)) return 'temporary'
+            if (/\/src\/mock\/.+/.test(id)) return 'temporary'
             if (/\/src\/.+\/.+/.test(id)) return 'bootstrap'
             if (/\/src\//.test(id)) return 'main'
           }
