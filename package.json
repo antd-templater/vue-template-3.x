@@ -23,8 +23,8 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
-    "@antd-templater/library-3.x": "^4.0.0",
-    "ant-design-vue": "^4.1.2",
+    "@antd-templater/library-3.x": "^4.0.2",
+    "ant-design-vue": "^4.2.0",
     "axios": "^1.6.8",
     "dayjs": "^1.11.10",
     "js-simpler": "^1.5.0",
@@ -34,13 +34,13 @@
     "pinia": "^2.1.7",
     "pinia-plugin-persist": "^1.0.0",
     "qs": "^6.12.1",
-    "vue": "^3.4.23",
+    "vue": "^3.4.24",
     "vue-ls": "^4.2.0",
     "vue-router": "^4.3.2",
     "vue-types": "^5.1.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.2.2",
+    "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@release-it/conventional-changelog": "^8.0.1",
     "@types/md5": "^2.3.5",
@@ -48,8 +48,8 @@
     "@types/nprogress": "^0.2.3",
     "@types/qs": "^6.9.15",
     "@types/vue-ls": "^3.2.7",
-    "@typescript-eslint/eslint-plugin": "^7.7.0",
-    "@typescript-eslint/parser": "^7.7.0",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
     "@vitejs/plugin-legacy": "^5.3.2",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vitejs/plugin-vue-jsx": "^3.1.0",
@@ -66,8 +66,8 @@
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
     "release-it": "^17.2.0",
-    "rollup": "^4.16.0",
-    "terser": "^5.30.3",
+    "rollup": "^4.16.4",
+    "terser": "^5.30.4",
     "typescript": "^5.4.5",
     "unplugin-auto-import": "^0.17.5",
     "unplugin-vue-components": "^0.26.0",
@@ -75,7 +75,7 @@
     "vite-plugin-compression": "^0.5.1",
     "vitest": "^1.5.0",
     "volar-service-prettyhtml": "^0.0.34",
-    "vue-tsc": "^2.0.13"
+    "vue-tsc": "^2.0.14"
   },
   "config": {
     "cz-message-helper": {

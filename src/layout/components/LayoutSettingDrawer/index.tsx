@@ -401,8 +401,8 @@ export default defineComponent({
               <ALayoutMode style='margin-bottom: 22px;'/>
               <ADivider/>
               <AThemeComponnets/>
-              <AThemeMode/>
-              <AThemeColors style='margin-bottom: 22px;'/>
+              <AThemeMode style='margin: 22px 0 0;'/>
+              <AThemeColors style='margin: 28px 0 20px;'/>
               <ADivider/>
               <ANavigateSettting style='margin-bottom: 22px;'/>
               <ADivider/>
