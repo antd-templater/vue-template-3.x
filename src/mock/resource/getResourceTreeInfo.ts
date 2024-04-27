@@ -36,7 +36,6 @@ worker.use(
               activity: 'Y',
               children: [
                 {
-
                   sort: 1000100,
                   path: '/system/OrganizeManage',
                   icon: 'CodepenOutlined',

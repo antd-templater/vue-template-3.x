@@ -1,7 +1,7 @@
 import { promiser, resolver, worker, rester } from '@/mock/setup'
 import { http, HttpResponse } from 'msw'
 
-const tag = '获取用户列表'
+const tag = '分页查询用户列表'
 const url = resolver('/user/getUserInfoList')
 
 worker.use(
@@ -17,7 +17,7 @@ worker.use(
       result: {
         data: [
           {
-            userNo: '182588xxx88',
+            userNo: 'admin',
             userName: 'admin',
             password: '12345678',
             mobilePhone: '182588xxx88',
@@ -31,7 +31,7 @@ worker.use(
             activity: 'Y'
           },
           {
-            userNo: '182588xxx88',
+            userNo: 'lin',
             userName: '林某',
             password: '12345678',
             mobilePhone: '182588xxx88',

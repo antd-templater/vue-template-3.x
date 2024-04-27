@@ -30,7 +30,6 @@ import './resource/modifyResoureInfoByRole'
 import './role/addRoleInfo'
 import './role/deleteRoleInfo'
 import './role/getRoleInfoByPages'
-import './role/getRoleInfoByUserNo'
 import './role/getRoleInfoList'
 import './role/modifyRoleInfo'
 

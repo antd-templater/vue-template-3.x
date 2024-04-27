@@ -1,7 +1,7 @@
 import { promiser, resolver, worker, rester } from '@/mock/setup'
 import { http, HttpResponse } from 'msw'
 
-const tag = '获取组织列表'
+const tag = '分页查询组织列表'
 const url = resolver('/organize/getOrganizeInfoList')
 
 worker.use(

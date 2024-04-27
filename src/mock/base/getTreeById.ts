@@ -20,8 +20,16 @@ worker.use(
           message: null,
           result: [
             {
+              label: '浙大远疆投资集团有限公司',
+              shortName: '集团公司',
+              value: '1',
+              valueParent: '0',
               children: [
                 {
+                  label: '港运信息有限公司',
+                  shortName: '港运公司',
+                  value: '101.100',
+                  valueParent: '1',
                   children: [
                     {
                       label: '一号集装箱码头有限公司',
@@ -90,6 +98,10 @@ worker.use(
                       valueParent: '101.100'
                     },
                     {
+                      label: '北仑网安通信有限公司',
+                      shortName: '北仑网安',
+                      value: '101.100.113',
+                      valueParent: '101.100',
                       children: [
                         {
                           label: '北仑海运有限责任公司',
@@ -97,13 +109,13 @@ worker.use(
                           value: '101.100.113.126',
                           valueParent: '101.100.113'
                         }
-                      ],
-                      label: '北仑网安通信有限公司',
-                      shortName: '北仑网安',
-                      value: '101.100.113',
-                      valueParent: '101.100'
+                      ]
                     },
                     {
+                      label: '天芸集团有限公司',
+                      shortName: '天芸集团',
+                      value: '101.101',
+                      valueParent: '101.100',
                       children: [
                         {
                           label: '温州信讯有限公司',
@@ -111,11 +123,7 @@ worker.use(
                           value: '101.101.105',
                           valueParent: '101.101'
                         }
-                      ],
-                      label: '天芸集团有限公司',
-                      shortName: '天芸集团',
-                      value: '101.101',
-                      valueParent: '101.100'
+                      ]
                     },
                     {
                       label: '太一集装箱码头有限公司',
@@ -321,17 +329,9 @@ worker.use(
                       value: '101.110',
                       valueParent: '101.100'
                     }
-                  ],
-                  label: '港运信息有限公司',
-                  shortName: '港运公司',
-                  value: '101.100',
-                  valueParent: '1'
+                  ]
                 }
-              ],
-              label: '浙大远疆投资集团有限公司',
-              shortName: '集团公司',
-              value: '1',
-              valueParent: '0'
+              ]
             }
           ]
         }

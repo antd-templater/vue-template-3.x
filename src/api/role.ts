@@ -34,17 +34,6 @@ export function getRoleInfoByPages<T = any, D = any>(data: D) {
 }
 
 /**
- * 获取用户角色列表
- */
-export function getRoleInfoByUserNo<T = any, D = any>(data: D) {
-  return request<T, D>({
-    url: '/role/getRoleInfoByUserNo',
-    method: 'post',
-    data: data
-  })
-}
-
-/**
  * 修改角色信息
  */
 export function modifyRoleInfo<T = any, D = any>(data: D) {

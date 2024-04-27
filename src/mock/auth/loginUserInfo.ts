@@ -15,7 +15,7 @@ worker.use(
       code: '0000',
       message: null,
       result: {
-        userNo: '182588xxx88',
+        userNo: 'admin',
         userName: 'admin',
         mobilePhone: '182588xxx88',
         postName: '系统管理',
