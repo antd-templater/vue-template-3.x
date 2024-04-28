@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "cypress",
+      "node"
+    ],
+  },
+  "include": [
+    "../../cypress/support/commands.ts",
+    "**/*.vue",
+    "**/*.ts"
+  ],
+  "exclude": []
+}

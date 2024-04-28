@@ -28,7 +28,6 @@
     "types": [
       "@antd-templater/library-3.x/library-declare",
       "pinia-plugin-persist",
-      "vitest/globals",
       "vite/client"
     ]
   },
@@ -40,9 +39,8 @@
     "src/**/*.jsx",
     "src/**/*.vue"
   ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
+  "exclude": [
+    "node_modules",
+    "test"
   ]
 }

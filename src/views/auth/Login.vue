@@ -169,7 +169,7 @@ const doLogin = async() => {
 <style lang="less" scoped>
 .login-container {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
