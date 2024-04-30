@@ -1,3 +1,4 @@
+import { isRegExp } from 'js-simpler'
 import { toPromise } from 'js-simpler'
 import { setupWorker } from 'msw/browser'
 import { AppPageBase } from '@/configure/presetEnvironment'
@@ -9,7 +10,7 @@ export const promiser = async(value: any, delay: number = 300) => {
     .catch(() => Promise.reject(value))
 }
 
-export const resolver = (url: string, regex?: boolean) => {
+export const resolver = (url: string, regex?: RegExp | boolean) => {
   const check = /^https?:\/\//i
   const repeat = /^\/*|\/+/g
 
@@ -18,7 +19,7 @@ export const resolver = (url: string, regex?: boolean) => {
   }
 
   if (url && regex) {
-    const format = /[-/\\^$*+?.()|[\]{}]/g
+    const format = isRegExp(regex) ? regex : /[-/\\^$*+?.()|[\]{}]/g
     const source = (url.split('?')[0]).replace(format, '\\$&')
     return new RegExp(source + '(\\?.*)?$')
   }
