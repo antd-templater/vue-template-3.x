@@ -154,7 +154,6 @@
 <script setup lang="ts">
 import Message from 'ant-design-vue/es/message'
 import Notification from 'ant-design-vue/es/notification'
-import { treeEmitCheckDefiner } from '@antd-templater/library-3.x'
 import { requestBuilder } from '@/utils/common'
 import * as resourceApi from '@/api/resource'
 

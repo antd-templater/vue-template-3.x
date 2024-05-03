@@ -18,7 +18,7 @@ export default defineComponent({
     isSideMenu: VueTypes.bool().def(false),
     themeMode: VueTypes.string().def('light')
   },
-  setup(props) {
+  setup() {
     const appStore = useAppStore()
     const userStore = useUserStore()
     const nickname = toRef(userStore, 'nickname')

@@ -14,10 +14,6 @@
 </template>
 
 <script setup lang="ts">
-import { formGroupsDefiner } from '@antd-templater/library-3.x'
-import { formRulesDefiner } from '@antd-templater/library-3.x'
-import { formGridDefiner } from '@antd-templater/library-3.x'
-
 export interface Props {
   disabled: boolean;
   readonly: boolean;

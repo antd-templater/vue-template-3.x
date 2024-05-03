@@ -107,7 +107,7 @@ export default defineComponent({
       return dom
     }
 
-    const rightContentRender = (props: any) => {
+    const rightContentRender = (_: any) => {
       return (
         <LayoutAvatar
           isTopMenu={appStore.isTopMenu}
@@ -117,7 +117,7 @@ export default defineComponent({
       )
     }
 
-    const menuHeaderRender = (props: any) => {
+    const menuHeaderRender = (_: any) => {
       return (
         <LayoutLogo
           full={false}
@@ -137,11 +137,11 @@ export default defineComponent({
       }
     }
 
-    const onHeaderHide = (props: any) => {
+    const onHeaderHide = (_: any) => {
       appStore.toggleCollapsed(true)
     }
 
-    const onCollapse = (props: any) => {
+    const onCollapse = (_: any) => {
       if (appStore.isMobile) {
         appStore.toggleCollapsed(true)
       }

@@ -136,10 +136,9 @@
 </template>
 
 <script setup lang="ts">
-import { treeEmitSelectDefiner } from '@antd-templater/library-3.x'
 import { CSSProperties } from 'vue'
-
 import * as resourceApi from '@/api/resource'
+
 import Message from 'ant-design-vue/es/message'
 import AModal from 'ant-design-vue/es/modal'
 import MenuDrawer from './MenuDrawer.vue'

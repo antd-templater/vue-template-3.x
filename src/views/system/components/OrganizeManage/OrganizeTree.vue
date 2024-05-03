@@ -57,10 +57,6 @@
 </template>
 
 <script setup lang="ts">
-import { treeEmitChangeDefiner } from '@antd-templater/library-3.x'
-import { treeEmitSelectDefiner } from '@antd-templater/library-3.x'
-import { treeLoadDataDefiner } from '@antd-templater/library-3.x'
-
 import { CSSProperties } from 'vue'
 import { requestBuilder } from '@/utils/common'
 import * as organizeApi from '@/api/organize'

@@ -83,12 +83,6 @@
 </template>
 
 <script setup lang="ts">
-import { tableLoadDataDefiner } from '@antd-templater/library-3.x'
-import { tablePaginateDefiner } from '@antd-templater/library-3.x'
-import { tableColumnsDefiner } from '@antd-templater/library-3.x'
-import { tableStickyDefiner } from '@antd-templater/library-3.x'
-import { tableScrollDefiner } from '@antd-templater/library-3.x'
-
 import { CSSProperties } from 'vue'
 import { requestBuilder } from '@/utils/common'
 import * as resourceApi from '@/api/resource'

@@ -20,7 +20,6 @@ module.exports = {
     'eslint:recommended',
     'plugin:vue/vue3-recommended',
     'plugin:@typescript-eslint/eslint-recommended',
-    './node_modules/@antd-templater/library-3.x/library-eslintrc.json',
     '.eslintrc-auto-import.json'
   ],
   rules: {
@@ -228,7 +227,11 @@ module.exports = {
       }
     },
     {
-      files: ['**/*.vue', '**/*.ts'],
+      files: [
+        '**/*.vue',
+        '**/*.tsx',
+        '**/*.ts'
+      ],
       rules: {
         'no-undef': 'off',
         'no-unused-vars': 'off',
@@ -238,11 +241,8 @@ module.exports = {
       }
     },
     {
-      env: {
-        jest: true
-      },
       files: [
-        '**/test/**/*.{test,spec}.ts'
+        '**/*.{test,spec,cy}.ts'
       ],
       rules: {
         'no-multiple-empty-lines': ['error', {

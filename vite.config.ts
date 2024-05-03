@@ -1,9 +1,10 @@
 import { loadEnv } from 'vite'
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitest/config'
+import { AntdLibraryResolver } from '@antd-templater/library-3.x/resolver'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
-import ViteCompression from 'vite-plugin-compression'
 import AutoComponents from 'unplugin-vue-components/vite'
+import ViteCompression from 'vite-plugin-compression'
 import AutoImport from 'unplugin-auto-import/vite'
 import VueJsx from '@vitejs/plugin-vue-jsx'
 import Vue from '@vitejs/plugin-vue'
@@ -65,13 +66,16 @@ export default defineConfig(({ mode }) => {
             resolveIcons: true,
             importStyle: 'less'
           })
+        ],
+        include: [
+          /\.[tj]sx?/,
+          /\.vue\?vue/,
+          /\.vue$/
         ]
       }),
       AutoImport({
-        include: [
-          /\.[tj]sx?$/,
-          /\.vue\?vue/,
-          /\.vue$/
+        resolvers: [
+          AntdLibraryResolver()
         ],
         imports: [
           'vue',

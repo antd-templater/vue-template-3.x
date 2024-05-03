@@ -1,5 +1,6 @@
 # ignore eslint files
 .gitignore
+*.d.ts
 *.svg
 *.ico
 *.json
@@ -7,6 +8,5 @@
 *.log
 *.lock
 
-/dist/*
 /node_modules/*
-/*.d.ts
+/dist/*
