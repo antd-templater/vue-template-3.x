@@ -11,7 +11,7 @@ worker.use(
     const params = await rester.params(req)
     const printer = await rester.printer(tag)
 
-    let resource:any = null
+    let resource: any = null
 
     switch (body.params.parentId) {
       case '27245863256459422': {
@@ -34,7 +34,7 @@ worker.use(
                 hideChildInMenu: 'N',
                 hideInMenu: 'N',
                 allowCache: 'Y',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 sort: 1000200,
@@ -50,7 +50,7 @@ worker.use(
                 hideChildInMenu: 'N',
                 hideInMenu: 'N',
                 allowCache: 'Y',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 sort: 1000300,
@@ -66,7 +66,7 @@ worker.use(
                 hideChildInMenu: 'N',
                 hideInMenu: 'N',
                 allowCache: 'Y',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 sort: 1000400,
@@ -82,14 +82,14 @@ worker.use(
                 hideChildInMenu: 'N',
                 hideInMenu: 'N',
                 allowCache: 'Y',
-                activity: 'Y'
-              }
+                activity: 'Y',
+              },
             ],
             pageNo: 1,
             pageSize: 20,
             totalSize: 4,
-            totalPage: 1
-          }
+            totalPage: 1,
+          },
         }
         break
       }
@@ -107,7 +107,7 @@ worker.use(
                 resourceId: '1127282136000102508',
                 resourceName: 'add',
                 resourceType: 'b',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 sort: 2,
@@ -117,7 +117,7 @@ worker.use(
                 resourceId: '1127282136000102509',
                 resourceName: 'del',
                 resourceType: 'b',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 sort: 3,
@@ -127,7 +127,7 @@ worker.use(
                 resourceId: '1127282136000102510',
                 resourceName: 'edit',
                 resourceType: 'b',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 sort: 4,
@@ -137,14 +137,14 @@ worker.use(
                 resourceId: '1127282136000102511',
                 resourceName: 'query',
                 resourceType: 'b',
-                activity: 'Y'
-              }
+                activity: 'Y',
+              },
             ],
             pageNo: 1,
             pageSize: 20,
             totalSize: 4,
-            totalPage: 1
-          }
+            totalPage: 1,
+          },
         }
         break
       }
@@ -162,7 +162,7 @@ worker.use(
                 resourceId: '27245863256459447',
                 resourceName: 'add',
                 resourceType: 'b',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 sort: 2,
@@ -172,14 +172,14 @@ worker.use(
                 resourceId: '27245863256459449',
                 resourceName: 'del',
                 resourceType: 'b',
-                activity: 'Y'
-              }
+                activity: 'Y',
+              },
             ],
             pageNo: 1,
             pageSize: 20,
             totalSize: 2,
-            totalPage: 1
-          }
+            totalPage: 1,
+          },
         }
         break
       }
@@ -197,7 +197,7 @@ worker.use(
                 resourceId: '27245863256459496',
                 resourceName: 'add',
                 resourceType: 'b',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 sort: 2,
@@ -207,7 +207,7 @@ worker.use(
                 resourceId: '27245863256459497',
                 resourceName: 'del',
                 resourceType: 'b',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 sort: 3,
@@ -217,7 +217,7 @@ worker.use(
                 resourceId: '27245863256459498',
                 resourceName: 'edit',
                 resourceType: 'b',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 sort: 4,
@@ -227,14 +227,14 @@ worker.use(
                 resourceId: '27245863256459499',
                 resourceName: 'query',
                 resourceType: 'b',
-                activity: 'Y'
-              }
+                activity: 'Y',
+              },
             ],
             pageNo: 1,
             pageSize: 20,
             totalSize: 4,
-            totalPage: 1
-          }
+            totalPage: 1,
+          },
         }
         break
       }
@@ -252,7 +252,7 @@ worker.use(
                 resourceId: '1127282136000102580',
                 resourceName: 'add',
                 resourceType: 'b',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 sort: 2,
@@ -262,7 +262,7 @@ worker.use(
                 resourceId: '1127282136000102581',
                 resourceName: 'del',
                 resourceType: 'b',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 sort: 3,
@@ -272,7 +272,7 @@ worker.use(
                 resourceId: '1127282136000102582',
                 resourceName: 'edit',
                 resourceType: 'b',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 sort: 4,
@@ -282,14 +282,14 @@ worker.use(
                 resourceId: '1127282136000102583',
                 resourceName: 'query',
                 resourceType: 'b',
-                activity: 'Y'
-              }
+                activity: 'Y',
+              },
             ],
             pageNo: 1,
             pageSize: 20,
             totalSize: 4,
-            totalPage: 1
-          }
+            totalPage: 1,
+          },
         }
         break
       }
@@ -302,8 +302,8 @@ worker.use(
             pageNo: 1,
             pageSize: 20,
             totalSize: 0,
-            totalPage: 0
-          }
+            totalPage: 0,
+          },
         }
       }
     }
@@ -317,7 +317,7 @@ worker.use(
 
     return promiser(
       HttpResponse.json(resource),
-      0
+      0,
     )
-  })
+  }),
 )

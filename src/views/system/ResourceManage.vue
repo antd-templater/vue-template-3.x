@@ -41,7 +41,7 @@ import useAppStore from '@/store/app'
 
 defineOptions({
   name: 'ResourceManage',
-  inheritAttrs: false
+  inheritAttrs: false,
 })
 
 const menuNode = ref({} as Record<string, any>)

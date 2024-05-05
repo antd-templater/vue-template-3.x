@@ -50,5 +50,5 @@ export default {
   AppPageBase,
   AppRouterBase,
   AppRouterUseHash,
-  AppHiddenSettings
+  AppHiddenSettings,
 }

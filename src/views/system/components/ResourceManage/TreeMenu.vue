@@ -149,29 +149,29 @@ export interface Emits {
 
 defineOptions({
   name: 'ResourceTreeMenu',
-  inheritAttrs: false
+  inheritAttrs: false,
 })
 
 const cardHeadStyle: CSSProperties = {
   flex: '0 0 auto',
-  overflow: 'hidden'
+  overflow: 'hidden',
 }
 
 const cardBodyStyle: CSSProperties = {
   flex: '1 1 auto',
   overflow: 'hidden',
-  position: 'relative'
+  position: 'relative',
 }
 
 const replaceFields: Ref<STreeFieldNames> = ref({
   key: 'resourceId',
   title: 'title',
-  children: 'children'
+  children: 'children',
 })
 
 const emits = defineEmits<Emits>()
-const tree = ref(null as InstanceType<STree>| null)
-const menuDrawer = ref(null as InstanceType<typeof MenuDrawer>| null)
+const tree = ref(null as InstanceType<STree> | null)
+const menuDrawer = ref(null as InstanceType<typeof MenuDrawer> | null)
 const menuTree = ref([] as Record<string, any>[])
 const loading = ref(false)
 
@@ -225,7 +225,7 @@ const doDrawerDel = (record: Record<string, any>) => {
     cancelText: '取消',
     okText: '删除',
     okType: 'danger',
-    onOk: () => { menuDrawer.value?.doDel([record]) }
+    onOk: () => { menuDrawer.value?.doDel([record]) },
   })
 }
 

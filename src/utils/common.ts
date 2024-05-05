@@ -8,14 +8,14 @@ import dayjs from '@/plugin/dayjs'
 /**
  * 声明类型
  */
-export type RawValue = <T = any>(value: MaybeRef<T> | ComputedRef<T>) => T;
-export type TakeFixed = (num: string | number, digit?: number) => string;
-export type TakePadEnd = (num: string | number, keep?: number) => string;
-export type TakeTimeToDesc = (date?: dayjs.ConfigType, format?: string) => string;
-export type TakeTimeToDate = (date?: dayjs.ConfigType, format?: dayjs.OptionType) => dayjs.Dayjs | undefined;
-export type RequestBuilder = (action?: string, params?: Record<string, any>, paginate?: { pageNo?: number, pageSize?: number } | null, sorter?: AxiosSorter[] | AxiosSorter | null) => AxiosRequestResult;
-export type TakeTextByKey = <T = string | number>(tree: Array<Record<string, any>>, key: string | number, field?: Array<string> | string) => T;
-export type TakeNodeByKey = <T = Record<string, any>>(tree: Array<Record<string, any>>, key: string | number) => T | null;
+export type RawValue = <T = any>(value: MaybeRef<T> | ComputedRef<T>) => T
+export type TakeFixed = (num: string | number, digit?: number) => string
+export type TakePadEnd = (num: string | number, keep?: number) => string
+export type TakeTimeToDesc = (date?: dayjs.ConfigType, format?: string) => string
+export type TakeTimeToDate = (date?: dayjs.ConfigType, format?: dayjs.OptionType) => dayjs.Dayjs | undefined
+export type RequestBuilder = (action?: string, params?: Record<string, any>, paginate?: { pageNo?: number; pageSize?: number; } | null, sorter?: AxiosSorter[] | AxiosSorter | null) => AxiosRequestResult
+export type TakeTextByKey = <T = string | number>(tree: Array<Record<string, any>>, key: string | number, field?: Array<string> | string) => T
+export type TakeNodeByKey = <T = Record<string, any>>(tree: Array<Record<string, any>>, key: string | number) => T | null
 
 /**
  * 获取原数据 Raw (Ref / Reactive)
@@ -150,11 +150,11 @@ export const requestBuilder: RequestBuilder = (action = '', params = {}, paginat
 
       sorter: sorter.filter(opt => opt.field && opt.value).map(opt => ({
         field: opt.field.replace(/(^|\B)([A-Z])/g, '_$2').toLowerCase(),
-        value: opt.value.replace(/(^|\B)([A-Z])/g, '_$2').toLowerCase()
+        value: opt.value.replace(/(^|\B)([A-Z])/g, '_$2').toLowerCase(),
       })),
 
       pageSize: paginate?.pageSize ?? undefined,
-      pageNo: paginate?.pageNo ?? undefined
+      pageNo: paginate?.pageNo ?? undefined,
     }
   }
 
@@ -166,11 +166,11 @@ export const requestBuilder: RequestBuilder = (action = '', params = {}, paginat
 
         sorter: {
           field: sorter.field.replace(/(^|\B)([A-Z])/g, '_$2').toLowerCase(),
-          value: sorter.value.replace(/(^|\B)([A-Z])/g, '_$2').toLowerCase()
+          value: sorter.value.replace(/(^|\B)([A-Z])/g, '_$2').toLowerCase(),
         },
 
         pageSize: paginate?.pageSize ?? undefined,
-        pageNo: paginate?.pageNo ?? undefined
+        pageNo: paginate?.pageNo ?? undefined,
       }
     }
   }
@@ -180,6 +180,6 @@ export const requestBuilder: RequestBuilder = (action = '', params = {}, paginat
     params: params,
     sorter: undefined,
     pageSize: paginate?.pageSize ?? undefined,
-    pageNo: paginate?.pageNo ?? undefined
+    pageNo: paginate?.pageNo ?? undefined,
   }
 }

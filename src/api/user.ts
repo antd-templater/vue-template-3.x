@@ -7,7 +7,7 @@ export function addUserInfo<T = any, D = any>(data: D) {
   return request<T, D>({
     url: '/user/addUserInfo',
     method: 'post',
-    data: data
+    data: data,
   })
 }
 
@@ -18,7 +18,7 @@ export function getUserInfoList<T = any, D = any>(data: D) {
   return request<T, D>({
     url: '/user/getUserInfoList',
     method: 'post',
-    data: data
+    data: data,
   })
 }
 
@@ -29,7 +29,7 @@ export function modifyUserInfo<T = any, D = any>(data: D) {
   return request<T, D>({
     url: '/user/modifyUserInfo',
     method: 'post',
-    data: data
+    data: data,
   })
 }
 
@@ -40,6 +40,6 @@ export function deleteUserInfo<T = any, D = any>(data: D) {
   return request<T, D>({
     url: '/user/deleteUserInfo',
     method: 'post',
-    data: data
+    data: data,
   })
 }

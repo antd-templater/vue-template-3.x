@@ -52,7 +52,7 @@ const treeToRoute: TreeToRoute = (trees, parent = {}, components = {}) => {
       target,
       allowCache,
       hideInMenu,
-      hideChildInMenu
+      hideChildInMenu,
     } = item.meta || {}
 
     if (item.component === PageView) {
@@ -89,8 +89,8 @@ const treeToRoute: TreeToRoute = (trees, parent = {}, components = {}) => {
         hideChildInMenu: hideInMenu === true || hideInMenu === 'Y' || hideChildInMenu === true || hideChildInMenu === 'Y',
         allowCache: (parentAllowCache !== false && parentAllowCache !== 'N') || (allowCache !== false && allowCache !== 'N'),
         hideInMenu: hideInMenu === true || hideInMenu === 'Y',
-        permission: item.name && [item.name] || []
-      }
+        permission: item.name && [item.name] || [],
+      },
     }
 
     // 无效图标
@@ -118,7 +118,7 @@ const treeToRoute: TreeToRoute = (trees, parent = {}, components = {}) => {
       currentRouter.children = treeToRoute(
         item.children,
         currentRouter,
-        components
+        components,
       )
     }
 
@@ -271,5 +271,5 @@ export type {
   GenerateDynamicFullpath,
   GenerateDynamicRouter,
   GenerateLayoutRouter,
-  GenerateViewsRouter
+  GenerateViewsRouter,
 }

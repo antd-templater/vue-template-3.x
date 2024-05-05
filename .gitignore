@@ -17,5 +17,5 @@ yarn-error.log*
 *.sw*
 
 # ingore
-/node_modules
-/dist
+node_modules
+dist

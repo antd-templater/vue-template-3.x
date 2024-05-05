@@ -6,5 +6,5 @@ import { generateViewsRouter } from '@/router/generate-routes'
  */
 export default {
   ...generateViewsRouter(import.meta.glob(['@/views/**/*.vue', '!@/views/**/components/**/*.vue'], { eager: false })),
-  ...generateLayoutRouter(import.meta.glob(['@/layout/*.{tsx,vue}'], { eager: true }))
+  ...generateLayoutRouter(import.meta.glob(['@/layout/*.{tsx,vue}'], { eager: true })),
 }

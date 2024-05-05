@@ -28,7 +28,7 @@ worker.use(
                 orgShortName: '集团公司',
                 parentOrgId: '0',
                 parentOrgName: '',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 key: '101.100',
@@ -38,14 +38,14 @@ worker.use(
                 orgShortName: '港运公司',
                 parentOrgId: '1',
                 parentOrgName: '浙大远疆投资集团有限公司',
-                activity: 'Y'
-              }
+                activity: 'Y',
+              },
             ],
             pageNo: 1,
             pageSize: 20,
             totalSize: 2,
-            totalPage: 1
-          }
+            totalPage: 1,
+          },
         }
         break
       }
@@ -63,7 +63,7 @@ worker.use(
                 orgShortName: '港运公司',
                 parentOrgId: '1',
                 parentOrgName: '浙大远疆投资集团有限公司',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 key: '101.100.131',
@@ -73,7 +73,7 @@ worker.use(
                 orgShortName: '北仑网安',
                 parentOrgId: '101.100',
                 parentOrgName: '港运信息有限公司',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 key: '101.100.138',
@@ -83,14 +83,14 @@ worker.use(
                 orgShortName: '宁财港务',
                 parentOrgId: '101.100',
                 parentOrgName: '港运信息有限公司',
-                activity: 'Y'
-              }
+                activity: 'Y',
+              },
             ],
             pageNo: 1,
             pageSize: 20,
             totalSize: 3,
-            totalPage: 1
-          }
+            totalPage: 1,
+          },
         }
         break
       }
@@ -108,7 +108,7 @@ worker.use(
                 orgShortName: '北仑网安',
                 parentOrgId: '101.100',
                 parentOrgName: '港运信息有限公司',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 key: '1126534161135795126',
@@ -116,7 +116,7 @@ worker.use(
                 isLeaf: true,
                 title: '公司部',
                 orgShortName: '',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 key: '1126534161135795127',
@@ -124,7 +124,7 @@ worker.use(
                 isLeaf: true,
                 title: '人事部',
                 orgShortName: '',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 key: '1126534161135795128',
@@ -132,7 +132,7 @@ worker.use(
                 isLeaf: true,
                 title: '财务部',
                 orgShortName: '',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 key: '1126534161135795129',
@@ -140,7 +140,7 @@ worker.use(
                 isLeaf: true,
                 title: '市场部',
                 orgShortName: '',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 key: '1126534161135795130',
@@ -148,7 +148,7 @@ worker.use(
                 isLeaf: true,
                 title: '运维部',
                 orgShortName: '',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 key: '1126534161135795131',
@@ -156,7 +156,7 @@ worker.use(
                 isLeaf: true,
                 title: '系统部',
                 orgShortName: '',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 key: '1126534161135795132',
@@ -164,7 +164,7 @@ worker.use(
                 isLeaf: true,
                 title: '开发部',
                 orgShortName: '',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 key: '1126534161135795133',
@@ -172,7 +172,7 @@ worker.use(
                 isLeaf: true,
                 title: '大数据中心',
                 orgShortName: '',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 key: '1126534161135795134',
@@ -180,7 +180,7 @@ worker.use(
                 isLeaf: true,
                 title: '技术中心',
                 orgShortName: '',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 key: '1126534161135795135',
@@ -188,7 +188,7 @@ worker.use(
                 isLeaf: true,
                 title: '研发中心',
                 orgShortName: '',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 key: '1126534161135795642',
@@ -196,7 +196,7 @@ worker.use(
                 isLeaf: true,
                 title: '后勤中心',
                 orgShortName: '',
-                activity: 'Y'
+                activity: 'Y',
               },
               {
                 key: '1127020120488651741',
@@ -204,14 +204,14 @@ worker.use(
                 isLeaf: true,
                 title: '工程部',
                 orgShortName: '',
-                activity: 'Y'
-              }
+                activity: 'Y',
+              },
             ],
             pageNo: 1,
             pageSize: 20,
             totalSize: 13,
-            totalPage: 1
-          }
+            totalPage: 1,
+          },
         }
         break
       }
@@ -229,14 +229,14 @@ worker.use(
                 orgShortName: '宁财港务',
                 parentOrgId: '101.100',
                 parentOrgName: '港运信息有限公司',
-                activity: 'Y'
-              }
+                activity: 'Y',
+              },
             ],
             pageNo: 1,
             pageSize: 20,
             totalSize: 1,
-            totalPage: 1
-          }
+            totalPage: 1,
+          },
         }
         break
       }
@@ -249,8 +249,8 @@ worker.use(
             pageNo: 1,
             pageSize: 20,
             totalSize: 0,
-            totalPage: 0
-          }
+            totalPage: 0,
+          },
         }
       }
     }
@@ -264,7 +264,7 @@ worker.use(
 
     return promiser(
       HttpResponse.json(resource),
-      0
+      0,
     )
-  })
+  }),
 )

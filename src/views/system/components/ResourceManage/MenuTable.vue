@@ -94,7 +94,7 @@ import MenuDrawer from './MenuDrawer.vue'
 
 defineOptions({
   name: 'ResourceMenuTable',
-  inheritAttrs: false
+  inheritAttrs: false,
 })
 
 const table = ref(null as InstanceType<STable> | null)
@@ -102,12 +102,12 @@ const menuDrawer = ref(null as InstanceType<typeof MenuDrawer> | null)
 
 const queryParams = ref({
   resourceType: 'm',
-  parentId: ''
+  parentId: '',
 })
 
 const cardHeadStyle: CSSProperties = {
   flex: '0 0 auto',
-  overflow: 'hidden'
+  overflow: 'hidden',
 }
 
 const cardBodyStyle: CSSProperties = {
@@ -115,7 +115,7 @@ const cardBodyStyle: CSSProperties = {
   overflow: 'auto',
   position: 'relative',
   boxSizing: 'border-box',
-  padding: '20px'
+  padding: '20px',
 }
 
 const loading = ref(false)
@@ -123,18 +123,18 @@ const cellState = ref(false)
 const cellStyle = {
   container: {
     display: 'inline-block',
-    width: 'auto'
+    width: 'auto',
   },
   inputWrapper: {
     display: 'inline-block',
     minWidth: '180px',
-    paddingRight: '36px'
+    paddingRight: '36px',
   },
   textWrapper: {
     display: 'inline-block',
     width: 'auto',
-    paddingRight: '36px'
-  }
+    paddingRight: '36px',
+  },
 }
 
 const sticky = tableStickyDefiner({
@@ -142,14 +142,14 @@ const sticky = tableStickyDefiner({
   leftFooter: false,
   rightFooter: false,
   bottomFooter: false,
-  bottomScrollbar: true
+  bottomScrollbar: true,
 })
 
 const scroll = tableScrollDefiner({
   scrollToFirstXOnChange: true,
   scrollToFirstYOnChange: true,
   overflow: 'visible',
-  x: 'max-content'
+  x: 'max-content',
 })
 
 const columns = tableColumnsDefiner([
@@ -158,64 +158,64 @@ const columns = tableColumnsDefiner([
     dataIndex: 'serial',
     align: 'center',
     maxWidth: 60,
-    width: 60
+    width: 60,
   },
   {
     title: '菜单名称',
     dataIndex: 'title',
     minWidth: 100,
-    fixed: 'left'
+    fixed: 'left',
   },
   {
     title: '菜单标识',
     dataIndex: 'resourceName',
-    minWidth: 150
+    minWidth: 150,
   },
   {
     title: '组件标识',
     dataIndex: 'component',
-    minWidth: 150
+    minWidth: 150,
   },
   {
     title: '跳转路径',
     dataIndex: 'redirect',
-    minWidth: 150
+    minWidth: 150,
   },
   {
     title: '访问路径',
     dataIndex: 'path',
-    minWidth: 150
+    minWidth: 150,
   },
   {
     title: '菜单图标',
     dataIndex: 'icon',
-    minWidth: 150
+    minWidth: 150,
   },
   {
     title: '菜单排序',
     dataIndex: 'sort',
-    minWidth: 150
+    minWidth: 150,
   },
   {
     title: '隐藏子菜单',
     dataIndex: 'hideChildInMenu',
-    width: 120
+    width: 120,
   },
   {
     title: '隐藏菜单',
     dataIndex: 'hideInMenu',
-    width: 120
+    width: 120,
   },
   {
     title: '是否缓存',
     dataIndex: 'allowCache',
-    width: 120
+    width: 120,
   },
   {
     title: '是否启用',
     dataIndex: 'activity',
-    width: 120
-  }
+    width: 120,
+  },
 ])
 
 const paginate = tablePaginateDefiner({
@@ -226,7 +226,7 @@ const paginate = tablePaginateDefiner({
   showSizeChanger: true,
   showTotal: true,
   visible: true,
-  fixed: true
+  fixed: true,
 })
 
 const loadData = tableLoadDataDefiner(async options => {
@@ -236,7 +236,7 @@ const loadData = tableLoadDataDefiner(async options => {
     if (res.code !== '0000') {
       Notification.error({
         message: '系统消息',
-        description: res.message || '按钮资源查询失败!'
+        description: res.message || '按钮资源查询失败!',
       })
       return Promise.reject(res)
     }
@@ -260,14 +260,14 @@ const doTableModify = (record: object) => {
     if (res.code !== '0000') {
       Notification.error({
         message: '系统消息',
-        description: '修改失败'
+        description: '修改失败',
       })
       return Promise.reject(res)
     }
 
     Notification.success({
       message: '系统消息',
-      description: '修改成功'
+      description: '修改成功',
     })
 
     doTableRefresh()
@@ -294,7 +294,7 @@ defineExpose({
   queryParams,
   doTableRefresh,
   doTableReady,
-  doTableClear
+  doTableClear,
 })
 </script>
 

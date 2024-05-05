@@ -31,8 +31,8 @@ worker.use(
               permissionId: 'ResourceManage',
               actionEntitySet: [
                 { action: 'add', defaultCheck: false, describe: '新增' },
-                { action: 'del', defaultCheck: false, describe: '删除' }
-              ]
+                { action: 'del', defaultCheck: false, describe: '删除' },
+              ],
             },
             {
               permissionId: 'RoleManage',
@@ -40,8 +40,8 @@ worker.use(
                 { action: 'add', defaultCheck: false, describe: '新增' },
                 { action: 'del', defaultCheck: false, describe: '删除' },
                 { action: 'edit', defaultCheck: false, describe: '修改' },
-                { action: 'query', defaultCheck: false, describe: '查询' }
-              ]
+                { action: 'query', defaultCheck: false, describe: '查询' },
+              ],
             },
             {
               permissionId: 'OrganizeManage',
@@ -49,8 +49,8 @@ worker.use(
                 { action: 'add', defaultCheck: false, describe: '新增' },
                 { action: 'del', defaultCheck: false, describe: '删除' },
                 { action: 'edit', defaultCheck: false, describe: '修改' },
-                { action: 'query', defaultCheck: false, describe: '查询' }
-              ]
+                { action: 'query', defaultCheck: false, describe: '查询' },
+              ],
             },
             {
               permissionId: 'UserManage',
@@ -58,12 +58,12 @@ worker.use(
                 { action: 'add', defaultCheck: false, describe: '新增' },
                 { action: 'del', defaultCheck: false, describe: '删除' },
                 { action: 'edit', defaultCheck: false, describe: '修改' },
-                { action: 'query', defaultCheck: false, describe: '查询' }
-              ]
-            }
-          ]
-        }
-      }
+                { action: 'query', defaultCheck: false, describe: '查询' },
+              ],
+            },
+          ],
+        },
+      },
     }
 
     printer(log => {
@@ -75,7 +75,7 @@ worker.use(
 
     return promiser(
       HttpResponse.json(resource),
-      0
+      0,
     )
-  })
+  }),
 )

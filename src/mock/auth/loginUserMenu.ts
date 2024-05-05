@@ -28,8 +28,8 @@ worker.use(
             title: '系统管理',
             hideChildInMenu: 'N',
             hideInMenu: 'N',
-            allowCache: 'Y'
-          }
+            allowCache: 'Y',
+          },
         },
         {
           sort: 1000100,
@@ -44,8 +44,8 @@ worker.use(
             title: '组织管理',
             hideChildInMenu: 'N',
             hideInMenu: 'N',
-            allowCache: 'Y'
-          }
+            allowCache: 'Y',
+          },
         },
         {
           sort: 1000200,
@@ -60,8 +60,8 @@ worker.use(
             title: '资源管理',
             hideChildInMenu: 'N',
             hideInMenu: 'N',
-            allowCache: 'Y'
-          }
+            allowCache: 'Y',
+          },
         },
         {
           sort: 1000300,
@@ -76,8 +76,8 @@ worker.use(
             title: '角色管理',
             hideChildInMenu: 'N',
             hideInMenu: 'N',
-            allowCache: 'Y'
-          }
+            allowCache: 'Y',
+          },
         },
         {
           sort: 1000400,
@@ -92,10 +92,10 @@ worker.use(
             title: '用户管理',
             hideChildInMenu: 'N',
             hideInMenu: 'N',
-            allowCache: 'Y'
-          }
-        }
-      ]
+            allowCache: 'Y',
+          },
+        },
+      ],
     }
 
     printer(log => {
@@ -107,7 +107,7 @@ worker.use(
 
     return promiser(
       HttpResponse.json(resource),
-      0
+      0,
     )
-  })
+  }),
 )

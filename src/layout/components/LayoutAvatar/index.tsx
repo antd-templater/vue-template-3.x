@@ -16,7 +16,7 @@ export default defineComponent({
   props: {
     isTopMenu: VueTypes.bool().def(false),
     isSideMenu: VueTypes.bool().def(false),
-    themeMode: VueTypes.string().def('light')
+    themeMode: VueTypes.string().def('light'),
   },
   setup() {
     const appStore = useAppStore()
@@ -37,32 +37,32 @@ export default defineComponent({
         AModal.confirm({
           title: '提示',
           content: '真的要注销登录吗 ?',
-          onOk: () => { userStore.logout().then(() => window.location.reload()) }
+          onOk: () => { userStore.logout().then(() => window.location.reload()) },
         })
       }
 
       return (
         <>
           <AMenu
-            class='layout-avatar-dropdown'
-            style='min-width: 120px'
+            class="layout-avatar-dropdown"
+            style="min-width: 120px"
           >
-            <AMenuItem key='1'>
+            <AMenuItem key="1">
               <a
-                href='javascript:void(0);'
-                onClick={() => { open.value = true } }
+                href="javascript:void(0);"
+                onClick={() => { open.value = true }}
               >
-                <SettingOutlined style='margin-right: 10px'/>
+                <SettingOutlined style="margin-right: 10px" />
                 <span>修改密码</span>
               </a>
             </AMenuItem>
 
-            <AMenuItem key='2'>
+            <AMenuItem key="2">
               <a
-                href='javascript:void(0);'
+                href="javascript:void(0);"
                 onClick={doLogout}
               >
-                <LogoutOutlined style='margin-right: 10px'/>
+                <LogoutOutlined style="margin-right: 10px" />
                 <span>退出登录</span>
               </a>
             </AMenuItem>
@@ -77,13 +77,13 @@ export default defineComponent({
       const formModel = reactive({
         password: '',
         newPassword: '',
-        confirmPassword: ''
+        confirmPassword: '',
       })
 
       const formRules = reactive({
         password: [{
           required: true,
-          message: '请输入原密码'
+          message: '请输入原密码',
         }],
         newPassword: [{
           required: true,
@@ -98,7 +98,7 @@ export default defineComponent({
               return Promise.reject(new Error('您的密码长度不足8位'))
             }
             return Promise.resolve()
-          }
+          },
         }],
         confirmPassword: [{
           required: true,
@@ -110,24 +110,24 @@ export default defineComponent({
               return Promise.reject(new Error('确认密码与新密码不一样, 请重新输入'))
             }
             return Promise.resolve()
-          }
-        }]
+          },
+        }],
       })
 
       const APasswordModalFooter = () => {
         return (
           <>
             <AButton
-              key='back'
-              onClick={ () => { open.value = false } }
+              key="back"
+              onClick={() => { open.value = false }}
             >
               <span>取消</span>
             </AButton>
 
             <AButton
-              key='submit'
-              type='primary'
-              onClick={ () => { doForgetPassword() }}
+              key="submit"
+              type="primary"
+              onClick={() => { doForgetPassword() }}
             >
               <span>提交</span>
             </AButton>
@@ -140,7 +140,7 @@ export default defineComponent({
           const params = {
             userNo: userStore.userNo,
             password: formModel.password,
-            newPassword: formModel.newPassword
+            newPassword: formModel.newPassword,
           }
 
           await formRef.value.validate()
@@ -163,7 +163,7 @@ export default defineComponent({
       return (
         <AModal
           width={420}
-          title='修改密码'
+          title="修改密码"
           bodyStyle={{ padding: '15px 30px 10px 30px' }}
           v-slots={{ footer: APasswordModalFooter }}
           v-model={[open.value, 'open']}
@@ -175,34 +175,34 @@ export default defineComponent({
             hideRequiredMark
           >
             <AFormItem
-              name='password'
-              label='原密码'
+              name="password"
+              label="原密码"
             >
               <AInputPassword
                 v-model={[formModel.password, 'value']}
-                placeholder='请输入原密码'
+                placeholder="请输入原密码"
               />
             </AFormItem>
 
             <AFormItem
-              name='newPassword'
-              label='新密码'
+              name="newPassword"
+              label="新密码"
               hasFeedback
             >
               <AInputPassword
                 v-model={[formModel.newPassword, 'value']}
-                placeholder='请输入新密码'
+                placeholder="请输入新密码"
               />
             </AFormItem>
 
             <AFormItem
-              name='confirmPassword'
-              label='确认密码'
+              name="confirmPassword"
+              label="确认密码"
               hasFeedback
             >
               <AInputPassword
                 v-model={[formModel.confirmPassword, 'value']}
-                placeholder='请确认新密码'
+                placeholder="请确认新密码"
               />
             </AFormItem>
           </AForm>
@@ -212,52 +212,52 @@ export default defineComponent({
 
     return () => (
       <div
-        class='layout-avatar-container'
+        class="layout-avatar-container"
         style={{
           height: '100%',
           padding: '0 16px 0 10px',
           color: whiteTheme.value ? 'inherit' : '#ffffff',
-          cursor: 'pointer'
+          cursor: 'pointer',
         }}
       >
-        <ADropdown overlay={ ADropdownOverlay() }>
+        <ADropdown overlay={ADropdownOverlay()}>
           <div
-            class='layout-avatar-wrapper'
+            class="layout-avatar-wrapper"
             style={{
               height: '100%',
               display: 'flex',
               flexFlow: 'row nowrap',
               alignItems: 'center',
-              alignContent: 'center'
+              alignContent: 'center',
             }}
           >
             <div
-              class='layout-avatar-img'
-              style='width: 30px; height: 30px; flex: 0 0 auto; margin-right: 6px;'
+              class="layout-avatar-img"
+              style="width: 30px; height: 30px; flex: 0 0 auto; margin-right: 6px;"
             >
               <img
-                style='display: block; width: 100%; height: 100%; margin: 0;'
+                style="display: block; width: 100%; height: 100%; margin: 0;"
                 src={avatar.value}
               />
             </div>
 
             <span
-              class='layout-avatar-nick'
+              class="layout-avatar-nick"
               style={{
                 flex: '1 1 auto',
                 maxWidth: '120px',
                 color: whiteTheme.value ? '#f9f9f9' : '#303133',
                 textOverflow: 'ellipsis',
                 whiteSpace: 'nowrap',
-                overflow: 'hidden'
+                overflow: 'hidden',
               }}
             >
               { nickname.value }
             </span>
           </div>
         </ADropdown>
-        <APasswordModal/>
+        <APasswordModal />
       </div>
     )
-  }
+  },
 })

@@ -37,6 +37,7 @@
   "editor.formatOnPaste": true,
   "editor.detectIndentation": false,
   "editor.renderControlCharacters": true,
+  "eslint.experimental.useFlatConfig": true,
   "eslint.format.enable": true,
   "eslint.probe": [
     "javascript",
@@ -59,10 +60,5 @@
   "prettier.htmlWhitespaceSensitivity": "ignore",
   "prettier.quoteProps": "consistent",
   "prettier.arrowParens": "avoid",
-  "prettier.trailingComma": "es5",
-  "stylusSupremacy.insertColons": true,
-  "stylusSupremacy.insertBraces": false,
-  "stylusSupremacy.insertSemicolons": false,
-  "stylusSupremacy.insertNewLineAroundImports": false,
-  "stylusSupremacy.insertNewLineAroundBlocks": false
+  "prettier.trailingComma": "es5"
 }

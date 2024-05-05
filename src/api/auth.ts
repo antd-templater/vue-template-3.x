@@ -7,7 +7,7 @@ export function login<T = any, D = any>(data: D) {
   return request<T, D>({
     url: '/auth/login',
     method: 'post',
-    data: data
+    data: data,
   })
 }
 
@@ -18,7 +18,7 @@ export function logout<T = any, D = any>(data: D) {
   return request<T, D>({
     url: '/auth/logout',
     method: 'post',
-    data: data
+    data: data,
   })
 }
 
@@ -29,7 +29,7 @@ export function modifyPassword<T = any, D = any>(data: D) {
   return request<T, D>({
     url: '/auth/modifyPassword',
     method: 'post',
-    data: data
+    data: data,
   })
 }
 
@@ -40,7 +40,7 @@ export function loginUserInfo<T = any, D = any>(data: D) {
   return request<T, D>({
     url: '/auth/loginUserInfo',
     method: 'post',
-    data: data
+    data: data,
   })
 }
 
@@ -51,6 +51,6 @@ export function loginUserMenu<T = any, D = any>(data: D) {
   return request<T, D>({
     url: '/auth/loginUserMenu',
     method: 'post',
-    data: data
+    data: data,
   })
 }

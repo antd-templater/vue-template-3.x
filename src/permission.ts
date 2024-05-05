@@ -61,13 +61,13 @@ router.beforeEach(async(to, from, next) => {
             duration: 0.8,
             message: '系统通知',
             description: '获取用户信息失败，请重新登录!',
-            onClose: () => userStore.logout().then(resolve).catch(resolve)
+            onClose: () => userStore.logout().then(resolve).catch(resolve),
           })
         })
 
         next({
           path: loginRoutePath,
-          query: { redirect: to.fullPath }
+          query: { redirect: to.fullPath },
         })
       }
       return
@@ -89,13 +89,13 @@ router.beforeEach(async(to, from, next) => {
       duration: 0.8,
       message: '系统通知',
       description: 'token 已过期, 请重新登录!',
-      onClose: () => userStore.logout().then(resolve).catch(resolve)
+      onClose: () => userStore.logout().then(resolve).catch(resolve),
     })
   })
 
   next({
     path: loginRoutePath,
-    query: { redirect: to.fullPath }
+    query: { redirect: to.fullPath },
   })
 })
 

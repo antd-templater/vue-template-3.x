@@ -42,7 +42,7 @@ const createAxiosInterceptor = (axios: AxiosInstance) => {
       }
 
       return config
-    }
+    },
   )
   axios.interceptors.response.use(
     response => {
@@ -67,7 +67,7 @@ const createAxiosInterceptor = (axios: AxiosInstance) => {
       }
 
       return response.data
-    }
+    },
   )
   axios.interceptors.response.use(
     response => response,
@@ -84,13 +84,13 @@ const createAxiosInterceptor = (axios: AxiosInstance) => {
         status = error.data?.code || status
         message = error.data?.message || null
         messager = error.config?.messager !== false
-      } catch (e) {}
+      } catch {}
 
       if (error.toString().indexOf('timeout') > -1) {
         Notification.error({
           duration: 1.5,
           message: '系统消息',
-          description: '请求超时'
+          description: '请求超时',
         })
         return promise
       }
@@ -99,7 +99,7 @@ const createAxiosInterceptor = (axios: AxiosInstance) => {
         Notification.error({
           duration: 1.5,
           message: '系统消息',
-          description: message || '暂无权限'
+          description: message || '暂无权限',
         })
 
         return promise
@@ -109,7 +109,7 @@ const createAxiosInterceptor = (axios: AxiosInstance) => {
         Notification.error({
           duration: 1.5,
           message: '系统消息',
-          description: message || (token ? 'token已过期' : '暂无权限')
+          description: message || (token ? 'token已过期' : '暂无权限'),
         })
 
         if (token) {
@@ -123,12 +123,12 @@ const createAxiosInterceptor = (axios: AxiosInstance) => {
         Notification.error({
           duration: 1.5,
           message: '系统消息',
-          description: message ?? '系统异常'
+          description: message ?? '系统异常',
         })
       }
 
       return promise
-    }
+    },
   )
   return axios
 }
@@ -139,5 +139,5 @@ const createAxiosInterceptor = (axios: AxiosInstance) => {
 export const request = createAxiosInstance({
   baseURL: AppApiBase || '/',
   timeout: 30000,
-  messager: true
+  messager: true,
 })

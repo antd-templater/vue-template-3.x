@@ -79,7 +79,7 @@ export const request = () => {
     printer,
     params,
     query,
-    body
+    body,
   }
 }
 
@@ -89,7 +89,7 @@ export const runner = () => {
   worker.start({
     serviceWorker: { url: `${replacer(AppPageBase)}/msw.js` },
     onUnhandledRequest: 'bypass',
-    quiet: true
+    quiet: true,
   })
 
   return worker

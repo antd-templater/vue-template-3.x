@@ -15,7 +15,7 @@ export default {
     redirect: '/index',
     component: BasicLayout,
     meta: { title: '首页' },
-    children: []
+    children: [],
   },
 
   externalRoute: {
@@ -30,31 +30,31 @@ export default {
       componentName: 'ExternalLink',
       hideChildInMenu: true,
       hideInMenu: true,
-      allowCache: true
-    }
+      allowCache: true,
+    },
   },
 
   notFoundRoutes: [
     {
       name: 'PageError403',
       path: '/PageError403',
-      component: () => import(`@/views/error/PageError403.vue`)
+      component: () => import(`@/views/error/PageError403.vue`),
     },
     {
       name: 'PageError404',
       path: '/PageError404',
-      component: () => import(`@/views/error/PageError404.vue`)
+      component: () => import(`@/views/error/PageError404.vue`),
     },
     {
       name: 'PageError500',
       path: '/PageError500',
-      component: () => import(`@/views/error/PageError500.vue`)
+      component: () => import(`@/views/error/PageError500.vue`),
     },
     {
       path: '/:catchAll(.*)',
-      redirect: '/PageError404'
-    }
+      redirect: '/PageError404',
+    },
   ],
 
-  constantRoutes: [] as any[]
+  constantRoutes: [] as any[],
 }

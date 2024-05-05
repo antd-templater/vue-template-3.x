@@ -13,7 +13,7 @@ export default defineComponent({
     isSideMenu: VueTypes.bool().def(false),
     collapsed: VueTypes.bool().def(false),
     layoutMode: VueTypes.string().def('side'),
-    themeMode: VueTypes.string().def('light')
+    themeMode: VueTypes.string().def('light'),
   },
   setup(props) {
     const { full, title, collapsed, isSideMenu } = toRefs(props)
@@ -26,7 +26,7 @@ export default defineComponent({
     const LogoContent = () => {
       return (
         <div
-          class='layout-logo-content'
+          class="layout-logo-content"
           style={{
             flex: '0 0 auto',
             justifyContent: 'center',
@@ -37,12 +37,12 @@ export default defineComponent({
             textAlign: 'center',
             overflow: 'hidden',
             padding: '0 0',
-            margin: '0 0'
+            margin: '0 0',
           }}
         >
           <img
             src={full.value || !title.value ? logoShowUrl.value : logoShrinkUrl.value}
-            style='width: 100%; height: 100%; display: block'
+            style="width: 100%; height: 100%; display: block"
           />
         </div>
       )
@@ -59,7 +59,7 @@ export default defineComponent({
         height: '48px',
         fontSize: '18px',
         lineHeight: '48px',
-        color: darkTheme.value ? '#ffffff' : 'var(--ant-primary-color)'
+        color: darkTheme.value ? '#ffffff' : 'var(--ant-primary-color)',
       }
 
       return (
@@ -71,16 +71,16 @@ export default defineComponent({
 
     return () => (
       <div
-        class='layout-logo-container'
+        class="layout-logo-container"
         style={{
           display: 'flex',
           width: `${logoWidth.value}px`,
-          height: '48px'
+          height: '48px',
         }}
       >
-        <LogoContent/>
-        <LogoTitle/>
+        <LogoContent />
+        <LogoTitle />
       </div>
     )
-  }
+  },
 })

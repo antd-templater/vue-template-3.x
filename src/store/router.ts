@@ -16,6 +16,6 @@ export default defineStore('router', () => {
   return {
     dynamicRoutes,
     constantRoutes,
-    generateRouter
+    generateRouter,
   }
 })

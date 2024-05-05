@@ -14,7 +14,7 @@ worker.use(
     const resource = {
       code: '0000',
       message: null,
-      result: null
+      result: null,
     }
 
     printer(log => {
@@ -26,7 +26,7 @@ worker.use(
 
     return promiser(
       HttpResponse.json(resource),
-      0
+      0,
     )
-  })
+  }),
 )

@@ -38,7 +38,7 @@ export default defineStore('tag', () => {
     'BasicLayout',
     'RouteView',
     'PageFrame',
-    'PageView'
+    'PageView',
   ])
 
   const stackTags: Ref<Route[]> = ref([])
@@ -57,8 +57,8 @@ export default defineStore('tag', () => {
       matched: tag.matched?.map(tag => ({
         path: tag.path,
         name: tag.name,
-        meta: tag.meta
-      }))
+        meta: tag.meta,
+      })),
     })
   }
 
@@ -69,7 +69,7 @@ export default defineStore('tag', () => {
     return {
       stackTags: readonly(stackTags),
       visitTags: readonly(visitTags),
-      cacheTags: readonly(cacheTags)
+      cacheTags: readonly(cacheTags),
     }
   }
 
@@ -85,7 +85,7 @@ export default defineStore('tag', () => {
     return {
       stackTags: readonly(stackTags),
       visitTags: readonly(visitTags),
-      cacheTags: readonly(cacheTags)
+      cacheTags: readonly(cacheTags),
     }
   }
 
@@ -114,7 +114,7 @@ export default defineStore('tag', () => {
     return {
       stackTags: readonly(stackTags),
       visitTags: readonly(visitTags),
-      cacheTags: readonly(cacheTags)
+      cacheTags: readonly(cacheTags),
     }
   }
 
@@ -136,7 +136,7 @@ export default defineStore('tag', () => {
     return {
       stackTags: readonly(stackTags),
       visitTags: readonly(visitTags),
-      cacheTags: readonly(cacheTags)
+      cacheTags: readonly(cacheTags),
     }
   }
 
@@ -147,7 +147,7 @@ export default defineStore('tag', () => {
     return {
       stackTags: readonly(stackTags),
       visitTags: readonly(visitTags),
-      cacheTags: readonly(cacheTags)
+      cacheTags: readonly(cacheTags),
     }
   }
 
@@ -158,7 +158,7 @@ export default defineStore('tag', () => {
     return {
       stackTags: readonly(stackTags),
       visitTags: readonly(visitTags),
-      cacheTags: readonly(cacheTags)
+      cacheTags: readonly(cacheTags),
     }
   }
 
@@ -173,7 +173,7 @@ export default defineStore('tag', () => {
     return {
       stackTags: readonly(stackTags),
       visitTags: readonly(visitTags),
-      cacheTags: readonly(cacheTags)
+      cacheTags: readonly(cacheTags),
     }
   }
 
@@ -184,7 +184,7 @@ export default defineStore('tag', () => {
     return {
       stackTags: readonly(stackTags),
       visitTags: readonly(visitTags),
-      cacheTags: readonly(cacheTags)
+      cacheTags: readonly(cacheTags),
     }
   }
 
@@ -195,7 +195,7 @@ export default defineStore('tag', () => {
     return {
       stackTags: readonly(stackTags),
       visitTags: readonly(visitTags),
-      cacheTags: readonly(cacheTags)
+      cacheTags: readonly(cacheTags),
     }
   }
 
@@ -210,7 +210,7 @@ export default defineStore('tag', () => {
     return {
       stackTags: readonly(stackTags),
       visitTags: readonly(visitTags),
-      cacheTags: readonly(cacheTags)
+      cacheTags: readonly(cacheTags),
     }
   }
 
@@ -221,7 +221,7 @@ export default defineStore('tag', () => {
     return {
       stackTags: readonly(stackTags),
       visitTags: readonly(visitTags),
-      cacheTags: readonly(cacheTags)
+      cacheTags: readonly(cacheTags),
     }
   }
 
@@ -231,7 +231,7 @@ export default defineStore('tag', () => {
     return {
       stackTags: readonly(stackTags),
       visitTags: readonly(visitTags),
-      cacheTags: readonly(cacheTags)
+      cacheTags: readonly(cacheTags),
     }
   }
 
@@ -243,7 +243,7 @@ export default defineStore('tag', () => {
     return {
       stackTags: readonly(stackTags),
       visitTags: readonly(visitTags),
-      cacheTags: readonly(cacheTags)
+      cacheTags: readonly(cacheTags),
     }
   }
 
@@ -256,7 +256,7 @@ export default defineStore('tag', () => {
     return {
       stackTags: readonly(stackTags),
       visitTags: readonly(visitTags),
-      cacheTags: readonly(cacheTags)
+      cacheTags: readonly(cacheTags),
     }
   }
 
@@ -282,7 +282,7 @@ export default defineStore('tag', () => {
     delAllTags,
     delAllCacheTags,
     delAllVisitTags,
-    delCurrentTag
+    delCurrentTag,
   }
 }, {
   persist: {
@@ -291,13 +291,13 @@ export default defineStore('tag', () => {
       {
         storage: sessionStorage,
         key: 'STORE-STACK-TAGS',
-        paths: ['stackTags']
+        paths: ['stackTags'],
       },
       {
         storage: sessionStorage,
         key: 'STORE-VISIT-TAGS',
-        paths: ['visitTags']
-      }
-    ]
-  }
+        paths: ['visitTags'],
+      },
+    ],
+  },
 })

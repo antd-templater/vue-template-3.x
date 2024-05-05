@@ -7,7 +7,7 @@ export function addResourceInfo<T = any, D = any>(data: D) {
   return request<T, D>({
     url: '/resource/addResourceInfo',
     method: 'post',
-    data: data
+    data: data,
   })
 }
 
@@ -18,7 +18,7 @@ export function getResourceListInfo<T = any, D = any>(data: D) {
   return request<T, D>({
     url: '/resource/getResourceListInfo',
     method: 'post',
-    data: data
+    data: data,
   })
 }
 
@@ -29,7 +29,7 @@ export function getResourceTreeInfo<T = any, D = any>(data: D) {
   return request<T, D>({
     url: '/resource/getResourceTreeInfo',
     method: 'post',
-    data: data
+    data: data,
   })
 }
 
@@ -40,7 +40,7 @@ export function getResourceMenuByRole<T = any, D = any>(data: D) {
   return request<T, D>({
     url: '/resource/getResourceMenuByRole',
     method: 'post',
-    data: data
+    data: data,
   })
 }
 
@@ -51,7 +51,7 @@ export function getResourceButtonByRole<T = any, D = any>(data: D) {
   return request<T, D>({
     url: '/resource/getResourceButtonByRole',
     method: 'post',
-    data: data
+    data: data,
   })
 }
 
@@ -62,7 +62,7 @@ export function modifyResoureInfoByRole<T = any, D = any>(data: D) {
   return request<T, D>({
     url: '/resource/modifyResoureInfoByRole',
     method: 'post',
-    data: data
+    data: data,
   })
 }
 
@@ -73,7 +73,7 @@ export function modifyResourceInfo<T = any, D = any>(data: D) {
   return request<T, D>({
     url: '/resource/modifyResourceInfo',
     method: 'post',
-    data: data
+    data: data,
   })
 }
 
@@ -84,6 +84,6 @@ export function deleteResourceInfo<T = any, D = any>(data: D) {
   return request<T, D>({
     url: '/resource/deleteResourceInfo',
     method: 'post',
-    data: data
+    data: data,
   })
 }

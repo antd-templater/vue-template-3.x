@@ -12,7 +12,7 @@ export default defineComponent({
   props: {
     multiTab: VueTypes.bool().def(false),
     isMixMenu: VueTypes.bool().def(false),
-    hideMixHeaderTab: VueTypes.bool().def(true)
+    hideMixHeaderTab: VueTypes.bool().def(true),
   },
   setup(props) {
     const route = useRoute()
@@ -71,7 +71,7 @@ export default defineComponent({
       closeThis,
       closeLeft,
       closeRight,
-      closeOthers
+      closeOthers,
     }
 
     tagStore.$onAction(({ name, after }) => {
@@ -101,11 +101,11 @@ export default defineComponent({
 
       const ADropdownMenu = (path: string) => {
         return (
-          <AMenu onClick={ ({ key }) => closeOperater[key]?.(path) }>
-            <AMenuItem key='closeThis'>关闭当前标签</AMenuItem>
-            <AMenuItem key='closeLeft'>关闭左侧标签</AMenuItem>
-            <AMenuItem key='closeRight'>关闭右侧标签</AMenuItem>
-            <AMenuItem key='closeOthers'>关闭其他标签</AMenuItem>
+          <AMenu onClick={({ key }) => closeOperater[key]?.(path)}>
+            <AMenuItem key="closeThis">关闭当前标签</AMenuItem>
+            <AMenuItem key="closeLeft">关闭左侧标签</AMenuItem>
+            <AMenuItem key="closeRight">关闭右侧标签</AMenuItem>
+            <AMenuItem key="closeOthers">关闭其他标签</AMenuItem>
           </AMenu>
         )
       }
@@ -127,7 +127,7 @@ export default defineComponent({
       }
 
       return (
-        <div class='layout-tabs-container'>
+        <div class="layout-tabs-container">
           <div
             style={{
               width: '100%',
@@ -135,16 +135,16 @@ export default defineComponent({
               boxSizing: 'border-box',
               boxShadow: '0 .5px 1px 0 rgba(0, 0, 0, 0.15)',
               position: 'relative',
-              zIndex: 9
+              zIndex: 9,
             }}
           >
             <ATabs
               hideAdd
-              size='small'
-              type='editable-card'
-              prefixCls='layout-tabs'
+              size="small"
+              type="editable-card"
+              prefixCls="layout-tabs"
               v-model={[activeKey.value, 'activeKey']}
-              onEdit={(key, action) => action === 'remove' ? closeThis(key) : null }
+              onEdit={(key, action) => action === 'remove' ? closeThis(key) : null}
               tabBarStyle={{ margin: '0 0', padding: '6.5px 0 5px', background: '#ffffff' }}
             >
               { ATabPanes() }
@@ -153,5 +153,5 @@ export default defineComponent({
         </div>
       )
     }
-  }
+  },
 })

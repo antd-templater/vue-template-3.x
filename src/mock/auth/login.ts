@@ -17,7 +17,7 @@ worker.use(
       resource = {
         code: '9999',
         message: '用户名密码错误',
-        result: null
+        result: null,
       }
     }
 
@@ -34,10 +34,10 @@ worker.use(
             orgName: '北仑网安通信有限公司',
             deptName: '软件部',
             deptId: '1126534161135795132',
-            activity: 'Y'
+            activity: 'Y',
           },
-          token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxODI1ODc2NDMyMSIsImV4cCI6MTY0MjQ4NTQwNX0.gFrCkMY5OlheC7sF7elhb8cF2fvkD-dj950xklyI14Q'
-        }
+          token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxODI1ODc2NDMyMSIsImV4cCI6MTY0MjQ4NTQwNX0.gFrCkMY5OlheC7sF7elhb8cF2fvkD-dj950xklyI14Q',
+        },
       }
     }
 
@@ -50,7 +50,7 @@ worker.use(
 
     return promiser(
       HttpResponse.json(resource),
-      0
+      0,
     )
-  })
+  }),
 )

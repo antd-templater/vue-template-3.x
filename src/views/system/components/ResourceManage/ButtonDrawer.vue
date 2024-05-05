@@ -64,11 +64,11 @@ import ButtonForm from './ButtonForm.vue'
 
 export interface Props {
   presetOptions: {
-    buttons: Record<string, any>[]
-  }
+    buttons: Record<string, any>[];
+  };
 }
 
-export interface Emits{
+export interface Emits {
   (e: 'submitted'): void;
   (e: 'deleted'): void;
   (e: 'closed'): void;
@@ -76,7 +76,7 @@ export interface Emits{
 
 defineOptions({
   name: 'ResourceButtonDrawer',
-  inheritAttrs: false
+  inheritAttrs: false,
 })
 
 const props = defineProps<Props>()
@@ -103,9 +103,9 @@ const doEdit = (data: any) => {
   record.value = Object.assign(
     {
       resourceType: 'b',
-      activity: 'Y'
+      activity: 'Y',
     },
-    data
+    data,
   )
 
   nextTick(() => {
@@ -124,9 +124,9 @@ const doAdd = (data: any) => {
   record.value = Object.assign(
     {
       resourceType: 'b',
-      activity: 'Y'
+      activity: 'Y',
     },
-    data
+    data,
   )
 
   nextTick(() => {
@@ -139,14 +139,14 @@ const doDel = async(records: object[]) => {
     if (res.code !== '0000') {
       Notification.error({
         message: '系统消息',
-        description: res.message || '删除失败!'
+        description: res.message || '删除失败!',
       })
       return Promise.reject(res)
     }
 
     Notification.success({
       message: '系统消息',
-      description: '删除成功!'
+      description: '删除成功!',
     })
 
     emits('deleted')
@@ -160,7 +160,7 @@ const doSubmit = () => {
 
       const notice = {
         error: action === 'insert' ? '新增失败!' : '更新失败!',
-        success: action === 'insert' ? '新增成功!' : '更新成功!'
+        success: action === 'insert' ? '新增成功!' : '更新成功!',
       }
 
       const promise = action === 'insert'
@@ -208,7 +208,7 @@ const doClose = () => {
 defineExpose({
   doEdit,
   doAdd,
-  doDel
+  doDel,
 })
 </script>
 

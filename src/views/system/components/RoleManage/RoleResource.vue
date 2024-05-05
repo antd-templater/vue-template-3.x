@@ -164,7 +164,7 @@ export interface Emits {
 
 defineOptions({
   name: 'RoleResource',
-  inheritAttrs: false
+  inheritAttrs: false,
 })
 
 // emits
@@ -178,21 +178,21 @@ const record = ref({} as Record<string, any>)
 const loadings = ref({
   tree: false,
   button: false,
-  submitting: false
+  submitting: false,
 })
 
 // 菜单资源
 const tree = ref(null as InstanceType<STree> | null)
-const menuTrees = ref([] as Array<{ label: string; value: string; children: any[] }>)
+const menuTrees = ref([] as Array<{ label: string; value: string; children: any[]; }>)
 const menuCheckKeys = ref([] as Array<string>)
 const replaceFields = {
   key: 'value',
-  title: 'label'
+  title: 'label',
 }
 
 // 按钮资源
-const buttonList = ref([] as Array<{ id: string; actionsOptions: Record<string, any>[], selected: string[]; }>)
-const buttonSortList = ref([] as Array<{ id: string; menu: Record<string, any>, titles: string[]; options: Record<string, any>[]; selected: string[]; }>)
+const buttonList = ref([] as Array<{ id: string; actionsOptions: Record<string, any>[]; selected: string[]; }>)
+const buttonSortList = ref([] as Array<{ id: string; menu: Record<string, any>; titles: string[]; options: Record<string, any>[]; selected: string[]; }>)
 const buttonCheckKeys = ref([] as Array<string>)
 
 const queryMenus = async() => {
@@ -229,8 +229,8 @@ const queryButton = async(values: Array<string>) => {
     '',
     values.map(value => ({
       roleId: record.value.roleId,
-      menuId: value
-    }))
+      menuId: value,
+    })),
   )
 
   const promise = resourceApi.getResourceButtonByRole(params).then(res => {
@@ -244,7 +244,7 @@ const queryButton = async(values: Array<string>) => {
     buttonList.value = res.result.map((button: any) => {
       return {
         ...button,
-        selected: button.selected.filter((key: string) => button.actionsOptions.some((opt: any) => opt.value === key))
+        selected: button.selected.filter((key: string) => button.actionsOptions.some((opt: any) => opt.value === key)),
       }
     })
 
@@ -271,7 +271,7 @@ const doTreeCheck = treeEmitCheckDefiner(options => {
   queryButton(checkedKeys)
 })
 
-const doButtonCheck = (options: { button: any, option: any }) => {
+const doButtonCheck = (options: { button: any; option: any; }) => {
   const button = options.button
   const option = options.option
 
@@ -290,11 +290,11 @@ const doButtonCheck = (options: { button: any, option: any }) => {
   buttonCheckKeys.value = buttonSortList.value.flatMap(button => button.selected)
 }
 
-const isButtonAllChecked = (button: { options: any[], selected: string[] }) => {
+const isButtonAllChecked = (button: { options: any[]; selected: string[]; }) => {
   return button.options.every(option => button.selected.includes(option.value))
 }
 
-const isButtonHasChecked = (button: { options: any[], selected: string[] }) => {
+const isButtonHasChecked = (button: { options: any[]; selected: string[]; }) => {
   return (
     !button.options.every(option => button.selected.includes(option.value)) &&
     button.options.some(option => button.selected.includes(option.value))
@@ -341,7 +341,7 @@ const doButtonSort = () => {
       titles: [...parents.map(node => node.label), menu.label],
       options: button.actionsOptions,
       selected: button.selected,
-      id: button.id
+      id: button.id,
     }
   })
 
@@ -356,7 +356,7 @@ const doOpen = (source: Record<string, any>) => {
   loadings.value = {
     tree: false,
     button: false,
-    submitting: false
+    submitting: false,
   }
 }
 
@@ -370,7 +370,7 @@ const doClose = () => {
     loadings.value = {
       tree: false,
       button: false,
-      submitting: false
+      submitting: false,
     }
 
     // 菜单资源
@@ -401,14 +401,14 @@ const doSubmit = () => {
       if (res.code !== '0000') {
         Notification.error({
           message: '系统消息',
-          description: '修改失败'
+          description: '修改失败',
         })
         return Promise.reject(res)
       }
 
       Notification.success({
         message: '系统消息',
-        description: '修改成功'
+        description: '修改成功',
       })
 
       emits('submitted')
@@ -424,7 +424,7 @@ const doSubmit = () => {
 
 defineExpose({
   doClose,
-  doOpen
+  doOpen,
 })
 </script>
 

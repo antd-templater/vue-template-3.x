@@ -20,9 +20,9 @@ worker.use(
           roleId: '27442970747734159',
           roleName: '系统管理',
           dataFlag: '2',
-          activity: 'Y'
-        }
-      ]
+          activity: 'Y',
+        },
+      ],
     }
 
     printer(log => {
@@ -34,7 +34,7 @@ worker.use(
 
     return promiser(
       HttpResponse.json(resource),
-      0
+      0,
     )
-  })
+  }),
 )

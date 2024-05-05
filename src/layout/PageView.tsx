@@ -19,26 +19,26 @@ export default defineComponent({
 
     return () => (
       <div
-        class='page-view-container'
+        class="page-view-container"
         style={{
           width: '100%',
           height: '100%',
           margin: '0',
           padding: '0.5px',
           position: 'relative',
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
         }}
       >
         <RouterView
           v-slots={{
             default: (scope: any) => (
               <KeepAlive include={appStore.multiTab && appStore.keepAlive ? tagStore.cacheTags : []}>
-                { scope.Component ? <scope.Component key={key.value}/> : null }
+                { scope.Component ? <scope.Component key={key.value} /> : null }
               </KeepAlive>
-            )
+            ),
           }}
         />
       </div>
     )
-  }
+  },
 })

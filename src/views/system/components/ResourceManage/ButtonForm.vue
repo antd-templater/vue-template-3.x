@@ -16,8 +16,8 @@
 <script setup lang="ts">
 export interface Props {
   presetOptions: {
-    buttons: Record<string, any>[]
-  }
+    buttons: Record<string, any>[];
+  };
   disabled: boolean;
   readonly: boolean;
   loading: boolean;
@@ -25,7 +25,7 @@ export interface Props {
 
 defineOptions({
   name: 'ResourceButtonForm',
-  inheritAttrs: false
+  inheritAttrs: false,
 })
 
 const form = ref(null as InstanceType<SForm> | null)
@@ -40,7 +40,7 @@ const groups = formGroupsDefiner([
     slot: '',
     field: 'AGroup-1',
     label: '',
-    grid: {}
+    grid: {},
   },
   {
     type: 'AInput',
@@ -49,8 +49,8 @@ const groups = formGroupsDefiner([
     label: '按钮名称',
     props: {
       placeholder: '请输入按钮名称',
-      options: props.presetOptions.buttons
-    }
+      options: props.presetOptions.buttons,
+    },
   },
   {
     type: 'AInput',
@@ -58,8 +58,8 @@ const groups = formGroupsDefiner([
     field: 'resourceName',
     label: '按钮标识',
     props: {
-      placeholder: '请输入按钮标识'
-    }
+      placeholder: '请输入按钮标识',
+    },
   },
   {
     type: 'AInput',
@@ -67,15 +67,15 @@ const groups = formGroupsDefiner([
     field: 'sort',
     label: '按钮排序',
     props: {
-      placeholder: '请输入按钮排序'
-    }
+      placeholder: '请输入按钮排序',
+    },
   },
   {
     type: 'AGroup',
     slot: 'AGroup-2',
     field: 'AGroup-2',
     border: true,
-    grid: {}
+    grid: {},
   },
   {
     type: 'ASwitch',
@@ -86,20 +86,20 @@ const groups = formGroupsDefiner([
       checkedValue: 'Y',
       unCheckedValue: 'N',
       checkedChildren: '开',
-      unCheckedChildren: '关'
-    }
-  }
+      unCheckedChildren: '关',
+    },
+  },
 ])
 
 const rules = formRulesDefiner({
   title: [{ required: true, message: '请输入按钮名称' }],
   resourceName: [{ required: true, message: '请输入按钮标识' }],
-  sort: [{ required: true, message: '请输入按钮排序' }]
+  sort: [{ required: true, message: '请输入按钮排序' }],
 })
 
 const grid = formGridDefiner({
   gutter: 8,
-  xs: 24
+  xs: 24,
 })
 
 const resetFields = (...rest: any[]) => {
@@ -109,7 +109,7 @@ const resetFields = (...rest: any[]) => {
 const validateFields = (...rest: any[]) => {
   return form.value?.validateFields(...rest).then(() => ({
     action: action.value,
-    record: model.value
+    record: model.value,
   }))
 }
 
@@ -127,7 +127,7 @@ defineExpose({
   validateFields,
   resetFields,
   doCreate,
-  doClose
+  doClose,
 })
 </script>
 

@@ -18,17 +18,17 @@ export default defineComponent({
     })
 
     return () => (
-      <div class='route-view-container'>
+      <div class="route-view-container">
         <RouterView
           v-slots={{
             default: (scope: any) => (
               <KeepAlive include={appStore.multiTab && appStore.keepAlive ? tagStore.cacheTags : []}>
-                { scope.Component ? <scope.Component key={key.value}/> : null }
+                { scope.Component ? <scope.Component key={key.value} /> : null }
               </KeepAlive>
-            )
+            ),
           }}
         />
       </div>
     )
-  }
+  },
 })

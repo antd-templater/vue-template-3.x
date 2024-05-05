@@ -19,5 +19,5 @@ export default createRouter({
     return !multiTab || !keepAlive || !isAllowCache || !position
       ? { top: 0, left: 0 }
       : position
-  }
+  },
 })

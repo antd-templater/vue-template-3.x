@@ -7,7 +7,7 @@ module.exports = {
         useTabs: false,
         tabWidth: 2,
         printWidth: 200,
-        singleQuote: true
+        singleQuote: true,
       },
       tabWidth: 2,
       printWidth: 200,
@@ -15,7 +15,7 @@ module.exports = {
       wrapAttributes: true,
       sortAttributes: false,
       usePrettier: false,
-      useTabs: false
-    })
-  ]
+      useTabs: false,
+    }),
+  ],
 }

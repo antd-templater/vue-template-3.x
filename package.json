@@ -4,7 +4,7 @@
   "homepage": "https://github.com/antd-templater/template-3.x",
   "author": "lin pengteng <china.linpengteng@gmail.com>",
   "license": "MIT License",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "keywords": [
     "front-end",
     "ant-design-vue",
@@ -15,7 +15,7 @@
     "test": "vitest --ui",
     "cypress": "cypress open --component",
     "build": "vue-tsc --noEmit && vite build",
-    "format": "eslint --fix --quiet src --ext .vue,.tsx,.jsx,.ts,.js",
+    "eslint": "npx eslint --fix --quiet src/**/*{.vue,.tsx,.ts}",
     "release": "release-it",
     "preview": "vite preview",
     "preinstall": "npx only-allow pnpm",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
-    "@antd-templater/library-3.x": "^4.1.0",
+    "@antd-templater/library-3.x": "^4.2.1",
     "ant-design-vue": "^4.2.1",
     "axios": "^1.6.8",
     "dayjs": "^1.11.11",
@@ -41,16 +41,18 @@
     "vue-types": "^5.1.2"
   },
   "devDependencies": {
+    "@antd-templater/eslint-config": "^1.0.2",
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
+    "@eslint/config-inspector": "^0.4.8",
+    "@eslint/js": "^9.2.0",
     "@release-it/conventional-changelog": "^8.0.1",
+    "@stylistic/eslint-plugin": "^1.8.0",
     "@types/md5": "^2.3.5",
     "@types/node": "^20.12.8",
     "@types/nprogress": "^0.2.3",
     "@types/qs": "^6.9.15",
     "@types/vue-ls": "^3.2.7",
-    "@typescript-eslint/eslint-plugin": "^7.8.0",
-    "@typescript-eslint/parser": "^7.8.0",
     "@vitejs/plugin-legacy": "^5.3.2",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vitejs/plugin-vue-jsx": "^3.1.0",
@@ -60,7 +62,7 @@
     "cypress": "^13.8.1",
     "cz-message-helper": "^1.3.1",
     "darkreader": "^4.9.84",
-    "eslint": "^8.57.0",
+    "eslint": "^9.1.1",
     "eslint-plugin-vue": "^9.25.0",
     "husky": "^9.0.11",
     "jsdom": "^24.0.0",
@@ -71,6 +73,7 @@
     "rollup": "^4.17.2",
     "terser": "^5.31.0",
     "typescript": "^5.4.5",
+    "typescript-eslint": "^7.8.0",
     "unplugin-auto-import": "^0.17.5",
     "unplugin-vue-components": "^0.27.0",
     "vite": "^5.2.11",
@@ -88,7 +91,7 @@
     }
   },
   "engines": {
-    "node": ">=18.0.0",
+    "node": "^18.18.0 || ^20.9.0 || >=21.1.0",
     "pnpm": ">=7"
   },
   "msw": {

@@ -31,8 +31,8 @@ const computedTheme = computed(() => {
       colorWarning: appStore.warningColor,
       colorSuccess: appStore.successColor,
       colorError: appStore.errorColor,
-      colorInfo: appStore.infoColor
-    }
+      colorInfo: appStore.infoColor,
+    },
   }
 })
 

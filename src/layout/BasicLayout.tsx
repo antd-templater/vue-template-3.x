@@ -35,7 +35,7 @@ export default defineComponent({
 
     const contentStyle = computed(() => {
       return {
-        overflow: (appStore.isMixMenu && (appStore.hideMixHeaderTab || !appStore.fixedHeaderTab)) || (!appStore.isMixMenu && appStore.fixedHeader && !appStore.fixedHeaderTab) ? 'auto' : 'visible'
+        overflow: (appStore.isMixMenu && (appStore.hideMixHeaderTab || !appStore.fixedHeaderTab)) || (!appStore.isMixMenu && appStore.fixedHeader && !appStore.fixedHeaderTab) ? 'auto' : 'visible',
       }
     })
 
@@ -80,7 +80,7 @@ export default defineComponent({
           padding: '0 15px',
           fontSize: '24px',
           color: darkTheme.value ? '#ffffff' : 'var(--ant-primary-color)',
-          cursor: 'pointer'
+          cursor: 'pointer',
         }
 
         return (
@@ -91,13 +91,13 @@ export default defineComponent({
           >
             <div
               ref={refLayoutHeader as any}
-              style='display: flex; flex: 1 1 auto; align-items: center; height: 48px; lineHeight: 48px;'
+              style="display: flex; flex: 1 1 auto; align-items: center; height: 48px; lineHeight: 48px;"
             >
               <h1
                 style={h1Style}
                 onClick={() => appStore.toggleCollapsed(!appStore.collapsed)}
               >
-                { props.collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/> }
+                { props.collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined /> }
               </h1>
             </div>
           </SProGlobalHeader>
@@ -133,7 +133,7 @@ export default defineComponent({
 
     const menuExtraRender = (props: any) => {
       if (props.layout === 'mix' && !props.isMobile) {
-        return <div style='width: 100%; height: 5px'/>
+        return <div style="width: 100%; height: 5px" />
       }
     }
 
@@ -203,7 +203,7 @@ export default defineComponent({
         onSelect={onSelect}
       >
         <div
-          class='page-router-view-navigate'
+          class="page-router-view-navigate"
           style={{ position: 'sticky', left: 0 }}
         >
           <LayoutMultiTab
@@ -220,7 +220,7 @@ export default defineComponent({
         </div>
 
         <div
-          class='page-router-view-container'
+          class="page-router-view-container"
           style={{
             width: '100%',
             maxWidth: appStore.isTopMenu && appStore.isFixed ? '1200px' : 'none',
@@ -231,7 +231,7 @@ export default defineComponent({
             padding: '0px 0px',
             zIndex: 1,
             right: 0,
-            left: 0
+            left: 0,
           }}
         >
           <RouterView
@@ -240,15 +240,15 @@ export default defineComponent({
                 <KeepAlive include={appStore.multiTab && appStore.keepAlive ? tagStore.cacheTags : []}>
                   { scope.Component ? <scope.Component /> : null }
                 </KeepAlive>
-              )
+              ),
             }}
           />
         </div>
 
-        <div class='page-router-view-settings'>
-          <LayoutSettingDrawer/>
+        <div class="page-router-view-settings">
+          <LayoutSettingDrawer />
         </div>
       </SProLayout>
     )
-  }
+  },
 })

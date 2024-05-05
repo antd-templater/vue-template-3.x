@@ -24,10 +24,10 @@ export default {
     warningColor: '#faad14',
     successColor: '#52c41a',
     errorColor: '#ff4d4f',
-    infoColor: '#1890ff'
+    infoColor: '#1890ff',
   },
   themeWeak: false,
-  themeMode: 'light' as	ThemeMode,
+  themeMode: 'light' as ThemeMode,
   layoutMode: 'side' as LayoutMode,
   iconPrefix: 'icon-',
   iconfontUrl: '',
@@ -40,7 +40,7 @@ export default {
   fixedHeader: true,
   fixedSidebar: true,
   fixedHeaderTab: true,
-  hideMixHeaderTab: true
+  hideMixHeaderTab: true,
 }
 
 export type ThemeMode = 'light' | 'dark' | 'realDark'

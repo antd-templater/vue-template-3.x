@@ -30,6 +30,6 @@ export default (app: App) => {
 
         return
       }
-    }
+    },
   })
 }

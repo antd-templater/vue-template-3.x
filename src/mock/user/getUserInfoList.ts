@@ -28,7 +28,7 @@ worker.use(
             deptId: '1126534161135795132',
             roleId: ['27442970747734159'],
             postName: '系统管理',
-            activity: 'Y'
+            activity: 'Y',
           },
           {
             userNo: 'lin',
@@ -42,14 +42,14 @@ worker.use(
             deptId: '1126534161135795132',
             roleId: ['27442970747734159'],
             postName: '系统管理',
-            activity: 'Y'
-          }
+            activity: 'Y',
+          },
         ],
         pageNo: 1,
         pageSize: 20,
         totalSize: 2,
-        totalPage: 1
-      }
+        totalPage: 1,
+      },
     }
 
     printer(log => {
@@ -61,7 +61,7 @@ worker.use(
 
     return promiser(
       HttpResponse.json(resource),
-      0
+      0,
     )
-  })
+  }),
 )

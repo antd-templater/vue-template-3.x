@@ -49,7 +49,7 @@ worker.use(
                   hideChildInMenu: 'N',
                   hideInMenu: 'N',
                   allowCache: 'Y',
-                  activity: 'Y'
+                  activity: 'Y',
                 },
                 {
                   sort: 1000200,
@@ -65,7 +65,7 @@ worker.use(
                   hideChildInMenu: 'N',
                   hideInMenu: 'N',
                   allowCache: 'Y',
-                  activity: 'Y'
+                  activity: 'Y',
                 },
                 {
                   sort: 1000300,
@@ -81,7 +81,7 @@ worker.use(
                   hideChildInMenu: 'N',
                   hideInMenu: 'N',
                   allowCache: 'Y',
-                  activity: 'Y'
+                  activity: 'Y',
                 },
                 {
                   sort: 1000400,
@@ -97,13 +97,13 @@ worker.use(
                   hideChildInMenu: 'N',
                   hideInMenu: 'N',
                   allowCache: 'Y',
-                  activity: 'Y'
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  activity: 'Y',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     }
 
     printer(log => {
@@ -115,7 +115,7 @@ worker.use(
 
     return promiser(
       HttpResponse.json(resource),
-      0
+      0,
     )
-  })
+  }),
 )

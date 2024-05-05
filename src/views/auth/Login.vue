@@ -97,32 +97,32 @@ const router = useRouter()
 const formModel = reactive({
   username: '',
   password: '',
-  rememberMe: true
+  rememberMe: true,
 })
 
 const formRules = reactive({
   username: [
     {
       required: true,
-      message: '请输入用户名'
-    }
+      message: '请输入用户名',
+    },
   ],
   password: [
     {
       required: true,
-      message: '请输入密码'
-    }
-  ]
+      message: '请输入密码',
+    },
+  ],
 })
 
 const formStates = reactive({
   username: computed(() => formUse.validateInfos.username.validateStatus !== 'error'),
-  password: computed(() => formUse.validateInfos.password.validateStatus !== 'error')
+  password: computed(() => formUse.validateInfos.password.validateStatus !== 'error'),
 })
 
 const formUse = Form.useForm(
   formModel,
-  formRules
+  formRules,
 )
 
 const doLogin = async() => {
@@ -137,7 +137,7 @@ const doLogin = async() => {
         onClose: () => {
           loading.value = false
           router.push({ path: '/' })
-        }
+        },
       })
     }
 
@@ -149,7 +149,7 @@ const doLogin = async() => {
           description: err.message,
           onClose: () => {
             loading.value = false
-          }
+          },
         })
       }
       setTimeout(() => {

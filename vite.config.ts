@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => {
 
     test: {
       globals: true,
-      environment: 'jsdom'
+      environment: 'jsdom',
     },
 
     css: {
@@ -30,15 +30,15 @@ export default defineConfig(({ mode }) => {
       preprocessorOptions: {
         less: {
           modifyVars: {},
-          javascriptEnabled: true
-        }
-      }
+          javascriptEnabled: true,
+        },
+      },
     },
 
     resolve: {
       alias: {
-        '@/': fileURLToPath(new URL('./src', import.meta.url)) + '/'
-      }
+        '@/': fileURLToPath(new URL('./src', import.meta.url)) + '/',
+      },
     },
 
     server: {
@@ -47,9 +47,9 @@ export default defineConfig(({ mode }) => {
         '/api': {
           target: 'http://127.0.0.1:8888/api',
           rewrite: path => path.replace(/^\/api/, ''),
-          changeOrigin: true
-        }
-      }
+          changeOrigin: true,
+        },
+      },
     },
 
     plugins: [
@@ -57,45 +57,45 @@ export default defineConfig(({ mode }) => {
         disable: offGzip,
         threshold: 10240,
         algorithm: 'gzip',
-        ext: '.gz'
+        ext: '.gz',
       }),
       AutoComponents({
         dirs: ['src/components'],
         resolvers: [
           AntDesignVueResolver({
             resolveIcons: true,
-            importStyle: 'less'
-          })
+            importStyle: 'less',
+          }),
         ],
         include: [
           /\.[tj]sx?/,
           /\.vue\?vue/,
-          /\.vue$/
-        ]
+          /\.vue$/,
+        ],
       }),
       AutoImport({
         resolvers: [
-          AntdLibraryResolver()
+          AntdLibraryResolver(),
         ],
         imports: [
           'vue',
           'pinia',
-          'vue-router'
+          'vue-router',
         ],
         eslintrc: {
           enabled: true,
           filepath: './.eslintrc-auto-import.json',
-          globalsPropValue: true
+          globalsPropValue: true,
         },
-        dts: true
+        dts: true,
       }),
       VueJsx(),
       Vue({
         script: {
           defineModel: true,
-          propsDestructure: true
-        }
-      })
+          propsDestructure: true,
+        },
+      }),
     ],
 
     build: {
@@ -104,8 +104,8 @@ export default defineConfig(({ mode }) => {
       terserOptions: {
         compress: {
           drop_console: true,
-          drop_debugger: true
-        }
+          drop_debugger: true,
+        },
       },
       rollupOptions: {
         logLevel: 'silent',
@@ -136,9 +136,9 @@ export default defineConfig(({ mode }) => {
             if (/\/src\/mock\/.+/.test(id)) return 'temporary'
             if (/\/src\/.+\/.+/.test(id)) return 'bootstrap'
             if (/\/src\//.test(id)) return 'main'
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    },
   }
 })

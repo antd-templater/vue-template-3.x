@@ -61,7 +61,7 @@ export interface Props {
     orgTree: any[];
     deptId: any[];
     roleId: any[];
-  }
+  };
 }
 
 export interface Emits {
@@ -70,12 +70,12 @@ export interface Emits {
 
 defineOptions({
   name: 'UserTable',
-  inheritAttrs: false
+  inheritAttrs: false,
 })
 
 const queryParams = ref({
   userNo: '',
-  activity: ''
+  activity: '',
 })
 
 const props = defineProps<Props>()
@@ -87,14 +87,14 @@ const sticky = tableStickyDefiner({
   leftFooter: false,
   rightFooter: false,
   bottomFooter: false,
-  bottomScrollbar: true
+  bottomScrollbar: true,
 })
 
 const scroll = tableScrollDefiner({
   scrollToFirstXOnChange: true,
   scrollToFirstYOnChange: true,
   overflow: 'visible',
-  x: 'max-content'
+  x: 'max-content',
 })
 
 const columns = tableColumnsDefiner([
@@ -103,50 +103,50 @@ const columns = tableColumnsDefiner([
     dataIndex: 'serial',
     align: 'center',
     maxWidth: 60,
-    width: 60
+    width: 60,
   },
   {
     title: '用户名',
     dataIndex: 'userNo',
     ellipsis: true,
-    width: 130
+    width: 130,
   },
   {
     title: '用户姓名',
     dataIndex: 'userName',
     ellipsis: true,
-    width: 130
+    width: 130,
   },
   {
     title: '手机号',
     dataIndex: 'mobilePhone',
     ellipsis: true,
-    width: 120
+    width: 120,
   },
   {
     title: '职位',
-    dataIndex: 'postName'
+    dataIndex: 'postName',
   },
   {
     title: '所属组织',
-    dataIndex: 'orgId'
+    dataIndex: 'orgId',
   },
   {
     title: '所属部门',
-    dataIndex: 'deptId'
+    dataIndex: 'deptId',
   },
   {
     title: '可用状态',
     dataIndex: 'activity',
     align: 'center',
-    width: 80
+    width: 80,
   },
   {
     title: '操作',
     dataIndex: 'action',
     align: 'center',
-    width: 80
-  }
+    width: 80,
+  },
 ])
 
 const paginate = tablePaginateDefiner({
@@ -157,7 +157,7 @@ const paginate = tablePaginateDefiner({
   showSizeChanger: true,
   showTotal: true,
   visible: true,
-  fixed: true
+  fixed: true,
 })
 
 const loadData = tableLoadDataDefiner(options => {
@@ -165,14 +165,14 @@ const loadData = tableLoadDataDefiner(options => {
     '',
     queryParams.value,
     options.paginate,
-    options.sorter
+    options.sorter,
   )
 
   return userApi.getUserInfoList(params).then(res => {
     if (res.code !== '0000') {
       Notification.error({
         message: '系统消息',
-        description: res.message || '用户查询查询失败!'
+        description: res.message || '用户查询查询失败!',
       })
       return Promise.reject(res)
     }
@@ -196,14 +196,14 @@ const doTableModify = (record: object) => {
     if (res.code !== '0000') {
       Notification.error({
         message: '系统消息',
-        description: '修改失败'
+        description: '修改失败',
       })
       return Promise.reject(res)
     }
 
     Notification.success({
       message: '系统消息',
-      description: '修改成功'
+      description: '修改成功',
     })
 
     doTableRefresh()
@@ -220,7 +220,7 @@ const doTableRefresh = () => {
 
 defineExpose({
   doTableRefresh,
-  queryParams
+  queryParams,
 })
 </script>
 

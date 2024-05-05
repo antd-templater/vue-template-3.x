@@ -51,7 +51,7 @@ export interface ReqiredRoute extends Route {
 }
 
 export interface ListToTree {
-  (list: Menu[], chidren: Menu[], parent: { id?: string | number }): void;
+  (list: Menu[], chidren: Menu[], parent: { id?: string | number; }): void;
 }
 
 export interface TreeToRoute {
@@ -71,9 +71,9 @@ export interface GenerateDynamicRouter {
 }
 
 export interface GenerateLayoutRouter {
-  (context: Record<string, any>): Record<string, any>
+  (context: Record<string, any>): Record<string, any>;
 }
 
 export interface GenerateViewsRouter {
-  (context: Record<string, () => Promise<any>>): Record<string, () => Promise<any>>
+  (context: Record<string, () => Promise<any>>): Record<string, () => Promise<any>>;
 }

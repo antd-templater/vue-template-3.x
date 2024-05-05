@@ -16,8 +16,8 @@ module.exports = {
         'test',
         'merge',
         'revert',
-        'wip'
-      ]
+        'wip',
+      ],
     ],
     'type-case': [0],
     'scope-case': [0],
@@ -33,6 +33,6 @@ module.exports = {
     'body-full-stop': [0],
     'header-max-length': [2, 'always', 72],
     'body-leading-blank': [2, 'always'],
-    'footer-leading-blank': [2, 'always']
-  }
+    'footer-leading-blank': [2, 'always'],
+  },
 }

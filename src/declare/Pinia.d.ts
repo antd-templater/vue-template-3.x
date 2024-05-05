@@ -1,11 +1,11 @@
-/** 
+/**
  * pinia-plugin-persist: TypeScript5.0+ moduleResolution bundler breaks types import
  */
 
 declare module 'pinia-plugin-persist' {
-  import { PiniaPluginContext } from 'pinia';
+  import { PiniaPluginContext } from 'pinia'
 
-  declare type Store = PiniaPluginContext['store'];
+  declare type Store = PiniaPluginContext['store']
 
   export interface PersistStrategy {
     key?: string;
@@ -19,12 +19,12 @@ declare module 'pinia-plugin-persist' {
   }
 
   declare module 'pinia' {
-    interface DefineStoreOptionsBase<S, Store> {
-        persist?: PersistOptions;
+    interface DefineStoreOptionsBase {
+      persist?: PersistOptions;
     }
   }
 
-  export declare const updateStorage: (strategy: PersistStrategy, store: Store) => void;
-  declare const _default: ({ options, store }: PiniaPluginContext) => void;
-  export default _default;
+  export declare const updateStorage: (strategy: PersistStrategy, store: Store) => void
+  declare const _default: ({ options, store }: PiniaPluginContext) => void
+  export default _default
 }

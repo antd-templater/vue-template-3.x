@@ -22,31 +22,31 @@ export default defineComponent({
 
     return () => (
       <div
-        class='page-frame-container'
+        class="page-frame-container"
         style={{
           margin: '0',
           padding: '0.5px',
           position: 'absolute',
           boxSizing: 'border-box',
-          ...appStore.layoutViewStyle
+          ...appStore.layoutViewStyle,
         }}
       >
         <ASpin
-          size='large'
-          tip='正在加载访问中...'
-          wrapperClassName='ant-spin-wrapper'
+          size="large"
+          tip="正在加载访问中..."
+          wrapperClassName="ant-spin-wrapper"
           spinning={loading.value}
         >
           <iframe
             ref={iframe as any}
-            width='100%'
-            height='100%'
-            scrolling='yes'
-            frameborder='0'
+            width="100%"
+            height="100%"
+            scrolling="yes"
+            frameborder="0"
             src={iframeSource}
           />
         </ASpin>
       </div>
     )
-  }
+  },
 })

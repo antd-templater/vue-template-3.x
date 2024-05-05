@@ -60,7 +60,7 @@ export interface Props {
   dictionary: {
     orgTree: any[];
     isOrg: any[];
-  }
+  };
 }
 
 export interface Emits {
@@ -69,7 +69,7 @@ export interface Emits {
 
 defineOptions({
   name: 'OrganizeTable',
-  inheritAttrs: false
+  inheritAttrs: false,
 })
 
 const props = defineProps<Props>()
@@ -82,14 +82,14 @@ const sticky = tableStickyDefiner({
   leftFooter: false,
   rightFooter: false,
   bottomFooter: false,
-  bottomScrollbar: true
+  bottomScrollbar: true,
 })
 
 const scroll = tableScrollDefiner({
   scrollToFirstXOnChange: true,
   scrollToFirstYOnChange: true,
   overflow: 'visible',
-  x: 'max-content'
+  x: 'max-content',
 })
 
 const columns = tableColumnsDefiner([
@@ -98,45 +98,45 @@ const columns = tableColumnsDefiner([
     dataIndex: 'serial',
     align: 'center',
     maxWidth: 60,
-    width: 60
+    width: 60,
   },
   {
     title: '名称',
     dataIndex: 'title',
     tooltip: true,
-    fixed: 'left'
+    fixed: 'left',
   },
   {
     title: '简称',
-    dataIndex: 'orgShortName'
+    dataIndex: 'orgShortName',
   },
   {
     title: '编码',
-    dataIndex: 'key'
+    dataIndex: 'key',
   },
   {
     title: '上级单位',
     dataIndex: 'parentOrgName',
-    tooltip: true
+    tooltip: true,
   },
   {
     title: '形态',
     dataIndex: 'isOrg',
-    width: 100
+    width: 100,
   },
   {
     title: '可用状态',
     dataIndex: 'activity',
     align: 'center',
-    width: 90
+    width: 90,
   },
   {
     title: '操作',
     dataIndex: 'action',
     align: 'center',
     fixed: 'right',
-    width: 80
-  }
+    width: 80,
+  },
 ])
 
 const paginate = tablePaginateDefiner({
@@ -147,7 +147,7 @@ const paginate = tablePaginateDefiner({
   showSizeChanger: true,
   showTotal: true,
   visible: true,
-  fixed: true
+  fixed: true,
 })
 
 const loadData = tableLoadDataDefiner(options => {
@@ -155,14 +155,14 @@ const loadData = tableLoadDataDefiner(options => {
     '',
     queryParams.value,
     options.paginate,
-    options.sorter
+    options.sorter,
   )
 
   return organizeApi.getOrganizeInfoList(params).then(res => {
     if (res.code !== '0000') {
       Notification.error({
         message: '系统消息',
-        description: res.message || '组织机构查询失败!'
+        description: res.message || '组织机构查询失败!',
       })
       return Promise.reject(res)
     }
@@ -180,14 +180,14 @@ const doActivitier = (record: any, key: string, value: any) => {
     if (res.code !== '0000') {
       Notification.error({
         message: '系统消息',
-        description: '修改失败'
+        description: '修改失败',
       })
       return Promise.reject(res)
     }
 
     Notification.success({
       message: '系统消息',
-      description: '修改成功'
+      description: '修改成功',
     })
 
     doTableRefresh()
@@ -204,7 +204,7 @@ const doTableEdit = (record: any) => {
 
 defineExpose({
   doTableRefresh,
-  queryParams
+  queryParams,
 })
 </script>
 

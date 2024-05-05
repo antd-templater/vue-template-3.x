@@ -24,7 +24,7 @@ declare interface UserRole {
   permissions: Array<{
     roleId: string;
     permissionId: string;
-    actionEntitySet: Array<{ action: string, describe: string }>;
+    actionEntitySet: Array<{ action: string; describe: string; }>;
     actionList: Array<string>;
   }>;
 }

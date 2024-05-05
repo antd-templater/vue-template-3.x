@@ -111,7 +111,7 @@ export interface Emits {
 
 defineOptions({
   name: 'RoleQuery',
-  inheritAttrs: false
+  inheritAttrs: false,
 })
 
 const open = ref(false)

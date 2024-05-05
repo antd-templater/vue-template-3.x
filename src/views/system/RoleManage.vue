@@ -38,7 +38,7 @@ import useAppStore from '@/store/app'
 
 defineOptions({
   name: 'RoleManage',
-  inheritAttrs: false
+  inheritAttrs: false,
 })
 
 const cardStyle: CSSProperties = {
@@ -47,12 +47,12 @@ const cardStyle: CSSProperties = {
   flex: '1 1 auto',
   width: '100%',
   height: '100%',
-  overflow: 'hidden'
+  overflow: 'hidden',
 }
 
 const cardHeadStyle: CSSProperties = {
   flex: '0 0 auto',
-  overflow: 'hidden'
+  overflow: 'hidden',
 }
 
 const cardBodyStyle: CSSProperties = {
@@ -61,7 +61,7 @@ const cardBodyStyle: CSSProperties = {
   flex: '1 1 auto',
   padding: '20px 24px 6px',
   overflow: 'hidden',
-  position: 'relative'
+  position: 'relative',
 }
 
 const table = ref(null as InstanceType<typeof RoleTable> | null)

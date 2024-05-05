@@ -11,7 +11,7 @@ import { AxiosError } from 'axios'
 vi.mock('@/store/user', () => {
   const module = {
     token: '',
-    logout: () => Promise.resolve()
+    logout: () => Promise.resolve(),
   }
   return { default: vi.fn(() => module) }
 })
@@ -29,7 +29,7 @@ describe('@utils/request.ts', () => {
       return HttpResponse.json({
         code: '0000',
         message: null,
-        result: 'success'
+        result: 'success',
       })
     }),
 
@@ -37,9 +37,9 @@ describe('@utils/request.ts', () => {
       return HttpResponse.json({
         code: '0000',
         message: null,
-        result: { name: 'admin', email: 'admin@gmail.com' }
+        result: { name: 'admin', email: 'admin@gmail.com' },
       })
-    })
+    }),
   )
 
   beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))

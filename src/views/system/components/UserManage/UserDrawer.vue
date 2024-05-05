@@ -48,19 +48,19 @@ export interface Props {
     orgTree: any[];
     deptId: any[];
     roleId: any[];
-  }
+  };
 }
 
 import UserForm from './UserForm.vue'
 
-export interface Emits{
+export interface Emits {
   (e: 'submitted'): void;
   (e: 'closed'): void;
 }
 
 defineOptions({
   name: 'UserDrawer',
-  inheritAttrs: false
+  inheritAttrs: false,
 })
 
 const props = defineProps<Props>()
@@ -86,7 +86,7 @@ const doEdit = (data: any) => {
 
   record.value = Object.assign(
     { activity: 'Y' },
-    data
+    data,
   )
   nextTick(() => {
     form.value?.doCreate('update', record.value)
@@ -103,7 +103,7 @@ const doAdd = (data: any) => {
 
   record.value = Object.assign(
     { activity: 'Y' },
-    data
+    data,
   )
 
   nextTick(() => {
@@ -118,7 +118,7 @@ const doSubmit = () => {
 
       const notice = {
         error: action === 'insert' ? '新增失败!' : '更新失败!',
-        success: action === 'insert' ? '新增成功!' : '更新成功!'
+        success: action === 'insert' ? '新增成功!' : '更新成功!',
       }
 
       const promise = action === 'insert'
@@ -165,7 +165,7 @@ const doClose = () => {
 
 defineExpose({
   doEdit,
-  doAdd
+  doAdd,
 })
 </script>
 

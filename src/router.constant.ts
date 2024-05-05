@@ -11,7 +11,7 @@ baseRoutes.push(
   {
     path: '/index',
     name: 'index',
-    redirect: '/system/OrganizeManage'
+    redirect: '/system/OrganizeManage',
   },
   {
     path: '/auth',
@@ -22,8 +22,8 @@ baseRoutes.push(
         path: 'Login',
         name: 'Login',
         component: () => import(`@/views/auth/Login.vue`),
-        meta: { title: '系统登录' }
-      }
-    ]
-  }
+        meta: { title: '系统登录' },
+      },
+    ],
+  },
 )

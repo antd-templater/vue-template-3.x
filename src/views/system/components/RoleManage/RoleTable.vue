@@ -81,29 +81,29 @@ export interface Emits {
 
 defineOptions({
   name: 'RoleTable',
-  inheritAttrs: false
+  inheritAttrs: false,
 })
 
 const queryParams = ref({
   roleName: '',
-  activity: ''
+  activity: '',
 })
 
 const presetOptions = ref({
   dataFlag: [
     {
       label: '用户级',
-      value: '0'
+      value: '0',
     },
     {
       label: '部门级',
-      value: '1'
+      value: '1',
     },
     {
       label: '公司级',
-      value: '2'
-    }
-  ]
+      value: '2',
+    },
+  ],
 
 })
 
@@ -113,18 +113,18 @@ const cellState = ref(false)
 const cellStyle = {
   container: {
     display: 'inline-block',
-    width: 'auto'
+    width: 'auto',
   },
   inputWrapper: {
     display: 'inline-block',
     maxWidth: '200px',
-    paddingRight: '36px'
+    paddingRight: '36px',
   },
   textWrapper: {
     display: 'inline-block',
     width: 'auto',
-    paddingRight: '36px'
-  }
+    paddingRight: '36px',
+  },
 }
 
 const sticky = tableStickyDefiner({
@@ -132,14 +132,14 @@ const sticky = tableStickyDefiner({
   leftFooter: false,
   rightFooter: false,
   bottomFooter: false,
-  bottomScrollbar: true
+  bottomScrollbar: true,
 })
 
 const scroll = tableScrollDefiner({
   scrollToFirstXOnChange: true,
   scrollToFirstYOnChange: true,
   overflow: 'visible',
-  x: 'max-content'
+  x: 'max-content',
 })
 
 const columns = tableColumnsDefiner([
@@ -148,26 +148,26 @@ const columns = tableColumnsDefiner([
     dataIndex: 'serial',
     align: 'center',
     maxWidth: 60,
-    width: 60
+    width: 60,
   },
   {
     title: '角色名称',
-    dataIndex: 'roleName'
+    dataIndex: 'roleName',
   },
   {
     title: '数据范围',
-    dataIndex: 'dataFlag'
+    dataIndex: 'dataFlag',
   },
   {
     title: '角色状态',
-    dataIndex: 'activity'
+    dataIndex: 'activity',
   },
   {
     title: '操作',
     dataIndex: 'action',
     align: 'center',
-    width: 120
-  }
+    width: 120,
+  },
 ])
 
 const paginate = tablePaginateDefiner({
@@ -178,7 +178,7 @@ const paginate = tablePaginateDefiner({
   showSizeChanger: true,
   showTotal: true,
   visible: true,
-  fixed: true
+  fixed: true,
 })
 
 const loadData = tableLoadDataDefiner(options => {
@@ -186,14 +186,14 @@ const loadData = tableLoadDataDefiner(options => {
     '',
     queryParams.value,
     options.paginate,
-    options.sorter
+    options.sorter,
   )
 
   return roleApi.getRoleInfoByPages(params).then(res => {
     if (res.code !== '0000') {
       Notification.error({
         message: '系统消息',
-        description: res.message || '用户角色查询失败!'
+        description: res.message || '用户角色查询失败!',
       })
       return Promise.reject(res)
     }
@@ -221,14 +221,14 @@ const doTableModify = (record: object) => {
     if (res.code !== '0000') {
       Notification.error({
         message: '系统消息',
-        description: '修改失败'
+        description: '修改失败',
       })
       return Promise.reject(res)
     }
 
     Notification.success({
       message: '系统消息',
-      description: '修改成功'
+      description: '修改成功',
     })
 
     doTableRefresh()
@@ -242,7 +242,7 @@ const doTableRefresh = () => {
 
 defineExpose({
   doTableRefresh,
-  queryParams
+  queryParams,
 })
 </script>
 

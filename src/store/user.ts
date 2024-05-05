@@ -140,7 +140,7 @@ export default defineStore('user', () => {
 
     login,
     logout,
-    loginUserInfo
+    loginUserInfo,
   }
 }, {
   persist: {
@@ -149,18 +149,18 @@ export default defineStore('user', () => {
       {
         storage: localStorage,
         key: 'STORE-TOKEN',
-        paths: ['token']
+        paths: ['token'],
       },
       {
         storage: localStorage,
         key: 'STORE-ORG-ID',
-        paths: ['orgId']
+        paths: ['orgId'],
       },
       {
         storage: localStorage,
         key: 'STORE-USER-NO',
-        paths: ['userNo']
-      }
-    ]
-  }
+        paths: ['userNo'],
+      },
+    ],
+  },
 })

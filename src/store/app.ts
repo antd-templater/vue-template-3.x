@@ -11,7 +11,7 @@ export default defineStore('app', () => {
     warningColor: defaultSettings.themeColor.warningColor,
     successColor: defaultSettings.themeColor.successColor,
     errorColor: defaultSettings.themeColor.errorColor,
-    infoColor: defaultSettings.themeColor.infoColor
+    infoColor: defaultSettings.themeColor.infoColor,
   })
 
   const isMobile = ref(false)
@@ -152,7 +152,7 @@ export default defineStore('app', () => {
       minWidth: minWidth,
       maxWidth: maxWidth,
       minHeight: minHeight,
-      maxHeight: maxHeight
+      maxHeight: maxHeight,
     }
   })
 
@@ -220,14 +220,14 @@ export default defineStore('app', () => {
 
     layoutViewStyle,
     isWindowOS,
-    isMacOS
+    isMacOS,
   }
 }, {
   persist: {
     enabled: true,
     strategies: [{
       key: 'STORE-APP',
-      storage: localStorage
-    }]
-  }
+      storage: localStorage,
+    }],
+  },
 })

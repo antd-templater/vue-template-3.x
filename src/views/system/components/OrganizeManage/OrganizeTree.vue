@@ -69,7 +69,7 @@ export interface Emits {
 
 defineOptions({
   name: 'OrganizeTree',
-  inheritAttrs: false
+  inheritAttrs: false,
 })
 
 const cardStyle: CSSProperties = {
@@ -78,7 +78,7 @@ const cardStyle: CSSProperties = {
   flex: '1 1 auto',
   width: '100%',
   height: '100%',
-  overflow: 'hidden'
+  overflow: 'hidden',
 }
 
 const bodyStyle: CSSProperties = {
@@ -87,12 +87,12 @@ const bodyStyle: CSSProperties = {
   flexFlow: 'column nowrap',
   flex: '1 1 auto',
   position: 'relative',
-  overflow: 'auto'
+  overflow: 'auto',
 }
 
 const headStyle: CSSProperties = {
   flex: '0 0 auto',
-  overflow: 'hidden'
+  overflow: 'hidden',
 }
 
 const emits = defineEmits<Emits>()
@@ -121,7 +121,7 @@ const doRefresh = (_options?: Record<string, any>) => {
       promises.push(
         doQuery({ key })
           .then(result => ({ parent: key !== '0' ? { key } : null, children: result || [] }))
-          .catch(() => {})
+          .catch(() => {}),
       )
     }
 
@@ -147,7 +147,7 @@ const doLinkage = treeEmitSelectDefiner(options => {
 
   emits('queryTable', {
     orgId: options.selectedNode?.isOrg === 'Y' ? options.selectedNode.key : '',
-    deptId: options.selectedNode?.isOrg === 'N' ? options.selectedNode.key : ''
+    deptId: options.selectedNode?.isOrg === 'N' ? options.selectedNode.key : '',
   })
 })
 
@@ -160,7 +160,7 @@ const doQuery = treeLoadDataDefiner(options => {
     '',
     { orgId: options.key },
     null,
-    null
+    null,
   )
 
   return organizeApi.getOrganizeInfoTree(params).then(res => {
@@ -180,7 +180,7 @@ onMounted(() => {
 })
 
 defineExpose({
-  doRefresh
+  doRefresh,
 })
 </script>
 
