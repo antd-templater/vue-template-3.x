@@ -40,6 +40,10 @@ describe('@utils/request.ts', () => {
         result: { name: 'admin', email: 'admin@gmail.com' },
       })
     }),
+
+    http.get('http://api.test.com/unusableApi', () => {
+      return HttpResponse.error()
+    }),
   )
 
   beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
