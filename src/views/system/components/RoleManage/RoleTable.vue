@@ -104,7 +104,6 @@ const presetOptions = ref({
       value: '2',
     },
   ],
-
 })
 
 const table = ref(null as InstanceType<STable> | null)
