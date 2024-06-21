@@ -30,7 +30,7 @@ const createAxiosInterceptor = (axios: AxiosInstance) => {
       const headers = config.headers
 
       if (user.token && !headers.token && headers.token !== null) {
-        headers.token = `Bearer ${user.token}`
+        headers.token = `${user.token}`
       }
 
       if (headers['x-msw-requester'] === undefined) {
@@ -73,17 +73,17 @@ const createAxiosInterceptor = (axios: AxiosInstance) => {
     response => response,
     error => {
       let status = 500 as any
-      let message = '' as any
+      let message = null as any
       let messager = true as boolean
       const token = useUserStore().token
       const logout = useUserStore().logout
       const promise = Promise.reject(error)
 
       try {
-        status = error.status || status
-        status = error.data?.code || status
-        message = error.data?.message || null
-        messager = error.config?.messager !== false
+        status = error.response?.status || error.status || status
+        status = error.response?.data?.code || error.data?.code || status
+        message = error.response?.data?.message || error.data?.message || null
+        messager = (error.response?.config?.messager ?? error.config?.messager) !== false
       } catch {}
 
       if (error.toString().indexOf('timeout') > -1) {

@@ -176,7 +176,7 @@ const doLogin = async() => {
   background: #f0f2f5 url(@/assets/login/background.svg);
 
   & > .main {
-    width: 400px;
+    width: 420px;
     height: 100%;
     flex: 0 0 auto;
     position: relative;
