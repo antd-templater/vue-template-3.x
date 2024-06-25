@@ -139,7 +139,7 @@ const columns = tableColumnsDefiner([
     title: '可用状态',
     dataIndex: 'activity',
     align: 'center',
-    width: 80,
+    minWidth: 80,
   },
   {
     title: '操作',

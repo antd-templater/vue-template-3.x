@@ -37,7 +37,7 @@ export default defineComponent({
         AModal.confirm({
           title: '提示',
           content: '真的要注销登录吗 ?',
-          onOk: () => { userStore.logout().then(() => window.location.reload()) },
+          onOk: () => { userStore.logout().then(() => window.location.replace('/')) },
         })
       }
 
