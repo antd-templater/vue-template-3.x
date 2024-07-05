@@ -47,6 +47,7 @@ export default defineComponent({
 
     const isAllowOpenKey = ref(!appStore.collapsed && !appStore.isTopMenu || appStore.isMobile)
     const selectedKeys = ref(route.matched.map(route => route.path).filter(path => path !== '/'))
+    const routeKeys = ref(route.matched.map(route => route.path).filter(path => path !== '/'))
     const openKeys = ref(route.matched.map(route => route.path).filter(path => path !== '/' && isAllowOpenKey.value))
 
     const findKeys = (key: string, routes: any[]) => {
@@ -151,7 +152,8 @@ export default defineComponent({
       if (keys.length > 0) {
         const key = keys.pop()
         const routes = unref(menuData)
-        selectedKeys.value = findKeys(key, routes) || keys
+        const lastKey = routeKeys.value[routeKeys.value.length - 1]
+        selectedKeys.value = (routeKeys.value.includes(key) ? findKeys(lastKey, routes) : findKeys(key, routes)) || keys
       }
     }
 
@@ -164,6 +166,7 @@ export default defineComponent({
     watch(route, () => {
       isAllowOpenKey.value = !appStore.collapsed && !appStore.isTopMenu || appStore.isMobile
       selectedKeys.value = route.matched.map(route => route.path).filter(path => path !== '/')
+      routeKeys.value = route.matched.map(route => route.path).filter(path => path !== '/')
       openKeys.value = route.matched.map(route => route.path).filter(path => path !== '/' && isAllowOpenKey.value)
     })
 

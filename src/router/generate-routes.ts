@@ -69,6 +69,7 @@ const treeToRoute: TreeToRoute = (trees, parent = {}, components = {}) => {
 
     const parentAllowCache = parent.meta?.allowCache
     const isFrameView = item.component === 'PageFrame'
+    const isNoTarget = ['PageView', 'RouteView'].includes(item.component)
     const match = item.component === 'PageFrame' ? 'external' : 'path'
 
     const currentRouter: ReqiredRoute = {
@@ -82,7 +83,7 @@ const treeToRoute: TreeToRoute = (trees, parent = {}, components = {}) => {
         icon: icon,
         title: title,
         match: match,
-        target: target,
+        target: target ?? (isNoTarget ? 'none' : undefined),
         groupId: (parent.meta || {}).groupId || item.id,
         external: isFrameView && item.path || '',
         componentName: item.component || item.name || '',
@@ -139,14 +140,33 @@ export const generateDynamicFullpath: GenerateDynamicFullpath = (parent = {}, it
   const one = /\/+$/
   const two = /^\/*/
   const keep = /(.+?)\/*$/
+  const check = /^https?:\/\/.+|^\/.+/i
   const namePath = item.name?.replace(one, '') ?? ''
   const itemPath = item.path?.replace(keep, '$1') ?? ''
   const parentPath = parent.path?.replace(one, '') ?? ''
-  const isUseMergePath = item.component === 'PageFrame' || !(/^\//).test(itemPath)
+  const isPageFrame = item.component === 'PageFrame'
 
-  return isUseMergePath && !!namePath
-    ? (parentPath + '/' + namePath).replace(two, '/')
-    : (itemPath || '')
+  if (!isPageFrame && check.test(itemPath)) {
+    return itemPath
+  }
+
+  if (!isPageFrame && !itemPath) {
+    return (parentPath + '/' + namePath).replace(two, '/')
+  }
+
+  if (!isPageFrame && itemPath) {
+    return (parentPath + '/' + itemPath).replace(two, '/')
+  }
+
+  if (isPageFrame && !namePath) {
+    return itemPath
+  }
+
+  if (isPageFrame && namePath) {
+    return (parentPath + '/' + namePath).replace(two, '/')
+  }
+
+  return ''
 }
 
 /**
