@@ -1,14 +1,18 @@
 <p align="center">
-  <img 
-    style="width: 98%; margin: 0 auto;" 
-    src="https://antd-templater.github.io/resource/Ant-Templater3.x-Docs.png" 
-    alt="Ant Templater3.x Docs"
-  >
+  <a href="https://antd-templater.github.io/docs/vue3.x/">
+    <img 
+      style="width: 100%; margin: 0 auto;" 
+      src="https://antd-templater.github.io/resource/Ant-Templater-Docs-3.x.png" 
+      alt="Ant Templater3.x Docs"
+    >
+  </a>
 </p>
 
-**Antd-Templater** 是一个基于 TypeScript + Vue3.x + Pinia + Ant-Design-Vue4.x + Vite 等技术栈，为开发中大型后台管理系统而提供开箱即用的解决方案，支持动态主题(Design Token)、动态菜单配置、路由权限校验、数据持久化储存，同时也提供完备的 TypeScript + ESLint + Volar 格式化和规范。
+<br/>
 
-- 轻量化: 仅预设基础访问页, 没有冗余 Demo 页 [<span style="font-size: 15px">(详情)</span>](../standard/develop_guide.html#目录结构)
+**[Antd-Templater](https://antd-templater.github.io/docs/vue3.x/)** 是一个基于 TypeScript + Vue3.x + Pinia + Ant-Design-Vue4.x + Vite 等技术栈，为开发中大型后台管理系统而提供开箱即用的解决方案，支持动态主题(Design Token)、动态菜单配置、路由权限校验、数据持久化储存，同时也提供完备的 TypeScript + ESLint + Volar 格式化和规范。
+
+- 轻量化: 仅预设基础访问页, 没有冗余 Demo 页
 - 多主题: 支持亮色风格、暗色风格、暗黑风格等
 - 多布局: 侧边菜单、顶部菜单、混合菜单等导航
 - 标签栏: 支持面包屑，支持多页签及其数据缓存
@@ -103,78 +107,3 @@ pnpm preview
 
 </details>
 
-<br/>
-<br/>
-
-## 浏览器兼容性
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center;"> 
-        <img src="https://antd-templater.github.io/docs/vue3.x/ie.png" alt="IE" width="24px" height="24px" style="display: block; margin: 3px auto; vertical-align: middle;" />
-        <span style="vertical-align: sub;">IE</span>
-      </th>
-      <th style="text-align: center;">
-        <img src="https://antd-templater.github.io/docs/vue3.x/edge.png" alt="Edge" width="24px" height="24px" style="display: block; margin: 3px auto; vertical-align: middle;" />
-        <span style="vertical-align: sub;">Edge</span>
-      </th>
-      <th style="text-align: center;">
-        <img src="https://antd-templater.github.io/docs/vue3.x/firefox.png" alt="Firefox" width="24px" height="24px" style="display: block; margin: 3px auto; vertical-align: middle;" />
-        <span style="vertical-align: sub;">Firefox</span>
-      </th>
-      <th style="text-align: center;">
-        <img src="https://antd-templater.github.io/docs/vue3.x/chrome.png" alt="Chrome" width="24px" height="24px" style="display: block; margin: 3px auto; vertical-align: middle;" />
-        <span style="vertical-align: sub;">Chrome</span>
-      </th>
-      <th style="text-align: center;">
-        <img src="https://antd-templater.github.io/docs/vue3.x/safari.png" alt="Safari" width="24px" height="24px" style="display: block; margin: 3px auto; vertical-align: middle;" />
-        <span style="vertical-align: sub;">Safari</span>
-      </th>
-      <th style="text-align: center;">
-        <img src="https://antd-templater.github.io/docs/vue3.x/electron.png" alt="Electron" width="24px" height="24px" style="display: block; margin: 3px auto; vertical-align: middle;" />
-        <span style="vertical-align: sub;">Electron</span>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center;">
-        <span style="vertical-align: middle;">不支持 </span>
-        <svg width="12" height="16" viewBox="0 0 12 16" fill="#f0624d" class="icon" style="display: inline-block; vertical-align: middle;">
-          <path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"></path>
-        </svg>
-      </td>
-      <td style="text-align: center;">
-        <span style="vertical-align: middle;">支持 </span>
-        <svg width="12" height="16" viewBox="0 0 12 16" fill="#60b13c" class="icon" style="display: inline-block; vertical-align: middle;">
-          <path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"></path>
-        </svg>
-      </td>
-      <td style="text-align: center;">
-        <span style="vertical-align: middle;">支持 </span>
-        <svg width="12" height="16" viewBox="0 0 12 16" fill="#60b13c" class="icon" style="display: inline-block; vertical-align: middle;">
-          <path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"></path>
-        </svg>
-      </td>
-      <td style="text-align: center;">
-        <span style="vertical-align: middle;">支持 </span>
-        <svg width="12" height="16" viewBox="0 0 12 16" fill="#60b13c" class="icon" style="display: inline-block; vertical-align: middle;">
-          <path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"></path>
-        </svg>
-      </td>
-      <td style="text-align: center;">
-        <span style="vertical-align: middle;">支持 </span>
-        <svg width="12" height="16" viewBox="0 0 12 16" fill="#60b13c" class="icon" style="display: inline-block; vertical-align: middle;">
-          <path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"></path>
-        </svg>
-      </td>
-      <td style="text-align: center;">
-        <span style="vertical-align: middle;">支持 </span>
-        <svg width="12" height="16" viewBox="0 0 12 16" fill="#60b13c" class="icon" style="display: inline-block; vertical-align: middle;">
-          <path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"></path>
-        </svg>
-      </td>
-    </tr>
-  </tbody>
-</table>

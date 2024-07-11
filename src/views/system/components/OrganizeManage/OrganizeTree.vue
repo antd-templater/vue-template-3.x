@@ -118,11 +118,14 @@ const doRefresh = (_options?: Record<string, any>) => {
     selectedKeys.value = []
 
     for (const key of loadingKeys) {
-      promises.push(
-        doQuery({ key })
-          .then(result => ({ parent: key !== '0' ? { key } : null, children: result || [] }))
-          .catch(() => {}),
-      )
+      const promise = Promise.resolve(doQuery({ key })).then(result => {
+        return {
+          parent: key !== '0' ? { key } : null,
+          children: result || [],
+        }
+      })
+
+      promises.push(promise.catch(() => {}))
     }
 
     return Promise.all(promises)
