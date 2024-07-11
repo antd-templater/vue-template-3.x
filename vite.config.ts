@@ -20,6 +20,7 @@ export default defineConfig(({ mode }) => {
     base: base,
 
     test: {
+      open: false,
       globals: true,
       environment: 'jsdom',
     },
