@@ -72,7 +72,6 @@ const groups = formGroupsDefiner([
     props: {
       showSearch: true,
       placeholder: '请输入组件名称',
-      replaceFields: { label: 'label', value: 'label' },
       filterOption: (value: string, option: { label: string; }) => {
         return !value.trim() || option.label.startsWith(value.trim())
       },

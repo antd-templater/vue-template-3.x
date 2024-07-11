@@ -36,7 +36,7 @@
         v-model:treeData="treeData"
         v-model:expandedKeys="expandedKeys"
         v-model:selectedKeys="selectedKeys"
-        :replaceFields="replaceFields"
+        :fieldNames="fieldNames"
         :allowAutoExpandLoad="true"
         :allowAutoExpanded="true"
         :allowSelectedLevel="1"
@@ -102,7 +102,7 @@ const loading = ref(false as boolean)
 const loadedKeys = ref([] as STreeKeys)
 const selectedKeys = ref([] as STreeKeys)
 const expandedKeys = ref([] as STreeKeys)
-const replaceFields = ref({ children: 'children', title: 'title', key: 'key' })
+const fieldNames = ref({ children: 'children', title: 'title', key: 'key' })
 
 const doRefresh = (_options?: Record<string, any>) => {
   if (!loading.value) {

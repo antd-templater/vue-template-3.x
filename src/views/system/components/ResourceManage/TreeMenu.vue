@@ -11,7 +11,7 @@
         ref="tree"
         :loading="loading"
         :treeData="menuTree"
-        :replaceFields="replaceFields"
+        :fieldNames="fieldNames"
         :allowCheckedLevel="2"
         :allowSelectedLevel="2"
         :selectable="true"
@@ -163,7 +163,7 @@ const cardBodyStyle: CSSProperties = {
   position: 'relative',
 }
 
-const replaceFields: Ref<STreeFieldNames> = ref({
+const fieldNames: Ref<STreeFieldNames> = ref({
   key: 'resourceId',
   title: 'title',
   children: 'children',

@@ -30,7 +30,7 @@
               v-model:checkedKeys="menuCheckKeys"
               :loading="loadings.tree"
               :treeData="menuTrees"
-              :replaceFields="replaceFields"
+              :fieldNames="fieldNames"
               :allowCheckedLevel="2"
               :allowSelectedLevel="2"
               :allowSelectToCheck="true"
@@ -185,7 +185,7 @@ const loadings = ref({
 const tree = ref(null as InstanceType<STree> | null)
 const menuTrees = ref([] as Array<{ label: string; value: string; children: any[]; }>)
 const menuCheckKeys = ref([] as Array<string>)
-const replaceFields = {
+const fieldNames = {
   key: 'value',
   title: 'label',
 }
