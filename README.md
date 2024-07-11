@@ -1,16 +1,4 @@
-<p align="center">
-  <a href="https://antd-templater.github.io/docs/vue3.x/">
-    <img 
-      style="width: 100%; margin: 0 auto;" 
-      src="https://antd-templater.github.io/resource/Ant-Templater-Docs-3.x.png" 
-      alt="Ant Templater3.x Docs"
-    >
-  </a>
-</p>
-
-<br/>
-
-**[Antd-Templater](https://antd-templater.github.io/docs/vue3.x/)** 是一个基于 TypeScript + Vue3.x + Pinia + Ant-Design-Vue4.x + Vite 等技术栈，为开发中大型后台管理系统而提供开箱即用的解决方案，支持动态主题(Design Token)、动态菜单配置、路由权限校验、数据持久化储存，同时也提供完备的 TypeScript + ESLint + Volar 格式化和规范。
+**[Antd-Template-3.x](https://antd-templater.github.io/docs/vue3.x/)** 是一个基于 TypeScript + Vue3.x + Pinia + Ant-Design-Vue4.x + Vite 等技术栈，为开发中大型后台管理系统而提供开箱即用的解决方案，支持动态主题(Design Token)、动态菜单配置、路由权限校验、数据持久化储存，同时也提供完备的 TypeScript + ESLint + Volar 格式化和规范。
 
 - 轻量化: 仅预设基础访问页, 没有冗余 Demo 页
 - 多主题: 支持亮色风格、暗色风格、暗黑风格等
@@ -82,28 +70,4 @@ pnpm build
 pnpm preview
 ```
 
-<br/>
-<br/>
-
-## 注意事项
-
-<details open>
-<summary>建议使用 VSCode 编辑器</summary>
-<br/>
-
-1. Antd-Templater 预设了项目级 VSCode 配置，提供并支持统一的代码风格和格式化。
-2. Antd-Templater 使用了 ESLint9.x 版本，似乎在 WebStorm 编辑器中不能很好的工作。
-
-</details>
-
-<br/>
-
-<details open>
-<summary>建议配置 VSCode 扩展插件</summary>
-<br/>
-
-1. 禁用 -> 适用于 Vue2 项目的 `Vetur` 插件，它不兼容 Vue3 项目，使用会有错误信息。
-2. 启用 -> 适用于 Vue3 项目的 `Vue - Official` 插件, 它提供了很好的 TS 智能提示。
-
-</details>
 
