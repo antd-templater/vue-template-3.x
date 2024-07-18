@@ -1,4 +1,4 @@
-**Antd-Template-3.x** 是一个基于 TypeScript + Vue3.x + Pinia + Ant-Design-Vue4.x + Vite 等技术栈，为开发中大型后台管理系统而提供开箱即用的解决方案，支持动态主题(Design Token)、动态菜单配置、路由权限校验、数据持久化储存，同时也提供完备的 TypeScript + ESLint + Volar 格式化和规范。[**查看文档**](https://antd-templater.github.io/docs/vue3.x/)
+**Antd-Template-Vue** 是一个基于 TypeScript + Vue3.x + Pinia + Ant-Design-Vue4.x + Vite 等技术栈，为开发中大型后台管理系统而提供开箱即用的解决方案，支持动态主题(Design Token)、动态菜单配置、路由权限校验、数据持久化储存，同时也提供完备的 TypeScript + ESLint + Volar 格式化和规范。[**查看文档**](https://antd-templater.github.io/docs/vue3.x/)
 
 - 轻量化: 仅预设基础访问页, 没有冗余 Demo 页
 - 多主题: 支持亮色风格、暗色风格、暗黑风格等
@@ -42,14 +42,14 @@
 
 ```bash
 # Download
-git clone https://github.com/antd-templater/template-3.x.git Antd-Templater
+git clone https://github.com/antd-templater/vue-template-3.x.git Antd-Templater-Vue
 ```
 
 ### 安装依赖
 
 ```bash
 # Enter project
-cd Antd-Templater
+cd Antd-Templater-Vue
 
 # Install denpendencies
 pnpm install
