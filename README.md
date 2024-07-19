@@ -42,14 +42,14 @@
 
 ```bash
 # Download
-git clone https://github.com/antd-templater/vue-template-3.x.git Antd-Templater-Vue
+git clone https://github.com/antd-templater/vue-template-3.x.git Antd-Template-Vue
 ```
 
 ### 安装依赖
 
 ```bash
 # Enter project
-cd Antd-Templater-Vue
+cd Antd-Template-Vue
 
 # Install denpendencies
 pnpm install
