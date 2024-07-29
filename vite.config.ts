@@ -94,7 +94,6 @@ export default defineConfig(({ mode }) => {
       Vue({
         script: {
           defineModel: true,
-          propsDestructure: true,
         },
       }),
     ],
