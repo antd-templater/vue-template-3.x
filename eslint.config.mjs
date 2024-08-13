@@ -90,11 +90,13 @@ export default tseslint.config(
         asyncArrow: 'never',
       }],
       '@typescript-eslint/ban-ts-comment': 'off',
+      '@typescript-eslint/no-empty-object-type': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-namespace': ['error', {
         allowDeclarations: true,
         allowDefinitionFiles: true,
       }],
+      '@typescript-eslint/no-unused-expressions': 'off',
       '@typescript-eslint/no-unused-vars': ['error', {
         vars: 'all',
         args: 'none',
