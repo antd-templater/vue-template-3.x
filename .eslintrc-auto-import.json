@@ -111,6 +111,13 @@
     "treeEmitExpandDefiner": true,
     "treeEmitChangeDefiner": true,
     "treeDropHandlerDefiner": true,
-    "treeReplaceFieldsDefiner": true
+    "treeReplaceFieldsDefiner": true,
+    "DirectiveBinding": true,
+    "MaybeRef": true,
+    "MaybeRefOrGetter": true,
+    "onWatcherCleanup": true,
+    "useId": true,
+    "useModel": true,
+    "useTemplateRef": true
   }
 }

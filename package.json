@@ -4,7 +4,7 @@
   "homepage": "https://github.com/antd-templater/vue-template-3.x",
   "author": "lin pengteng <china.linpengteng@gmail.com>",
   "license": "MIT License",
-  "version": "4.3.0",
+  "version": "4.3.1",
   "keywords": [
     "front-end",
     "ant-design-vue",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
-    "@antd-templater/library-3.x": "^4.3.16",
+    "@antd-templater/library-3.x": "^4.3.17",
     "ant-design-vue": "^4.2.5",
     "axios": "^1.7.7",
     "dayjs": "^1.11.13",

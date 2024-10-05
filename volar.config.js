@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
+
 const prettyhtml = require('volar-service-prettyhtml')
 
 module.exports = {
