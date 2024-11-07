@@ -1,13 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base",
+    "config:recommended",
     "group:allNonMajor",
     ":semanticCommitTypeAll(chore)"
   ],
-  "schedule": [
-    "at 10:00 am on friday"
-  ],
+  "schedule": ["at 10:00 am on friday"],
   "npm": {
     "commitMessageTopic": "{{prettyDepType}} {{depName}}"
   },
