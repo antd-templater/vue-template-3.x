@@ -83,7 +83,7 @@ const treeToRoute: TreeToRoute = (trees, parent = {}, components = {}) => {
         icon: icon,
         title: title,
         match: match,
-        target: target ?? (isNoTarget ? 'none' : undefined),
+        target: target ?? (isNoTarget ? '_none' : 'RouterLink'),
         groupId: (parent.meta || {}).groupId || item.id,
         external: isFrameView && item.path || '',
         componentName: item.component || item.name || '',

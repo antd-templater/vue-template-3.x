@@ -30,22 +30,24 @@ type Matched = {
   meta: Meta;
 }
 
+type Strings = string[]
+
 /**
  * Tag 标签页管理
  */
 export default defineStore('tag', () => {
-  const cacheTags: Ref<string[]> = ref([
+  const currentTag: Ref<Route | null> = ref(null)
+  const stackTags: Ref<Route[]> = ref([])
+  const visitTags: Ref<Route[]> = ref([])
+
+  const cacheTags: Ref<Strings> = ref([
     'BasicLayout',
     'RouteView',
     'PageFrame',
     'PageView',
   ])
 
-  const stackTags: Ref<Route[]> = ref([])
-  const visitTags: Ref<Route[]> = ref([])
-  const currentTag: Ref<Route | null> = ref(null)
-
-  const clone = (tag: Route) => {
+  const clone = (tag: Route): Route => {
     return Object.assign({}, {
       fullPath: tag.fullPath,
       path: tag.path,
@@ -62,9 +64,9 @@ export default defineStore('tag', () => {
     })
   }
 
-  const addTags = (tag: Route) => {
-    addCacheTags(tag)
-    addVisitTags(tag)
+  const addTags = (tags: Route | Route[]) => {
+    addVisitTags(tags)
+    addCacheTags(tags)
 
     return {
       stackTags: readonly(stackTags),
@@ -73,65 +75,32 @@ export default defineStore('tag', () => {
     }
   }
 
-  const addCacheTags = (tag: Route) => {
-    const tagName = tag.meta.componentName
-    const keepAlive = useAppStore().keepAlive
-    const allowCache = tag.meta.allowCache !== false
+  const addVisitTags = (tags: Route | Route[]) => {
+    tags = Array.isArray(tags) ? tags : [tags]
+    tags = Array.from(new Set(tags))
 
-    if (keepAlive && allowCache && tagName && !cacheTags.value.includes(tagName)) {
-      cacheTags.value.push(tagName)
-    }
+    tags.forEach(tag => {
+      const stackTag = stackTags.value.find(stack => stack.fullPath === tag.fullPath)
+      const visitTag = visitTags.value.find(visit => visit.fullPath === tag.fullPath)
 
-    return {
-      stackTags: readonly(stackTags),
-      visitTags: readonly(visitTags),
-      cacheTags: readonly(cacheTags),
-    }
-  }
-
-  const addVisitTags = (tag: Route) => {
-    const stackTag = stackTags.value.find(stack => stack.fullPath === tag.fullPath)
-    const visitTag = visitTags.value.find(visit => visit.fullPath === tag.fullPath)
-
-    if (stackTag) {
-      stackTags.value.splice(stackTags.value.indexOf(stackTag), 1)
-      stackTags.value.unshift(stackTag)
-    }
-
-    if (!stackTag) {
-      stackTags.value.unshift(clone(tag))
-    }
-
-    if (!visitTag) {
-      currentTag.value = clone(tag)
-      visitTags.value.push(currentTag.value)
-    }
-
-    if (visitTag) {
-      currentTag.value = visitTag
-    }
-
-    return {
-      stackTags: readonly(stackTags),
-      visitTags: readonly(visitTags),
-      cacheTags: readonly(cacheTags),
-    }
-  }
-
-  const updateVisitedTags = (tag: Route) => {
-    for (const stack of stackTags.value) {
-      if (stack.fullPath === tag.fullPath) {
-        Object.assign(stack, clone(tag))
-        break
+      if (stackTag) {
+        stackTags.value.splice(stackTags.value.indexOf(stackTag), 1)
+        stackTags.value.unshift(stackTag)
       }
-    }
 
-    for (const visit of visitTags.value) {
-      if (visit.fullPath === tag.fullPath) {
-        Object.assign(visit, clone(tag))
-        break
+      if (!stackTag) {
+        stackTags.value.unshift(clone(tag))
       }
-    }
+
+      if (!visitTag) {
+        currentTag.value = clone(tag)
+        visitTags.value.push(currentTag.value)
+      }
+
+      if (visitTag) {
+        currentTag.value = visitTag
+      }
+    })
 
     return {
       stackTags: readonly(stackTags),
@@ -140,9 +109,19 @@ export default defineStore('tag', () => {
     }
   }
 
-  const delTags = (tag: Route) => {
-    delCacheTags(tag)
-    delVisitTags(tag)
+  const addCacheTags = (tags: Route | Route[]) => {
+    tags = Array.isArray(tags) ? tags : [tags]
+    tags = Array.from(new Set(tags))
+
+    tags.forEach(tag => {
+      const tagName = tag.meta.componentName
+      const keepAlive = useAppStore().keepAlive
+      const allowCache = tag.meta.allowCache !== false
+
+      if (keepAlive && allowCache && tagName && !cacheTags.value.includes(tagName)) {
+        cacheTags.value.push(tagName)
+      }
+    })
 
     return {
       stackTags: readonly(stackTags),
@@ -151,9 +130,25 @@ export default defineStore('tag', () => {
     }
   }
 
-  const delCacheTags = (tag: Route) => {
-    cacheTags.value = cacheTags.value.filter(name => name !== tag.meta.componentName)
-    cacheTags.value = Array.from(new Set([...cacheTags.value, 'BasicLayout', 'RouteView', 'PageFrame', 'PageView']))
+  const updateVisitTags = (tags: Route | Route[]) => {
+    tags = Array.isArray(tags) ? tags : [tags]
+    tags = Array.from(new Set(tags))
+
+    tags.forEach(tag => {
+      for (const stack of stackTags.value) {
+        if (stack.fullPath === tag.fullPath) {
+          Object.assign(stack, clone(tag))
+          break
+        }
+      }
+
+      for (const visit of visitTags.value) {
+        if (visit.fullPath === tag.fullPath) {
+          Object.assign(visit, clone(tag))
+          break
+        }
+      }
+    })
 
     return {
       stackTags: readonly(stackTags),
@@ -162,9 +157,58 @@ export default defineStore('tag', () => {
     }
   }
 
-  const delVisitTags = (tag: Route) => {
-    stackTags.value = stackTags.value.filter(stack => stack.fullPath !== tag.fullPath)
-    visitTags.value = visitTags.value.filter(visit => visit.fullPath !== tag.fullPath)
+  const updateCacheTags = (tags: Route | Route[]) => {
+    tags = Array.isArray(tags) ? tags : [tags]
+    tags = Array.from(new Set(tags))
+
+    tags.forEach(tag => {
+      const tagName = tag.meta.componentName
+      const keepAlive = useAppStore().keepAlive
+      const allowCache = tag.meta.allowCache !== false
+
+      if (!visitTags.value.some(visit => visit.fullPath === tag.fullPath)) {
+        cacheTags.value = cacheTags.value.filter(name => name !== tag.meta.componentName)
+        return
+      }
+
+      if (keepAlive && allowCache && tagName && !cacheTags.value.includes(tagName)) {
+        cacheTags.value.push(tagName)
+      }
+    })
+
+    cacheTags.value = Array.from(
+      new Set([
+        ...cacheTags.value,
+        'BasicLayout',
+        'RouteView',
+        'PageFrame',
+        'PageView',
+      ]),
+    )
+
+    return {
+      stackTags: readonly(stackTags),
+      visitTags: readonly(visitTags),
+      cacheTags: readonly(cacheTags),
+    }
+  }
+
+  const delTags = (tags: Route | Route[]) => {
+    delVisitTags(tags)
+    delCacheTags(tags)
+
+    return {
+      stackTags: readonly(stackTags),
+      visitTags: readonly(visitTags),
+      cacheTags: readonly(cacheTags),
+    }
+  }
+
+  const delVisitTags = (tags: Route | Route[]) => {
+    tags = Array.isArray(tags) ? Array.from(new Set(tags)) : Array.from(new Set([tags]))
+
+    stackTags.value = stackTags.value.filter(stack => !tags.some(tag => stack.fullPath === tag.fullPath))
+    visitTags.value = visitTags.value.filter(visit => !tags.some(tag => visit.fullPath === tag.fullPath))
 
     if (!currentTag.value || !stackTags.value.includes(currentTag.value)) {
       currentTag.value = stackTags.value[0] || null
@@ -177,19 +221,10 @@ export default defineStore('tag', () => {
     }
   }
 
-  const delOtherTags = (tag: Route) => {
-    delOtherCacheTags(tag)
-    delOtherVisitTags(tag)
+  const delCacheTags = (tags: Route | Route[]) => {
+    tags = Array.isArray(tags) ? Array.from(new Set(tags)) : Array.from(new Set([tags]))
 
-    return {
-      stackTags: readonly(stackTags),
-      visitTags: readonly(visitTags),
-      cacheTags: readonly(cacheTags),
-    }
-  }
-
-  const delOtherCacheTags = (tag: Route) => {
-    cacheTags.value = cacheTags.value.filter(name => name === tag.meta.componentName)
+    cacheTags.value = cacheTags.value.filter(name => !tags.some(tag => name === tag.meta.componentName))
     cacheTags.value = Array.from(new Set([...cacheTags.value, 'BasicLayout', 'RouteView', 'PageFrame', 'PageView']))
 
     return {
@@ -199,13 +234,39 @@ export default defineStore('tag', () => {
     }
   }
 
-  const delOtherVisitTags = (tag: Route) => {
-    stackTags.value = stackTags.value.filter(stack => stack.fullPath === tag.fullPath)
-    visitTags.value = visitTags.value.filter(visit => visit.fullPath === tag.fullPath)
+  const delOtherTags = (tags: Route | Route[]) => {
+    delOtherVisitTags(tags)
+    delOtherCacheTags(tags)
+
+    return {
+      stackTags: readonly(stackTags),
+      visitTags: readonly(visitTags),
+      cacheTags: readonly(cacheTags),
+    }
+  }
+
+  const delOtherVisitTags = (tags: Route | Route[]) => {
+    tags = Array.isArray(tags) ? Array.from(new Set(tags)) : Array.from(new Set([tags]))
+
+    stackTags.value = stackTags.value.filter(stack => tags.some(tag => stack.fullPath === tag.fullPath))
+    visitTags.value = visitTags.value.filter(visit => tags.some(tag => visit.fullPath === tag.fullPath))
 
     if (!currentTag.value || !stackTags.value.includes(currentTag.value)) {
       currentTag.value = stackTags.value[0] || null
     }
+
+    return {
+      stackTags: readonly(stackTags),
+      visitTags: readonly(visitTags),
+      cacheTags: readonly(cacheTags),
+    }
+  }
+
+  const delOtherCacheTags = (tags: Route | Route[]) => {
+    tags = Array.isArray(tags) ? Array.from(new Set(tags)) : Array.from(new Set([tags]))
+
+    cacheTags.value = cacheTags.value.filter(name => tags.some(tag => name === tag.meta.componentName))
+    cacheTags.value = Array.from(new Set([...cacheTags.value, 'BasicLayout', 'RouteView', 'PageFrame', 'PageView']))
 
     return {
       stackTags: readonly(stackTags),
@@ -215,18 +276,8 @@ export default defineStore('tag', () => {
   }
 
   const delAllTags = () => {
-    delAllCacheTags()
     delAllVisitTags()
-
-    return {
-      stackTags: readonly(stackTags),
-      visitTags: readonly(visitTags),
-      cacheTags: readonly(cacheTags),
-    }
-  }
-
-  const delAllCacheTags = () => {
-    cacheTags.value = ['BasicLayout', 'RouteView', 'PageFrame', 'PageView']
+    delAllCacheTags()
 
     return {
       stackTags: readonly(stackTags),
@@ -247,10 +298,21 @@ export default defineStore('tag', () => {
     }
   }
 
+  const delAllCacheTags = () => {
+    cacheTags.value = ['BasicLayout', 'RouteView', 'PageFrame', 'PageView']
+
+    return {
+      stackTags: readonly(stackTags),
+      visitTags: readonly(visitTags),
+      cacheTags: readonly(cacheTags),
+    }
+  }
+
   const delCurrentTag = () => {
     if (currentTag.value) {
-      delCacheTags(currentTag.value)
       delVisitTags(currentTag.value)
+      delCacheTags(currentTag.value)
+      updateCacheTags(currentTag.value)
     }
 
     return {
@@ -267,21 +329,22 @@ export default defineStore('tag', () => {
     currentTag,
 
     addTags,
-    addCacheTags,
     addVisitTags,
-    updateVisitedTags,
+    addCacheTags,
+    updateVisitTags,
+    updateCacheTags,
 
     delTags,
-    delCacheTags,
     delVisitTags,
+    delCacheTags,
 
     delOtherTags,
-    delOtherCacheTags,
     delOtherVisitTags,
+    delOtherCacheTags,
 
     delAllTags,
-    delAllCacheTags,
     delAllVisitTags,
+    delAllCacheTags,
     delCurrentTag,
   }
 }, {

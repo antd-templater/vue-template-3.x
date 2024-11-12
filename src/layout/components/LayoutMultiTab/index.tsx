@@ -23,9 +23,10 @@ export default defineComponent({
     const active = (route: any) => {
       route = { ...route, meta: { ...route.meta, icon: undefined } }
       activeKey.value = route.fullPath
-      tagStore.updateVisitedTags(route)
-      tagStore.addCacheTags(route)
+      tagStore.updateVisitTags(route)
+      tagStore.updateCacheTags(route)
       tagStore.addVisitTags(route)
+      tagStore.addCacheTags(route)
     }
 
     const target = (key: any) => {
@@ -33,9 +34,9 @@ export default defineComponent({
     }
 
     const remove = (tags: any[]) => {
-      for (const tag of tags) {
-        tagStore.delTags(tag)
-      }
+      tagStore.delVisitTags(tags)
+      tagStore.delCacheTags(tags)
+      tagStore.updateCacheTags(tags)
 
       if (tags.some(tag => activeKey.value === tag.fullPath)) {
         activeKey.value = tagStore.stackTags.map(tag => tag.fullPath)[0] || '/'

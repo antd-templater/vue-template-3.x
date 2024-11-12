@@ -8,8 +8,8 @@
  * - Please do NOT serve this file on production.
  */
 
-const PACKAGE_VERSION = '2.6.1'
-const INTEGRITY_CHECKSUM = '07a8241b182f8a246a7cd39894799a9e'
+const PACKAGE_VERSION = '2.6.4'
+const INTEGRITY_CHECKSUM = 'ca7800994cc8bfb5eb961e037c877074'
 const IS_MOCKED_RESPONSE = Symbol('isMockedResponse')
 const activeClientIds = new Set()
 
@@ -114,11 +114,10 @@ self.addEventListener('fetch', async function (event) {
   }
 
   const passthrough = async () => {
-    const entries = _request.headers.entries()
-    const headers = Object.fromEntries(entries)
+    const headers = new Headers(_request.headers)
 
-    delete headers['x-msw-requester']
-    delete headers['x-msw-intention']
+    headers.delete('accept', 'msw/passthrough')
+    headers.delete('x-msw-requester', 'Axios')
 
     return fetch(_request, { headers })
   }
