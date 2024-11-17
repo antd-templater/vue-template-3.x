@@ -109,7 +109,7 @@ const presetOptions = ref({
 const table = ref(null as InstanceType<STable> | null)
 const roleResource = ref(null as InstanceType<typeof RoleResource> | null)
 const cellState = ref(false)
-const cellStyle = {
+const cellStyle = ref({
   container: {
     display: 'inline-block',
     width: 'auto',
@@ -124,7 +124,7 @@ const cellStyle = {
     width: 'auto',
     paddingRight: '36px',
   },
-}
+})
 
 const sticky = tableStickyDefiner({
   topHeader: 0,

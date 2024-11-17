@@ -174,7 +174,7 @@ const cardBodyStyle: CSSProperties = {
 
 const loading = ref(false)
 const cellState = ref(false)
-const cellStyle = {
+const cellStyle = ref({
   container: {
     display: 'inline-block',
     width: 'auto',
@@ -189,7 +189,7 @@ const cellStyle = {
     width: 'auto',
     paddingRight: '36px',
   },
-}
+})
 
 const sticky = tableStickyDefiner({
   topHeader: 0,

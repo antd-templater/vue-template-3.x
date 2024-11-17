@@ -73,7 +73,7 @@ const groups = formGroupsDefiner([
       showSearch: true,
       placeholder: '请输入组件名称',
       filterOption: (value: string, option: { label: string; }) => {
-        return !value.trim() || option.label.startsWith(value.trim())
+        return !!option.label.startsWith(value.trim())
       },
       options: [
         {

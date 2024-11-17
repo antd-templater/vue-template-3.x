@@ -28,7 +28,7 @@
             <span>{{ groupIndex + 1 }}</span>
           </template>
 
-          <template v-if="['title', 'resourceName', 'component', 'sort'].includes(column.key)">
+          <template v-if="['title', 'resourceName', 'sort'].includes(column.key)">
             <SEditCellInput
               v-model:status="cellState"
               :cellStyle="cellStyle"
@@ -58,6 +58,19 @@
               checkedChildren="是"
               unCheckedChildren="否"
               @change="doActivitier(record, column.key, $event)"
+            />
+          </template>
+
+          <template v-if="column.key === 'component'">
+            <SEditCellAutoComplete
+              v-model:status="cellState"
+              :cellStyle="cellStyle"
+              :text="String(value ?? '')"
+              empty="无"
+              :options="['PageView', 'RouteView', 'PageFrame'].map(value => ({ label: value, value }))"
+              :filterOption="(value, option) => !!option?.label.startsWith(value.trim())"
+              @change="doTableChange(record, column.key, $event.value)"
+              @confirm="doTableModify(record)"
             />
           </template>
 
@@ -120,7 +133,7 @@ const cardBodyStyle: CSSProperties = {
 
 const loading = ref(false)
 const cellState = ref(false)
-const cellStyle = {
+const cellStyle = ref({
   container: {
     display: 'inline-block',
     width: 'auto',
@@ -135,7 +148,7 @@ const cellStyle = {
     width: 'auto',
     paddingRight: '36px',
   },
-}
+})
 
 const sticky = tableStickyDefiner({
   topHeader: 0,
