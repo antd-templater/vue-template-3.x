@@ -3,6 +3,7 @@ import { SettingOutlined, LogoutOutlined } from '@ant-design/icons-vue'
 import { InputPassword as AInputPassword } from 'ant-design-vue/es/input'
 import AMenu, { MenuItem as AMenuItem } from 'ant-design-vue/es/menu'
 import AForm, { FormItem as AFormItem } from 'ant-design-vue/es/form'
+import { AppRouterBase } from '@/configure/presetEnvironment'
 import ADropdown from 'ant-design-vue/es/dropdown'
 import AMessage from 'ant-design-vue/es/message'
 import AButton from 'ant-design-vue/es/button'
@@ -37,7 +38,7 @@ export default defineComponent({
         AModal.confirm({
           title: '提示',
           content: '真的要注销登录吗 ?',
-          onOk: () => { userStore.logout().then(() => window.location.replace('/')) },
+          onOk: () => { userStore.logout().then(() => window.location.replace(AppRouterBase)) },
         })
       }
 
