@@ -1,6 +1,6 @@
 import './index.less'
 
-import { Teleport } from 'vue'
+import { Teleport, Fragment } from 'vue'
 import { SettingOutlined, CloseOutlined, CheckOutlined } from '@ant-design/icons-vue'
 import AList, { ListItem as AListItem, ListItemMeta as AListItemMeta } from 'ant-design-vue/es/list'
 import ASelect, { SelectOption as ASelectOption } from 'ant-design-vue/es/select'
@@ -364,11 +364,11 @@ export default defineComponent({
             type="warning"
             style={{ marginBottom: '5px', fontSize: '14px', cursor: 'pointer' }}
             message={(
-              <>
+              <Fragment>
                 <span>配置栏应用于开发环境中预览、调试</span>
                 <br />
                 <span>点击此处 - 可在游览器Console界面中查看目前配置选项</span>
-              </>
+              </Fragment>
             )}
           />
         </div>
@@ -383,7 +383,7 @@ export default defineComponent({
 
     if (isRender) {
       return () => (
-        <>
+        <Fragment>
           <ADrawer
             width="300"
             open={open.value}
@@ -420,7 +420,7 @@ export default defineComponent({
               <ADrawerButton />
             </div>
           </Teleport>
-        </>
+        </Fragment>
       )
     }
   },

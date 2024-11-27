@@ -11,6 +11,7 @@ import AModal from 'ant-design-vue/es/modal'
 import useUserStore from '@/store/user'
 import useAppStore from '@/store/app'
 import * as authApi from '@/api/auth'
+import { Fragment } from 'vue'
 
 export default defineComponent({
   name: 'LayoutAvatar',
@@ -43,7 +44,7 @@ export default defineComponent({
       }
 
       return (
-        <>
+        <Fragment>
           <AMenu
             class="layout-avatar-dropdown"
             style="min-width: 120px"
@@ -68,7 +69,7 @@ export default defineComponent({
               </a>
             </AMenuItem>
           </AMenu>
-        </>
+        </Fragment>
       )
     }
 
@@ -117,7 +118,7 @@ export default defineComponent({
 
       const APasswordModalFooter = () => {
         return (
-          <>
+          <Fragment>
             <AButton
               key="back"
               onClick={() => { open.value = false }}
@@ -132,7 +133,7 @@ export default defineComponent({
             >
               <span>提交</span>
             </AButton>
-          </>
+          </Fragment>
         )
       }
 

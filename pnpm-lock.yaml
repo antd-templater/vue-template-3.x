@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  vue-tsc:
+    hash: z2iuqlt7ype4qnrwd5eymeecl4
+    path: patches/vue-tsc.patch
+
 importers:
 
   .:
@@ -176,7 +181,7 @@ importers:
         version: 0.0.62
       vue-tsc:
         specifier: ^2.1.10
-        version: 2.1.10(typescript@5.7.2)
+        version: 2.1.10(patch_hash=z2iuqlt7ype4qnrwd5eymeecl4)(typescript@5.7.2)
 
 packages:
 
@@ -11409,7 +11414,7 @@ snapshots:
       '@vue/devtools-api': 6.6.4
       vue: 3.5.13(typescript@5.7.2)
 
-  vue-tsc@2.1.10(typescript@5.7.2):
+  vue-tsc@2.1.10(patch_hash=z2iuqlt7ype4qnrwd5eymeecl4)(typescript@5.7.2):
     dependencies:
       '@volar/typescript': 2.4.9
       '@vue/language-core': 2.1.10(typescript@5.7.2)

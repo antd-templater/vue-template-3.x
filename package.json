@@ -97,5 +97,10 @@
   "msw": {
     "workerDirectory": "public"
   },
+  "pnpm": {
+    "patchedDependencies": {
+      "vue-tsc": "patches/vue-tsc.patch"
+    }
+  },
   "packageManager": "pnpm@9.12.3"
 }
