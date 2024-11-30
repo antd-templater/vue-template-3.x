@@ -1,3 +1,5 @@
+import './axios'
+
 import { isRegExp } from 'js-simpler'
 import { toPromise } from 'js-simpler'
 import { setupWorker } from 'msw/browser'
@@ -44,7 +46,7 @@ export const replacer = (url: string) => {
   return url
 }
 
-export const request = () => {
+export const parser = () => {
   const printer = async(tag: string) => {
     const log = console.log
     const group = console.group
@@ -95,5 +97,5 @@ export const runner = () => {
   return worker
 }
 
-export const rester = request()
+export const rester = parser()
 export const worker = runner()

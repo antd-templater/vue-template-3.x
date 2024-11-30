@@ -15,9 +15,9 @@ type AxiosAssertResult<R, T> = R extends AxiosResponseResult ? Promise<AxiosResp
  * 创建 Axios 实例
  */
 const createAxiosInstance = <Result = AxiosResponseResult>(config: AxiosDefaultConfig) => {
-  const axios = Axios.create(config)
-  const proxy = createAxiosInterceptor(axios)
-  return <T = any, D = any, R = Result>(config: AxiosRequestConfig<D>) => proxy(config) as AxiosAssertResult<R, T>
+  const proxy = <T = any, D = any, R = Result>(config: AxiosRequestConfig<D>) => axios(config) as AxiosAssertResult<R, T>
+  const axios = createAxiosInterceptor(Axios.create(config))
+  return Object.assign(proxy, axios)
 }
 
 /**
@@ -31,10 +31,6 @@ const createAxiosInterceptor = (axios: AxiosInstance) => {
 
       if (user.token && !headers.token && headers.token !== null) {
         headers.token = `${user.token}`
-      }
-
-      if (headers['x-msw-requester'] === undefined) {
-        headers['x-msw-requester'] = 'Axios'
       }
 
       if (headers.token === null) {
@@ -134,7 +130,7 @@ const createAxiosInterceptor = (axios: AxiosInstance) => {
 }
 
 /**
- *  Axios 实例 - request
+ * 实例 Axios - request
  */
 export const request = createAxiosInstance({
   baseURL: AppApiBase || '/',
