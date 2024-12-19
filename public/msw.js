@@ -8,8 +8,8 @@
  * - Please do NOT serve this file on production.
  */
 
-const PACKAGE_VERSION = '2.6.6'
-const INTEGRITY_CHECKSUM = 'ca7800994cc8bfb5eb961e037c877074'
+const PACKAGE_VERSION = '2.7.0'
+const INTEGRITY_CHECKSUM = '00729d72e3b82faf54ca8b9621dbb96f'
 const IS_MOCKED_RESPONSE = Symbol('isMockedResponse')
 const activeClientIds = new Set()
 
@@ -115,11 +115,30 @@ self.addEventListener('fetch', async function (event) {
 
   const passthrough = async () => {
     const headers = new Headers(_request.headers)
+    const xMswHeader = headers.get('x-msw-requester')
+    const acceptHeader = headers.get('accept')
 
-    headers.delete('accept', 'msw/passthrough')
-    headers.delete('x-msw-requester', 'Axios')
+    if (xMswHeader) {
+      const values = xMswHeader.split(',').map((value) => value.trim())
+      const filters = values.filter((value) => value !== 'Axios')
+     
+      filters.length > 0
+        ? headers.set('x-msw-requester', filters.join(', '))
+        : headers.delete('x-msw-requester')
+    }
 
-    return fetch(_request, { headers })
+    if (acceptHeader) {
+      const values = acceptHeader.split(',').map((value) => value.trim())
+      const filters = values.filter((value) => value !== 'msw/passthrough')
+     
+      filters.length > 0
+        ? headers.set('accept', filters.join(', '))
+        : headers.delete('accept')
+    }
+
+    return fetch(_request, { 
+      headers 
+    })
   }
 
   const responser = async () => {
