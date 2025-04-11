@@ -32,7 +32,7 @@
     "md5": "^2.3.0",
     "msw": "^2.7.3",
     "nprogress": "^0.2.0",
-    "pinia": "^3.0.1",
+    "pinia": "^3.0.2",
     "pinia-plugin-persist": "^1.0.0",
     "qs": "^6.14.0",
     "vue": "^3.5.13",
@@ -59,7 +59,7 @@
     "@vitest/coverage-v8": "^3.1.1",
     "@vitest/ui": "^3.1.1",
     "@vue/test-utils": "^2.4.6",
-    "cypress": "^14.2.1",
+    "cypress": "^14.3.0",
     "cz-message-helper": "^2.0.0",
     "darkreader": "^4.9.105",
     "eslint": "^9.24.0",
@@ -67,7 +67,7 @@
     "husky": "^9.1.7",
     "jsdom": "^26.0.0",
     "less": "^4.3.0",
-    "lint-staged": "^15.5.0",
+    "lint-staged": "^15.5.1",
     "prettier": "^3.5.3",
     "release-it": "^18.1.2",
     "rollup": "^4.39.0",
@@ -76,7 +76,7 @@
     "typescript-eslint": "^8.29.1",
     "unplugin-auto-import": "^19.1.2",
     "unplugin-vue-components": "^28.4.1",
-    "vite": "^6.2.5",
+    "vite": "^6.2.6",
     "vite-plugin-compression": "^0.5.1",
     "vitest": "^3.1.1",
     "volar-service-prettyhtml": "^0.0.64",
@@ -92,10 +92,10 @@
   },
   "engines": {
     "node": "^18.18.0 || ^20.9.0 || >=21.1.0",
-    "pnpm": ">=9.12.3"
+    "pnpm": ">=9.15.9"
   },
   "msw": {
     "workerDirectory": "public"
   },
-  "packageManager": "pnpm@9.12.3"
+  "packageManager": "pnpm@9.15.9"
 }
