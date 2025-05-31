@@ -30,12 +30,12 @@
     "dayjs": "^1.11.13",
     "js-simpler": "^1.7.0",
     "md5": "^2.3.0",
-    "msw": "^2.8.5",
+    "msw": "^2.8.7",
     "nprogress": "^0.2.0",
     "pinia": "^3.0.2",
     "pinia-plugin-persist": "^1.0.0",
     "qs": "^6.14.0",
-    "vue": "^3.5.15",
+    "vue": "^3.5.16",
     "vue-ls": "^4.2.0",
     "vue-router": "^4.5.1",
     "vue-types": "^6.0.0"
@@ -45,11 +45,11 @@
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@eslint/config-inspector": "^1.0.2",
-    "@eslint/js": "^9.27.0",
+    "@eslint/js": "^9.28.0",
     "@release-it/conventional-changelog": "^10.0.1",
     "@stylistic/eslint-plugin": "^4.4.0",
     "@types/md5": "^2.3.5",
-    "@types/node": "^22.15.23",
+    "@types/node": "^22.15.29",
     "@types/nprogress": "^0.2.3",
     "@types/qs": "^6.14.0",
     "@types/vue-ls": "^3.2.7",
@@ -62,14 +62,14 @@
     "cypress": "^14.4.0",
     "cz-message-helper": "^2.0.0",
     "darkreader": "^4.9.105",
-    "eslint": "^9.27.0",
+    "eslint": "^9.28.0",
     "eslint-plugin-vue": "^10.1.0",
     "husky": "^9.1.7",
     "jsdom": "^26.1.0",
     "less": "^4.3.0",
     "lint-staged": "^16.1.0",
     "prettier": "^3.5.3",
-    "release-it": "^19.0.2",
+    "release-it": "^19.0.3",
     "rollup": "^4.41.1",
     "terser": "^5.40.0",
     "typescript": "^5.8.3",
@@ -92,10 +92,10 @@
   },
   "engines": {
     "node": "^18.18.0 || ^20.9.0 || >=21.1.0",
-    "pnpm": ">=9.12.3"
+    "pnpm": ">=9.15.9"
   },
   "msw": {
     "workerDirectory": "public"
   },
-  "packageManager": "pnpm@9.12.3"
+  "packageManager": "pnpm@9.15.9"
 }
